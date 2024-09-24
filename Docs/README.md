@@ -6,35 +6,7 @@
 
 <br>
 
-## 1. 브랜치 전략
-- 브랜치는 `feature/#이슈번호-설명간단히(영문)` 으로 생성한다.
-```
-feature/#이슈번호-간략한설명(영문)
-ex) feature/#24-SecondView
-```
-
-<br>
-
-### 1-1. 브랜치 규칙
-```
-1. develop, main 브랜치에서의 작업은 원칙적으로 금지한다.
-2. 자신이 담당한 부분 이외에 다른 팀원이 담당한 부분을 수정할 때에는 반드시 변경 사항을 전달한다.
-3. 본인의 Pull Request는 본인이 Merge한다.
-4. Commit, Push, Merge, Pull Request 등 모든 작업은 앱이 정상적으로 실행되는 지 빌드한 후 수행한다.
-```
-
-### 1-2. 브랜치 플로우
-```
-1. Issue를 생성한다.
-2. feature 브랜치를 생성한다.
-3. feature 브랜치 내부에서 Add - Commit - Push - Pull Request 의 과정을 거친다.
-4. Pull Request가 작성되면 충돌 확인 후 merge 한다.
-5. 종료된 Pull Request branch는 삭제한다.
-```
-
-<br>
-
-## 2. 커밋 규칙
+## 1. 네이밍 전략
 ```
 - feat: 새로운 기능 추가
 - fix: 버그 수정
@@ -45,9 +17,44 @@ ex) feature/#24-SecondView
 - chore: 빌드 업무 수정, 패키지 매니저 수정
 ```
 
+## 2. 브랜치 전략
+- 브랜치는 `브랜치종류/#이슈번호-설명간단히(영문)` 으로 생성한다.
+```
+브랜치종류/#이슈번호-간략한설명(영문)
+ex) feat/#24-SecondView
+```
+
 <br>
 
-## 3. Issue 스타일 가이드
+### 2-1. 브랜치 규칙
+```
+1. develop, main 브랜치에서의 작업은 원칙적으로 금지한다.
+2. 자신이 담당한 부분 이외에 다른 팀원이 담당한 부분을 수정할 때에는 반드시 변경 사항을 전달한다.
+3. 본인의 Pull Request는 본인이 Merge한다.
+4. Commit, Push, Merge, Pull Request 등 모든 작업은 앱이 정상적으로 실행되는 지 빌드한 후 수행한다.
+```
+
+### 2-2. 브랜치 플로우
+```
+1. Issue를 생성한다.
+2. feature 브랜치를 생성한다.
+3. feature 브랜치 내부에서 Add - Commit - Push - Pull Request 의 과정을 거친다.
+4. Pull Request가 작성되면 충돌 확인 후 merge 한다.
+5. 종료된 Pull Request branch는 삭제한다.
+```
+
+<br>
+
+## 3. 커밋 규칙
+- 커밋은 `[커밋종류] 커밋내용` 으로 생성한다.
+```
+[커밋종류] 커밋내용
+ex) [feat] MainView 생성
+```
+
+<br>
+
+## 4. Issue 스타일 가이드
 ### Feature Issue
 ```
 ---
@@ -103,7 +110,7 @@ assignees: ''
 
 <br>
 
-## 4. Pull Request 스타일 가이드
+## 5. Pull Request 스타일 가이드
 아래 템플릿을 따르고 있습니다.
 ```
 ## 제목 양식
