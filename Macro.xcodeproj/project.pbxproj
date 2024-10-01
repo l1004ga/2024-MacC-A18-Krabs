@@ -20,6 +20,7 @@
 		2BE5ADF52CABC45A0094F3C3 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */; };
 		2BE5ADF92CABC45D0094F3C3 /* MacroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */; };
 		2BE5ADFA2CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */; };
+		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITests.swift; sourceTree = "<group>"; };
 		2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE5ADD52CABC4570094F3C3 /* ExampleEntity.swift */,
+				3C1DB7082CABDA2400160970 /* JangdanEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */,
 				2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */,
 				2BE5ADEF2CABC4570094F3C3 /* ExampleService.swift in Sources */,
+				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				2BE5ADF12CABC4570094F3C3 /* ExampleView.swift in Sources */,
 				2BE5ADF22CABC4570094F3C3 /* ExampleViewModel.swift in Sources */,
