@@ -10,7 +10,11 @@ struct JangdanEntity {
     var bakCount: Int
     var daebak: Int
     var bpm: Int
-    var sobakList: [[Accent]]
+    var daebakList: [Daebak]
+    
+    struct Daebak {
+        var bakAccentList: [Accent]
+    }
 }
 
 enum Accent {
