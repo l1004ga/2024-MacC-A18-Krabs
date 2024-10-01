@@ -1,7 +1,7 @@
 ---
 name: Bug Template
 about: 버그 발생시 작성해 주세요
-title: ''
+title: "[Fix] "
 labels: bug
 assignees: ''
 
