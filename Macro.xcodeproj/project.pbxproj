@@ -20,6 +20,7 @@
 		2BE5ADF52CABC45A0094F3C3 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */; };
 		2BE5ADF92CABC45D0094F3C3 /* MacroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */; };
 		2BE5ADFA2CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */; };
+		2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITests.swift; sourceTree = "<group>"; };
 		2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeOnOffUseCase.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 			children = (
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
 				2BE5ADD92CABC4570094F3C3 /* ExampleUseCase.swift */,
+				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				2BE5ADF12CABC4570094F3C3 /* ExampleView.swift in Sources */,
 				2BE5ADF22CABC4570094F3C3 /* ExampleViewModel.swift in Sources */,
+				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
