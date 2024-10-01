@@ -26,5 +26,5 @@ assignees: ''
 
 - [ ] 
 
-### ETC (Optional)
+### ETC <!-- (Optional) -->
 <!-- 기타 참고사항을 작성해 주세요 -->

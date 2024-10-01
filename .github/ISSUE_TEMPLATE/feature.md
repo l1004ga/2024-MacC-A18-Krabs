@@ -15,8 +15,8 @@ assignees: ''
 
 - [ ] 
 
-## ScreenShot (Optional)
+## ScreenShot <!-- (Optional) -->
 <!-- 추가할 기능의 스크린샷이 있다면 첨부해 주세요 -->
 
-### ETC (Optional)
+### ETC <!-- (Optional) -->
 <!-- 기타 참고사항을 작성해 주세요 -->
