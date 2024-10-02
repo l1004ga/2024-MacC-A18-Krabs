@@ -8,7 +8,7 @@
 import Foundation
 
 class MetronomeOnOffUseCase {
-    private var jangdan: [Accent]
+    private var jangdanAccentList: [Accent]
     private var bpm: Int
     private var currentBeat: Int
     
@@ -24,7 +24,7 @@ class MetronomeOnOffUseCase {
     private var soundUseCase: PlaySoundInterface
     
     init(templateUseCase: JangdanSelectInterface, beatDisplayUseCase: UpdateBeatDisplayInterface, soundUseCase: PlaySoundInterface) {
-        self.jangdan = []
+        self.jangdanAccentList = []
         self.bpm = 120
         self.currentBeat = 0
         
@@ -38,7 +38,7 @@ class MetronomeOnOffUseCase {
 extension MetronomeOnOffUseCase {
     func play() {
         // 데이터 갱신
-        self.jangdan = templateUseCase.fetchJangdan()
+        self.jangdanAccentList = templateUseCase.fetchJangdan()
         self.bpm = templateUseCase.fetchBPM()
         self.currentBeat = 0
         
@@ -62,7 +62,7 @@ extension MetronomeOnOffUseCase {
     }
     
     private func timerHandler() {
-        let accent = jangdan[self.currentBeat % jangdan.count]
+        let accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
         
         Task {
             await self.beatDisplayUseCase.nextBeat()
