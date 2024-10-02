@@ -49,7 +49,7 @@ extension MetronomeOnOffUseCase {
         self.timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
             
-            self.perform()
+            self.timerHandler()
         }
         
         // Timer 실행
@@ -61,7 +61,7 @@ extension MetronomeOnOffUseCase {
         timer = nil
     }
     
-    private func perform() {
+    private func timerHandler() {
         let accent = jangdan[self.currentBeat % jangdan.count]
         
         Task {
