@@ -17,8 +17,6 @@ class MetronomeOnOffUseCase {
     var jangdanSubscription: AnyCancellable?
     var bpmSubscription: AnyCancellable?
     
-    
-    
     // timer
     private var timer: DispatchSourceTimer?
     private let queue = DispatchQueue(label: "metronomeTimer", qos: .background) // 다른 스레드
@@ -28,26 +26,27 @@ class MetronomeOnOffUseCase {
     
     private var templateUseCase: JangdanSelectInterface
     private var beatDisplayUseCase: UpdateBeatDisplayInterface
-    private var soundUseCase: PlaySoundInterface
+    private var soundManager: PlaySoundInterface
     
-    init(templateUseCase: JangdanSelectInterface, beatDisplayUseCase: UpdateBeatDisplayInterface, soundUseCase: PlaySoundInterface) {
+    init(templateUseCase: JangdanSelectInterface, beatDisplayUseCase: UpdateBeatDisplayInterface, soundManager: PlaySoundInterface) {
         self.jangdanAccentList = []
         self.bpm = 120
         self.currentBeat = 0
         
         self.templateUseCase = templateUseCase
         self.beatDisplayUseCase = beatDisplayUseCase
-        self.soundUseCase = soundUseCase
+        self.soundManager = soundManager
+        
         self.jangdanSubscription = templateUseCase.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
             self.jangdanAccentList = jangdan
         }
+        self.jangdanSubscription?.store(in: &self.cancelBag)
         self.bpmSubscription = templateUseCase.bpmPublisher.sink { [weak self] bpm in
             guard let self else { return }
             self.bpm = bpm
         }
-        jangdanSubscription?.store(in: &self.cancelBag)
-        bpmSubscription?.store(in: &self.cancelBag)
+        self.bpmSubscription?.store(in: &self.cancelBag)
     }
 }
 
@@ -68,35 +67,24 @@ extension MetronomeOnOffUseCase {
         }
         
         // Timer 실행
-        timer?.resume()
+        self.timer?.resume()
     }
     
     func stop() {
-        timer?.cancel()
-        timer = nil
+        self.timer?.cancel()
+        self.timer = nil
     }
     
     private func timerHandler() {
-        let accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
-        
         Task {
             await self.beatDisplayUseCase.nextBeat()
         }
         
+        let accent: Accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
         Task {
-            switch accent {
-            case .none:
-                break
-            case .weak:
-                await self.soundUseCase.beep("weak")
-            case .medium:
-                await self.soundUseCase.beep("medium")
-            case .strong:
-                await self.soundUseCase.beep("strong")
-            }
+            await self.soundManager.beep(accent)
         }
-        
-        currentBeat += 1
+        self.currentBeat += 1
     }
 }
 
