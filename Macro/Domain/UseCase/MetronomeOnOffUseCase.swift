@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 class MetronomeOnOffUseCase {
     private var jangdanAccentList: [Accent]
     private var bpm: Int
     private var currentBeat: Int
+    
+    var cancelBag: Set<AnyCancellable> = []
+    var jangdanSubscription: AnyCancellable?
+    var bpmSubscription: AnyCancellable?
+    
+    
     
     // timer
     private var timer: DispatchSourceTimer?
@@ -31,6 +38,16 @@ class MetronomeOnOffUseCase {
         self.templateUseCase = templateUseCase
         self.beatDisplayUseCase = beatDisplayUseCase
         self.soundUseCase = soundUseCase
+        self.jangdanSubscription = templateUseCase.jangdanPublisher.sink { [weak self] jangdan in
+            guard let self else { return }
+            self.jangdanAccentList = jangdan
+        }
+        self.bpmSubscription = templateUseCase.bpmPublisher.sink { [weak self] bpm in
+            guard let self else { return }
+            self.bpm = bpm
+        }
+        jangdanSubscription?.store(in: &self.cancelBag)
+        bpmSubscription?.store(in: &self.cancelBag)
     }
 }
 
@@ -38,8 +55,6 @@ class MetronomeOnOffUseCase {
 extension MetronomeOnOffUseCase {
     func play() {
         // 데이터 갱신
-        self.jangdanAccentList = templateUseCase.fetchJangdan()
-        self.bpm = templateUseCase.fetchBPM()
         self.currentBeat = 0
         
         // Timer 설정
