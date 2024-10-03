@@ -29,7 +29,7 @@ class SoundManager {
 }
 
 extension SoundManager: PlaySoundInterface {
-    func beep(_ accent: Accent) async {
+    func beep(_ accent: Accent) {
         switch accent {
         case .none:
             break
