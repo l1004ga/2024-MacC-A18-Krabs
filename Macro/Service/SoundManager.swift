@@ -8,11 +8,9 @@
 import AVFoundation
 
 class SoundManager {
-    private var weakSoundPlayer: AVAudioPlayer
-    private var mediumSoundPlayer: AVAudioPlayer
-    private var strongSoundPlayer: AVAudioPlayer
-    
-    private var player: AVAudioPlayer?
+    private var weakSoundPlayer: AVAudioPlayer?
+    private var mediumSoundPlayer: AVAudioPlayer?
+    private var strongSoundPlayer: AVAudioPlayer?
     
     init?() {
         // AudioSession 설정
@@ -52,17 +50,32 @@ class SoundManager {
     }
 }
 
+// Sound Set 변경
+extension SoundManager {
+    enum SoundType: String {
+        case beep
+    }
+    
+    func setSoundType(to type: SoundType) {
+        do {
+            try self.configureSoundPlayers(weak: "\(type.rawValue)_weak", medium: "\(type.rawValue)_medium", strong: "\(type.rawValue)_strong")
+        } catch {
+            print("SoundManager: Sound Type 변경 실패 - \(error)")
+        }
+    }
+}
+
 extension SoundManager: PlaySoundInterface {
     func beep(_ accent: Accent) {
         switch accent {
         case .none:
             break
         case .weak:
-            self.weakSoundPlayer.play()
+            self.weakSoundPlayer?.play()
         case .medium:
-            self.mediumSoundPlayer.play()
+            self.mediumSoundPlayer?.play()
         case .strong:
-            self.strongSoundPlayer.play()
+            self.strongSoundPlayer?.play()
         }
     }
 }
