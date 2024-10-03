@@ -25,6 +25,9 @@
 		2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */; };
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
+		438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */; };
+		438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoUseCase.swift */; };
+		438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBeatDisplayInterface.swift; sourceTree = "<group>"; };
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
+		438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTempoInterface.swift; sourceTree = "<group>"; };
+		438226DE2CAE8494007A3B23 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
+		438226E02CAEC720007A3B23 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,7 @@
 		2BE5ADD82CABC4570094F3C3 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */,
 				2BE5ADD72CABC4570094F3C3 /* ExampleInterface.swift */,
 				2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */,
 				2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */,
@@ -136,6 +143,8 @@
 		2BE5ADDA2CABC4570094F3C3 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				438226E02CAEC720007A3B23 /* TemplateUseCase.swift */,
+				438226DE2CAE8494007A3B23 /* TempoUseCase.swift */,
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
 				2BE5ADD92CABC4570094F3C3 /* ExampleUseCase.swift */,
 				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */,
@@ -363,13 +372,16 @@
 			files = (
 				2BE5ADEB2CABC4570094F3C3 /* ExampleEntity.swift in Sources */,
 				2BE5ADEC2CABC4570094F3C3 /* ExampleInterface.swift in Sources */,
+				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
 				2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */,
 				2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */,
+				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
 				2BE5ADEF2CABC4570094F3C3 /* ExampleService.swift in Sources */,
 				2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */,
 				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
+				438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				2BE5ADF12CABC4570094F3C3 /* ExampleView.swift in Sources */,
 				2BE5ADF22CABC4570094F3C3 /* ExampleViewModel.swift in Sources */,
