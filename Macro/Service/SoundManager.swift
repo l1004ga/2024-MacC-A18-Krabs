@@ -5,26 +5,50 @@
 //  Created by Yunki on 10/3/24.
 //
 
-import AudioToolbox
+import AVFoundation
 
 class SoundManager {
-    var strongSound: SystemSoundID
-    var mediumSound: SystemSoundID
-    var weakSound: SystemSoundID
+    private var weakSoundPlayer: AVAudioPlayer
+    private var mediumSoundPlayer: AVAudioPlayer
+    private var strongSoundPlayer: AVAudioPlayer
+    
+    private var player: AVAudioPlayer?
     
     init?() {
-        self.weakSound = 0
-        self.mediumSound = 1
-        self.strongSound = 2
+        // AudioSession 설정
+        do {
+            // Background, 무음모드에서도 소리나게 설정
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("SoundManager: 오디오 세션 설정 중 에러 발생 - \(error)")
+            return nil
+        }
         
+        do {
+            try configureSoundPlayers(weak: "beep_weak", medium: "beep_medium", strong: "beep_strong")
+        } catch {
+            return nil
+        }
+    }
+    
+    private func configureSoundPlayers(weak: String, medium: String, strong: String) throws {
         // TODO: - 파일 가져다 진짜 집어넣기
-//        guard let weakSoundURL = Bundle.main.url(forResource: "beep_weak", withExtension: "wav") else { nil }
-//        guard let mediumSoundURL = Bundle.main.url(forResource: "beep_medium", withExtension: "wav") else { nil }
-//        guard let strongSoundURL = Bundle.main.url(forResource: "beep_strong", withExtension: "wav") else { nil }
+        guard let weakSoundURL = Bundle.main.url(forResource: weak, withExtension: "wav") else { throw InitializeError.soundPlayerCreationFailed }
+        guard let mediumSoundURL = Bundle.main.url(forResource: medium, withExtension: "wav") else { throw InitializeError.soundPlayerCreationFailed }
+        guard let strongSoundURL = Bundle.main.url(forResource: strong, withExtension: "wav") else { throw InitializeError.soundPlayerCreationFailed }
         
-//        AudioServicesCreateSystemSoundID(weakSoundURL, &weakSound)
-//        AudioServicesCreateSystemSoundID(mediumSoundURL, &mediumSound)
-//        AudioServicesCreateSystemSoundID(strongSoundURL, &strongSound)
+        guard let weakSoundPlayer = try? AVAudioPlayer(contentsOf: weakSoundURL) else { throw InitializeError.soundPlayerCreationFailed }
+        guard let mediumSoundPlayer = try? AVAudioPlayer(contentsOf: mediumSoundURL) else { throw InitializeError.soundPlayerCreationFailed }
+        guard let strongSoundPlayer = try? AVAudioPlayer(contentsOf: strongSoundURL) else { throw InitializeError.soundPlayerCreationFailed }
+        
+        self.weakSoundPlayer = weakSoundPlayer
+        self.mediumSoundPlayer = mediumSoundPlayer
+        self.strongSoundPlayer = strongSoundPlayer
+    }
+    
+    enum InitializeError: Error {
+        case soundPlayerCreationFailed
     }
 }
 
@@ -34,11 +58,11 @@ extension SoundManager: PlaySoundInterface {
         case .none:
             break
         case .weak:
-            AudioServicesPlayAlertSound(self.weakSound)
+            self.weakSoundPlayer.play()
         case .medium:
-            AudioServicesPlayAlertSound(self.mediumSound)
+            self.mediumSoundPlayer.play()
         case .strong:
-            AudioServicesPlayAlertSound(self.strongSound)
+            self.strongSoundPlayer.play()
         }
     }
 }
