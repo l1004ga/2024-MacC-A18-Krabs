@@ -81,9 +81,7 @@ extension MetronomeOnOffUseCase {
         }
         
         let accent: Accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
-        Task {
-            await self.soundManager.beep(accent)
-        }
+        self.soundManager.beep(accent)
         self.currentBeat += 1
     }
 }
