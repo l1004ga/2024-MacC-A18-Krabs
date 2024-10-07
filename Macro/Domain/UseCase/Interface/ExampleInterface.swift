@@ -8,3 +8,4 @@
 protocol ExampleInterface {
     func fetchName() -> String
 }
+
