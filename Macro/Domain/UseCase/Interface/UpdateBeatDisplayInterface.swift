@@ -7,6 +7,5 @@
 
 // 화면에 박자 표시시키는 UseCase용
 protocol UpdateBeatDisplayInterface {
-    // TODO: - async 여부 확인 필요
-    func nextBeat() async
+    func nextBeat()
 }

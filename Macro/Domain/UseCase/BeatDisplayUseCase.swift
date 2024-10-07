@@ -14,7 +14,7 @@ class BeatDisplayUseCase {
 }
 
 extension BeatDisplayUseCase: UpdateBeatDisplayInterface {
-    func nextBeat() async {
+    func nextBeat() {
         tickHandler()
     }
 }
