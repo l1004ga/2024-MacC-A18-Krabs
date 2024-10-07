@@ -103,6 +103,7 @@ class TemplateUseCase {
 extension TemplateUseCase: UpdateTempoInterface {
 
     func updateTempo(newBpm: Int) {
+      self.currentJangdanBpm = newBpm
         
     }
 }
