@@ -27,6 +27,7 @@
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentUseCase.swift */; };
+		3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */; };
 		438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */; };
 		438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoUseCase.swift */; };
 		438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateUseCase.swift */; };
@@ -73,6 +74,7 @@
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentUseCase.swift; sourceTree = "<group>"; };
+		3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveNextAccentInterface.swift; sourceTree = "<group>"; };
 		438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTempoInterface.swift; sourceTree = "<group>"; };
 		438226DE2CAE8494007A3B23 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
 		438226E02CAEC720007A3B23 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */,
 				2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */,
 				2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */,
+				3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */,
 				2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
+				3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
