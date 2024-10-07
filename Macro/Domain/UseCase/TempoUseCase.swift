@@ -12,8 +12,8 @@ class TempoUseCase {
     private var templateUseCase: UpdateTempoInterface
     private var changeBpm: Int
     
-    init(templateUseCase3: UpdateTempoInterface) {
-        self.templateUseCase = templateUseCase3
+    init(templateUseCase: UpdateTempoInterface) {
+        self.templateUseCase = templateUseCase
         self.changeBpm = 0
     }
     
