@@ -83,7 +83,7 @@ class TemplateUseCase: JangdanSelectInterface {
     private var jangdanSubject = PassthroughSubject<[Accent], Never>()
     private var bpmSubject = PassthroughSubject<Int, Never>()
     
-    var currentJangdan: JangdanEntity
+    private var currentJangdan: JangdanEntity
     var currentJangdanName: String {
         return currentJangdan.name
     }
