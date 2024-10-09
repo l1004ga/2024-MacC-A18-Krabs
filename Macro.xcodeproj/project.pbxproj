@@ -27,9 +27,9 @@
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		2BF22E822CB3C5EA00E66E50 /* BeatDisplayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */; };
 		2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */; };
-		2BF22E922CB6724400E66E50 /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E8F2CB6724400E66E50 /* beep_medium.wav */; };
-		2BF22E932CB6724400E66E50 /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E912CB6724400E66E50 /* beep_weak.wav */; };
-		2BF22E942CB6724400E66E50 /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E902CB6724400E66E50 /* beep_strong.wav */; };
+		2BF22E982CB67B2E00E66E50 /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E962CB67B2E00E66E50 /* beep_strong.wav */; };
+		2BF22E992CB67B2E00E66E50 /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E972CB67B2E00E66E50 /* beep_weak.wav */; };
+		2BF22E9A2CB67B2E00E66E50 /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E952CB67B2E00E66E50 /* beep_medium.wav */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentUseCase.swift */; };
 		3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */; };
@@ -79,9 +79,9 @@
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatDisplayUseCase.swift; sourceTree = "<group>"; };
 		2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMainView.swift; sourceTree = "<group>"; };
-		2BF22E8F2CB6724400E66E50 /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
-		2BF22E902CB6724400E66E50 /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
-		2BF22E912CB6724400E66E50 /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
+		2BF22E952CB67B2E00E66E50 /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
+		2BF22E962CB67B2E00E66E50 /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
+		2BF22E972CB67B2E00E66E50 /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentUseCase.swift; sourceTree = "<group>"; };
 		3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveNextAccentInterface.swift; sourceTree = "<group>"; };
@@ -233,9 +233,9 @@
 				2BE5ADE32CABC4570094F3C3 /* System */,
 				2BE5ADE62CABC4570094F3C3 /* View */,
 				2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */,
-				2BF22E8F2CB6724400E66E50 /* beep_medium.wav */,
-				2BF22E902CB6724400E66E50 /* beep_strong.wav */,
-				2BF22E912CB6724400E66E50 /* beep_weak.wav */,
+				2BF22E952CB67B2E00E66E50 /* beep_medium.wav */,
+				2BF22E962CB67B2E00E66E50 /* beep_strong.wav */,
+				2BF22E972CB67B2E00E66E50 /* beep_weak.wav */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -368,9 +368,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BF22E922CB6724400E66E50 /* beep_medium.wav in Resources */,
-				2BF22E932CB6724400E66E50 /* beep_weak.wav in Resources */,
-				2BF22E942CB6724400E66E50 /* beep_strong.wav in Resources */,
+				2BF22E982CB67B2E00E66E50 /* beep_strong.wav in Resources */,
+				2BF22E992CB67B2E00E66E50 /* beep_weak.wav in Resources */,
+				2BF22E9A2CB67B2E00E66E50 /* beep_medium.wav in Resources */,
 				2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */,
 				2BE5ADEA2CABC4570094F3C3 /* Assets.xcassets in Resources */,
 			);

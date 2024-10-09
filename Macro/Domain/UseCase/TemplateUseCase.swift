@@ -125,6 +125,9 @@ class TemplateUseCase: JangdanSelectInterface {
     func setJangdan(name: String) {
         if let jangdan = loadJangdanData(name: name) {
             self.currentJangdan = jangdan
+            
+            let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
+            jangdanSubject.send(oneDimensionalArray)
         }
         
     }

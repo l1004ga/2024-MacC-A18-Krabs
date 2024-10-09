@@ -22,17 +22,17 @@ struct TempMainView: View {
             .padding()
             
             Button(viewModel.state.isPlaying ? "Stop" : "Play") {
-                
+                viewModel.effect(action: .playButton)
             }
             .padding()
             
             HStack {
                 Button("-") {
-//                    viewModel.state.bpm -= 1
+                    viewModel.effect(action: .decreaseBpm)
                 }
                 Text("\(viewModel.state.bpm)")
                 Button("+") {
-//                    viewModel.state.bpm += 1
+                    viewModel.effect(action: .increaseBpm)
                 }
             }
             .padding()
@@ -68,20 +68,30 @@ class TempMainViewModel {
     var state: State { return _state }
     
     enum Action {
-        case tapButton // Play / Stop Button
+        case playButton // Play / Stop Button
         case decreaseBpm // - button
         case increaseBpm // + button
     }
     
     func effect(action: Action) {
         switch action {
-        case .tapButton:
+        case .playButton:
             self._state.currentIndex = -1
             self._state.isPlaying.toggle()
+            
+            if self._state.isPlaying {
+                self.metronomeOnOffUseCase.play()
+            } else {
+                self.metronomeOnOffUseCase.stop()
+            }
+            
         case .decreaseBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
+            self._state.bpm -= 1
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
+            
         case .increaseBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
+            self._state.bpm += 1
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
         }
     }
 }

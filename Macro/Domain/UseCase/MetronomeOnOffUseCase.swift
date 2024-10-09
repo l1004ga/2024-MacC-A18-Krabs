@@ -29,7 +29,7 @@ class MetronomeOnOffUseCase {
     private var soundManager: PlaySoundInterface
     
     init(templateUseCase: JangdanSelectInterface, beatDisplayUseCase: UpdateBeatDisplayInterface, soundManager: PlaySoundInterface) {
-        self.jangdanAccentList = []
+        self.jangdanAccentList = [.strong]
         self.bpm = 120
         self.currentBeat = 0
         
@@ -76,9 +76,7 @@ extension MetronomeOnOffUseCase {
     }
     
     private func timerHandler() {
-        Task {
-            await self.beatDisplayUseCase.nextBeat()
-        }
+        self.beatDisplayUseCase.nextBeat()
         
         let accent: Accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
         self.soundManager.beep(accent)
