@@ -49,12 +49,11 @@ class TempMainViewModel {
     init() {
         let initTemplateUseCase: TemplateUseCase = .init()
         let initSoundManager: SoundManager? = .init()
-        let beatDisplayUseCase: BeatDisplayUseCase = .init(tickHandler: {})
         
         initTemplateUseCase.setJangdan(name: "자진모리")
         
         self.templateUseCase = initTemplateUseCase
-        self.metronomeOnOffUseCase = .init(templateUseCase: initTemplateUseCase, beatDisplayUseCase: beatDisplayUseCase, soundManager: initSoundManager!)
+        self.metronomeOnOffUseCase = .init(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
         self.tempoUseCase = .init(templateUseCase: initTemplateUseCase)
     }
     
@@ -80,7 +79,10 @@ class TempMainViewModel {
             self._state.isPlaying.toggle()
             
             if self._state.isPlaying {
-                self.metronomeOnOffUseCase.play()
+                self.metronomeOnOffUseCase.play {
+                    self._state.currentIndex += 1
+                    self._state.currentIndex %= self.templateUseCase.currentJangdanBakCount
+                }
             } else {
                 self.metronomeOnOffUseCase.stop()
             }
