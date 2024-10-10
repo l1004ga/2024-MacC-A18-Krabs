@@ -22,6 +22,15 @@ enum Accent {
     case medium
     case weak
     case none
+    
+    func nextAccent() -> Accent {
+        switch self {
+        case .strong: return .medium
+        case .medium: return .weak
+        case .weak: return .none
+        case .none: return .strong
+        }
+    }
 }
 
 
