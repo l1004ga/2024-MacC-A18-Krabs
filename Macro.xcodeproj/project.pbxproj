@@ -10,14 +10,8 @@
 		2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */; };
 		2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */; };
 		2BE5ADEA2CABC4570094F3C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */; };
-		2BE5ADEB2CABC4570094F3C3 /* ExampleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADD52CABC4570094F3C3 /* ExampleEntity.swift */; };
-		2BE5ADEC2CABC4570094F3C3 /* ExampleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADD72CABC4570094F3C3 /* ExampleInterface.swift */; };
-		2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADD92CABC4570094F3C3 /* ExampleUseCase.swift */; };
-		2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDC2CABC4570094F3C3 /* Example+Extensions.swift */; };
-		2BE5ADEF2CABC4570094F3C3 /* ExampleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE02CABC4570094F3C3 /* ExampleService.swift */; };
+		2BE5ADEE2CABC4570094F3C3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDC2CABC4570094F3C3 /* Date+Extensions.swift */; };
 		2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE22CABC4570094F3C3 /* MacroApp.swift */; };
-		2BE5ADF12CABC4570094F3C3 /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE42CABC4570094F3C3 /* ExampleView.swift */; };
-		2BE5ADF22CABC4570094F3C3 /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE52CABC4570094F3C3 /* ExampleViewModel.swift */; };
 		2BE5ADF52CABC45A0094F3C3 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */; };
 		2BE5ADF92CABC45D0094F3C3 /* MacroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */; };
 		2BE5ADFA2CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */; };
@@ -25,7 +19,6 @@
 		2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */; };
 		2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */; };
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
-		2BF22E822CB3C5EA00E66E50 /* BeatDisplayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */; };
 		2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */; };
 		2BF22E982CB67B2E00E66E50 /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E962CB67B2E00E66E50 /* beep_strong.wav */; };
 		2BF22E992CB67B2E00E66E50 /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E972CB67B2E00E66E50 /* beep_weak.wav */; };
@@ -60,15 +53,9 @@
 		2BE5AD382C9EC9030094F3C3 /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD482C9EC9040094F3C3 /* MacroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD522C9EC9040094F3C3 /* MacroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BE5ADD52CABC4570094F3C3 /* ExampleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleEntity.swift; sourceTree = "<group>"; };
-		2BE5ADD72CABC4570094F3C3 /* ExampleInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleInterface.swift; sourceTree = "<group>"; };
-		2BE5ADD92CABC4570094F3C3 /* ExampleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUseCase.swift; sourceTree = "<group>"; };
-		2BE5ADDC2CABC4570094F3C3 /* Example+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+Extensions.swift"; sourceTree = "<group>"; };
+		2BE5ADDC2CABC4570094F3C3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2BE5ADE02CABC4570094F3C3 /* ExampleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleService.swift; sourceTree = "<group>"; };
 		2BE5ADE22CABC4570094F3C3 /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
-		2BE5ADE42CABC4570094F3C3 /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
-		2BE5ADE52CABC4570094F3C3 /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
 		2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BE5ADF32CABC45A0094F3C3 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITests.swift; sourceTree = "<group>"; };
@@ -77,7 +64,6 @@
 		2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectInterface.swift; sourceTree = "<group>"; };
 		2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBeatDisplayInterface.swift; sourceTree = "<group>"; };
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
-		2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatDisplayUseCase.swift; sourceTree = "<group>"; };
 		2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMainView.swift; sourceTree = "<group>"; };
 		2BF22E952CB67B2E00E66E50 /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		2BF22E962CB67B2E00E66E50 /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
@@ -138,7 +124,6 @@
 		2BE5ADD62CABC4570094F3C3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				2BE5ADD52CABC4570094F3C3 /* ExampleEntity.swift */,
 				3C1DB7082CABDA2400160970 /* JangdanEntity.swift */,
 			);
 			path = Entity;
@@ -148,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */,
-				2BE5ADD72CABC4570094F3C3 /* ExampleInterface.swift */,
 				2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */,
 				2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */,
 				2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */,
@@ -163,10 +147,8 @@
 				438226E02CAEC720007A3B23 /* TemplateUseCase.swift */,
 				438226DE2CAE8494007A3B23 /* TempoUseCase.swift */,
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
-				2BE5ADD92CABC4570094F3C3 /* ExampleUseCase.swift */,
 				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */,
 				3C1DB7312CB3B58500160970 /* AccentUseCase.swift */,
-				2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -183,7 +165,7 @@
 		2BE5ADDD2CABC4570094F3C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2BE5ADDC2CABC4570094F3C3 /* Example+Extensions.swift */,
+				2BE5ADDC2CABC4570094F3C3 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -199,7 +181,6 @@
 		2BE5ADE12CABC4570094F3C3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2BE5ADE02CABC4570094F3C3 /* ExampleService.swift */,
 				2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */,
 			);
 			path = Service;
@@ -216,8 +197,6 @@
 		2BE5ADE62CABC4570094F3C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2BE5ADE42CABC4570094F3C3 /* ExampleView.swift */,
-				2BE5ADE52CABC4570094F3C3 /* ExampleViewModel.swift */,
 				2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */,
 			);
 			path = View;
@@ -397,26 +376,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE5ADEB2CABC4570094F3C3 /* ExampleEntity.swift in Sources */,
-				2BE5ADEC2CABC4570094F3C3 /* ExampleInterface.swift in Sources */,
-				2BF22E822CB3C5EA00E66E50 /* BeatDisplayUseCase.swift in Sources */,
 				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
-				2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */,
-				2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */,
+				2BE5ADEE2CABC4570094F3C3 /* Date+Extensions.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
 				2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */,
 				3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
-				2BE5ADEF2CABC4570094F3C3 /* ExampleService.swift in Sources */,
 				2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */,
 				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
-				2BE5ADF12CABC4570094F3C3 /* ExampleView.swift in Sources */,
-				2BE5ADF22CABC4570094F3C3 /* ExampleViewModel.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
