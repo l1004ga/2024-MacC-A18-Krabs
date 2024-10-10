@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TempMainView: View {
     @State var viewModel: TempMainViewModel = .init()
-    
+    @State private var sobakOnOff: Bool = false
     private func heightCalc(_ accent: Accent) -> CGFloat {
         switch accent {
         case .none:
@@ -60,6 +60,14 @@ struct TempMainView: View {
                 }
             }
             .padding()
+            
+            Toggle(isOn: $sobakOnOff) {
+                Text("소박 보기")
+            }
+            .onChange(of: sobakOnOff) {
+                self.viewModel.effect(action: .changeSobakOnOff)
+            }
+            .padding()
         }
     }
 }
@@ -93,6 +101,7 @@ class TempMainViewModel {
             [.strong, .weak, .weak],
             [.strong, .weak, .weak]
         ]
+        var sobakOnOff: Bool = false
     }
     
     private var _state: State = .init()
@@ -103,6 +112,7 @@ class TempMainViewModel {
         case decreaseBpm // - button
         case increaseBpm // + button
         case changeAccent(daebak: Int, sobak: Int)
+        case changeSobakOnOff
     }
     
     func effect(action: Action) {
@@ -131,6 +141,9 @@ class TempMainViewModel {
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
             self._state.jangdanAccents[daebak][sobak] = self._state.jangdanAccents[daebak][sobak].nextAccent()
+        case .changeSobakOnOff:
+            self._state.sobakOnOff.toggle()
+            self.templateUseCase.changeSobakOnOff()
         }
     }
 }

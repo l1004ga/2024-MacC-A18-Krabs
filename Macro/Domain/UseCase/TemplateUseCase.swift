@@ -93,16 +93,23 @@ class TemplateUseCase: JangdanSelectInterface {
         }
         set {
             currentJangdan.bpm = newValue
-            bpmSubject.send(newValue)
+            if sobakOnOff {
+                let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
+                bpmSubject.send(newValue * sobak)
+            } else {
+                bpmSubject.send(newValue)
+            }
         }
     }
     var currentJangdanBakCount: Int {
         return currentJangdan.bakCount
     }
     
+    var sobakOnOff: Bool
     
     init() {
         self.currentJangdan = JangdanEntity(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [])
+        self.sobakOnOff = false
     }
     
     // JangdanSelectInterface에 필요한 퍼블리셔들
@@ -132,6 +139,10 @@ class TemplateUseCase: JangdanSelectInterface {
         
     }
     
+    func changeSobakOnOff() {
+        self.sobakOnOff.toggle()
+    }
+    
     // 현재 위치의 강세를 탭할 때마다 순차적으로 변경되도록 도와주는 함수
     private func changeAccent(daebakIndex: Int, sobakIndex: Int) {
         var currentAccent = currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
@@ -157,8 +168,12 @@ class TemplateUseCase: JangdanSelectInterface {
     
     // 2차원인 강세 리스트를 1차원 배열로 변경해주는 함수
     private func convertToOneDimensionalArray(daebakList: [JangdanEntity.Daebak]) -> [Accent] {
-        
-        return daebakList.flatMap { $0.bakAccentList }
+        if sobakOnOff { // 대박+소박 전체 강세 다보냄
+            return daebakList.flatMap { $0.bakAccentList }
+        } else { // 대박만 강세 정제
+            let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
+            return daebakList.flatMap { $0.bakAccentList }.enumerated().filter { $0.offset % sobak == 0 }.map { $0.element}
+        }
     }
     
 }
