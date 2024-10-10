@@ -25,16 +25,14 @@ class MetronomeOnOffUseCase {
     }
     
     private var templateUseCase: JangdanSelectInterface
-    private var beatDisplayUseCase: UpdateBeatDisplayInterface
     private var soundManager: PlaySoundInterface
     
-    init(templateUseCase: JangdanSelectInterface, beatDisplayUseCase: UpdateBeatDisplayInterface, soundManager: PlaySoundInterface) {
-        self.jangdanAccentList = []
-        self.bpm = 120
+    init(templateUseCase: JangdanSelectInterface, soundManager: PlaySoundInterface) {
+        self.jangdanAccentList = [.strong]
+        self.bpm = 60
         self.currentBeat = 0
         
         self.templateUseCase = templateUseCase
-        self.beatDisplayUseCase = beatDisplayUseCase
         self.soundManager = soundManager
         
         self.jangdanSubscription = templateUseCase.jangdanPublisher.sink { [weak self] jangdan in
@@ -52,7 +50,7 @@ class MetronomeOnOffUseCase {
 
 // Play / Stop
 extension MetronomeOnOffUseCase {
-    func play() {
+    func play(_ tickHandler: @escaping () -> Void ) {
         // 데이터 갱신
         self.currentBeat = 0
         
@@ -63,6 +61,7 @@ extension MetronomeOnOffUseCase {
         self.timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
             
+            tickHandler()
             self.timerHandler()
         }
         
@@ -76,10 +75,6 @@ extension MetronomeOnOffUseCase {
     }
     
     private func timerHandler() {
-        Task {
-            await self.beatDisplayUseCase.nextBeat()
-        }
-        
         let accent: Accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
         self.soundManager.beep(accent)
         self.currentBeat += 1

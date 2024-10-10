@@ -26,6 +26,10 @@
 		2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */; };
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		2BF22E822CB3C5EA00E66E50 /* BeatDisplayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */; };
+		2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */; };
+		2BF22E982CB67B2E00E66E50 /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E962CB67B2E00E66E50 /* beep_strong.wav */; };
+		2BF22E992CB67B2E00E66E50 /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E972CB67B2E00E66E50 /* beep_weak.wav */; };
+		2BF22E9A2CB67B2E00E66E50 /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2BF22E952CB67B2E00E66E50 /* beep_medium.wav */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentUseCase.swift */; };
 		3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */; };
@@ -74,6 +78,10 @@
 		2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBeatDisplayInterface.swift; sourceTree = "<group>"; };
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		2BF22E812CB3C5EA00E66E50 /* BeatDisplayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatDisplayUseCase.swift; sourceTree = "<group>"; };
+		2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMainView.swift; sourceTree = "<group>"; };
+		2BF22E952CB67B2E00E66E50 /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
+		2BF22E962CB67B2E00E66E50 /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
+		2BF22E972CB67B2E00E66E50 /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentUseCase.swift; sourceTree = "<group>"; };
 		3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveNextAccentInterface.swift; sourceTree = "<group>"; };
@@ -210,6 +218,7 @@
 			children = (
 				2BE5ADE42CABC4570094F3C3 /* ExampleView.swift */,
 				2BE5ADE52CABC4570094F3C3 /* ExampleViewModel.swift */,
+				2BF22E8D2CB66E0A00E66E50 /* TempMainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +233,9 @@
 				2BE5ADE32CABC4570094F3C3 /* System */,
 				2BE5ADE62CABC4570094F3C3 /* View */,
 				2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */,
+				2BF22E952CB67B2E00E66E50 /* beep_medium.wav */,
+				2BF22E962CB67B2E00E66E50 /* beep_strong.wav */,
+				2BF22E972CB67B2E00E66E50 /* beep_weak.wav */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -356,6 +368,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BF22E982CB67B2E00E66E50 /* beep_strong.wav in Resources */,
+				2BF22E992CB67B2E00E66E50 /* beep_weak.wav in Resources */,
+				2BF22E9A2CB67B2E00E66E50 /* beep_medium.wav in Resources */,
 				2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */,
 				2BE5ADEA2CABC4570094F3C3 /* Assets.xcassets in Resources */,
 			);
@@ -389,6 +404,7 @@
 				2BE5ADED2CABC4570094F3C3 /* ExampleUseCase.swift in Sources */,
 				2BE5ADEE2CABC4570094F3C3 /* Example+Extensions.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
+				2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */,
 				3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
@@ -562,10 +578,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Macro/Preview Content\"";
-				DEVELOPMENT_TEAM = UV2PAA368V;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UV2PAA368V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -578,8 +596,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hanbae.Macro;
+				PRODUCT_BUNDLE_IDENTIFIER = Krabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Developer Krabs.Macro";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -591,10 +611,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Macro/Preview Content\"";
-				DEVELOPMENT_TEAM = UV2PAA368V;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UV2PAA368V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -607,8 +629,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hanbae.Macro;
+				PRODUCT_BUNDLE_IDENTIFIER = Krabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AppStore Krabs.Macro";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
