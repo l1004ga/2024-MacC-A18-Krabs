@@ -10,17 +10,13 @@ import Foundation
 
 class TempoUseCase {
     private var templateUseCase: UpdateTempoInterface
-    private var changeBpm: Int
     
     init(templateUseCase: UpdateTempoInterface) {
         self.templateUseCase = templateUseCase
-        self.changeBpm = 0
     }
     
     func updateTempo(newBpm: Int) {
-        changeBpm = newBpm
-        templateUseCase.updateTempo(newBpm: changeBpm)
+        // 사용자가 변경한 BPM을 각 장단별 데이터 객체에 저장 요청
+        templateUseCase.updateTempo(newBpm: newBpm)
     }
-    
 }
-

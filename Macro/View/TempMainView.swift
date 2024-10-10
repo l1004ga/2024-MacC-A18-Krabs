@@ -88,11 +88,11 @@ class TempMainViewModel {
             }
             
         case .decreaseBpm:
-            self._state.bpm -= 1
+            self._state.bpm -= 10
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
             
         case .increaseBpm:
-            self._state.bpm += 1
+            self._state.bpm += 10
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
         }
     }

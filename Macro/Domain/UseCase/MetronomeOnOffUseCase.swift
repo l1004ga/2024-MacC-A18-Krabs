@@ -43,6 +43,8 @@ class MetronomeOnOffUseCase {
         self.bpmSubscription = templateUseCase.bpmPublisher.sink { [weak self] bpm in
             guard let self else { return }
             self.bpm = bpm
+            // Timer의 schedule을 현재 변경된 bpm에 맞게 재설정
+            self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval)
         }
         self.bpmSubscription?.store(in: &self.cancelBag)
     }
@@ -78,14 +80,5 @@ extension MetronomeOnOffUseCase {
         let accent: Accent = jangdanAccentList[self.currentBeat % jangdanAccentList.count]
         self.soundManager.beep(accent)
         self.currentBeat += 1
-    }
-}
-
-// BPM 갱신
-extension MetronomeOnOffUseCase {
-    func updateBPM(to value: Int) {
-        self.bpm = value
-        // TODO: - 실행시켜보고 뭔가 이상하면 deadline 변경해볼것 [.now() + interval -> .now()]
-        self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval)
     }
 }
