@@ -23,5 +23,3 @@ enum Accent {
     case weak
     case none
 }
-
-
