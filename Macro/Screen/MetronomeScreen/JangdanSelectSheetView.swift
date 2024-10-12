@@ -14,8 +14,10 @@ struct JangdanSelectSheetView: View {
     @Binding var jangdan: String
     @Binding var isSheetPresented: Bool
     
+    // geometry 설정을 위한 변수
+    @State var geoSize: CGSize = .zero
+    
     var body: some View {
-        GeometryReader { geo in
             VStack(alignment: .leading, spacing: 0) {
                 
                 // 우상단 창닫기 버튼
@@ -26,16 +28,16 @@ struct JangdanSelectSheetView: View {
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(.gray)  // TODO: change color name
-                            .font(.system(size: geo.size.width * 0.076))
-                            .padding(.bottom, geo.size.height * 0.021)
-                            .padding(.trailing, geo.size.width * 0.041)
+                            .font(.system(size: geoSize.width * 0.076))
+                            .padding(.bottom, geoSize.height * 0.021)
+                            .padding(.trailing, geoSize.width * 0.041)
                     }
                 })
           
                 Text("다른 장단 선택하기")
                     .font(.Title1_R)
                     .foregroundStyle(.textDefault)
-                    .padding(.leading, geo.size.width * 0.041)
+                    .padding(.leading, geoSize.width * 0.041)
                 
                 List {
                     ForEach(exampleList, id: \.self) { jangdan in
@@ -45,7 +47,7 @@ struct JangdanSelectSheetView: View {
                         }, label: {
                             HStack(spacing: 0) {
                                 Text("\(jangdan)")
-                                    .padding(.vertical, geo.size.height * 0.011)
+                                    .padding(.vertical, geoSize.height * 0.011)
                                     .foregroundStyle(.white)
                                 
                                 Spacer()
@@ -59,8 +61,7 @@ struct JangdanSelectSheetView: View {
                 }
                 
             }
-            .padding(.top, geo.size.height * 0.016)
-        }
+            .padding(.top, geoSize.height * 0.016)
     }
 }
 
