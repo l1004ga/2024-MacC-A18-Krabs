@@ -14,6 +14,7 @@ struct MetronomeView: View {
     @State private var jangdan: String
     @State private var isSheetPresented: Bool = false
     @State var geoSize: CGSize
+    @State private var isOn: Bool = false
     
     init(jangdan: String, geoSize: CGSize) {
         self.jangdan = jangdan
@@ -25,7 +26,7 @@ struct MetronomeView: View {
         
             VStack(spacing: 0) {
                 
-                SobakToggleView(geoSize: geoSize)
+                SobakToggleView(isOn: $isOn, geoSize: geoSize)
                     .padding(.bottom, geoSize.height * 0.019)
                 
                 MetronomeControlView(geoSize: geoSize)

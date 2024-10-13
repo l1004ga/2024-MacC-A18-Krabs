@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SobakToggleView: View {
     
-    @State private var isOn: Bool = false
+    @Binding var isOn: Bool
     
     // geometry 설정을 위한 변수
     @State var geoSize: CGSize = .zero
@@ -38,6 +38,6 @@ struct SobakToggleView: View {
 }
 
 
-#Preview {
-    SobakToggleView()
-}
+//#Preview {
+//    SobakToggleView()
+//}
