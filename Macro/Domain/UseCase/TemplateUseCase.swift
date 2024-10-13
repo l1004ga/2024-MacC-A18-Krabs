@@ -171,8 +171,7 @@ class TemplateUseCase: JangdanSelectInterface {
         if sobakOnOff { // 대박+소박 전체 강세 다보냄
             return daebakList.flatMap { $0.bakAccentList }
         } else { // 대박만 강세 정제
-            let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
-            return daebakList.flatMap { $0.bakAccentList }.enumerated().filter { $0.offset % sobak == 0 }.map { $0.element}
+            return daebakList.compactMap { $0.bakAccentList.first }
         }
     }
     
