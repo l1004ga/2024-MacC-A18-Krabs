@@ -14,9 +14,6 @@ struct JangdanSelectSheetView: View {
     @Binding var jangdan: String
     @Binding var isSheetPresented: Bool
     
-    // geometry 설정을 위한 변수
-    @State var geoSize: CGSize = .zero
-    
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 
@@ -28,40 +25,32 @@ struct JangdanSelectSheetView: View {
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(.gray)  // TODO: change color name
-                            .font(.system(size: geoSize.width * 0.076))
-                            .padding(.bottom, geoSize.height * 0.021)
-                            .padding(.trailing, geoSize.width * 0.041)
+                            .font(.system(size: 30))
+                            .padding(.bottom, 17.5)
+                            .padding(.trailing, 16)
                     }
                 })
           
                 Text("다른 장단 선택하기")
                     .font(.Title1_R)
                     .foregroundStyle(.textDefault)
-                    .padding(.leading, geoSize.width * 0.041)
+                    .padding(.leading, 16)
                 
                 List {
                     ForEach(exampleList, id: \.self) { jangdan in
                         Button(action: {
                             self.jangdan = jangdan
                             isSheetPresented = false
-                        }, label: {
-                            HStack(spacing: 0) {
+                        }, label: { 
                                 Text("\(jangdan)")
-                                    .padding(.vertical, geoSize.height * 0.011)
+                                    .padding(.vertical, 9)
                                     .foregroundStyle(.white)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 17)) // TODO : 사용 여부 및 반응형 여부 확인 필요
-                                    .foregroundStyle(.gray) // TODO: 변경 필요
-                            }
                         })
                     }
                 }
                 
             }
-            .padding(.top, geoSize.height * 0.016)
+            .padding(.top, 14)
     }
 }
 
