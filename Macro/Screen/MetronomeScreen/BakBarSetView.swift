@@ -80,7 +80,9 @@ struct BakBarSetView: View {
     var daebakCount: Int // 대박 개수
     var daebakList: [[Accent]] // 대박 리스트
     var isSobakMode: Bool // 소박 보기 모드인지 대박 보기 모드인지 구분하는 불리언 값
+    var isPlaying: Bool // 재생 중인지 여부
     var currentIndex: Int? // 현재 재생 중인 인덱스
+    
     
     var body: some View {
         // 대박과 소박 개수로 리듬 케이스 결정
@@ -88,18 +90,25 @@ struct BakBarSetView: View {
         
         HStack(spacing: 1) {
             if isSobakMode {
-                // 소박을 반복하여 그리기, 대박 안에 소박들을 그린다
+                // 소박을 반복하여 그리기
                 ForEach(daebakList.indices, id: \.self) { daebakIndex in
                     let daebak = daebakList[daebakIndex]
                     
                     HStack(spacing: 1) { // 소박들이 한 대박 안에 붙어서 렌더링
                         ForEach(daebak.indices, id: \.self) { sobakIndex in
+                            let currentSobakIndex = (daebakIndex * daebak.count) + sobakIndex
+                            let isCurrentBeat = isPlaying && currentIndex == currentSobakIndex
+                            
                             BakBarView(
                                 currentAccent: daebak[sobakIndex], // 소박의 강세 적용
                                 bakInt: sobakIndex == 0 ? daebakIndex + 1 : 0, // 첫 소박에만 숫자를 표시
                                 barHeight: rhythmCase.sobakSize()?.height ?? 280, // 소박 높이
                                 barWidth: rhythmCase.sobakSize()?.width ?? 30, // 소박 너비
-                                barColor: currentIndex == daebakIndex ? Color.bakBarActive : Color.bakBarInactive // 현재 재생 중인 인덱스에 따라 색상 변경
+                                
+                                // 재생 중일 때와 아닐 때의 색상 분기 처리
+                                barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
+                                strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
+                                elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray)
                             )
                         }
                     }
@@ -123,13 +132,17 @@ struct BakBarSetView: View {
                 ForEach(daebakList.indices, id: \.self) { daebakIndex in
                     let size = rhythmCase.daebakSize(forIndex: daebakIndex)
                     let daebak = daebakList[daebakIndex]
+                    let isCurrentBeat = isPlaying && currentIndex == daebakIndex
                     
                     BakBarView(
                         currentAccent: daebak[0],
                         bakInt: daebakIndex + 1,
                         barHeight: size.height,
                         barWidth: size.width,
-                        barColor: currentIndex == daebakIndex ? Color.bakBarActive : Color.bakBarInactive // 현재 재생 중인 인덱스에 따라 색상 변경
+                        
+                        barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
+                        strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
+                        elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray)
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.trailing, 1)
@@ -152,10 +165,10 @@ struct BakBarSetView: View {
         .padding() // 가로 정렬을 위해 여백 추가
     }
 }
+
 // 프리뷰 설정
 struct BakBarSetView_Previews: PreviewProvider {
     static var previews: some View {
-        // 미리보기: 기본 케이스 (중모리, 중중모리, 굿거리)
         let daebakList: [[Accent]] = [
             [.strong, .medium, .weak],
             [.medium, .weak, .strong],
@@ -167,7 +180,9 @@ struct BakBarSetView_Previews: PreviewProvider {
             bakCount: 12,
             daebakCount: 4,
             daebakList: daebakList,
-            isSobakMode: true // 소박 모드
+            isSobakMode: true, // 소박 모드
+            isPlaying: true, // 재생 중 상태
+            currentIndex: 0 // 현재 인덱스
         )
     }
 }

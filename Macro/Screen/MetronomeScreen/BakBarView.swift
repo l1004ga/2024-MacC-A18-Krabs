@@ -13,7 +13,9 @@ struct BakBarView: View {
     var bakInt: Int = 1
     var barHeight: CGFloat
     var barWidth: CGFloat
-    var barColor: Color // 외부에서 색상을 전달받음
+    var barColor: Color // 외부에서 색상을 전달받음\
+    var strongAccentIntColor: Color
+    var elseAccentIntColor: Color
     
     
     
@@ -41,11 +43,12 @@ struct BakBarView: View {
                     Text("\(bakInt)")
                         .font(.system(size: 32, weight: .semibold))
                         .padding(.top, 16)
+                        .foregroundColor(elseAccentIntColor)
                 } else {
                     Text("\(bakInt)")
                         .font(.system(size: 32, weight: .semibold))
                         .padding(.top, 16)
-                        .foregroundColor(.black)
+                        .foregroundColor(strongAccentIntColor)
                 }
             }
         }
@@ -82,6 +85,6 @@ struct BakBarView: View {
 
 struct BakBarView_Previews: PreviewProvider {
     static var previews: some View {
-        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakBarActive) // 박 숫자 표시
+        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakBarActive, strongAccentIntColor: .bakBarNumberBlack, elseAccentIntColor: .bakBarNumberWhite) // 박 숫자 표시
     }
 }
