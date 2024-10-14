@@ -8,101 +8,65 @@ import Foundation
 import SwiftUI
 import Combine
 
-
-
-let jangdanList: [JangdanEntity] = [
-    JangdanEntity(
-        name: "자진모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 140,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "중모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 100,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "굿거리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 120,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "세마치",
-        bakCount: 9,
-        daebak: 3,
-        bpm: 130,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .medium, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "휘모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 180,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    )
-]
-
 // 장단을 불러와서 장단 엔티티형태로 온오프에 전달
 // 비피엠, 강세를 각 유스케이스에서 받으면 바뀐 형태를 적용해서 장단 엔티티 형태로 온오프에 전달
 // 템포유스케이스에서는 바뀔 템포의 정보를 받고 이를 통해 비피엠 변경
 // 강세유스케이스에서는 바뀔 소박의 위치에 대한 정보를 받고 1탭에 대한 활동으로 간주하여 강세 변경
 
 class TemplateUseCase: JangdanSelectInterface {
+    // 장단의 정보를 저장하고 있는 레이어
+    private var jangdanRepository: JangdanDataInterface
     
     // 장단 변경과 BPM 변경을 퍼블리싱하는 Subject
+    // for ViewModel
+    private var jangdanUISubject = PassthroughSubject<[[Accent]], Never>()
+    private var bpmUISubject = PassthroughSubject<Int, Never>()
+    // for MetronomeOnOffUseCase
     private var jangdanSubject = PassthroughSubject<[Accent], Never>()
     private var bpmSubject = PassthroughSubject<Int, Never>()
     
     private var currentJangdan: JangdanEntity
+    
+    var sobakOnOff: Bool
+    
+    init(jangdanRepository: JangdanDataInterface) {
+        self.jangdanRepository = jangdanRepository
+        self.currentJangdan = JangdanEntity(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [])
+        self.sobakOnOff = false
+        
+        self.publishJangdanForUI()
+        self.publishJangdanForPlay()
+    }
+    
     var currentJangdanName: String {
         return currentJangdan.name
     }
+    
     var currentJangdanBpm: Int {
         get {
-            return currentJangdan.bpm
+            return self.currentJangdan.bpm
         }
         set {
-            currentJangdan.bpm = newValue
-            bpmSubject.send(newValue)
+            self.currentJangdan.bpm = newValue
+            self.updateBPMBySobakStatus()
         }
     }
+    
     var currentJangdanBakCount: Int {
-        return currentJangdan.bakCount
+        if self.sobakOnOff {
+            return currentJangdan.bakCount
+        } else {
+            return currentJangdan.daebak
+        }
     }
     
+    // ViewModel용 퍼블리셔
+    var jangdanUIPublisher: AnyPublisher<[[Accent]], Never> {
+        return jangdanUISubject.eraseToAnyPublisher()
+    }
     
-    init() {
-        self.currentJangdan = JangdanEntity(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [])
+    var bpmUIPublisher: AnyPublisher<Int, Never> {
+        return bpmUISubject.eraseToAnyPublisher()
     }
     
     // JangdanSelectInterface에 필요한 퍼블리셔들
@@ -114,53 +78,73 @@ class TemplateUseCase: JangdanSelectInterface {
         return bpmSubject.eraseToAnyPublisher()
     }
     
-    // 장단 데이터에서 장단 정보를 불러오는 함수
-    private func loadJangdanData(name: String) -> JangdanEntity? {
-        // TODO: 추후 장단리스트 repository 처리 필요
-        
-        return jangdanList.first { $0.name == name }
-    }
-    
     // 불러온 정보를 수정할 수 있도록 변수에 저장
-    func setJangdan(name: String) {
-        if let jangdan = loadJangdanData(name: name) {
+    func setJangdan(jangdan: Jangdan) {
+        if let jangdan = self.jangdanRepository.fetchJangdanData(jangdan: jangdan) {
             self.currentJangdan = jangdan
             
-            let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
-            jangdanSubject.send(oneDimensionalArray)
+            self.publishJangdanForUI()
+            self.publishJangdanForPlay()
+            
+            self.updateBPMBySobakStatus()
+        }
+    }
+    
+    // 사용자가 소박보기 On/Off 시 실행됨
+    func changeSobakOnOff() {
+        self.sobakOnOff.toggle()
+        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 [Accent] 조절
+        self.publishJangdanForUI()
+        self.publishJangdanForPlay()
+        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 BPM 조절
+        self.updateBPMBySobakStatus()
+    }
+    
+    // MetronomeOnOffUseCase의 Jangdan을 갱신시킬 때
+    private func publishJangdanForPlay() {
+        var jangdanForPlay: [Accent] = []
+        if self.sobakOnOff { // 대박+소박 전체 강세 다보냄
+            jangdanForPlay = self.currentJangdan.daebakList.flatMap { $0.bakAccentList }
+        } else { // 대박만 강세 정제
+            jangdanForPlay = self.currentJangdan.daebakList.compactMap { $0.bakAccentList.first }
+        }
+        self.jangdanSubject.send(jangdanForPlay)
+    }
+    
+    // ViewModel의 Jangdan을 갱신시킬 때
+    private func publishJangdanForUI() {
+        var jangdanForUI: [[Accent]] = []
+        if self.sobakOnOff {
+            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
+        } else {
+            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList.prefix(1).map { $0 } }
         }
         
+        self.jangdanUISubject.send(jangdanForUI)
+    }
+    
+    // 1)사용자가 BPM 변경 시, 2)소박보기 On/Off 변경 시 BPM 실행됨
+    private func updateBPMBySobakStatus() {
+        if self.sobakOnOff {
+            let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
+            self.bpmSubject.send(self.currentJangdanBpm * sobak)
+        } else {
+            self.bpmSubject.send(self.currentJangdanBpm)
+        }
+        self.bpmUISubject.send(self.currentJangdanBpm)
     }
     
     // 현재 위치의 강세를 탭할 때마다 순차적으로 변경되도록 도와주는 함수
     private func changeAccent(daebakIndex: Int, sobakIndex: Int) {
-        var currentAccent = currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
-        
-        switch currentAccent {
-        case .strong:
-            currentAccent = .medium
-        case .medium:
-            currentAccent = .weak
-        case .weak:
-            currentAccent = .none
-        case .none:
-            currentAccent = .strong
-        }
+        let currentAccent = self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
         
         // 강세 변경
-        currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex] = currentAccent
+        self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex] = currentAccent.nextAccent()
         
         // 1차원 배열 강세리스트를 퍼블리싱
-        let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
-        jangdanSubject.send(oneDimensionalArray)
+        self.publishJangdanForUI()
+        self.publishJangdanForPlay()
     }
-    
-    // 2차원인 강세 리스트를 1차원 배열로 변경해주는 함수
-    private func convertToOneDimensionalArray(daebakList: [JangdanEntity.Daebak]) -> [Accent] {
-        
-        return daebakList.flatMap { $0.bakAccentList }
-    }
-    
 }
 
 
@@ -180,4 +164,3 @@ extension TemplateUseCase: MoveNextAccentInterface {
     }
     
 }
-
