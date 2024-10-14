@@ -98,6 +98,11 @@ class TempMainViewModel {
         }
         self.jangdanUISubscriber?.store(in: &self.cancelBag)
         
+        self.templateUseCase.bpmUIPublisher.sink { [weak self] bpm in
+            guard let self else { return }
+            self._state.bpm = bpm
+        }.store(in: &cancelBag)
+        
         self.templateUseCase.setJangdan(jangdan: .자진모리)
     }
     
@@ -141,12 +146,10 @@ class TempMainViewModel {
             }
             
         case .decreaseBpm:
-            self._state.bpm -= 10
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 10)
             
         case .increaseBpm:
-            self._state.bpm += 10
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
