@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TempMainView: View {
     @State var viewModel: TempMainViewModel = .init()
@@ -26,7 +27,7 @@ struct TempMainView: View {
     var body: some View {
         VStack {
             HStack(alignment: .bottom) {
-                ForEach(0..<12) { index in
+                ForEach(0..<viewModel.state.jangdanAccents.count * viewModel.state.jangdanAccents[0].count, id: \.self) { index in
                     let daebak = index / viewModel.state.jangdanAccents[0].count // 3
                     let sobak = index % viewModel.state.jangdanAccents[0].count // 3
                     
@@ -79,16 +80,25 @@ class TempMainViewModel {
     private var tempoUseCase: TempoUseCase
     private var accentUseCase : AccentUseCase
     
+    private var cancelBag: Set<AnyCancellable> = []
+    private var jangdanUISubscriber: AnyCancellable?
+    
     init() {
         let initTemplateUseCase: TemplateUseCase = .init()
         let initSoundManager: SoundManager? = .init()
-        
-        initTemplateUseCase.setJangdan(name: "자진모리")
         
         self.templateUseCase = initTemplateUseCase
         self.metronomeOnOffUseCase = .init(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
         self.tempoUseCase = .init(templateUseCase: initTemplateUseCase)
         self.accentUseCase = .init(templateUseCase: initTemplateUseCase)
+        
+        self.jangdanUISubscriber = templateUseCase.jangdanUIPublisher.sink { [weak self] jangdanUI in
+            guard let self else { return }
+            self._state.jangdanAccents = jangdanUI
+        }
+        self.jangdanUISubscriber?.store(in: &self.cancelBag)
+        
+        self.templateUseCase.setJangdan(name: "자진모리")
     }
     
     struct State {
@@ -125,6 +135,7 @@ class TempMainViewModel {
                 self.metronomeOnOffUseCase.play {
                     self._state.currentIndex += 1
                     self._state.currentIndex %= self.templateUseCase.currentJangdanBakCount
+                    print(self.templateUseCase.currentJangdanBakCount)
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
@@ -140,7 +151,6 @@ class TempMainViewModel {
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
-            self._state.jangdanAccents[daebak][sobak] = self._state.jangdanAccents[daebak][sobak].nextAccent()
         case .changeSobakOnOff:
             self._state.sobakOnOff.toggle()
             self.templateUseCase.changeSobakOnOff()
