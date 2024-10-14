@@ -74,8 +74,8 @@ class TemplateUseCase: JangdanSelectInterface {
     }
     
     // 불러온 정보를 수정할 수 있도록 변수에 저장
-    func setJangdan(name: String) {
-        if let jangdan = self.jangdanRepository.fetchJangdanData(name: name) {
+    func setJangdan(jangdan: Jangdan) {
+        if let jangdan = self.jangdanRepository.fetchJangdanData(jangdan: jangdan) {
             self.currentJangdan = jangdan
             
             self.publishJangdanForUI()

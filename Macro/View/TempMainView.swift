@@ -98,7 +98,7 @@ class TempMainViewModel {
         }
         self.jangdanUISubscriber?.store(in: &self.cancelBag)
         
-        self.templateUseCase.setJangdan(name: "자진모리")
+        self.templateUseCase.setJangdan(jangdan: .자진모리)
     }
     
     struct State {
