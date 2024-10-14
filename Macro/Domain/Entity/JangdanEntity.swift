@@ -8,7 +8,7 @@
 struct JangdanEntity {
     var name: String
     var bakCount: Int
-    var daebak: Int
+    var daebak: Int 
     var bpm: Int
     var daebakList: [Daebak]
     
