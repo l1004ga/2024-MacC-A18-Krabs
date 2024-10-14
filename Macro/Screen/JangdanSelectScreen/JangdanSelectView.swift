@@ -32,7 +32,7 @@ struct JangdanSelectView: View {
                     }
                     
                 }
-                .padding(.top, 94)
+                .padding(.top, 40)
             }
     }
 }
