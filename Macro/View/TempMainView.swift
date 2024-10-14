@@ -135,7 +135,6 @@ class TempMainViewModel {
                 self.metronomeOnOffUseCase.play {
                     self._state.currentIndex += 1
                     self._state.currentIndex %= self.templateUseCase.currentJangdanBakCount
-                    print(self.templateUseCase.currentJangdanBakCount)
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
