@@ -84,7 +84,7 @@ class TempMainViewModel {
     private var jangdanUISubscriber: AnyCancellable?
     
     init() {
-        let initTemplateUseCase: TemplateUseCase = .init()
+        let initTemplateUseCase: TemplateUseCase = .init(jangdanRepository: JangdanRepository())
         let initSoundManager: SoundManager? = .init()
         
         self.templateUseCase = initTemplateUseCase
@@ -98,7 +98,7 @@ class TempMainViewModel {
         }
         self.jangdanUISubscriber?.store(in: &self.cancelBag)
         
-        self.templateUseCase.setJangdan(name: "자진모리")
+        self.templateUseCase.setJangdan(jangdan: .자진모리)
     }
     
     struct State {
