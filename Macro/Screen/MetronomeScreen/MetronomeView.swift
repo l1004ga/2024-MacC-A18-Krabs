@@ -11,7 +11,7 @@ struct MetronomeView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var jangdan: String
+    @State private var jangdan: Jangdan
     @State private var isSheetPresented: Bool = false
     @State private var isOn: Bool = false
     @State private var isPlaying: Bool = false
@@ -20,7 +20,7 @@ struct MetronomeView: View {
     @State private var movingRight: Bool = true // 원이 오른쪽으로 이동 중인지 추적
     @State private var timer: Timer? = nil
     
-    init(jangdan: String) {
+    init(jangdan: Jangdan) {
         self.jangdan = jangdan
     }
     
