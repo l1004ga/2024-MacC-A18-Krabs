@@ -146,12 +146,10 @@ class TempMainViewModel {
             }
             
         case .decreaseBpm:
-            self._state.bpm -= 10
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 10)
             
         case .increaseBpm:
-            self._state.bpm += 10
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
