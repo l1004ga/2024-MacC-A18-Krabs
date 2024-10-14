@@ -20,6 +20,7 @@ class TemplateUseCase: JangdanSelectInterface {
     // 장단 변경과 BPM 변경을 퍼블리싱하는 Subject
     // for ViewModel
     private var jangdanUISubject = PassthroughSubject<[[Accent]], Never>()
+    private var bpmUISubject = PassthroughSubject<Int, Never>()
     // for MetronomeOnOffUseCase
     private var jangdanSubject = PassthroughSubject<[Accent], Never>()
     private var bpmSubject = PassthroughSubject<Int, Never>()
@@ -62,6 +63,10 @@ class TemplateUseCase: JangdanSelectInterface {
     // ViewModel용 퍼블리셔
     var jangdanUIPublisher: AnyPublisher<[[Accent]], Never> {
         return jangdanUISubject.eraseToAnyPublisher()
+    }
+    
+    var bpmUIPublisher: AnyPublisher<Int, Never> {
+        return bpmUISubject.eraseToAnyPublisher()
     }
     
     // JangdanSelectInterface에 필요한 퍼블리셔들
@@ -126,6 +131,7 @@ class TemplateUseCase: JangdanSelectInterface {
         } else {
             self.bpmSubject.send(self.currentJangdanBpm)
         }
+        self.bpmUISubject.send(self.currentJangdanBpm)
     }
     
     // 현재 위치의 강세를 탭할 때마다 순차적으로 변경되도록 도와주는 함수
