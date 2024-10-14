@@ -84,7 +84,7 @@ class TempMainViewModel {
     private var jangdanUISubscriber: AnyCancellable?
     
     init() {
-        let initTemplateUseCase: TemplateUseCase = .init()
+        let initTemplateUseCase: TemplateUseCase = .init(jangdanRepository: JangdanRepository())
         let initSoundManager: SoundManager? = .init()
         
         self.templateUseCase = initTemplateUseCase

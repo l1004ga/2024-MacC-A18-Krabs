@@ -8,74 +8,14 @@ import Foundation
 import SwiftUI
 import Combine
 
-let jangdanList: [JangdanEntity] = [
-    JangdanEntity(
-        name: "자진모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 140,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "중모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 100,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "굿거리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 120,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "세마치",
-        bakCount: 9,
-        daebak: 3,
-        bpm: 130,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .medium, .weak])
-        ]
-    ),
-    JangdanEntity(
-        name: "휘모리",
-        bakCount: 12,
-        daebak: 4,
-        bpm: 180,
-        daebakList: [
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium, .weak, .weak])
-        ]
-    )
-]
-
 // 장단을 불러와서 장단 엔티티형태로 온오프에 전달
 // 비피엠, 강세를 각 유스케이스에서 받으면 바뀐 형태를 적용해서 장단 엔티티 형태로 온오프에 전달
 // 템포유스케이스에서는 바뀔 템포의 정보를 받고 이를 통해 비피엠 변경
 // 강세유스케이스에서는 바뀔 소박의 위치에 대한 정보를 받고 1탭에 대한 활동으로 간주하여 강세 변경
 
 class TemplateUseCase: JangdanSelectInterface {
+    // 장단의 정보를 저장하고 있는 레이어
+    private var jangdanRepository: JangdanDataInterface
     
     // 장단 변경과 BPM 변경을 퍼블리싱하는 Subject
     // for ViewModel
@@ -88,7 +28,8 @@ class TemplateUseCase: JangdanSelectInterface {
     
     var sobakOnOff: Bool
     
-    init() {
+    init(jangdanRepository: JangdanDataInterface) {
+        self.jangdanRepository = jangdanRepository
         self.currentJangdan = JangdanEntity(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [])
         self.sobakOnOff = false
         
@@ -132,16 +73,9 @@ class TemplateUseCase: JangdanSelectInterface {
         return bpmSubject.eraseToAnyPublisher()
     }
     
-    // 장단 데이터에서 장단 정보를 불러오는 함수
-    private func loadJangdanData(name: String) -> JangdanEntity? {
-        // TODO: 추후 장단리스트 repository 처리 필요
-        
-        return jangdanList.first { $0.name == name }
-    }
-    
     // 불러온 정보를 수정할 수 있도록 변수에 저장
     func setJangdan(name: String) {
-        if let jangdan = loadJangdanData(name: name) {
+        if let jangdan = self.jangdanRepository.fetchJangdanData(name: name) {
             self.currentJangdan = jangdan
             
             self.publishJangdanForUI()
@@ -196,7 +130,7 @@ class TemplateUseCase: JangdanSelectInterface {
     
     // 현재 위치의 강세를 탭할 때마다 순차적으로 변경되도록 도와주는 함수
     private func changeAccent(daebakIndex: Int, sobakIndex: Int) {
-        var currentAccent = self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
+        let currentAccent = self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
         
         // 강세 변경
         self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex] = currentAccent.nextAccent()
