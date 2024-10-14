@@ -36,6 +36,9 @@
 		438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */; };
 		438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoUseCase.swift */; };
 		438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateUseCase.swift */; };
+		439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF072CB8220B003F6343 /* SobakToggleView.swift */; };
+		439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF092CB825AE003F6343 /* MetronomeControlView.swift */; };
+		439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,9 @@
 		438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTempoInterface.swift; sourceTree = "<group>"; };
 		438226DE2CAE8494007A3B23 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
 		438226E02CAEC720007A3B23 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
+		439ABF072CB8220B003F6343 /* SobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SobakToggleView.swift; sourceTree = "<group>"; };
+		439ABF092CB825AE003F6343 /* MetronomeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeControlView.swift; sourceTree = "<group>"; };
+		439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +301,9 @@
 			isa = PBXGroup;
 			children = (
 				43774F642CB7FD5300F54EF7 /* MetronomeView.swift */,
+				439ABF072CB8220B003F6343 /* SobakToggleView.swift */,
+				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
+				439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */,
 			);
 			path = MetronomeScreen;
 			sourceTree = "<group>";
@@ -448,10 +457,13 @@
 				2BE5ADEE2CABC4570094F3C3 /* Date+Extensions.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
 				2BF22E8E2CB66E0A00E66E50 /* TempMainView.swift in Sources */,
+				439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */,
+				439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */,
 				3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
+				439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */,
 				2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */,
 				43774F652CB7FD5300F54EF7 /* MetronomeView.swift in Sources */,
 				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,
