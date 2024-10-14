@@ -96,12 +96,12 @@ class TempMainViewModel {
             guard let self else { return }
             self._state.jangdanAccents = jangdanUI
         }
+        self.jangdanUISubscriber?.store(in: &self.cancelBag)
+        
         self.templateUseCase.bpmUIPublisher.sink { [weak self] bpm in
             guard let self else { return }
             self._state.bpm = bpm
         }.store(in: &cancelBag)
-        
-        self.jangdanUISubscriber?.store(in: &self.cancelBag)
         
         self.templateUseCase.setJangdan(jangdan: .자진모리)
     }
