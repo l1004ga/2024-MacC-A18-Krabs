@@ -89,16 +89,11 @@ class TemplateUseCase: JangdanSelectInterface {
     }
     var currentJangdanBpm: Int {
         get {
-            return currentJangdan.bpm
+            return self.currentJangdan.bpm
         }
         set {
-            currentJangdan.bpm = newValue
-            if sobakOnOff {
-                let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
-                bpmSubject.send(newValue * sobak)
-            } else {
-                bpmSubject.send(newValue)
-            }
+            self.currentJangdan.bpm = newValue
+            self.updateBPMBySobakStatus()
         }
     }
     var currentJangdanBakCount: Int {
@@ -136,16 +131,31 @@ class TemplateUseCase: JangdanSelectInterface {
             let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
             jangdanSubject.send(oneDimensionalArray)
         }
-        
     }
     
+    // 사용자가 소박보기 On/Off 시 실행됨
     func changeSobakOnOff() {
         self.sobakOnOff.toggle()
+        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 [Accent] 조절
+        let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
+        self.jangdanSubject.send(oneDimensionalArray)
+        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 BPM 조절
+        self.updateBPMBySobakStatus()
+    }
+    
+    // 1)사용자가 BPM 변경 시, 2)소박보기 On/Off 변경 시 BPM 실행됨
+    func updateBPMBySobakStatus() {
+        if self.sobakOnOff {
+            let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
+            bpmSubject.send(self.currentJangdanBpm * sobak)
+        } else {
+            bpmSubject.send(self.currentJangdanBpm)
+        }
     }
     
     // 현재 위치의 강세를 탭할 때마다 순차적으로 변경되도록 도와주는 함수
     private func changeAccent(daebakIndex: Int, sobakIndex: Int) {
-        var currentAccent = currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
+        var currentAccent = self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex]
         
         switch currentAccent {
         case .strong:
@@ -163,12 +173,12 @@ class TemplateUseCase: JangdanSelectInterface {
         
         // 1차원 배열 강세리스트를 퍼블리싱
         let oneDimensionalArray = convertToOneDimensionalArray(daebakList: currentJangdan.daebakList)
-        jangdanSubject.send(oneDimensionalArray)
+        self.jangdanSubject.send(oneDimensionalArray)
     }
     
     // 2차원인 강세 리스트를 1차원 배열로 변경해주는 함수
     private func convertToOneDimensionalArray(daebakList: [JangdanEntity.Daebak]) -> [Accent] {
-        if sobakOnOff { // 대박+소박 전체 강세 다보냄
+        if self.sobakOnOff { // 대박+소박 전체 강세 다보냄
             return daebakList.flatMap { $0.bakAccentList }
         } else { // 대박만 강세 정제
             return daebakList.compactMap { $0.bakAccentList.first }
