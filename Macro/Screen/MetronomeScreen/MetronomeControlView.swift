@@ -64,7 +64,7 @@ struct MetronomeControlView: View {
                         .frame(width: 337, height: 80)
                         .foregroundStyle(.buttonPrimary)
                         .overlay {
-                            Text(isPlaying ? "시작" : "멈춤")
+                            Text(isPlaying ? "멈춤" : "시작")
                                 .font(.LargeTitle_R)
                                 .foregroundStyle(.textButtonPrimary)
                         }
