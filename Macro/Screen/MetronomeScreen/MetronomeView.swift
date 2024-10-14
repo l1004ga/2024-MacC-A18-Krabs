@@ -129,6 +129,7 @@ struct MetronomeView: View {
     
     // 타이머 중지 함수
     func stopMoving() {
+        circleXPosition = 0
         timer?.invalidate() // 타이머 해제
         timer = nil
     }
