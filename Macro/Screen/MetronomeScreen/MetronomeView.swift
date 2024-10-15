@@ -188,11 +188,6 @@ class MetronomeViewModel {
             self._state.bpm = bpm
         }
         self.bpmSubscriber?.store(in: &self.cancelBag)
-        print("MetronomeViewModel init")
-    }
-    
-    deinit {
-        print("MetronomeViewModel deinit")
     }
     
     private var _state: State = .init()
