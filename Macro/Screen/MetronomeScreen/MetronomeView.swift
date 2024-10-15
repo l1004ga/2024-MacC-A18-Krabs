@@ -236,7 +236,7 @@ class MetronomeViewModel {
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
                     self._state.currentIndex += 1
-                    self._state.currentIndex %= self._state.bakCount
+                    self._state.currentIndex %= self._state.isSobakOn ? self._state.bakCount : self._state.daebakCount
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
