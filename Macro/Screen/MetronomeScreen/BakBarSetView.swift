@@ -182,8 +182,11 @@ struct BakBarSetView_Previews: PreviewProvider {
             [.strong, .medium, .weak]
         ]
         
+        let viewModel = MetronomeViewModel()
+        viewModel.effect(action: .selectJangdan(jangdan: .굿거리))
+        
         return BakBarSetView(
-            viewModel: MetronomeViewModel(),
+            viewModel: viewModel,
             bakCount: 12,
             daebakCount: 4,
             daebakList: daebakList,
