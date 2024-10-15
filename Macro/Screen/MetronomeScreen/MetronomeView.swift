@@ -101,7 +101,9 @@ struct MetronomeView: View {
             .toolbarBackgroundVisibility(.visible)
             .toolbarTitleDisplayMode(.inline)
             .sheet(isPresented: $isSheetPresented) {
-                JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented)
+                JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented, sendJangdan: {
+                    self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+                })
                     .presentationDragIndicator(.visible)
             }
             .onAppear {

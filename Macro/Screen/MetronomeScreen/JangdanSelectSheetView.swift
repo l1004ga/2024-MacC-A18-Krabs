@@ -11,6 +11,7 @@ struct JangdanSelectSheetView: View {
     
     @Binding var jangdan: Jangdan
     @Binding var isSheetPresented: Bool
+    var sendJangdan: () -> Void
     
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
@@ -38,8 +39,9 @@ struct JangdanSelectSheetView: View {
                     ForEach(Jangdan.allCases, id: \.self) { jangdan in
                         Button(action: {
                             self.jangdan = jangdan
+                            sendJangdan()
                             isSheetPresented = false
-                        }, label: { 
+                        }, label: {
                                 Text("\(jangdan)")
                                     .padding(.vertical, 9)
                                     .foregroundStyle(.white)
