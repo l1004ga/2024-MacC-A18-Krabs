@@ -17,7 +17,6 @@ struct MetronomeView: View {
     @State private var isSheetPresented: Bool = false
     @State private var isSobakOn: Bool = false
     @State private var isPlaying: Bool = false
-    @State private var bpm: Int = 120
     
     @State private var circleXPosition: CGFloat = 0.0
     @State private var movingRight: Bool = true // 원이 오른쪽으로 이동 중인지 추적
@@ -27,7 +26,6 @@ struct MetronomeView: View {
         self.jangdan = jangdan
         self.viewModel = MetronomeViewModel()
         self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
-        self.bpm = self.viewModel.state.bpm
         self.isSobakOn = self.viewModel.state.isSobakOn
         self.isPlaying = self.viewModel.state.isPlaying
     }
@@ -55,12 +53,12 @@ struct MetronomeView: View {
                         self.viewModel.effect(action: .changeSobakOnOff)
                     }
                 
-                MetronomeControlView(isPlaying: $isPlaying, bpm: $bpm, viewModel: viewModel)
+                MetronomeControlView(isPlaying: $isPlaying, viewModel: viewModel)
                 
             }
             .onChange(of: isPlaying) { newValue in
                 if newValue {
-                    startMoving(currentBpm: bpm, geoSize: geo.size)
+                    startMoving(currentBpm: viewModel.state.bpm, geoSize: geo.size)
                 } else {
                     stopMoving()
                 }
@@ -173,9 +171,9 @@ class MetronomeViewModel {
     init() {
         let initTemplateUseCase = TemplateUseCase(jangdanRepository: JangdanRepository())
         self.templateUseCase = initTemplateUseCase
-        let soundManager = SoundManager()
+        let initSoundManager: SoundManager? = .init()
         // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
-        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: soundManager!)
+        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
         self.tempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
         self.accentUseCase = AccentUseCase(templateUseCase: initTemplateUseCase)
         self.jangdanUISubscriber = self.templateUseCase.jangdanUIPublisher.sink { [weak self] jangdanUI in
@@ -188,7 +186,6 @@ class MetronomeViewModel {
             self._state.bpm = bpm
         }
         self.bpmSubscriber?.store(in: &self.cancelBag)
-
     }
     
     private var _state: State = .init()
@@ -237,10 +234,10 @@ class MetronomeViewModel {
                 self.metronomeOnOffUseCase.stop()
             }
         case .decreaseBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 10)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
             
         case .increaseBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)

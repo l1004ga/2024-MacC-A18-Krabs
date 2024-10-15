@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MetronomeControlView: View {
     @Binding var isPlaying: Bool
-    @Binding var bpm: Int
     @State var viewModel: MetronomeViewModel
     
     
@@ -25,7 +24,6 @@ struct MetronomeControlView: View {
                 
                 HStack(spacing: 16) {
                     Button(action: {
-                        bpm -= 1
                         self.viewModel.effect(action: .decreaseBpm)
                     }, label: {
                         Circle()
@@ -38,13 +36,12 @@ struct MetronomeControlView: View {
                             }
                     })
                     
-                    Text("\(bpm)")
+                    Text("\(viewModel.state.bpm)")
                         .font(.custom("Pretendard-Medium", size: 64))
                         .foregroundStyle(.textSecondary)
                         .frame(width: 120, height: 60)
                     
                     Button(action: {
-                        bpm += 1
                         self.viewModel.effect(action: .increaseBpm)
                     }, label: {
                         Circle()
