@@ -60,6 +60,10 @@ class TemplateUseCase: JangdanSelectInterface {
         }
     }
     
+    var currentJangdanDaebakCount: Int {
+        return currentJangdan.daebak
+    }
+    
     // ViewModel용 퍼블리셔
     var jangdanUIPublisher: AnyPublisher<[[Accent]], Never> {
         return jangdanUISubject.eraseToAnyPublisher()

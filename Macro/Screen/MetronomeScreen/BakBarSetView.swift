@@ -166,6 +166,11 @@ struct BakBarSetView: View {
     }
 }
 
+@Observable
+class BakBarSetViewModel {
+    
+}
+
 // 프리뷰 설정
 struct BakBarSetView_Previews: PreviewProvider {
     static var previews: some View {

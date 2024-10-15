@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MetronomeView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var viewModel: MetronomeViewModel
     
     @State private var jangdan: Jangdan
     @State private var isSheetPresented: Bool = false
-    @State private var isOn: Bool = false
+    @State private var isSobakOn: Bool = false
     @State private var isPlaying: Bool = false
+    @State private var bpm: Int = 120
     
     @State private var circleXPosition: CGFloat = 0.0
     @State private var movingRight: Bool = true // 원이 오른쪽으로 이동 중인지 추적
@@ -22,6 +25,11 @@ struct MetronomeView: View {
     
     init(jangdan: Jangdan) {
         self.jangdan = jangdan
+        self.viewModel = MetronomeViewModel()
+        self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+        self.bpm = self.viewModel.state.bpm
+        self.isSobakOn = self.viewModel.state.isSobakOn
+        self.isPlaying = self.viewModel.state.isPlaying
     }
     
     
@@ -32,18 +40,31 @@ struct MetronomeView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 16)
                 
-                SobakToggleView(isOn: $isOn)
-                    .padding(.bottom, 16)
+                BakBarSetView(
+                    bakCount: viewModel.state.bakCount,
+                    daebakCount: viewModel.state.daebakCount,
+                    daebakList: viewModel.state.jangdanAccent,
+                    isSobakMode: isSobakOn, // 소박 모드
+                    isPlaying: isPlaying, // 재생 중 상태
+                    currentIndex: viewModel.state.currentIndex // 현재 인덱스
+                )
                 
-                MetronomeControlView(isPlaying: $isPlaying)
+                SobakToggleView(isOn: $isSobakOn)
+                    .padding(.bottom, 16)
+                    .onChange(of: isSobakOn) {
+                        self.viewModel.effect(action: .changeSobakOnOff)
+                    }
+                
+                MetronomeControlView(isPlaying: $isPlaying, bpm: $bpm, viewModel: viewModel)
                 
             }
             .onChange(of: isPlaying) { newValue in
                 if newValue {
-                    startMoving(currentBpm: 45, geoSize: geo.size)
+                    startMoving(currentBpm: bpm, geoSize: geo.size)
                 } else {
                     stopMoving()
                 }
+                self.viewModel.effect(action: .changeIsPlaying)
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -104,8 +125,7 @@ struct MetronomeView: View {
         }
         .frame(maxWidth: .infinity)
     }
-    
-    
+
     // 팬듈럼 작동 함수
     func startMoving(currentBpm: Int, geoSize: CGSize) {
         let rectangleWidth: CGFloat = CGFloat(geoSize.width) - 16
@@ -138,3 +158,92 @@ struct MetronomeView: View {
 //#Preview {
 //    MetronomeView(jangdan: "휘모리")
 //}
+
+@Observable
+class MetronomeViewModel {
+    private var templateUseCase: TemplateUseCase
+    private var metronomeOnOffUseCase: MetronomeOnOffUseCase
+    private var tempoUseCase: TempoUseCase
+    private var accentUseCase: AccentUseCase
+    
+    private var jangdanUISubscriber: AnyCancellable?
+    private var bpmSubscriber: AnyCancellable?
+    private var cancelBag: Set<AnyCancellable> = []
+    
+    init() {
+        let initTemplateUseCase = TemplateUseCase(jangdanRepository: JangdanRepository())
+        self.templateUseCase = initTemplateUseCase
+        let soundManager = SoundManager()
+        // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
+        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: soundManager!)
+        self.tempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
+        self.accentUseCase = AccentUseCase(templateUseCase: initTemplateUseCase)
+        self.jangdanUISubscriber = self.templateUseCase.jangdanUIPublisher.sink { [weak self] jangdanUI in
+            guard let self else { return }
+            self._state.jangdanAccent = jangdanUI
+        }
+        self.jangdanUISubscriber?.store(in: &self.cancelBag)
+        self.bpmSubscriber = self.templateUseCase.bpmUIPublisher.sink { [weak self] bpm in
+            guard let self else { return }
+            self._state.bpm = bpm
+        }
+        self.bpmSubscriber?.store(in: &self.cancelBag)
+
+    }
+    
+    private var _state: State = .init()
+    var state: State {
+        return _state
+    }
+    
+    struct State {
+        var currentJangdan: Jangdan?
+        var jangdanAccent: [[Accent]] = []
+        var bakCount: Int = 0
+        var daebakCount: Int = 0
+        var isSobakOn: Bool = false
+        var isPlaying: Bool = false
+        var currentIndex: Int = -1
+        var bpm: Int = 60
+    }
+    
+    enum Action {
+        case selectJangdan(jangdan: Jangdan)
+        case changeSobakOnOff
+        case changeIsPlaying
+        case decreaseBpm // - button
+        case increaseBpm // + button
+        case changeAccent(daebak: Int, sobak: Int)
+    }
+    
+    func effect(action: Action) {
+        switch action {
+        case let .selectJangdan(jangdan):
+            self._state.currentJangdan = jangdan
+            self.templateUseCase.setJangdan(jangdan: jangdan)
+            self._state.bakCount = self.templateUseCase.currentJangdanBakCount
+            self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
+        case .changeSobakOnOff:
+            self._state.isSobakOn.toggle()
+            self.templateUseCase.changeSobakOnOff()
+        case .changeIsPlaying:
+            self._state.isPlaying.toggle()
+            if self._state.isPlaying {
+                self.metronomeOnOffUseCase.play {
+                    self._state.currentIndex += 1
+                    self._state.currentIndex %= self._state.bakCount
+                }
+            } else {
+                self.metronomeOnOffUseCase.stop()
+            }
+        case .decreaseBpm:
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 10)
+            
+        case .increaseBpm:
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
+            
+        case let .changeAccent(daebak, sobak):
+            self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
+        }
+    }
+}
