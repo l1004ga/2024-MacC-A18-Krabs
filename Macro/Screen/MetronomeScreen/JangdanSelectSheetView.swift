@@ -9,10 +9,9 @@ import SwiftUI
 
 struct JangdanSelectSheetView: View {
     
-    let exampleList: [String] = ["진양", "중모리", "중중모리", "굿거리", "휘모리", "동살풀이", "엇모리", "엇중모리", "세마치", "노랫가락 5.8.8.5.5"]
-    
-    @Binding var jangdan: String
+    @Binding var jangdan: Jangdan
     @Binding var isSheetPresented: Bool
+    var sendJangdan: () -> Void
     
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
@@ -37,11 +36,12 @@ struct JangdanSelectSheetView: View {
                     .padding(.leading, 16)
                 
                 List {
-                    ForEach(exampleList, id: \.self) { jangdan in
+                    ForEach(Jangdan.allCases, id: \.self) { jangdan in
                         Button(action: {
                             self.jangdan = jangdan
+                            sendJangdan()
                             isSheetPresented = false
-                        }, label: { 
+                        }, label: {
                                 Text("\(jangdan)")
                                     .padding(.vertical, 9)
                                     .foregroundStyle(.white)

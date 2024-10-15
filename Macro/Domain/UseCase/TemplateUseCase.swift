@@ -53,11 +53,11 @@ class TemplateUseCase: JangdanSelectInterface {
     }
     
     var currentJangdanBakCount: Int {
-        if self.sobakOnOff {
             return currentJangdan.bakCount
-        } else {
-            return currentJangdan.daebak
-        }
+    }
+    
+    var currentJangdanDaebakCount: Int {
+        return currentJangdan.daebak
     }
     
     // ViewModel용 퍼블리셔

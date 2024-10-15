@@ -5,40 +5,41 @@
 //  Created by Yunki on 10/14/24.
 //
 
+// TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
 class JangdanRepository {
     let jangdanList: [JangdanEntity] = [
-        JangdanEntity(
-            name: "진양",
-            bakCount: 24,
-            daebak: 24,
-            bpm: 30,
-            daebakList: [
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.strong])
-            ]
-        ),
+//        JangdanEntity(
+//            name: "진양",
+//            bakCount: 24,
+//            daebak: 24,
+//            bpm: 30,
+//            daebakList: [
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.weak]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong])
+//            ]
+//        ),
         JangdanEntity(
             name: "중모리",
             bakCount: 12,
@@ -146,19 +147,19 @@ class JangdanRepository {
                 JangdanEntity.Daebak(bakAccentList: [.strong, .medium, .none])
             ]
         ),
-        JangdanEntity(
-            name: "노랫가락 5.8.8.5.5",
-            bakCount: 31,
-            daebak: 5,
-            bpm: 110,
-            daebakList: [
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak, .weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none, .weak, .none, .weak, .weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none, .weak, .none, .weak, .weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak, .weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .strong, .weak, .none])
-            ]
-        )
+//        JangdanEntity(
+//            name: "노랫가락 5.8.8.5.5",
+//            bakCount: 31,
+//            daebak: 5,
+//            bpm: 110,
+//            daebakList: [
+//                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak, .weak, .none]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none, .weak, .none, .weak, .weak, .none]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none, .weak, .none, .weak, .weak, .none]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak, .weak, .none]),
+//                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .strong, .weak, .none])
+//            ]
+//        )
     ]
 }
 
