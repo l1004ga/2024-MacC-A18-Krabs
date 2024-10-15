@@ -16,9 +16,7 @@ struct BakBarView: View {
     var barColor: Color // 외부에서 색상을 전달받음\
     var strongAccentIntColor: Color
     var elseAccentIntColor: Color
-    
-    
-    
+    var accent: () -> Void
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -36,6 +34,7 @@ struct BakBarView: View {
             .contentShape(Rectangle()) // 터치 영역을 전체로 설정
             .onTapGesture {
                 cycleAccent() // 터치할 때 강세를 변경
+                accent()
             }
             
             if bakInt != 0 { // 박 숫자를 표시하는지 여부
@@ -85,6 +84,6 @@ struct BakBarView: View {
 
 struct BakBarView_Previews: PreviewProvider {
     static var previews: some View {
-        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakBarActive, strongAccentIntColor: .bakBarNumberBlack, elseAccentIntColor: .bakBarNumberWhite) // 박 숫자 표시
+        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakBarActive, strongAccentIntColor: .bakBarNumberBlack, elseAccentIntColor: .bakBarNumberWhite, accent: {}) // 박 숫자 표시
     }
 }

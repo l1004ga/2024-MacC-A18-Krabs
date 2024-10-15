@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SobakToggleView: View {
     
-    @Binding var isOn: Bool
+    @Binding var isSobakOn: Bool
     
     var body: some View {
             HStack {
@@ -19,7 +19,7 @@ struct SobakToggleView: View {
                 
                 Spacer()
                 
-                Toggle("", isOn: $isOn)
+                Toggle("", isOn: $isSobakOn)
                     .labelsHidden()
                     .toggleStyle(SwitchToggleStyle(tint: .toggleOn))
             }

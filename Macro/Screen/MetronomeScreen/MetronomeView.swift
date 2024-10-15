@@ -39,15 +39,16 @@ struct MetronomeView: View {
                     .padding(.bottom, 16)
                 
                 BakBarSetView(
+                    viewModel: self.viewModel,
                     bakCount: viewModel.state.bakCount,
                     daebakCount: viewModel.state.daebakCount,
                     daebakList: viewModel.state.jangdanAccent,
-                    isSobakMode: isSobakOn, // 소박 모드
-                    isPlaying: isPlaying, // 재생 중 상태
+                    isSobakMode: viewModel.state.isSobakOn, // 소박 모드
+                    isPlaying: viewModel.state.isPlaying, // 재생 중 상태
                     currentIndex: viewModel.state.currentIndex // 현재 인덱스
                 )
                 
-                SobakToggleView(isOn: $isSobakOn)
+                SobakToggleView(isSobakOn: $isSobakOn)
                     .padding(.bottom, 16)
                     .onChange(of: isSobakOn) {
                         self.viewModel.effect(action: .changeSobakOnOff)
@@ -69,6 +70,7 @@ struct MetronomeView: View {
                 // 뒤로가기 chevron
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
+                        self.viewModel.effect(action: .stopMetronome)
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "chevron.backward")
@@ -186,6 +188,11 @@ class MetronomeViewModel {
             self._state.bpm = bpm
         }
         self.bpmSubscriber?.store(in: &self.cancelBag)
+        print("MetronomeViewModel init")
+    }
+    
+    deinit {
+        print("MetronomeViewModel deinit")
     }
     
     private var _state: State = .init()
@@ -211,6 +218,7 @@ class MetronomeViewModel {
         case decreaseBpm // - button
         case increaseBpm // + button
         case changeAccent(daebak: Int, sobak: Int)
+        case stopMetronome
     }
     
     func effect(action: Action) {
@@ -241,6 +249,8 @@ class MetronomeViewModel {
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
+        case .stopMetronome:
+            self.metronomeOnOffUseCase.stop()
         }
     }
 }

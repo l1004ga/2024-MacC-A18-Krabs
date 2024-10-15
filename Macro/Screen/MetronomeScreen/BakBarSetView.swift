@@ -76,6 +76,7 @@ func determineRhythmCase(daebakCount: Int, bakCount: Int) -> RhythmCase {
 
 // BakBarSetView: 대박과 소박을 그리는 뷰
 struct BakBarSetView: View {
+    @State var viewModel: MetronomeViewModel
     var bakCount: Int // 소박 개수
     var daebakCount: Int // 대박 개수
     var daebakList: [[Accent]] // 대박 리스트
@@ -83,6 +84,7 @@ struct BakBarSetView: View {
     var isPlaying: Bool // 재생 중인지 여부
     var currentIndex: Int? // 현재 재생 중인 인덱스
     
+
     
     var body: some View {
         // 대박과 소박 개수로 리듬 케이스 결정
@@ -108,7 +110,10 @@ struct BakBarSetView: View {
                                 // 재생 중일 때와 아닐 때의 색상 분기 처리
                                 barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
                                 strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
-                                elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray)
+                                elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray),
+                                accent: {
+                                    viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: sobakIndex))
+                                }
                             )
                         }
                     }
@@ -142,7 +147,8 @@ struct BakBarSetView: View {
                         
                         barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
                         strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
-                        elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray)
+                        elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray),
+                        accent: {viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: 0))}
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.trailing, 1)
@@ -166,11 +172,6 @@ struct BakBarSetView: View {
     }
 }
 
-@Observable
-class BakBarSetViewModel {
-    
-}
-
 // 프리뷰 설정
 struct BakBarSetView_Previews: PreviewProvider {
     static var previews: some View {
@@ -182,6 +183,7 @@ struct BakBarSetView_Previews: PreviewProvider {
         ]
         
         return BakBarSetView(
+            viewModel: MetronomeViewModel(),
             bakCount: 12,
             daebakCount: 4,
             daebakList: daebakList,
