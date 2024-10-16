@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct MetronomeControlView: View {
-    @Binding var isPlaying: Bool
-    @State var viewModel: MetronomeViewModel
     
+    @State var viewModel: MetronomeViewModel
     
     var body: some View {
         HStack {
@@ -58,13 +57,13 @@ struct MetronomeControlView: View {
                 Spacer()
                 
                 Button(action: {
-                    isPlaying.toggle()
+                    self.viewModel.effect(action: .changeIsPlaying)
                 }, label: {
                     RoundedRectangle(cornerRadius: 100)
                         .frame(width: 337, height: 80)
                         .foregroundStyle(.buttonPrimary)
                         .overlay {
-                            Text(isPlaying ? "멈춤" : "시작")
+                            Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
                                 .font(.LargeTitle_R)
                                 .foregroundStyle(.textButtonPrimary)
                         }

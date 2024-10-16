@@ -51,20 +51,20 @@ struct MetronomeView: View {
                 
                 SobakToggleView(isSobakOn: $isSobakOn)
                     .padding(.bottom, 16)
-                    .onChange(of: isSobakOn) {
-                        self.viewModel.effect(action: .changeSobakOnOff)
-                    }
+                    
                 
-                MetronomeControlView(isPlaying: $isPlaying, viewModel: viewModel)
+                MetronomeControlView(viewModel: viewModel)
 
             }
-            .onChange(of: isPlaying) { newValue in
+            .onChange(of: isSobakOn) {
+                self.viewModel.effect(action: .changeSobakOnOff)
+            }
+            .onChange(of: self.viewModel.state.isPlaying) { newValue in
                 if newValue {
                     startMoving(currentBpm: viewModel.state.bpm, geoSize: geo.size)
                 } else {
                     stopMoving()
                 }
-                self.viewModel.effect(action: .changeIsPlaying)
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -104,6 +104,7 @@ struct MetronomeView: View {
             .sheet(isPresented: $isSheetPresented) {
                 JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented, sendJangdan: {
                     self.viewModel.effect(action: .stopMetronome)
+                    self.isSobakOn = false // view의 소박보기 false
                     self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
                 })
                     .presentationDragIndicator(.visible)
@@ -158,10 +159,6 @@ struct MetronomeView: View {
         timer = nil
     }
 }
-
-//#Preview {
-//    MetronomeView(jangdan: "휘모리")
-//}
 
 @Observable
 class MetronomeViewModel {
@@ -230,7 +227,16 @@ class MetronomeViewModel {
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
             self.templateUseCase.changeSobakOnOff()
+            if self._state.isPlaying {
+                self.metronomeOnOffUseCase.stop()
+                self._state.currentIndex = -1
+                self.metronomeOnOffUseCase.play {
+                    self._state.currentIndex += 1
+                    self._state.currentIndex %= self._state.isSobakOn ? self._state.bakCount : self._state.daebakCount
+                }
+            }
         case .changeIsPlaying:
+            self._state.currentIndex = -1
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
@@ -249,6 +255,7 @@ class MetronomeViewModel {
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
         case .stopMetronome:
+            self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
         }
     }
