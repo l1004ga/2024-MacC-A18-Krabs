@@ -19,7 +19,9 @@ enum RhythmCase {
     // 대박 크기 반환 (너비 * 높이)
     func daebakSize(forIndex index: Int) -> (width: CGFloat, height: CGFloat) {
         switch self {
-        case .basicCase, .dongsalpuri:
+        case .basicCase:
+            return (width: 91.5, height: 280) // 대박 너비 91.5, 높이 280
+        case .dongsalpuri:
             return (width: 91.5, height: 280) // 대박 너비 91.5, 높이 280
         case .hwimori:
             return (width: 186.5, height: 280) // 대박 너비 186.5, 높이 280
@@ -37,11 +39,11 @@ enum RhythmCase {
     func sobakSize() -> (width: CGFloat, height: CGFloat)? {
         switch self {
         case .basicCase:
-            return (width: 30.42, height: 280) // 소박 너비 30.42, 높이 280
+            return (width: 91.5/3, height: 280) // 소박 너비 30.42, 높이 280
         case .dongsalpuri:
-            return (width: 45.62, height: 280) // 소박 너비 45.62, 높이 280
+            return (width: 91.5/2, height: 280) // 소박 너비 45.62, 높이 280
         case .hwimori:
-            return (width: 93.25, height: 280) // 소박 너비 93.25, 높이 280
+            return (width: 186.5/2, height: 280) // 소박 너비 93.25, 높이 280
         case .eotmori:
             return (width: 36.5, height: 280) // 소박 너비 36.5, 높이 280
         case .eotjungmori:
@@ -84,7 +86,7 @@ struct BakBarSetView: View {
     var isPlaying: Bool // 재생 중인지 여부
     var currentIndex: Int? // 현재 재생 중인 인덱스
     
-
+    
     
     var body: some View {
         // 대박과 소박 개수로 리듬 케이스 결정
@@ -96,7 +98,7 @@ struct BakBarSetView: View {
                 ForEach(daebakList.indices, id: \.self) { daebakIndex in
                     let daebak = daebakList[daebakIndex]
                     
-                    HStack(spacing: 1) { // 소박들이 한 대박 안에 붙어서 렌더링
+                    HStack(spacing: 0) { // 소박들이 한 대박 안에 붙어서 렌더링
                         ForEach(daebak.indices, id: \.self) { sobakIndex in
                             let currentSobakIndex = (daebakIndex * daebak.count) + sobakIndex
                             let isCurrentBeat = isPlaying && currentIndex == currentSobakIndex
@@ -114,6 +116,14 @@ struct BakBarSetView: View {
                                 accent: {
                                     viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: sobakIndex))
                                 }
+                            )
+                            .overlay(
+                                // 마지막 인덱스가 아닌 경우에만 테두리 추가
+                                sobakIndex != daebak.count - 1 ?
+                                Rectangle()
+                                    .frame(width: 1)
+                                    .foregroundColor(.bakBarLine) : nil,
+                                alignment: .trailing
                             )
                         }
                     }
@@ -151,7 +161,7 @@ struct BakBarSetView: View {
                         accent: {viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: 0))}
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 4))
-                    .padding(.trailing, 1)
+                    //                        .padding(.trailing, 1)
                     
                     // 대박 사이에 디바이더 추가
                     if daebakIndex != daebakList.count - 1 {
@@ -168,7 +178,7 @@ struct BakBarSetView: View {
                 }
             }
         }
-        .padding() // 가로 정렬을 위해 여백 추가
+        .padding(.horizontal, 8)
     }
 }
 
