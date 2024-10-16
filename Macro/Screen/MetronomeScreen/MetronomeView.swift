@@ -49,7 +49,7 @@ struct MetronomeView: View {
                 )
                 .padding(.bottom, 26)
                 
-                SobakToggleView(isSobakOn: $isSobakOn)
+                SobakToggleView(isSobakOn: $isSobakOn, jangdan: $jangdan)
                     .padding(.bottom, 16)
                     
                 

@@ -10,6 +10,7 @@ import SwiftUI
 struct SobakToggleView: View {
     
     @Binding var isSobakOn: Bool
+    @Binding var jangdan: Jangdan
     
     var body: some View {
             HStack {
@@ -22,6 +23,7 @@ struct SobakToggleView: View {
                 Toggle("", isOn: $isSobakOn)
                     .labelsHidden()
                     .toggleStyle(SwitchToggleStyle(tint: .toggleOn))
+                    .disabled(jangdan == .엇중모리)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
