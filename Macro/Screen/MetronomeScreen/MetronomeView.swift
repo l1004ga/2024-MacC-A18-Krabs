@@ -47,6 +47,7 @@ struct MetronomeView: View {
                     isPlaying: viewModel.state.isPlaying, // 재생 중 상태
                     currentIndex: viewModel.state.currentIndex // 현재 인덱스
                 )
+                .padding(.bottom, 26)
                 
                 SobakToggleView(isSobakOn: $isSobakOn)
                     .padding(.bottom, 16)
@@ -55,7 +56,7 @@ struct MetronomeView: View {
                     }
                 
                 MetronomeControlView(isPlaying: $isPlaying, viewModel: viewModel)
-                
+
             }
             .onChange(of: isPlaying) { newValue in
                 if newValue {
@@ -84,7 +85,7 @@ struct MetronomeView: View {
                     Button(action: {
                         isSheetPresented.toggle()
                     }) {
-                        HStack(spacing: 6) {
+                        HStack(spacing: 0) {
                             Text("\(jangdan)")
                                 .font(.Body_R)
                                 .foregroundStyle(.textSecondary)
