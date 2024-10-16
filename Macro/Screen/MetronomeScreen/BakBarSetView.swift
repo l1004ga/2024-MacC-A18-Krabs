@@ -122,7 +122,7 @@ struct BakBarSetView: View {
                                 sobakIndex != daebak.count - 1 ?
                                 Rectangle()
                                     .frame(width: 1)
-                                    .foregroundColor(.bakbarline) : nil,
+                                    .foregroundColor(.black) : nil,
                                 alignment: .trailing
                             )
                         }
