@@ -23,7 +23,7 @@ struct BakBarView: View {
             ZStack(alignment: .bottom) {
                 // 배경 영역 (고정된 바 배경)
                 Rectangle()
-                    .fill(Color.bakBarSetFrame) // 배경 색상 설정
+                    .fill(Color.bakbarsetframe) // 배경 색상 설정
                     .frame(width: barWidth, height: barHeight) // 고정된 배경 바 크기
                 
                 // 바 (변경되는 길이)
