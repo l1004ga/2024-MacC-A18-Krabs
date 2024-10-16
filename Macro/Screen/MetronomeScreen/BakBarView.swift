@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BakBarView: View {
     // 외부에서 받을 값들: 바의 높이, 너비, 초기 강세
-    @State var currentAccent: Accent // 외부에서 첫 강세 값을 받음
+    var currentAccent: Accent // 외부에서 첫 강세 값을 받음
     var bakInt: Int = 1
     var barHeight: CGFloat
     var barWidth: CGFloat
@@ -33,7 +33,7 @@ struct BakBarView: View {
             }
             .contentShape(Rectangle()) // 터치 영역을 전체로 설정
             .onTapGesture {
-                cycleAccent() // 터치할 때 강세를 변경
+//                cycleAccent() // 터치할 때 강세를 변경
                 accent()
             }
             
@@ -54,19 +54,19 @@ struct BakBarView: View {
     }
     
     // 터치할 때 강세를 순환시키는 함수
-    private func cycleAccent() {
-        switch currentAccent {
-        case .strong:
-            currentAccent = .medium
-        case .medium:
-            currentAccent = .weak
-        case .weak:
-            currentAccent = .none
-        case .none:
-            currentAccent = .strong
-        }
-    }
-    
+//    private func cycleAccent() {
+//        switch currentAccent {
+//        case .strong:
+//            currentAccent = .medium
+//        case .medium:
+//            currentAccent = .weak
+//        case .weak:
+//            currentAccent = .none
+//        case .none:
+//            currentAccent = .strong
+//        }
+//    }
+//    
     // 강세에 따른 높이 비율을 반환하는 함수
     private func heightForAccent(_ accent: Accent) -> CGFloat {
         switch accent {

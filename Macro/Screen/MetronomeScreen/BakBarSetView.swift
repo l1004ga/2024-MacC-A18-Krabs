@@ -178,6 +178,9 @@ struct BakBarSetView: View {
                 }
             }
         }
+        .onAppear {
+            print("박바셋뷰 \(self.viewModel.state.currentJangdan), \(self.viewModel.state.jangdanAccent)")
+        }
         .padding(.horizontal, 8)
     }
 }
