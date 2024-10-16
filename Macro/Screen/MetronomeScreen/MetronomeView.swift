@@ -99,7 +99,7 @@ struct MetronomeView: View {
                 }
             }
             .toolbarBackground(.navigationbarbackground, for: .navigationBar)
-            .toolbarBackgroundVisibility(.visible)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbarTitleDisplayMode(.inline)
             .sheet(isPresented: $isSheetPresented) {
                 JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented, sendJangdan: {
