@@ -231,6 +231,7 @@ class MetronomeViewModel {
             self._state.isSobakOn.toggle()
             self.templateUseCase.changeSobakOnOff()
         case .changeIsPlaying:
+            self._state.currentIndex = -1
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
