@@ -98,7 +98,7 @@ struct MetronomeView: View {
                     }
                 }
             }
-            .toolbarBackground(.navigationBarBackground, for: .navigationBar)
+            .toolbarBackground(.navigationbarbackground, for: .navigationBar)
             .toolbarBackgroundVisibility(.visible)
             .toolbarTitleDisplayMode(.inline)
             .sheet(isPresented: $isSheetPresented) {
@@ -120,7 +120,7 @@ struct MetronomeView: View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 100)
                 .frame(height: 16)
-                .foregroundStyle(.bakBarInactive) // 임시 색상
+                .foregroundStyle(.bakbarInactive) // 임시 색상
                 .padding(.horizontal, 8)
             
             Circle()

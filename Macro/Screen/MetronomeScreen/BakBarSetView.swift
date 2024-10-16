@@ -110,9 +110,9 @@ struct BakBarSetView: View {
                                 barWidth: rhythmCase.sobakSize()?.width ?? 30, // 소박 너비
                                 
                                 // 재생 중일 때와 아닐 때의 색상 분기 처리
-                                barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
-                                strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
-                                elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray),
+                                barColor: !isPlaying ? .bakbarActive : (isCurrentBeat ? .bakbarActive : .bakbarInactive),
+                                strongAccentIntColor: !isPlaying ? .bakbarnumberBlack : (isCurrentBeat ? .bakbarnumberBlack : .bakbarnumberBlack),
+                                elseAccentIntColor: !isPlaying ? .bakbarnumberWhite : (isCurrentBeat ? .bakbarnumberWhite  : .bakbarnumberGray),
                                 accent: {
                                     viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: sobakIndex))
                                 }
@@ -155,9 +155,9 @@ struct BakBarSetView: View {
                         barHeight: size.height,
                         barWidth: size.width,
                         
-                        barColor: !isPlaying ? .bakBarActive : (isCurrentBeat ? .bakBarActive : .bakBarInactive),
-                        strongAccentIntColor: !isPlaying ? .bakBarNumberBlack : (isCurrentBeat ? .bakBarNumberBlack : .bakBarNumberBlack),
-                        elseAccentIntColor: !isPlaying ? .bakBarNumberWhite : (isCurrentBeat ? .bakBarNumberWhite : .bakBarNumberGray),
+                        barColor: !isPlaying ? .bakbarActive : (isCurrentBeat ? .bakbarActive : .bakbarInactive),
+                        strongAccentIntColor: !isPlaying ? .bakbarnumberBlack : (isCurrentBeat ? .bakbarnumberBlack : .bakbarnumberBlack),
+                        elseAccentIntColor: !isPlaying ? .bakbarnumberWhite : (isCurrentBeat ? .bakbarnumberWhite  : .bakbarnumberGray),
                         accent: {viewModel.effect(action: .changeAccent(daebak: daebakIndex, sobak: 0))}
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 4))

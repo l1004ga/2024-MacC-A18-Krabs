@@ -23,7 +23,7 @@ struct BakBarView: View {
             ZStack(alignment: .bottom) {
                 // 배경 영역 (고정된 바 배경)
                 Rectangle()
-                    .fill(Color.bakBarSetFrame) // 배경 색상 설정
+                    .fill(Color.bakbarsetframe) // 배경 색상 설정
                     .frame(width: barWidth, height: barHeight) // 고정된 배경 바 크기
                 
                 // 바 (변경되는 길이)
@@ -84,6 +84,6 @@ struct BakBarView: View {
 
 struct BakBarView_Previews: PreviewProvider {
     static var previews: some View {
-        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakBarActive, strongAccentIntColor: .bakBarNumberBlack, elseAccentIntColor: .bakBarNumberWhite, accent: {}) // 박 숫자 표시
+        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakbarActive, strongAccentIntColor: .bakbarnumberBlack, elseAccentIntColor: .bakbarnumberWhite, accent: {}) // 박 숫자 표시
     }
 }
