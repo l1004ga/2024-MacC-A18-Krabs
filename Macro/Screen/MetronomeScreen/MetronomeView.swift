@@ -97,7 +97,7 @@ struct MetronomeView: View {
                     }
                 }
             }
-            .toolbarBackground(.navigationBarBackground, for: .navigationBar)
+            .toolbarBackground(.navigationbarbackground, for: .navigationBar)
             .toolbarBackgroundVisibility(.visible)
             .toolbarTitleDisplayMode(.inline)
             .sheet(isPresented: $isSheetPresented) {
