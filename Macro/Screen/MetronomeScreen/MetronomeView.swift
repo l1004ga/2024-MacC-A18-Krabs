@@ -65,7 +65,6 @@ struct MetronomeView: View {
                 } else {
                     stopMoving()
                 }
-//                self.viewModel.effect(action: .changeIsPlaying)
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -107,7 +106,6 @@ struct MetronomeView: View {
                     self.viewModel.effect(action: .stopMetronome)
                     self.isSobakOn = false // view의 소박보기 false
                     self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
-//                    self.viewModel.effect(action: .sheetReset) // viewModel의 소박보기 false
                 })
                     .presentationDragIndicator(.visible)
             }
@@ -161,10 +159,6 @@ struct MetronomeView: View {
         timer = nil
     }
 }
-
-//#Preview {
-//    MetronomeView(jangdan: "휘모리")
-//}
 
 @Observable
 class MetronomeViewModel {
@@ -221,7 +215,6 @@ class MetronomeViewModel {
         case increaseBpm // + button
         case changeAccent(daebak: Int, sobak: Int)
         case stopMetronome
-//        case sheetReset
     }
     
     func effect(action: Action) {
@@ -229,7 +222,6 @@ class MetronomeViewModel {
         case let .selectJangdan(jangdan):
             self._state.currentJangdan = jangdan
             self.templateUseCase.setJangdan(jangdan: jangdan)
-            print("현재 장단 : \(self._state.currentJangdan) 데이터 : \(self._state.jangdanAccent)")
             self._state.bakCount = self.templateUseCase.currentJangdanBakCount
             self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
         case .changeSobakOnOff:
@@ -265,9 +257,6 @@ class MetronomeViewModel {
         case .stopMetronome:
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
-//        case .sheetReset:
-//            self._state.isSobakOn = false
-//            self.templateUseCase.changeSobakOnOff() //데이터 패치
         }
     }
 }
