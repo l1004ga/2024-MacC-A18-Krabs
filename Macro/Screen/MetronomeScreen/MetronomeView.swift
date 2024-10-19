@@ -36,7 +36,17 @@ struct MetronomeView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 16)
                 
-                BakBarSetView(viewModel: self.viewModel)
+//                BakBarSetView(viewModel: self.viewModel)
+//                .padding(.bottom, 26)
+                HanbaeBoardView(
+                    jangdan: viewModel.state.jangdanAccent,
+                    isSobakOn: viewModel.state.isSobakOn,
+                    isPlaying: viewModel.state.isPlaying,
+                    currentIndex: viewModel.state.currentIndex
+                ) { daebak, sobak in
+                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+                }
+                .padding(.horizontal, 8)
                 .padding(.bottom, 26)
                 
                 SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
@@ -244,6 +254,7 @@ class MetronomeViewModel {
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
+            print("\(daebak) \(sobak)")
         case .stopMetronome:
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
