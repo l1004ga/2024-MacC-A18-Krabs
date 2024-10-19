@@ -36,15 +36,7 @@ struct MetronomeView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 16)
                 
-                BakBarSetView(
-                    viewModel: self.viewModel,
-                    bakCount: viewModel.state.bakCount,
-                    daebakCount: viewModel.state.daebakCount,
-                    daebakList: viewModel.state.jangdanAccent,
-                    isSobakMode: viewModel.state.isSobakOn, // 소박 모드
-                    isPlaying: viewModel.state.isPlaying, // 재생 중 상태
-                    currentIndex: viewModel.state.currentIndex // 현재 인덱스
-                )
+                BakBarSetView(viewModel: self.viewModel)
                 .padding(.bottom, 26)
                 
                 SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
