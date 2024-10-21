@@ -2,73 +2,47 @@
 //  BakBarView.swift
 //  Macro
 //
-//  Created by jhon on 10/14/24.
+//  Created by Yunki on 10/19/24.
 //
 
 import SwiftUI
 
 struct BakBarView: View {
-    // 외부에서 받을 값들: 바의 높이, 너비, 초기 강세
-    var currentAccent: Accent // 외부에서 첫 강세 값을 받음
-    var bakInt: Int = 1
-    var barHeight: CGFloat
-    var barWidth: CGFloat
-    var barColor: Color // 외부에서 색상을 전달받음\
-    var strongAccentIntColor: Color
-    var elseAccentIntColor: Color
-    var accent: () -> Void
+    var accent: Accent
+    var isActive: Bool
+    var bakNumber: Int?
     
     var body: some View {
         ZStack(alignment: .top) {
-            ZStack(alignment: .bottom) {
-                // 배경 영역 (고정된 바 배경)
+            VStack(spacing: 0) {
                 Rectangle()
-                    .fill(Color.bakbarsetframe) // 배경의 색상을 변경함
-                    .frame(width: barWidth, height: barHeight) // 고정된 배경 바 크기
-                
-                // 바 (변경되는 길이)
+                    .fill(accent > .medium
+                          ? isActive ? .bakbarActive : .bakbarInactive
+                          : .bakbarsetframe)
                 Rectangle()
-                    .fill(barColor) // 바 색상
-                    .frame(width: barWidth, height: barHeight * heightForAccent(currentAccent), alignment: .bottom) // 위로 줄어드는 바
-            }
-            .contentShape(Rectangle()) // 터치 영역을 전체로 설정
-            .onTapGesture {
-                accent()
+                    .fill(accent > .weak
+                          ? isActive ? .bakbarActive : .bakbarInactive
+                          : .bakbarsetframe)
+                Rectangle()
+                    .fill(accent > .none
+                          ? isActive ? .bakbarActive : .bakbarInactive
+                          : .bakbarsetframe)
             }
             
-            if bakInt != 0 { // 박 숫자를 표시하는지 여부
-                if currentAccent != .strong {
-                    Text("\(bakInt)")
-                        .font(.system(size: 32, weight: .semibold))
-                        .padding(.top, 16)
-                        .foregroundColor(elseAccentIntColor)
-                } else {
-                    Text("\(bakInt)")
-                        .font(.system(size: 32, weight: .semibold))
-                        .padding(.top, 16)
-                        .foregroundColor(strongAccentIntColor)
-                }
+            if let bakNumber {
+                Text("\(bakNumber)")
+                    .font(.system(size: 32, weight: .semibold))
+                    .padding(.top, 16)
+                    .foregroundColor(
+                        isActive
+                        ? accent == .strong ? .bakbarnumberBlack : .bakbarnumberWhite
+                        : accent == .strong ? .bakbarnumberBlack : .bakbarnumberGray
+                    )
             }
-        }
-    }
-    
-    // 강세에 따른 높이 비율을 반환하는 함수
-    private func heightForAccent(_ accent: Accent) -> CGFloat {
-        switch accent {
-        case .strong:
-            return 1.0
-        case .medium:
-            return 0.66
-        case .weak:
-            return 0.33
-        case .none:
-            return 0.0
         }
     }
 }
 
-struct BakBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        BakBarView(currentAccent: .medium, bakInt: 1, barHeight: 280, barWidth: 30.42, barColor: .bakbarActive, strongAccentIntColor: .bakbarnumberBlack, elseAccentIntColor: .bakbarnumberWhite, accent: {}) // 박 숫자 표시
-    }
+#Preview {
+    BakBarView(accent: .strong, isActive: true, bakNumber: 3)
 }

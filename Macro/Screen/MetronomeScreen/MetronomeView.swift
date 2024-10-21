@@ -36,8 +36,6 @@ struct MetronomeView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 16)
                 
-//                BakBarSetView(viewModel: self.viewModel)
-//                .padding(.bottom, 26)
                 HanbaeBoardView(
                     jangdan: viewModel.state.jangdanAccent,
                     isSobakOn: viewModel.state.isSobakOn,

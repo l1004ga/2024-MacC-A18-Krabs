@@ -19,7 +19,7 @@ struct HanbaeBoardView: View {
             GridRow {
                 ForEach(jangdan.indices, id: \.self) { daebakIndex in
                     
-                    PawnBakBarSetView(
+                    BakBarSetView(
                         accents: jangdan[daebakIndex],
                         daebakIndex: daebakIndex,
                         isDaebakOnly: !isSobakOn,
