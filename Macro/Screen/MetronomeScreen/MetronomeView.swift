@@ -40,7 +40,7 @@ struct MetronomeView: View {
                     jangdan: viewModel.state.jangdanAccent,
                     isSobakOn: viewModel.state.isSobakOn,
                     isPlaying: viewModel.state.isPlaying,
-                    currentIndex: viewModel.state.currentIndex
+                    currentIndex: viewModel.state.currentIndex // 여기서는 전체 박의 개수가 반복되어서 들어감
                 ) { daebak, sobak in
                     viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
                 }
@@ -177,7 +177,7 @@ class MetronomeViewModel {
         self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
         self.tempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
         self.accentUseCase = AccentUseCase(templateUseCase: initTemplateUseCase)
-        self.jangdanUISubscriber = self.templateUseCase.jangdanUIPublisher.sink { [weak self] jangdanUI in
+        self.jangdanUISubscriber = self.templateUseCase.jangdanPublisher.sink { [weak self] jangdanUI in
             guard let self else { return }
             self._state.jangdanAccent = jangdanUI
         }
@@ -224,13 +224,13 @@ class MetronomeViewModel {
             self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
-            self.templateUseCase.changeSobakOnOff()
+//            self.templateUseCase.changeSobakOnOff()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
                 self._state.currentIndex = -1
                 self.metronomeOnOffUseCase.play {
                     self._state.currentIndex += 1
-                    self._state.currentIndex %= self._state.isSobakOn ? self._state.bakCount : self._state.daebakCount
+                    self._state.currentIndex %= self._state.bakCount
                 }
             }
         case .changeIsPlaying:
@@ -239,7 +239,7 @@ class MetronomeViewModel {
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
                     self._state.currentIndex += 1
-                    self._state.currentIndex %= self._state.isSobakOn ? self._state.bakCount : self._state.daebakCount
+                    self._state.currentIndex %= self._state.bakCount
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()

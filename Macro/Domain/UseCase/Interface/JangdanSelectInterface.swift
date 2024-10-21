@@ -9,6 +9,6 @@
 import Combine
 
 protocol JangdanSelectInterface {
-    var jangdanPublisher: AnyPublisher<[Accent], Never> { get }
-    var bpmPublisher: AnyPublisher<Int, Never> { get }
+    var jangdanPublisher: AnyPublisher<[[Accent]], Never> { get }
+    var bpmPublisher: AnyPublisher<Double, Never> { get }
 }

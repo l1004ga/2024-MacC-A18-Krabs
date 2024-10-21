@@ -19,23 +19,17 @@ class TemplateUseCase: JangdanSelectInterface {
     
     // 장단 변경과 BPM 변경을 퍼블리싱하는 Subject
     // for ViewModel
-    private var jangdanUISubject = PassthroughSubject<[[Accent]], Never>()
     private var bpmUISubject = PassthroughSubject<Int, Never>()
     // for MetronomeOnOffUseCase
-    private var jangdanSubject = PassthroughSubject<[Accent], Never>()
-    private var bpmSubject = PassthroughSubject<Int, Never>()
+    private var jangdanSubject = PassthroughSubject<[[Accent]], Never>()
+    private var bpmSubject = PassthroughSubject<Double, Never>()
     
     private var currentJangdan: JangdanEntity
-    
-    var sobakOnOff: Bool
     
     init(jangdanRepository: JangdanDataInterface) {
         self.jangdanRepository = jangdanRepository
         self.currentJangdan = JangdanEntity(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [])
-        self.sobakOnOff = false
-        
-        self.publishJangdanForUI()
-        self.publishJangdanForPlay()
+        self.publishJangdan()
     }
     
     var currentJangdanName: String {
@@ -60,21 +54,15 @@ class TemplateUseCase: JangdanSelectInterface {
         return currentJangdan.daebak
     }
     
-    // ViewModel용 퍼블리셔
-    var jangdanUIPublisher: AnyPublisher<[[Accent]], Never> {
-        return jangdanUISubject.eraseToAnyPublisher()
-    }
-    
     var bpmUIPublisher: AnyPublisher<Int, Never> {
         return bpmUISubject.eraseToAnyPublisher()
     }
-    
-    // JangdanSelectInterface에 필요한 퍼블리셔들
-    var jangdanPublisher: AnyPublisher<[Accent], Never> {
+
+    var jangdanPublisher: AnyPublisher<[[Accent]], Never> {
         return jangdanSubject.eraseToAnyPublisher()
     }
     
-    var bpmPublisher: AnyPublisher<Int, Never> {
+    var bpmPublisher: AnyPublisher<Double, Never> {
         return bpmSubject.eraseToAnyPublisher()
     }
     
@@ -83,55 +71,23 @@ class TemplateUseCase: JangdanSelectInterface {
         if let jangdan = self.jangdanRepository.fetchJangdanData(jangdan: jangdan) {
             self.currentJangdan = jangdan
             
-            self.publishJangdanForUI()
-            self.publishJangdanForPlay()
-            
+            self.publishJangdan()
             self.updateBPMBySobakStatus()
         }
     }
-    
-    // 사용자가 소박보기 On/Off 시 실행됨
-    func changeSobakOnOff() {
-        self.sobakOnOff.toggle()
-        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 [Accent] 조절
-        self.publishJangdanForUI()
-        self.publishJangdanForPlay()
-        // 소박보기 On/Off에 따라 MetronomeUseCase로 보내는 BPM 조절
-        self.updateBPMBySobakStatus()
-    }
-    
-    // MetronomeOnOffUseCase의 Jangdan을 갱신시킬 때
-    private func publishJangdanForPlay() {
-        var jangdanForPlay: [Accent] = []
-        if self.sobakOnOff { // 대박+소박 전체 강세 다보냄
-            jangdanForPlay = self.currentJangdan.daebakList.flatMap { $0.bakAccentList }
-        } else { // 대박만 강세 정제
-            jangdanForPlay = self.currentJangdan.daebakList.compactMap { $0.bakAccentList.first }
-        }
-        self.jangdanSubject.send(jangdanForPlay)
-    }
-    
+
     // ViewModel의 Jangdan을 갱신시킬 때
-    private func publishJangdanForUI() {
-        var jangdanForUI: [[Accent]] = []
-        jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
-//        if self.sobakOnOff {
-//            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
-//        } else {
-//            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList.prefix(1).map { $0 } }
-//        }
-        
-        self.jangdanUISubject.send(jangdanForUI)
+    private func publishJangdan() {
+        var publishedJangdan: [[Accent]] = []
+        publishedJangdan = self.currentJangdan.daebakList.map { $0.bakAccentList }
+
+        self.jangdanSubject.send(publishedJangdan)
     }
     
     // 1)사용자가 BPM 변경 시, 2)소박보기 On/Off 변경 시 BPM 실행됨
     private func updateBPMBySobakStatus() {
-        if self.sobakOnOff {
-            let sobak = self.currentJangdan.bakCount / self.currentJangdan.daebak
-            self.bpmSubject.send(self.currentJangdanBpm * sobak)
-        } else {
-            self.bpmSubject.send(self.currentJangdanBpm)
-        }
+        let sobak = Double(self.currentJangdan.bakCount) / Double(self.currentJangdan.daebak)
+        self.bpmSubject.send(Double(self.currentJangdanBpm) * sobak)
         self.bpmUISubject.send(self.currentJangdanBpm)
     }
     
@@ -143,8 +99,7 @@ class TemplateUseCase: JangdanSelectInterface {
         self.currentJangdan.daebakList[daebakIndex].bakAccentList[sobakIndex] = currentAccent.nextAccent()
         
         // 1차원 배열 강세리스트를 퍼블리싱
-        self.publishJangdanForUI()
-        self.publishJangdanForPlay()
+        self.publishJangdan()
     }
 }
 

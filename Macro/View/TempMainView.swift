@@ -92,7 +92,7 @@ class TempMainViewModel {
         self.tempoUseCase = .init(templateUseCase: initTemplateUseCase)
         self.accentUseCase = .init(templateUseCase: initTemplateUseCase)
         
-        self.jangdanUISubscriber = templateUseCase.jangdanUIPublisher.sink { [weak self] jangdanUI in
+        self.jangdanUISubscriber = templateUseCase.jangdanPublisher.sink { [weak self] jangdanUI in
             guard let self else { return }
             self._state.jangdanAccents = jangdanUI
         }
@@ -155,7 +155,7 @@ class TempMainViewModel {
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
         case .changeSobakOnOff:
             self._state.sobakOnOff.toggle()
-            self.templateUseCase.changeSobakOnOff()
+            self.metronomeOnOffUseCase.changeSobak()
         }
     }
 }
