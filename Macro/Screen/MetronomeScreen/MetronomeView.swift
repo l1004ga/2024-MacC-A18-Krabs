@@ -32,7 +32,12 @@ struct MetronomeView: View {
     var body: some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
-                daebakPendulumView()
+                //                daebakPendulumView()
+                //                    .padding(.top, 24)
+                //                    .padding(.bottom, 16)
+                
+                DaebakPendulumView(trigger: self.viewModel.state.pendulumTrigger)
+                    .padding(.horizontal, 8)
                     .padding(.top, 24)
                     .padding(.bottom, 16)
                 
@@ -49,10 +54,10 @@ struct MetronomeView: View {
                 
                 SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                     .padding(.bottom, 16)
-                    
+                
                 
                 MetronomeControlView(viewModel: viewModel)
-
+                
             }
             .onChange(of: isSobakOn) {
                 self.viewModel.effect(action: .changeSobakOnOff)
@@ -105,7 +110,7 @@ struct MetronomeView: View {
                     self.isSobakOn = false // view의 소박보기 false
                     self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
                 })
-                    .presentationDragIndicator(.visible)
+                .presentationDragIndicator(.visible)
             }
             .onAppear {
                 circleXPosition = 0
@@ -128,7 +133,7 @@ struct MetronomeView: View {
         }
         .frame(maxWidth: .infinity)
     }
-
+    
     // 팬듈럼 작동 함수
     func startMoving(currentBpm: Int, geoSize: CGSize) {
         let rectangleWidth: CGFloat = CGFloat(geoSize.width) - 16
@@ -201,8 +206,9 @@ class MetronomeViewModel {
         var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
-        var currentIndex: Int = -1
+        var currentIndex: Int = 0
         var bpm: Int = 60
+        var pendulumTrigger: Bool = false
     }
     
     enum Action {
@@ -225,22 +231,36 @@ class MetronomeViewModel {
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
             self.metronomeOnOffUseCase.changeSobak()
-//            self.templateUseCase.changeSobakOnOff()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
-                self._state.currentIndex = -1
+                self._state.currentIndex = 0
+                self._state.pendulumTrigger = false
                 self.metronomeOnOffUseCase.play {
-                    self._state.currentIndex += 1
-                    self._state.currentIndex %= self._state.bakCount
+                    self._state.currentIndex = (self._state.currentIndex + 1 ) % self._state.bakCount
+//                    self._state.currentIndex += 1
+//                    self._state.currentIndex %= self._state.bakCount
+                    let sobakCount = self._state.bakCount / self._state.daebakCount
+                    if self._state.currentIndex % sobakCount == 0 {
+                        withAnimation(.snappy(duration: 60.0 / Double(self._state.bpm))) {
+                            self._state.pendulumTrigger.toggle()
+                        }
+                    }
                 }
             }
         case .changeIsPlaying:
-            self._state.currentIndex = -1
+            self._state.currentIndex = 0
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
-                    self._state.currentIndex += 1
-                    self._state.currentIndex %= self._state.bakCount
+                    self._state.currentIndex = (self._state.currentIndex + 1 ) % self._state.bakCount
+//                    self._state.currentIndex += 1
+//                    self._state.currentIndex %= self._state.bakCount
+                    let sobakCount = self._state.bakCount / self._state.daebakCount
+                    if self._state.currentIndex % sobakCount == 0 {
+                        withAnimation(.snappy(duration: 60.0 / Double(self._state.bpm))) {
+                            self._state.pendulumTrigger.toggle()
+                        }
+                    }
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
@@ -256,6 +276,7 @@ class MetronomeViewModel {
         case .stopMetronome:
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
+            self._state.pendulumTrigger = false
         }
     }
 }
