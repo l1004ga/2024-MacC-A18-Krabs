@@ -114,11 +114,12 @@ class TemplateUseCase: JangdanSelectInterface {
     // ViewModel의 Jangdan을 갱신시킬 때
     private func publishJangdanForUI() {
         var jangdanForUI: [[Accent]] = []
-        if self.sobakOnOff {
-            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
-        } else {
-            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList.prefix(1).map { $0 } }
-        }
+        jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
+//        if self.sobakOnOff {
+//            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList }
+//        } else {
+//            jangdanForUI = self.currentJangdan.daebakList.map { $0.bakAccentList.prefix(1).map { $0 } }
+//        }
         
         self.jangdanUISubject.send(jangdanForUI)
     }
