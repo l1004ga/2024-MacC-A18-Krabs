@@ -55,18 +55,14 @@ struct HanbaeBoardView: View {
 
 extension HanbaeBoardView {
     private func calculateActiveIndex(daebakIndex: Int, currentIndex: Int) -> Int? {
-        if self.isSobakOn {
-            var beforeCurrentDaebakCount = 0
-            for i in 0..<daebakIndex {
-                beforeCurrentDaebakCount += jangdan[i].count
-            }
-            if beforeCurrentDaebakCount..<beforeCurrentDaebakCount + jangdan[daebakIndex].count ~= currentIndex {
-                return currentIndex - beforeCurrentDaebakCount
-            }
-            return nil
-        } else {
-            return daebakIndex == currentIndex ? 0 : nil
+        var beforeCurrentDaebakCount = 0
+        for i in 0..<daebakIndex {
+            beforeCurrentDaebakCount += jangdan[i].count
         }
+        if beforeCurrentDaebakCount..<beforeCurrentDaebakCount + jangdan[daebakIndex].count ~= currentIndex {
+            return currentIndex - beforeCurrentDaebakCount
+        }
+        return nil
     }
 }
 

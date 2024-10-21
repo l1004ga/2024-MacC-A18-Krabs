@@ -224,6 +224,7 @@ class MetronomeViewModel {
             self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
+            self.metronomeOnOffUseCase.changeSobak()
 //            self.templateUseCase.changeSobakOnOff()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
