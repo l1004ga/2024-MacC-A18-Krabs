@@ -32,6 +32,7 @@
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
+		3CC5C6162CC6B70E0090BA1F /* DaebakPendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */; };
 		43774F532CB7C10E00F54EF7 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */; };
 		43774F572CB7C11D00F54EF7 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F552CB7C11D00F54EF7 /* Pretendard-Regular.otf */; };
 		43774F582CB7C11D00F54EF7 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F542CB7C11D00F54EF7 /* Pretendard-Bold.otf */; };
@@ -93,6 +94,7 @@
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
+		3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaebakPendulumView.swift; sourceTree = "<group>"; };
 		43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		43774F542CB7C11D00F54EF7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		43774F552CB7C11D00F54EF7 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				439ABF072CB8220B003F6343 /* SobakToggleView.swift */,
 				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
 				439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */,
+				3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */,
 			);
 			path = MetronomeScreen;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */,
 				43774F652CB7FD5300F54EF7 /* MetronomeView.swift in Sources */,
 				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,
+				3CC5C6162CC6B70E0090BA1F /* DaebakPendulumView.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				43774F5C2CB7C1D000F54EF7 /* Extension+Font.swift in Sources */,
 				438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */,
