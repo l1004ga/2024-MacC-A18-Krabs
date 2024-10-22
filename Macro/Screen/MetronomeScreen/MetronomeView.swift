@@ -37,7 +37,8 @@ struct MetronomeView: View {
                 jangdan: viewModel.state.jangdanAccent,
                 isSobakOn: viewModel.state.isSobakOn,
                 isPlaying: viewModel.state.isPlaying,
-                currentIndex: viewModel.state.currentIndex // 여기서는 전체 박의 개수가 반복되어서 들어감
+                currentDaebak: viewModel.state.currentDaebak,
+                currentSobak: viewModel.state.currentSobak
             ) { daebak, sobak in
                 viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
             }
@@ -148,7 +149,8 @@ class MetronomeViewModel {
         var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
-        var currentIndex: Int = 0
+        var currentSobak: Int = 0
+        var currentDaebak: Int = 0
         var bpm: Int = 60
         var pendulumTrigger: Bool = false
     }
@@ -164,9 +166,22 @@ class MetronomeViewModel {
     }
     
     private func updateStatePerBak() {
-        self._state.currentIndex = (self._state.currentIndex + 1) % self._state.bakCount
-        let sobakCount = self._state.bakCount / self._state.daebakCount
-        if self._state.currentIndex % sobakCount == 0 {
+        var nextSobak: Int = self._state.currentSobak
+        var nextDaebak: Int = self._state.currentDaebak
+        
+        nextSobak += 1
+        if nextSobak == self._state.jangdanAccent[nextDaebak].count {
+            nextDaebak += 1
+            if nextDaebak == self._state.jangdanAccent.count {
+                nextDaebak = 0
+            }
+            nextSobak = 0
+        }
+        
+        self._state.currentSobak = nextSobak
+        self._state.currentDaebak = nextDaebak
+        
+        if self._state.currentSobak == 0 {
             self._state.pendulumTrigger.toggle()
         }
     }
@@ -183,14 +198,16 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.changeSobak()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
-                self._state.currentIndex = 0
+                self._state.currentDaebak = self._state.jangdanAccent.count - 1
+                self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
                 self._state.pendulumTrigger = false
                 self.metronomeOnOffUseCase.play {
                     self.updateStatePerBak()
                 }
             }
         case .changeIsPlaying:
-            self._state.currentIndex = 0
+            self._state.currentDaebak = self._state.jangdanAccent.count - 1
+            self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {

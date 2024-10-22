@@ -11,7 +11,8 @@ struct HanbaeBoardView: View {
     var jangdan: [[Accent]]
     var isSobakOn: Bool
     var isPlaying: Bool
-    var currentIndex: Int
+    var currentDaebak: Int
+    var currentSobak: Int
     var tabBakBarEvent: (Int, Int) -> Void
     
     var body: some View {
@@ -24,7 +25,7 @@ struct HanbaeBoardView: View {
                         daebakIndex: daebakIndex,
                         isDaebakOnly: !isSobakOn,
                         isPlaying: isPlaying,
-                        activeIndex: calculateActiveIndex(daebakIndex: daebakIndex, currentIndex: currentIndex)
+                        activeIndex: currentDaebak == daebakIndex ? currentSobak : nil
                     ) { sobak in
                         tabBakBarEvent(daebakIndex, sobak)
                     }
@@ -71,5 +72,5 @@ extension HanbaeBoardView {
         jangdan: [[.strong, .weak],
                   [.weak, .medium, .medium],
                   [.weak, .weak],
-                  [.weak, .weak, .weak]], isSobakOn: true, isPlaying: true, currentIndex: 3) {_,_ in }
+                  [.weak, .weak, .weak]], isSobakOn: true, isPlaying: true, currentDaebak: 1, currentSobak: 2) {_,_ in }
 }
