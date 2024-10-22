@@ -34,6 +34,7 @@ struct MetronomeControlView: View {
                                     .foregroundStyle(.textButtonSecondary)
                             }
                     })
+                    .buttonRepeatBehavior(.enabled)
                     
                     Text("\(viewModel.state.bpm)")
                         .font(.custom("Pretendard-Medium", size: 64))
@@ -52,6 +53,7 @@ struct MetronomeControlView: View {
                                     .foregroundStyle(.textButtonSecondary)
                             }
                     })
+                    .buttonRepeatBehavior(.enabled)
                 }
                 
                 Spacer()
