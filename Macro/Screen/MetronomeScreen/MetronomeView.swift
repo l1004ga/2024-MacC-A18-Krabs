@@ -192,6 +192,11 @@ class MetronomeViewModel {
         }
     }
     
+    private func initialDaeSoBakIndex() {
+        self._state.currentDaebak = self._state.jangdanAccent.count - 1
+        self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
+    }
+    
     func effect(action: Action) {
         switch action {
         case let .selectJangdan(jangdan):
@@ -204,16 +209,14 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.changeSobak()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
-                self._state.currentDaebak = self._state.jangdanAccent.count - 1
-                self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
+                self.initialDaeSoBakIndex()
                 self._state.pendulumTrigger = false
                 self.metronomeOnOffUseCase.play {
                     self.updateStatePerBak()
                 }
             }
         case .changeIsPlaying:
-            self._state.currentDaebak = self._state.jangdanAccent.count - 1
-            self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
+            self.initialDaeSoBakIndex()
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
