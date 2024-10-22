@@ -54,7 +54,7 @@ struct MetronomeView: View {
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
         }
-        .onChange(of: self.viewModel.state.pendulumTrigger) { newValue in
+        .onChange(of: self.viewModel.state.pendulumTrigger) { _, newValue in
             withAnimation(.snappy(duration: 60.0 / Double(self.viewModel.state.bpm))) {
                 self.isPendulumOn = newValue
             }
@@ -163,6 +163,14 @@ class MetronomeViewModel {
         case stopMetronome
     }
     
+    private func updateStatePerBak() {
+        self._state.currentIndex = (self._state.currentIndex + 1) % self._state.bakCount
+        let sobakCount = self._state.bakCount / self._state.daebakCount
+        if self._state.currentIndex % sobakCount == 0 {
+            self._state.pendulumTrigger.toggle()
+        }
+    }
+    
     func effect(action: Action) {
         switch action {
         case let .selectJangdan(jangdan):
@@ -178,11 +186,7 @@ class MetronomeViewModel {
                 self._state.currentIndex = 0
                 self._state.pendulumTrigger = false
                 self.metronomeOnOffUseCase.play {
-                    self._state.currentIndex = (self._state.currentIndex + 1) % self._state.bakCount
-                    let sobakCount = self._state.bakCount / self._state.daebakCount
-                    if self._state.currentIndex % sobakCount == 0 {
-                        self._state.pendulumTrigger.toggle()
-                    }
+                    self.updateStatePerBak()
                 }
             }
         case .changeIsPlaying:
@@ -190,11 +194,7 @@ class MetronomeViewModel {
             self._state.isPlaying.toggle()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
-                    self._state.currentIndex = (self._state.currentIndex + 1 ) % self._state.bakCount
-                    let sobakCount = self._state.bakCount / self._state.daebakCount
-                    if self._state.currentIndex % sobakCount == 0 {
-                        self._state.pendulumTrigger.toggle()
-                    }
+                    self.updateStatePerBak()
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
