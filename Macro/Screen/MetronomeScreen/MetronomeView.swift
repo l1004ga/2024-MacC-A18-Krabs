@@ -56,7 +56,13 @@ struct MetronomeView: View {
             self.viewModel.effect(action: .changeSobakOnOff)
         }
         .onChange(of: self.viewModel.state.pendulumTrigger) { _, newValue in
-            withAnimation(.snappy(duration: 60.0 / Double(self.viewModel.state.bpm))) {
+            let meanTempo = 60.0 / Double(self.viewModel.state.bpm)
+            let hanbaeTempo = meanTempo * Double(self.viewModel.state.daebakCount)
+            let sobakTempo = hanbaeTempo / Double(self.viewModel.state.bakCount)
+            let resultTempo =  sobakTempo * Double(self.viewModel.state.jangdanAccent[self.viewModel.state.currentDaebak].count)
+                               
+                               
+            withAnimation(.easeInOut(duration: resultTempo)) {
                 self.isPendulumOn = newValue
             }
         }

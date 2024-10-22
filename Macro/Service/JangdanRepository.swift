@@ -114,7 +114,7 @@ class JangdanRepository {
             name: "엇모리",
             bakCount: 10,
             daebak: 4,
-            bpm: 200,
+            bpm: 10,
             daebakList: [
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
