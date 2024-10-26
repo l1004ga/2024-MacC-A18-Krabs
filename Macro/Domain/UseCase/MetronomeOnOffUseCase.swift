@@ -27,7 +27,7 @@ class MetronomeOnOffUseCase {
     
     // timer
     private var timer: DispatchSourceTimer?
-    private let queue = DispatchQueue(label: "metronomeTimer", qos: .background) // 다른 스레드
+    private let queue = DispatchQueue(label: "metronomeTimer", qos: .userInteractive) // 다른 스레드
     private var interval: TimeInterval {
         60.0 / Double(bpm)
     }
@@ -53,7 +53,7 @@ class MetronomeOnOffUseCase {
             guard let self else { return }
             self.bpm = bpm
             // Timer의 schedule을 현재 변경된 bpm에 맞게 재설정
-            self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval)
+            self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval, leeway: .nanoseconds(1))
         }
         self.bpmSubscription?.store(in: &self.cancelBag)
     }
