@@ -14,6 +14,7 @@
 		2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */; };
 		2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861182CC3E61F0036C6DB /* BakBarView.swift */; };
 		2B88611B2CC3E62A0036C6DB /* BakBarSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */; };
+		2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580D2CCF5F8700FA08A9 /* TapTapUseCase.swift */; };
 		2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */; };
 		2BE5ADEA2CABC4570094F3C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */; };
 		2BE5ADEE2CABC4570094F3C3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDC2CABC4570094F3C3 /* Date+Extensions.swift */; };
@@ -73,6 +74,7 @@
 		2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanbaeBoardView.swift; sourceTree = "<group>"; };
 		2B8861182CC3E61F0036C6DB /* BakBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakBarView.swift; sourceTree = "<group>"; };
 		2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakBarSetView.swift; sourceTree = "<group>"; };
+		2BCA580D2CCF5F8700FA08A9 /* TapTapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapUseCase.swift; sourceTree = "<group>"; };
 		2BE5AD382C9EC9030094F3C3 /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD482C9EC9040094F3C3 /* MacroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD522C9EC9040094F3C3 /* MacroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 				438226DE2CAE8494007A3B23 /* TempoUseCase.swift */,
 				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */,
 				3C1DB7312CB3B58500160970 /* AccentUseCase.swift */,
+				2BCA580D2CCF5F8700FA08A9 /* TapTapUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43774F632CB7EE0C00F54EF7 /* JangdanSelectView.swift in Sources */,
+				2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */,
 				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
 				2BE5ADEE2CABC4570094F3C3 /* Date+Extensions.swift in Sources */,
 				2B8861112CBD2EF10036C6DB /* JangdanDataInterface.swift in Sources */,

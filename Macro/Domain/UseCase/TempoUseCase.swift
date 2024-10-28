@@ -22,3 +22,9 @@ class TempoUseCase {
         }
     }
 }
+
+extension TempoUseCase: ReflectTempoInterface {
+    func reflectTempo(by tempo: Int) {
+        self.updateTempo(newBpm: tempo)
+    }
+}
