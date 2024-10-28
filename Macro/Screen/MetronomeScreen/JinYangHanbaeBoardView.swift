@@ -11,28 +11,28 @@ struct JinYangHanbaeBoardView: View {
     var jangdan: [[Accent]]
     var isSobakOn: Bool
     var isPlaying: Bool
-    var currentDaebak: Int
+    var currentDaebak: Int // 현재 실행중인 박을 확인하기 위함
     var currentSobak: Int
     var tabBakBarEvent: (Int, Int) -> Void
     
     var body: some View {
         Grid(horizontalSpacing: 0) {
-            ForEach(0..<(currentDaebak / 6), id: \.self) { rowIndex in // 4줄 아래로 쌓임
+            ForEach(0..<4, id: \.self) { rowIndex in // 4줄 아래로 쌓임
                 GridRow {
-                    ForEach(jangdan.indices, id: \.self) { daebakIndex in
-                        
+                    ForEach(0..<6, id: \.self) { daebakIndex in
+                        let newIndex = rowIndex * 6 + daebakIndex
                         BakBarSetView(
-                            accents: jangdan[rowIndex + daebakIndex],
-                            daebakIndex: rowIndex + daebakIndex,
+                            accents: jangdan[newIndex],
+                            daebakIndex: newIndex,
                             isDaebakOnly: !isSobakOn,
                             isPlaying: isPlaying,
-                            activeIndex: currentDaebak == rowIndex + daebakIndex ? currentSobak : nil
+                            activeIndex: currentDaebak == newIndex ? currentSobak : nil
                         ) { sobak in
                             tabBakBarEvent(daebakIndex, sobak)
                         }
                         .gridCellColumns(6)
                         
-                        if daebakIndex < jangdan.count - 1 {
+                        if daebakIndex < 6 {
                             VStack {
                                 Rectangle()
                                     .frame(width: 1, height: 12)
@@ -51,6 +51,10 @@ struct JinYangHanbaeBoardView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            print("진양장단 : \(jangdan)")
+            print("대박카운트 : \(currentDaebak)")
         }
         .padding(.vertical, 16)
     }
