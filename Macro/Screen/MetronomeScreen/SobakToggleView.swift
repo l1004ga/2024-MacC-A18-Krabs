@@ -23,7 +23,7 @@ struct SobakToggleView: View {
                 Toggle("", isOn: $isSobakOn)
                     .labelsHidden()
                     .toggleStyle(SwitchToggleStyle(tint: .toggleOn))
-                    .disabled(jangdan == .엇중모리)
+                    .disabled(jangdan == .엇중모리 || jangdan == .진양)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 12)

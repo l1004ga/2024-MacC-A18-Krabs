@@ -28,7 +28,7 @@ struct JinYangHanbaeBoardView: View {
                             isPlaying: isPlaying,
                             activeIndex: currentDaebak == newIndex ? currentSobak : nil
                         ) { sobak in
-                            tabBakBarEvent(daebakIndex, sobak)
+                            tabBakBarEvent(newIndex, sobak)
                         }
                         .gridCellColumns(6)
                         
@@ -60,18 +60,6 @@ struct JinYangHanbaeBoardView: View {
     }
 }
 
-extension JinYangHanbaeBoardView {
-    private func calculateActiveIndex(daebakIndex: Int, currentIndex: Int) -> Int? {
-        var beforeCurrentDaebakCount = 0
-        for i in 0..<daebakIndex {
-            beforeCurrentDaebakCount += jangdan[i].count
-        }
-        if beforeCurrentDaebakCount..<beforeCurrentDaebakCount + jangdan[daebakIndex].count ~= currentIndex {
-            return currentIndex - beforeCurrentDaebakCount
-        }
-        return nil
-    }
-}
 //
 //#Preview {
 //    JinYangHanbaeBoardView()
