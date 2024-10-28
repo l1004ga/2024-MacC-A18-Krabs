@@ -35,14 +35,14 @@ struct HanbaeBoardView: View {
                         VStack {
                             Rectangle()
                                 .frame(width: 1, height: 12)
-                                .foregroundStyle(.bakbardivider)
+                                .foregroundStyle(.bakBarDivider)
                                 .offset(y: -16)
                             
                             Spacer()
                             
                             Rectangle()
                                 .frame(width: 1, height: 12)
-                                .foregroundStyle(.bakbardivider)
+                                .foregroundStyle(.bakBarDivider)
                                 .offset(y: 16)
                         }
                         .frame(width: 4)

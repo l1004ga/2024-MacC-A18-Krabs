@@ -35,7 +35,7 @@ struct JinYangHanbaeBoardView: View {
                             VStack {
                                 Rectangle()
                                     .frame(width: 1, height: 1...3 ~= rowIndex ? 1 : 12)
-                                    .foregroundStyle(.bakbardivider)
+                                    .foregroundStyle(.bakBarDivider)
                                     .offset(y: -16)
                                     .opacity(1...3 ~= rowIndex ? 0 : 1)
                                 
@@ -43,7 +43,7 @@ struct JinYangHanbaeBoardView: View {
                                 
                                 Rectangle()
                                     .frame(width: 1, height: 0...2 ~= rowIndex ? 1 : 12)
-                                    .foregroundStyle(.bakbardivider)
+                                    .foregroundStyle(.bakBarDivider)
                                     .offset(y: 16)
                                     .opacity(0...2 ~= rowIndex ? 0 : 1)
                             }
