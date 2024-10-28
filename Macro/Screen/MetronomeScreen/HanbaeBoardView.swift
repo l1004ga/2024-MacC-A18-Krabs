@@ -49,6 +49,38 @@ struct HanbaeBoardView: View {
                     }
                 }
             }
+            GridRow {
+                ForEach(jangdan.indices, id: \.self) { daebakIndex in
+                    
+                    BakBarSetView(
+                        accents: jangdan[daebakIndex],
+                        daebakIndex: daebakIndex,
+                        isDaebakOnly: !isSobakOn,
+                        isPlaying: isPlaying,
+                        activeIndex: currentDaebak == daebakIndex ? currentSobak : nil
+                    ) { sobak in
+                        tabBakBarEvent(daebakIndex, sobak)
+                    }
+                    .gridCellColumns(jangdan[daebakIndex].count)
+                    
+                    if daebakIndex < jangdan.count - 1 {
+                        VStack {
+                            Rectangle()
+                                .frame(width: 1, height: 12)
+                                .foregroundStyle(.bakbardivider)
+                                .offset(y: -16)
+                            
+                            Spacer()
+                            
+                            Rectangle()
+                                .frame(width: 1, height: 12)
+                                .foregroundStyle(.bakbardivider)
+                                .offset(y: 16)
+                        }
+                        .frame(width: 4)
+                    }
+                }
+            }
         }
         .padding(.vertical, 16)
     }
