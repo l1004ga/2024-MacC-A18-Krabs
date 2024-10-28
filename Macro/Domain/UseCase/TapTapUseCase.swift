@@ -14,6 +14,8 @@ class TapTapUseCase {
     private var isTapping: Bool
     @Published private var lastTappedDate: Date
     
+    private var isTappingSubject = PassthroughSubject<Bool, Never>()
+    
     private var cancelBag: Set<AnyCancellable> = []
     
     private var tempoUseCase: ReflectTempoInterface
@@ -31,14 +33,23 @@ class TapTapUseCase {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.finishTapping()
+                self.isTappingSubject.send(self.isTapping)
             }
             .store(in: &cancelBag)
+    }
+}
+
+// ViewModel에서 호출할 용도
+extension TapTapUseCase {
+    var isTappingPublisher: AnyPublisher<Bool, Never> {
+        self.isTappingSubject.eraseToAnyPublisher()
     }
     
     func tap() {
         if !isTapping {
             self.startTime = .now
             isTapping = true
+            self.isTappingSubject.send(self.isTapping)
         }
         self.tapCount += 1
         
@@ -56,8 +67,4 @@ class TapTapUseCase {
         self.isTapping = false
         self.tapCount = 0
     }
-}
-
-protocol ReflectTempoInterface {
-    func reflectTempo(by tempo: Int)
 }
