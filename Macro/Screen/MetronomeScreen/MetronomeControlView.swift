@@ -14,7 +14,7 @@ struct MetronomeControlView: View {
     var body: some View {
         ZStack {
             UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 24, bottomTrailingRadius: 24, topTrailingRadius: 12)
-                .fill(Color.cardBackground)
+                .fill(Color.backgroundCard)
             
             VStack {
                 VStack(spacing: 18) {
@@ -28,7 +28,7 @@ struct MetronomeControlView: View {
                         }, label: {
                             Circle()
                                 .frame(width: 56)
-                                .foregroundStyle(.buttonBpmControl)
+                                .foregroundStyle(.buttonBPMControl)
                                 .overlay {
                                     Image(systemName: "minus")
                                         .font(.system(size: 26))
@@ -39,7 +39,7 @@ struct MetronomeControlView: View {
                         
                         Text("\(viewModel.state.bpm)")
                             .font(.custom("Pretendard-Medium", size: 64))
-                            .foregroundStyle(self.viewModel.state.isTapping ? .toggleOn : .textSecondary)
+                            .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120)
                         
                         Button(action: {
@@ -47,7 +47,7 @@ struct MetronomeControlView: View {
                         }, label: {
                             Circle()
                                 .frame(width: 56)
-                                .foregroundStyle(.buttonBpmControl)
+                                .foregroundStyle(.buttonBPMControl)
                                 .overlay {
                                     Image(systemName: "plus")
                                         .font(.system(size: 26))
@@ -62,11 +62,11 @@ struct MetronomeControlView: View {
                 
                 HStack(spacing: 16) {
                     RoundedRectangle(cornerRadius: 100)
-                        .foregroundStyle(self.viewModel.state.isPlaying ? .buttonPrimary : .white)
+                        .foregroundStyle(self.viewModel.state.isPlaying ? .buttonPlayStop : .buttonPlayStart)
                         .overlay {
                             Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
                                 .font(.LargeTitle_R)
-                                .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .black)
+                                .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonPlayStart)
                         }
                         .onTapGesture {
                             self.viewModel.effect(action: .changeIsPlaying)
@@ -74,7 +74,7 @@ struct MetronomeControlView: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 100)
-                            .foregroundStyle(viewModel.state.isTapping ? .toggleOn : .buttonPrimary)
+                            .foregroundStyle(viewModel.state.isTapping ? .buttonToggleOn : .buttonPrimary)
                         
                         if self.viewModel.state.isTapping {
                             Text("탭")

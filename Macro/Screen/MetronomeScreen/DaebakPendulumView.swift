@@ -13,12 +13,11 @@ struct DaebakPendulumView: View {
     var body: some View {
         ZStack(alignment: trigger ? .trailing : .leading) {
             RoundedRectangle(cornerRadius: 100)
-                .foregroundStyle(.bakbarsetframe)
+                .foregroundStyle(.frame)
                 .frame(height: 16)
             Circle()
                 .frame(height: 16)
-            // TODO: Color 디자인 바꿔야 함
-                .foregroundStyle(.white)
+                .foregroundStyle(.bub)
         }
     }
 }

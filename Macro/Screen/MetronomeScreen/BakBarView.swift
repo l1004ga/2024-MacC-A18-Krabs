@@ -17,16 +17,16 @@ struct BakBarView: View {
             VStack(spacing: 0) {
                 Rectangle()
                     .fill(accent > .medium
-                          ? isActive ? .bakbarActive : .bakbarInactive
-                          : .bakbarsetframe)
+                          ? isActive ? .bakBarActive: .bakBarInactive
+                          : .frame)
                 Rectangle()
                     .fill(accent > .weak
-                          ? isActive ? .bakbarActive : .bakbarInactive
-                          : .bakbarsetframe)
+                          ? isActive ? .bakBarActive : .bakBarInactive
+                          : .frame)
                 Rectangle()
                     .fill(accent > .none
-                          ? isActive ? .bakbarActive : .bakbarInactive
-                          : .bakbarsetframe)
+                          ? isActive ? .bakBarActive : .bakBarInactive
+                          : .frame)
             }
             
             if let bakNumber {
@@ -35,8 +35,8 @@ struct BakBarView: View {
                     .padding(.top, 16)
                     .foregroundColor(
                         isActive
-                        ? accent == .strong ? .bakbarnumberBlack : .bakbarnumberWhite
-                        : accent == .strong ? .bakbarnumberBlack : .bakbarnumberGray
+                        ? accent == .strong ? .bakBarNumberBlack : .bakBarNumberWhite
+                        : accent == .strong ? .bakBarNumberBlack : .bakBarNumberGray
                     )
             }
         }

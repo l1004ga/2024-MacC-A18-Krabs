@@ -36,7 +36,7 @@ struct BakBarSetView: View {
                             HStack {
                                 Rectangle()
                                     .frame(width: 1)
-                                    .foregroundColor(.bakbarline)
+                                    .foregroundColor(.bakBarLine)
                                 
                                 Spacer()
                             }

@@ -22,14 +22,14 @@ struct SobakToggleView: View {
                 
                 Toggle("", isOn: $isSobakOn)
                     .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: .toggleOn))
+                    .toggleStyle(SwitchToggleStyle(tint: .buttonToggleOn))
                     .disabled(jangdan == .엇중모리 || jangdan == .진양)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.cardBackground)
+                    .fill(Color.backgroundCard)
             )
             .padding(.horizontal, 16)
     }
