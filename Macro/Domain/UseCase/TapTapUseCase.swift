@@ -65,6 +65,7 @@ extension TapTapUseCase {
     
     func finishTapping() {
         self.isTapping = false
+        self.isTappingSubject.send(self.isTapping)
         self.tapCount = 0
     }
 }
