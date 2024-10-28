@@ -132,6 +132,7 @@ class MetronomeViewModel {
     private var metronomeOnOffUseCase: MetronomeOnOffUseCase
     private var tempoUseCase: TempoUseCase
     private var accentUseCase: AccentUseCase
+    private var taptapUseCase: TapTapUseCase
     
     private var jangdanUISubscriber: AnyCancellable?
     private var bpmSubscriber: AnyCancellable?
@@ -143,8 +144,17 @@ class MetronomeViewModel {
         let initSoundManager: SoundManager? = .init()
         // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
         self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
-        self.tempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
+        
+        let initTempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
+        
+        self.tempoUseCase = initTempoUseCase
         self.accentUseCase = AccentUseCase(templateUseCase: initTemplateUseCase)
+        self.taptapUseCase = TapTapUseCase(tempoUseCase: initTempoUseCase)
+        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
+            guard let self else { return }
+            self._state.isTapping = isTapping
+        }.store(in: &self.cancelBag)
+        
         self.jangdanUISubscriber = self.templateUseCase.jangdanPublisher.sink { [weak self] jangdanUI in
             guard let self else { return }
             self._state.jangdanAccent = jangdanUI
@@ -173,6 +183,7 @@ class MetronomeViewModel {
         var currentDaebak: Int = 0
         var bpm: Int = 60
         var pendulumTrigger: Bool = false
+        var isTapping: Bool = false
     }
     
     enum Action {
@@ -183,6 +194,7 @@ class MetronomeViewModel {
         case increaseBpm // + button
         case changeAccent(daebak: Int, sobak: Int)
         case stopMetronome
+        case estimateBpm
     }
     
     private func updateStatePerBak() {
@@ -218,6 +230,7 @@ class MetronomeViewModel {
             self.templateUseCase.setJangdan(jangdan: jangdan)
             self._state.bakCount = self.templateUseCase.currentJangdanBakCount
             self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
+            self.taptapUseCase.finishTapping()
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
             self.metronomeOnOffUseCase.changeSobak()
@@ -242,9 +255,11 @@ class MetronomeViewModel {
             }
         case .decreaseBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
+            self.taptapUseCase.finishTapping()
             
         case .increaseBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
+            self.taptapUseCase.finishTapping()
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
@@ -252,6 +267,8 @@ class MetronomeViewModel {
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
             self._state.pendulumTrigger = false
+        case .estimateBpm:
+            self.taptapUseCase.tap()
         }
     }
 }
