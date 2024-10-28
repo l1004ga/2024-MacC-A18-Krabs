@@ -7,7 +7,7 @@
 
 // TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
 enum Jangdan: String, CaseIterable {
-//    case 진양
+    case 진양
     case 중모리
     case 중중모리
     case 자진모리
@@ -21,7 +21,7 @@ enum Jangdan: String, CaseIterable {
     
     var name: String {
         switch self {
-//        case .진양: return "진양"
+        case .진양: return "진양"
         case .중모리: return "중모리"
         case .중중모리: return "중중모리"
         case .자진모리: return "자진모리"

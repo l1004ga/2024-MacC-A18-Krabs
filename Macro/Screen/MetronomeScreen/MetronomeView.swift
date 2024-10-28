@@ -31,19 +31,33 @@ struct MetronomeView: View {
             DaebakPendulumView(trigger: self.isPendulumOn)
                 .padding(.horizontal, 8)
                 .padding(.top, 24)
-                .padding(.bottom, 16)
+                .padding(.bottom, self.viewModel.state.currentJangdan?.name == "진양" ? 8 : 16)
             
-            HanbaeBoardView(
-                jangdan: viewModel.state.jangdanAccent,
-                isSobakOn: viewModel.state.isSobakOn,
-                isPlaying: viewModel.state.isPlaying,
-                currentDaebak: viewModel.state.currentDaebak,
-                currentSobak: viewModel.state.currentSobak
-            ) { daebak, sobak in
-                viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+            if self.viewModel.state.currentJangdan?.name == "진양" {
+                JinYangHanbaeBoardView(
+                    jangdan: viewModel.state.jangdanAccent,
+                    isSobakOn: viewModel.state.isSobakOn,
+                    isPlaying: viewModel.state.isPlaying,
+                    currentDaebak: viewModel.state.currentDaebak,
+                    currentSobak: viewModel.state.currentSobak
+                ) { daebak, sobak in
+                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 14)
+            } else {
+                HanbaeBoardView(
+                    jangdan: viewModel.state.jangdanAccent,
+                    isSobakOn: viewModel.state.isSobakOn,
+                    isPlaying: viewModel.state.isPlaying,
+                    currentDaebak: viewModel.state.currentDaebak,
+                    currentSobak: viewModel.state.currentSobak
+                ) { daebak, sobak in
+                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 26)
             }
-            .padding(.horizontal, 8)
-            .padding(.bottom, 26)
             
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)
