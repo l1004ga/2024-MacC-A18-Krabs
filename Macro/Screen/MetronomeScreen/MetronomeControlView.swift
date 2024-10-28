@@ -97,6 +97,7 @@ struct MetronomeControlView: View {
             .padding(.vertical, 24)
             .padding(.horizontal, 12)
         }
+        .frame(maxHeight: 265)
         .padding(.horizontal, 16)
     }
 }
