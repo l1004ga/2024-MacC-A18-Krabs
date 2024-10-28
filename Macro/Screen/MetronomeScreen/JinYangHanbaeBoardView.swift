@@ -30,7 +30,6 @@ struct JinYangHanbaeBoardView: View {
                         ) { sobak in
                             tabBakBarEvent(newIndex, sobak)
                         }
-                        .gridCellColumns(6)
                         
                         if daebakIndex < 6 {
                             VStack {
