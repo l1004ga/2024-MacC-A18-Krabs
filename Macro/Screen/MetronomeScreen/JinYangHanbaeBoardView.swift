@@ -16,7 +16,7 @@ struct JinYangHanbaeBoardView: View {
     var tabBakBarEvent: (Int, Int) -> Void
     
     var body: some View {
-        Grid(horizontalSpacing: 0) {
+        Grid(horizontalSpacing: 0, verticalSpacing: 10) {
             ForEach(0..<4, id: \.self) { rowIndex in // 4줄 아래로 쌓임
                 GridRow {
                     ForEach(0..<6, id: \.self) { daebakIndex in
@@ -31,29 +31,27 @@ struct JinYangHanbaeBoardView: View {
                             tabBakBarEvent(newIndex, sobak)
                         }
                         
-                        if daebakIndex < 6 {
+                        if daebakIndex < 5 {
                             VStack {
                                 Rectangle()
-                                    .frame(width: 1, height: 12)
+                                    .frame(width: 1, height: 1...3 ~= rowIndex ? 1 : 12)
                                     .foregroundStyle(.bakbardivider)
                                     .offset(y: -16)
+                                    .opacity(1...3 ~= rowIndex ? 0 : 1)
                                 
                                 Spacer()
                                 
                                 Rectangle()
-                                    .frame(width: 1, height: 12)
+                                    .frame(width: 1, height: 0...2 ~= rowIndex ? 1 : 12)
                                     .foregroundStyle(.bakbardivider)
                                     .offset(y: 16)
+                                    .opacity(0...2 ~= rowIndex ? 0 : 1)
                             }
                             .frame(width: 4)
                         }
                     }
                 }
             }
-        }
-        .onAppear {
-            print("진양장단 : \(jangdan)")
-            print("대박카운트 : \(currentDaebak)")
         }
         .padding(.vertical, 16)
     }
