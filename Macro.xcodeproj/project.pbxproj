@@ -14,6 +14,7 @@
 		2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */; };
 		2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861182CC3E61F0036C6DB /* BakBarView.swift */; };
 		2B88611B2CC3E62A0036C6DB /* BakBarSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */; };
+		2B96F4912CD1302C00933DE2 /* MetronomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96F4902CD1302C00933DE2 /* MetronomeViewModel.swift */; };
 		2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580D2CCF5F8700FA08A9 /* TapTapUseCase.swift */; };
 		2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */; };
 		2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanbaeBoardView.swift; sourceTree = "<group>"; };
 		2B8861182CC3E61F0036C6DB /* BakBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakBarView.swift; sourceTree = "<group>"; };
 		2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakBarSetView.swift; sourceTree = "<group>"; };
+		2B96F4902CD1302C00933DE2 /* MetronomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeViewModel.swift; sourceTree = "<group>"; };
 		2BCA580D2CCF5F8700FA08A9 /* TapTapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapUseCase.swift; sourceTree = "<group>"; };
 		2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectTempoInterface.swift; sourceTree = "<group>"; };
 		2BE5AD382C9EC9030094F3C3 /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,14 @@
 				3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */,
 			);
 			path = Sound;
+			sourceTree = "<group>";
+		};
+		2B96F48F2CD1301E00933DE2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B96F4902CD1302C00933DE2 /* MetronomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2BE5AD2F2C9EC9030094F3C3 = {
@@ -262,12 +272,12 @@
 			isa = PBXGroup;
 			children = (
 				43774F5A2CB7C12D00F54EF7 /* Info.plist */,
+				2BE5ADE32CABC4570094F3C3 /* System */,
 				43774F502CB7BFF800F54EF7 /* Resources */,
 				2BE5ADDB2CABC4570094F3C3 /* Domain */,
-				2BE5ADDD2CABC4570094F3C3 /* Extensions */,
 				2BE5ADE12CABC4570094F3C3 /* Service */,
-				2BE5ADE32CABC4570094F3C3 /* System */,
 				43774F5D2CB7ED4800F54EF7 /* Screen */,
+				2BE5ADDD2CABC4570094F3C3 /* Extensions */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -330,6 +340,7 @@
 		43774F612CB7EDB100F54EF7 /* MetronomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2B96F48F2CD1301E00933DE2 /* ViewModel */,
 				2B8861182CC3E61F0036C6DB /* BakBarView.swift */,
 				2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */,
 				2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */,
@@ -502,6 +513,7 @@
 				2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
 				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
+				2B96F4912CD1302C00933DE2 /* MetronomeViewModel.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
 				2B8861132CBD34D30036C6DB /* JangdanEnum.swift in Sources */,
 				2B88611B2CC3E62A0036C6DB /* BakBarSetView.swift in Sources */,
