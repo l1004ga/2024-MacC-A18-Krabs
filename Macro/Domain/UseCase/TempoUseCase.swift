@@ -17,8 +17,15 @@ class TempoUseCase {
     
     func updateTempo(newBpm: Int) {
         // 사용자가 변경한 BPM을 각 장단별 데이터 객체에 저장 요청
-        if 10...200 ~= newBpm {
+        switch newBpm {
+        case ..<10:
+            templateUseCase.updateTempo(newBpm: 10)
+        case 10...200:
             templateUseCase.updateTempo(newBpm: newBpm)
+        case 200...:
+            templateUseCase.updateTempo(newBpm: 200)
+        default :
+            break
         }
     }
 }
