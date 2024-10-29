@@ -38,7 +38,7 @@ struct MetronomeControlView: View {
                         .buttonRepeatBehavior(.enabled)
                         
                         Text("\(viewModel.state.bpm)")
-                            .font(.custom("Pretendard-Medium", size: 64))
+                            .font(.custom("Pretendard-Medium", fixedSize: 64))
                             .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120)
                         
