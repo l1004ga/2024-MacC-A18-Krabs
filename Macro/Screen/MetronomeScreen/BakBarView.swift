@@ -13,31 +13,33 @@ struct BakBarView: View {
     var bakNumber: Int?
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack(spacing: 0) {
-                Rectangle()
-                    .fill(accent > .medium
-                          ? isActive ? .bakBarActive: .bakBarInactive
-                          : .frame)
-                Rectangle()
-                    .fill(accent > .weak
-                          ? isActive ? .bakBarActive : .bakBarInactive
-                          : .frame)
-                Rectangle()
-                    .fill(accent > .none
-                          ? isActive ? .bakBarActive : .bakBarInactive
-                          : .frame)
-            }
-            
-            if let bakNumber {
-                Text("\(bakNumber)")
-                    .font(.system(size: 32, weight: .semibold))
-                    .padding(.top, 16)
-                    .foregroundColor(
-                        isActive
-                        ? accent == .strong ? .bakBarNumberBlack : .bakBarNumberWhite
-                        : accent == .strong ? .bakBarNumberBlack : .bakBarNumberGray
-                    )
+        GeometryReader { geo in
+            ZStack(alignment: .top) {
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .fill(accent > .medium
+                              ? isActive ? .bakBarActive: .bakBarInactive
+                              : .frame)
+                    Rectangle()
+                        .fill(accent > .weak
+                              ? isActive ? .bakBarActive : .bakBarInactive
+                              : .frame)
+                    Rectangle()
+                        .fill(accent > .none
+                              ? isActive ? .bakBarActive : .bakBarInactive
+                              : .frame)
+                }
+                
+                if let bakNumber {
+                    Text("\(bakNumber)")
+                        .font(.system(size: 32, weight: .semibold))
+                        .padding(.top, 16)
+                        .foregroundColor(
+                            isActive
+                            ? accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberWhite
+                            : accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberGray
+                        )
+                }
             }
         }
     }
