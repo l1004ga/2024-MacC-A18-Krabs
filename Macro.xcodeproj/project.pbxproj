@@ -20,7 +20,6 @@
 		2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */; };
 		2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */; };
 		2BE5ADEA2CABC4570094F3C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */; };
-		2BE5ADEE2CABC4570094F3C3 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDC2CABC4570094F3C3 /* Date+Extension.swift */; };
 		2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADE22CABC4570094F3C3 /* MacroApp.swift */; };
 		2BE5ADF52CABC45A0094F3C3 /* TempoUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF32CABC45A0094F3C3 /* TempoUseCaseTests.swift */; };
 		2BE5ADF92CABC45D0094F3C3 /* MacroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */; };
@@ -84,7 +83,6 @@
 		2BE5AD382C9EC9030094F3C3 /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD482C9EC9040094F3C3 /* MacroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE5AD522C9EC9040094F3C3 /* MacroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BE5ADDC2CABC4570094F3C3 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2BE5ADE22CABC4570094F3C3 /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
 		2BE5ADE72CABC4570094F3C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				43774F5B2CB7C1C400F54EF7 /* Font+Extension.swift */,
-				2BE5ADDC2CABC4570094F3C3 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -506,7 +503,6 @@
 				2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */,
 				2B96F4932CD131BD00933DE2 /* AccentEnum.swift in Sources */,
 				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
-				2BE5ADEE2CABC4570094F3C3 /* Date+Extension.swift in Sources */,
 				2B8861112CBD2EF10036C6DB /* JangdanDataInterface.swift in Sources */,
 				2B88610F2CBD2E720036C6DB /* JangdanRepository.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
