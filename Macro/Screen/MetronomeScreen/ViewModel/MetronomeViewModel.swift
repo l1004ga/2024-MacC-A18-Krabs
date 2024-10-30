@@ -40,7 +40,6 @@ class MetronomeViewModel {
         self.jangdanUISubscriber = self.templateUseCase.jangdanPublisher.sink { [weak self] jangdanUI in
             guard let self else { return }
             self._state.jangdanAccent = jangdanUI
-            self.initialDaeSoBakIndex()
         }
         self.jangdanUISubscriber?.store(in: &self.cancelBag)
         self.bpmSubscriber = self.templateUseCase.bpmUIPublisher.sink { [weak self] bpm in
@@ -111,6 +110,7 @@ class MetronomeViewModel {
         case let .selectJangdan(jangdan):
             self._state.currentJangdan = jangdan
             self.templateUseCase.setJangdan(jangdan: jangdan)
+            self.initialDaeSoBakIndex()
             self._state.bakCount = self.templateUseCase.currentJangdanBakCount
             self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
             self.taptapUseCase.finishTapping()
