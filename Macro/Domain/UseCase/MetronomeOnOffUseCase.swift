@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit.UIApplication
 
 class MetronomeOnOffUseCase {
     private var jangdan: [[Accent]]
@@ -68,7 +69,7 @@ extension MetronomeOnOffUseCase {
         func play(_ tickHandler: @escaping () -> Void ) {
             // 데이터 갱신
             self.currentBeat = 0
-            
+            UIApplication.shared.isIdleTimerDisabled = true
             // Timer 설정
             if let timer { self.stop() }
             self.timer = DispatchSource.makeTimerSource(queue: self.queue)
@@ -85,6 +86,7 @@ extension MetronomeOnOffUseCase {
         }
         
         func stop() {
+            UIApplication.shared.isIdleTimerDisabled = false
             self.timer?.cancel()
             self.timer = nil
         }
