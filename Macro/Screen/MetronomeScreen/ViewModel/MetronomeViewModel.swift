@@ -128,6 +128,7 @@ class MetronomeViewModel {
         case .changeIsPlaying:
             self.initialDaeSoBakIndex()
             self._state.isPlaying.toggle()
+            UIApplication.shared.isIdleTimerDisabled = self._state.isPlaying
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.play {
                     self.updateStatePerBak()
@@ -148,6 +149,7 @@ class MetronomeViewModel {
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
+            UIApplication.shared.isIdleTimerDisabled = self._state.isPlaying
             self.metronomeOnOffUseCase.stop()
             self._state.pendulumTrigger = false
         case .estimateBpm:
