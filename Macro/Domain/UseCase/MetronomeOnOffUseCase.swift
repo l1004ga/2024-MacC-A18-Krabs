@@ -17,17 +17,8 @@ class MetronomeOnOffUseCase {
             return jangdan.map { $0.enumerated().map { $0.offset == 0 ? $0.element : .none }}.flatMap { $0 }
         }
     }
-    private var originalBPM: Int
-    private var bpm: Double {
-        if isSobakOn {
-            let daebakCount = self.jangdan.count
-            let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
-            let averageSobakCount = Double(bakCount) / Double(daebakCount)
-            return Double(originalBPM) * averageSobakCount
-        } else {
-            return Double(originalBPM)
-        }
-    }
+
+    private var bpm: Double
     private var currentBeatIndex: Int
     var isSobakOn: Bool
     
@@ -45,7 +36,7 @@ class MetronomeOnOffUseCase {
     
     init(jangdanRepository: JangdanRepository, soundManager: PlaySoundInterface) {
         self.jangdan = [[.medium]]
-        self.originalBPM = 60
+        self.bpm = 60.0
         self.currentBeatIndex = 0
         self.isSobakOn = false
         
@@ -56,7 +47,11 @@ class MetronomeOnOffUseCase {
             guard let self else { return }
             self.jangdan = jangdanEntity.daebakList.map { $0.bakAccentList }
             
-            self.originalBPM = jangdanEntity.bpm
+            let daebakCount = self.jangdan.count
+            let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
+            let averageSobakCount = Double(bakCount) / Double(daebakCount)
+            self.bpm = Double(jangdanEntity.bpm) * averageSobakCount
+            
             self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval, leeway: .nanoseconds(1))
         }
         .store(in: &self.cancelBag)
