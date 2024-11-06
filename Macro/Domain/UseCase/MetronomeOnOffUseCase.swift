@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit.UIApplication
 
 class MetronomeOnOffUseCase {
     private var jangdan: [[Accent]]
@@ -64,27 +65,28 @@ extension MetronomeOnOffUseCase {
     func changeSobak() {
         self.isSobakOn.toggle()
     }
-    
+
     func play(_ tickHandler: @escaping () -> Void ) {
         // 데이터 갱신
-        self.currentBeatIndex = 0
-        
+        self.currentBeat = 0
+        UIApplication.shared.isIdleTimerDisabled = true
         // Timer 설정
         if let timer { self.stop() }
         self.timer = DispatchSource.makeTimerSource(queue: self.queue)
         self.timer?.schedule(deadline: .now(), repeating: self.interval)
         self.timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
-            
+
             tickHandler()
             self.timerHandler()
         }
-        
+
         // Timer 실행
         self.timer?.resume()
     }
-    
+
     func stop() {
+        UIApplication.shared.isIdleTimerDisabled = false
         self.timer?.cancel()
         self.timer = nil
     }
