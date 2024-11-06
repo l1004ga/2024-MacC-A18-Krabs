@@ -1,12 +1,12 @@
 //
-//  JangdanRepository.swift
+//  JangdanDataSource.swift
 //  Macro
 //
 //  Created by Yunki on 10/14/24.
 //
 
 // TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
-class JangdanRepository {
+class JangdanDataSource {
     let jangdanList: [JangdanEntity] = [
         JangdanEntity(
             name: "진양",
@@ -163,7 +163,7 @@ class JangdanRepository {
     ]
 }
 
-extension JangdanRepository: JangdanDataInterface {
+extension JangdanDataSource: JangdanDataInterface {
     func fetchJangdanData(jangdan: Jangdan) -> JangdanEntity? {
         return self.jangdanList.first { $0.name == jangdan.name }
     }

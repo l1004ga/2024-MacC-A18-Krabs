@@ -21,7 +21,7 @@ class MetronomeViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     
     init() {
-        let initTemplateUseCase = TemplateUseCase(jangdanRepository: JangdanRepository())
+        let initTemplateUseCase = TemplateUseCase(jangdanRepository: JangdanDataSource())
         self.templateUseCase = initTemplateUseCase
         let initSoundManager: SoundManager? = .init()
         // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
