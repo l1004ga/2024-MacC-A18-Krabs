@@ -5,16 +5,28 @@
 //  Created by leejina on 10/7/24.
 //
 
+import Combine
+
 class AccentUseCase {
-    private var templateUseCase: MoveNextAccentInterface
+    private var jangdanRepository: JangdanRepository
+    private var daebakList: [JangdanEntity.Daebak]
     
-    init(templateUseCase: MoveNextAccentInterface) {
-        self.templateUseCase = templateUseCase
+    private var cancelBag: Set<AnyCancellable> = []
+    
+    init(jangdanRepository: JangdanRepository) {
+        self.jangdanRepository = jangdanRepository
+        self.daebakList = []
+        
+        self.jangdanRepository.jangdanPublisher.sink { jangdanEntity in
+            self.daebakList = jangdanEntity.daebakList
+        }
+        .store(in: &cancelBag)
     }
 }
 
 extension AccentUseCase {
     func moveNextAccent(daebakIndex: Int, sobakIndex: Int) {
-        templateUseCase.moveNextAccent(daebakIndex: daebakIndex, sobakIndex: sobakIndex)
+        self.daebakList[daebakIndex].bakAccentList[sobakIndex] = self.daebakList[daebakIndex].bakAccentList[sobakIndex].nextAccent()
+        self.jangdanRepository.updateAccents(daebakList: self.daebakList)
     }
 }
