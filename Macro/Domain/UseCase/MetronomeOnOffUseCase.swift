@@ -17,7 +17,17 @@ class MetronomeOnOffUseCase {
             return jangdan.map { $0.enumerated().map { $0.offset == 0 ? $0.element : .none }}.flatMap { $0 }
         }
     }
-    private var bpm: Int
+    private var originalBPM: Int
+    private var bpm: Double {
+        if isSobakOn {
+            let daebakCount = self.jangdan.count
+            let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
+            let averageSobakCount = Double(bakCount) / Double(daebakCount)
+            return Double(originalBPM) * averageSobakCount
+        } else {
+            return Double(originalBPM)
+        }
+    }
     private var currentBeatIndex: Int
     var isSobakOn: Bool
     
@@ -27,7 +37,7 @@ class MetronomeOnOffUseCase {
     private var timer: DispatchSourceTimer?
     private let queue = DispatchQueue(label: "metronomeTimer", qos: .userInteractive) // 다른 스레드
     private var interval: TimeInterval {
-        60.0 / Double(bpm)
+        60.0 / bpm
     }
     
     private var jangdanRepository: JangdanRepository
@@ -35,7 +45,7 @@ class MetronomeOnOffUseCase {
     
     init(jangdanRepository: JangdanRepository, soundManager: PlaySoundInterface) {
         self.jangdan = [[.medium]]
-        self.bpm = 60
+        self.originalBPM = 60
         self.currentBeatIndex = 0
         self.isSobakOn = false
         
@@ -46,7 +56,7 @@ class MetronomeOnOffUseCase {
             guard let self else { return }
             self.jangdan = jangdanEntity.daebakList.map { $0.bakAccentList }
             
-            self.bpm = jangdanEntity.bpm
+            self.originalBPM = jangdanEntity.bpm
             self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval, leeway: .nanoseconds(1))
         }
         .store(in: &self.cancelBag)
