@@ -116,8 +116,6 @@ class MetronomeViewModel {
             self._state.currentJangdan = jangdan
             self.templateUseCase.setJangdan(jangdan: jangdan)
             self.initialDaeSoBakIndex()
-//            self._state.bakCount = self.templateUseCase.currentJangdanBakCount
-//            self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
             self.taptapUseCase.finishTapping()
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()

@@ -25,12 +25,10 @@
 		2BE5ADF92CABC45D0094F3C3 /* MacroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */; };
 		2BE5ADFA2CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */; };
 		2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */; };
-		2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */; };
 		2BE5AE002CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */; };
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentUseCase.swift */; };
-		3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */; };
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
@@ -43,7 +41,6 @@
 		43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F5B2CB7C1C400F54EF7 /* Font+Extension.swift */; };
 		43774F632CB7EE0C00F54EF7 /* JangdanSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F622CB7EE0C00F54EF7 /* JangdanSelectView.swift */; };
 		43774F652CB7FD5300F54EF7 /* MetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F642CB7FD5300F54EF7 /* MetronomeView.swift */; };
-		438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */; };
 		438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoUseCase.swift */; };
 		438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateUseCase.swift */; };
 		439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF072CB8220B003F6343 /* SobakToggleView.swift */; };
@@ -90,12 +87,10 @@
 		2BE5ADF62CABC45D0094F3C3 /* MacroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITests.swift; sourceTree = "<group>"; };
 		2BE5ADF72CABC45D0094F3C3 /* MacroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeOnOffUseCase.swift; sourceTree = "<group>"; };
-		2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectInterface.swift; sourceTree = "<group>"; };
 		2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBeatDisplayInterface.swift; sourceTree = "<group>"; };
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentUseCase.swift; sourceTree = "<group>"; };
-		3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveNextAccentInterface.swift; sourceTree = "<group>"; };
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
@@ -109,7 +104,6 @@
 		43774F5B2CB7C1C400F54EF7 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		43774F622CB7EE0C00F54EF7 /* JangdanSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectView.swift; sourceTree = "<group>"; };
 		43774F642CB7FD5300F54EF7 /* MetronomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeView.swift; sourceTree = "<group>"; };
-		438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTempoInterface.swift; sourceTree = "<group>"; };
 		438226DE2CAE8494007A3B23 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
 		438226E02CAEC720007A3B23 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
 		439ABF072CB8220B003F6343 /* SobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SobakToggleView.swift; sourceTree = "<group>"; };
@@ -210,11 +204,8 @@
 		2BE5ADD82CABC4570094F3C3 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				438226DC2CAE8372007A3B23 /* UpdateTempoInterface.swift */,
-				2BE5ADFD2CAC28690094F3C3 /* JangdanSelectInterface.swift */,
 				2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */,
 				2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */,
-				3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */,
 				2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */,
 			);
 			path = Interface;
@@ -510,17 +501,14 @@
 				3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */,
 				2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */,
 				2B96F4932CD131BD00933DE2 /* AccentEnum.swift in Sources */,
-				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
 				2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */,
 				2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
 				439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */,
 				2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */,
 				439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */,
-				3C1DB7342CB3C14900160970 /* MoveNextAccentInterface.swift in Sources */,
 				2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */,
 				438226E12CAEC728007A3B23 /* TemplateUseCase.swift in Sources */,
-				2BE5ADFE2CAC28690094F3C3 /* JangdanSelectInterface.swift in Sources */,
 				2B96F4912CD1302C00933DE2 /* MetronomeViewModel.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
 				2B8861132CBD34D30036C6DB /* JangdanEnum.swift in Sources */,
