@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */; };
 		2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */; };
-		2B8861112CBD2EF10036C6DB /* JangdanDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861102CBD2EF10036C6DB /* JangdanDataInterface.swift */; };
+		2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */; };
 		2B8861132CBD34D30036C6DB /* JangdanEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861122CBD34D30036C6DB /* JangdanEnum.swift */; };
 		2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */; };
 		2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861182CC3E61F0036C6DB /* BakBarView.swift */; };
@@ -71,7 +71,7 @@
 /* Begin PBXFileReference section */
 		2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataSource.swift; sourceTree = "<group>"; };
-		2B8861102CBD2EF10036C6DB /* JangdanDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataInterface.swift; sourceTree = "<group>"; };
+		2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanRepository.swift; sourceTree = "<group>"; };
 		2B8861122CBD34D30036C6DB /* JangdanEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEnum.swift; sourceTree = "<group>"; };
 		2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanbaeBoardView.swift; sourceTree = "<group>"; };
 		2B8861182CC3E61F0036C6DB /* BakBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakBarView.swift; sourceTree = "<group>"; };
@@ -169,6 +169,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		2B9E88E52CDB864700B33A56 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		2BE5AD2F2C9EC9030094F3C3 = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +215,6 @@
 				2BE5ADFF2CAC28880094F3C3 /* UpdateBeatDisplayInterface.swift */,
 				2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */,
 				3C1DB7332CB3C14900160970 /* MoveNextAccentInterface.swift */,
-				2B8861102CBD2EF10036C6DB /* JangdanDataInterface.swift */,
 				2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */,
 			);
 			path = Interface;
@@ -216,6 +223,7 @@
 		2BE5ADDA2CABC4570094F3C3 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				2B9E88E52CDB864700B33A56 /* Repository */,
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
 				438226E02CAEC720007A3B23 /* TemplateUseCase.swift */,
 				438226DE2CAE8494007A3B23 /* TempoUseCase.swift */,
@@ -503,7 +511,7 @@
 				2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */,
 				2B96F4932CD131BD00933DE2 /* AccentEnum.swift in Sources */,
 				438226DD2CAE8376007A3B23 /* UpdateTempoInterface.swift in Sources */,
-				2B8861112CBD2EF10036C6DB /* JangdanDataInterface.swift in Sources */,
+				2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */,
 				2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentUseCase.swift in Sources */,
 				439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */,
