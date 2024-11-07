@@ -68,7 +68,7 @@ extension MetronomeOnOffUseCase {
 
     func play(_ tickHandler: @escaping () -> Void ) {
         // 데이터 갱신
-        self.currentBeat = 0
+        self.currentBeatIndex = 0
         UIApplication.shared.isIdleTimerDisabled = true
         // Timer 설정
         if let timer { self.stop() }
