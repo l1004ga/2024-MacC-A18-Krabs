@@ -35,6 +35,7 @@
 		3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57946C2CDCD6BF00AE647B /* DIContainer.swift */; };
 		3C6EAFA22CDD1061003F2191 /* TapTapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */; };
 		3C6EAFA42CDD1146003F2191 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */; };
+		3C6EAFA62CDD11B7003F2191 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA52CDD11B7003F2191 /* TempoUseCase.swift */; };
 		3CC5C6162CC6B70E0090BA1F /* DaebakPendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */; };
 		43774F532CB7C10E00F54EF7 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */; };
 		43774F572CB7C11D00F54EF7 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F552CB7C11D00F54EF7 /* Pretendard-Regular.otf */; };
@@ -43,7 +44,7 @@
 		43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F5B2CB7C1C400F54EF7 /* Font+Extension.swift */; };
 		43774F632CB7EE0C00F54EF7 /* JangdanSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F622CB7EE0C00F54EF7 /* JangdanSelectView.swift */; };
 		43774F652CB7FD5300F54EF7 /* MetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43774F642CB7FD5300F54EF7 /* MetronomeView.swift */; };
-		438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoUseCase.swift */; };
+		438226DF2CAE84A0007A3B23 /* TempoImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226DE2CAE8494007A3B23 /* TempoImplement.swift */; };
 		438226E12CAEC728007A3B23 /* TemplateImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateImplement.swift */; };
 		439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF072CB8220B003F6343 /* SobakToggleView.swift */; };
 		439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF092CB825AE003F6343 /* MetronomeControlView.swift */; };
@@ -99,6 +100,7 @@
 		3C57946C2CDCD6BF00AE647B /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapUseCase.swift; sourceTree = "<group>"; };
 		3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
+		3C6EAFA52CDD11B7003F2191 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
 		3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaebakPendulumView.swift; sourceTree = "<group>"; };
 		43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		43774F542CB7C11D00F54EF7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		43774F5B2CB7C1C400F54EF7 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		43774F622CB7EE0C00F54EF7 /* JangdanSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectView.swift; sourceTree = "<group>"; };
 		43774F642CB7FD5300F54EF7 /* MetronomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeView.swift; sourceTree = "<group>"; };
-		438226DE2CAE8494007A3B23 /* TempoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoUseCase.swift; sourceTree = "<group>"; };
+		438226DE2CAE8494007A3B23 /* TempoImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoImplement.swift; sourceTree = "<group>"; };
 		438226E02CAEC720007A3B23 /* TemplateImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateImplement.swift; sourceTree = "<group>"; };
 		439ABF072CB8220B003F6343 /* SobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SobakToggleView.swift; sourceTree = "<group>"; };
 		439ABF092CB825AE003F6343 /* MetronomeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeControlView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */,
 				3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */,
 				3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */,
+				3C6EAFA52CDD11B7003F2191 /* TempoUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -222,7 +225,7 @@
 				2B9E88E52CDB864700B33A56 /* Repository */,
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
 				438226E02CAEC720007A3B23 /* TemplateImplement.swift */,
-				438226DE2CAE8494007A3B23 /* TempoUseCase.swift */,
+				438226DE2CAE8494007A3B23 /* TempoImplement.swift */,
 				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift */,
 				3C1DB7312CB3B58500160970 /* AccentUseCase.swift */,
 				2BCA580D2CCF5F8700FA08A9 /* TapTapImplement.swift */,
@@ -528,7 +531,8 @@
 				3CC5C6162CC6B70E0090BA1F /* DaebakPendulumView.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */,
-				438226DF2CAE84A0007A3B23 /* TempoUseCase.swift in Sources */,
+				3C6EAFA62CDD11B7003F2191 /* TempoUseCase.swift in Sources */,
+				438226DF2CAE84A0007A3B23 /* TempoImplement.swift in Sources */,
 				2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffUseCase.swift in Sources */,

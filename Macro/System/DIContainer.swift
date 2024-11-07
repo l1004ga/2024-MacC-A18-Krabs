@@ -14,7 +14,7 @@ class DIContainer {
         self._soundManager = .init()!
         
         self._templateUseCase = TemplateImplement(jangdanRepository: self._jangdanDataSource)
-        self._tempoUseCase = TempoUseCase(jangdanRepository: self._jangdanDataSource)
+        self._tempoUseCase = TempoImplement(jangdanRepository: self._jangdanDataSource)
         self._metronomeOnOffUseCase = MetronomeOnOffUseCase(jangdanRepository: self._jangdanDataSource, soundManager: _soundManager)
         self._accentUseCase = AccentUseCase(jangdanRepository: self._jangdanDataSource)
         self._tapTapUseCase = TapTapImplement(tempoUseCase: self._tempoUseCase)
@@ -30,7 +30,7 @@ class DIContainer {
     
     // UseCase Implements
     private var _templateUseCase: TemplateImplement
-    private var _tempoUseCase: TempoUseCase
+    private var _tempoUseCase: TempoImplement
     private var _metronomeOnOffUseCase: MetronomeOnOffUseCase
     private var _accentUseCase: AccentUseCase
     private var _tapTapUseCase: TapTapImplement

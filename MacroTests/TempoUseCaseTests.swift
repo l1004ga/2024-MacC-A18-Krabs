@@ -21,11 +21,11 @@ class TemplateUseCaseStub: UpdateTempoInterface {
 struct TempoUseCaseTests {
     // given
     let templateUseCaseStub: TemplateUseCaseStub
-    let sut: TempoUseCase
+    let sut: TempoImplement
     
     init() {
         self.templateUseCaseStub = TemplateUseCaseStub()
-        self.sut = TempoUseCase(templateUseCase: templateUseCaseStub)
+        self.sut = TempoImplement(templateUseCase: templateUseCaseStub)
     }
 
     @Test("템포UC 정상범주", arguments: [
