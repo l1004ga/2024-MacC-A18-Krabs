@@ -10,27 +10,26 @@ import SwiftUI
 struct JangdanSelectView: View {
     
     var body: some View {
-            NavigationStack {
-                VStack(alignment: .leading, spacing: 0) {
-                    
-                    
-                    Text("어떤 장단을 연습할까요?")
-                        .font(.Title1_R)
-                        .foregroundStyle(.textDefault)
-                        .padding(.leading, 16)
-                    
-                    List {
-                        ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                            NavigationLink(destination: MetronomeView(jangdan: jangdan)) {
-                                Text("\(jangdan)")
-                                    .padding(.vertical, 9)
-                            }
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 0) {
+                
+                Text("어떤 장단을 연습할까요?")
+                    .font(.Title1_R)
+                    .foregroundStyle(.textDefault)
+                    .padding(.leading, 16)
+                
+                List {
+                    ForEach(Jangdan.allCases, id: \.self) { jangdan in
+                        NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdan: jangdan)) {
+                            Text("\(jangdan)")
+                                .padding(.vertical, 9)
                         }
                     }
-                    
                 }
-                .padding(.top, 40)
+                
             }
+            .padding(.top, 40)
+        }
     }
 }
 

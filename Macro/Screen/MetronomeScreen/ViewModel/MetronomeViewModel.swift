@@ -10,34 +10,26 @@ import Combine
 
 @Observable
 class MetronomeViewModel {
+    // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
+    private var jangdanRepository: JangdanRepository
+    
     private var templateUseCase: TemplateUseCase
     private var metronomeOnOffUseCase: MetronomeOnOffUseCase
     private var tempoUseCase: TempoUseCase
     private var accentUseCase: AccentUseCase
     private var taptapUseCase: TapTapUseCase
     
-    // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
-    private var jangdanRepository: JangdanRepository
-    
     private var cancelBag: Set<AnyCancellable> = []
     
-    init() {
-        let initJangdanRepository = JangdanDataSource()
-        self.jangdanRepository = initJangdanRepository
+    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
-        let initTemplateUseCase = TemplateUseCase(jangdanRepository: initJangdanRepository)
-        self.templateUseCase = initTemplateUseCase
+        self.jangdanRepository = jangdanRepository
+        self.templateUseCase = templateUseCase
+        self.metronomeOnOffUseCase = metronomeOnOffUseCase
+        self.tempoUseCase = tempoUseCase
+        self.accentUseCase = accentUseCase
+        self.taptapUseCase = taptapUseCase
         
-        let initSoundManager: SoundManager? = .init()
-        // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
-        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(jangdanRepository: initJangdanRepository, soundManager: initSoundManager!)
-        
-        self.accentUseCase = AccentUseCase(jangdanRepository: initJangdanRepository)
-        
-        let initTempoUseCase = TempoUseCase(jangdanRepository: initJangdanRepository)
-        self.tempoUseCase = initTempoUseCase
-        
-        self.taptapUseCase = TapTapUseCase(tempoUseCase: initTempoUseCase)
         self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
             guard let self else { return }
             self._state.isTapping = isTapping

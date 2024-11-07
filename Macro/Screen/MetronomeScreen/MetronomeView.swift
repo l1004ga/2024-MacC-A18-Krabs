@@ -18,9 +18,9 @@ struct MetronomeView: View {
     @State private var isSobakOn: Bool = false
     @State private var isPendulumOn: Bool = false
     
-    init(jangdan: Jangdan) {
+    init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
-        self.viewModel = MetronomeViewModel()
+        self.viewModel = viewModel
         self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
         self.isSobakOn = self.viewModel.state.isSobakOn
     }
