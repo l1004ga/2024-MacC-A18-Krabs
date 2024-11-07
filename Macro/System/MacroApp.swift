@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct MacroApp: App {
+    let diContiner: DIContainer = .shared
     var body: some Scene {
         WindowGroup {
             JangdanSelectView()
