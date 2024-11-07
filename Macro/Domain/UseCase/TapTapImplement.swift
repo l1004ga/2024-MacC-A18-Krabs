@@ -38,7 +38,7 @@ class TapTapImplement {
 }
 
 // ViewModel에서 호출할 용도
-extension TapTapImplement {
+extension TapTapImplement: TapTapUseCase {
     var isTappingPublisher: AnyPublisher<Bool, Never> {
         self.isTappingSubject.eraseToAnyPublisher()
     }
