@@ -9,10 +9,9 @@ import Combine
 import Foundation
 
 class TapTapUseCase {
-    private var startTime: Date
-    private var tapCount: Int
     private var isTapping: Bool
     @Published private var lastTappedDate: Date
+    private var timeStampList: [Date] = []
     
     private var isTappingSubject = PassthroughSubject<Bool, Never>()
     
@@ -21,10 +20,9 @@ class TapTapUseCase {
     private var tempoUseCase: ReflectTempoInterface
     
     init(tempoUseCase: ReflectTempoInterface) {
-        self.startTime = .now
-        self.tapCount = 0
         self.isTapping = false
         self.lastTappedDate = .now
+        self.timeStampList = []
         
         self.tempoUseCase = tempoUseCase
         
@@ -47,25 +45,28 @@ extension TapTapUseCase {
     
     func tap() {
         if !isTapping {
-            self.startTime = .now
             isTapping = true
             self.isTappingSubject.send(self.isTapping)
         }
-        self.tapCount += 1
-        
+      
         lastTappedDate = .now
+        self.timeStampList.append(lastTappedDate)
         
-        guard tapCount > 1 else { return }
+        if timeStampList.count > 5 {
+            self.timeStampList.removeFirst()
+        }
         
-        let currentTime: Date = .now
-        let interval: TimeInterval = currentTime.timeIntervalSince(startTime)
-        let tempo: Double = Double(tapCount - 1) / interval * 60
+        guard timeStampList.count > 1 else { return }
+        
+        let interval: TimeInterval = timeStampList.last!.timeIntervalSince(timeStampList.first!)
+        let averageInterval: TimeInterval = interval / Double(timeStampList.count - 1)
+        let tempo: Double = 60 / averageInterval
         self.tempoUseCase.reflectTempo(by: Int(tempo.rounded()))
     }
     
     func finishTapping() {
         self.isTapping = false
         self.isTappingSubject.send(self.isTapping)
-        self.tapCount = 0
+        self.timeStampList.removeAll()
     }
 }
