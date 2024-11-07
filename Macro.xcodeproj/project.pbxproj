@@ -33,6 +33,7 @@
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
 		3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5794402CCF62EE00AE647B /* JinYangHanbaeBoardView.swift */; };
+		3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57946C2CDCD6BF00AE647B /* DIContainer.swift */; };
 		3CC5C6162CC6B70E0090BA1F /* DaebakPendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */; };
 		43774F532CB7C10E00F54EF7 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */; };
 		43774F572CB7C11D00F54EF7 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F552CB7C11D00F54EF7 /* Pretendard-Regular.otf */; };
@@ -95,6 +96,7 @@
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
 		3C5794402CCF62EE00AE647B /* JinYangHanbaeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JinYangHanbaeBoardView.swift; sourceTree = "<group>"; };
+		3C57946C2CDCD6BF00AE647B /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaebakPendulumView.swift; sourceTree = "<group>"; };
 		43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		43774F542CB7C11D00F54EF7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE5ADE22CABC4570094F3C3 /* MacroApp.swift */,
+				3C57946C2CDCD6BF00AE647B /* DIContainer.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */,
 				43774F632CB7EE0C00F54EF7 /* JangdanSelectView.swift in Sources */,
 				3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */,
 				2BCA580E2CCF5F8700FA08A9 /* TapTapUseCase.swift in Sources */,
