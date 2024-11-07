@@ -1,12 +1,14 @@
 //
-//  JangdanRepository.swift
+//  JangdanDataSource.swift
 //  Macro
 //
 //  Created by Yunki on 10/14/24.
 //
 
+import Combine
+
 // TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
-class JangdanRepository {
+class JangdanDataSource {
     let jangdanList: [JangdanEntity] = [
         JangdanEntity(
             name: "진양",
@@ -161,10 +163,27 @@ class JangdanRepository {
 //            ]
 //        )
     ]
+    var jangdan: JangdanEntity = .init(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [.init(bakAccentList: [.medium])])
+    var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
 }
 
-extension JangdanRepository: JangdanDataInterface {
-    func fetchJangdanData(jangdan: Jangdan) -> JangdanEntity? {
-        return self.jangdanList.first { $0.name == jangdan.name }
+extension JangdanDataSource: JangdanRepository {
+    var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
+        self.publisher.eraseToAnyPublisher()
+    }
+    
+    func fetchJangdanData(jangdan: Jangdan) {
+        self.jangdan = jangdanList.first { $0.name == jangdan.name } ?? jangdanList.first!
+        self.publisher.send(self.jangdan)
+    }
+    
+    func updateBPM(bpm: Int) {
+        self.jangdan.bpm = bpm
+        self.publisher.send(self.jangdan)
+    }
+    
+    func updateAccents(daebakList: [JangdanEntity.Daebak]) {
+        self.jangdan.daebakList = daebakList
+        self.publisher.send(self.jangdan)
     }
 }

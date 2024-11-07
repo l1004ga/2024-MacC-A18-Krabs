@@ -9,21 +9,23 @@ import Foundation
 
 
 class TempoUseCase {
-    private var templateUseCase: UpdateTempoInterface
+    private var jangdanRepository: JangdanRepository
     
-    init(templateUseCase: UpdateTempoInterface) {
-        self.templateUseCase = templateUseCase
+    init(jangdanRepository: JangdanRepository) {
+        self.jangdanRepository = jangdanRepository
     }
-    
+}
+
+extension TempoUseCase {
     func updateTempo(newBpm: Int) {
         // 사용자가 변경한 BPM을 각 장단별 데이터 객체에 저장 요청
         switch newBpm {
         case ..<10:
-            templateUseCase.updateTempo(newBpm: 10)
+            self.jangdanRepository.updateBPM(bpm: 10)
         case 10...200:
-            templateUseCase.updateTempo(newBpm: newBpm)
+            self.jangdanRepository.updateBPM(bpm: newBpm)
         case 200...:
-            templateUseCase.updateTempo(newBpm: 200)
+            self.jangdanRepository.updateBPM(bpm: 200)
         default :
             break
         }

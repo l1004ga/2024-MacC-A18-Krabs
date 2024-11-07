@@ -16,37 +16,42 @@ class MetronomeViewModel {
     private var accentUseCase: AccentUseCase
     private var taptapUseCase: TapTapUseCase
     
-    private var jangdanUISubscriber: AnyCancellable?
-    private var bpmSubscriber: AnyCancellable?
+    // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
+    private var jangdanRepository: JangdanRepository
+    
     private var cancelBag: Set<AnyCancellable> = []
     
     init() {
-        let initTemplateUseCase = TemplateUseCase(jangdanRepository: JangdanRepository())
+        let initJangdanRepository = JangdanDataSource()
+        self.jangdanRepository = initJangdanRepository
+        
+        let initTemplateUseCase = TemplateUseCase(jangdanRepository: initJangdanRepository)
         self.templateUseCase = initTemplateUseCase
+        
         let initSoundManager: SoundManager? = .init()
         // TODO: SoundManager 에러처리하고 언래핑 풀어주기~
-        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(templateUseCase: initTemplateUseCase, soundManager: initSoundManager!)
+        self.metronomeOnOffUseCase = MetronomeOnOffUseCase(jangdanRepository: initJangdanRepository, soundManager: initSoundManager!)
         
-        let initTempoUseCase = TempoUseCase(templateUseCase: initTemplateUseCase)
+        self.accentUseCase = AccentUseCase(jangdanRepository: initJangdanRepository)
         
+        let initTempoUseCase = TempoUseCase(jangdanRepository: initJangdanRepository)
         self.tempoUseCase = initTempoUseCase
-        self.accentUseCase = AccentUseCase(templateUseCase: initTemplateUseCase)
+        
         self.taptapUseCase = TapTapUseCase(tempoUseCase: initTempoUseCase)
         self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
             guard let self else { return }
             self._state.isTapping = isTapping
-        }.store(in: &self.cancelBag)
+        }
+        .store(in: &self.cancelBag)
         
-        self.jangdanUISubscriber = self.templateUseCase.jangdanPublisher.sink { [weak self] jangdanUI in
+        self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
-            self._state.jangdanAccent = jangdanUI
+            self._state.jangdanAccent = jangdan.daebakList.map { $0.bakAccentList }
+            self._state.bpm = jangdan.bpm
+            self._state.bakCount = jangdan.bakCount
+            self._state.daebakCount = jangdan.daebakList.count
         }
-        self.jangdanUISubscriber?.store(in: &self.cancelBag)
-        self.bpmSubscriber = self.templateUseCase.bpmUIPublisher.sink { [weak self] bpm in
-            guard let self else { return }
-            self._state.bpm = bpm
-        }
-        self.bpmSubscriber?.store(in: &self.cancelBag)
+        .store(in: &self.cancelBag)
     }
     
     private var _state: State = .init()
@@ -111,8 +116,6 @@ class MetronomeViewModel {
             self._state.currentJangdan = jangdan
             self.templateUseCase.setJangdan(jangdan: jangdan)
             self.initialDaeSoBakIndex()
-            self._state.bakCount = self.templateUseCase.currentJangdanBakCount
-            self._state.daebakCount = self.templateUseCase.currentJangdanDaebakCount
             self.taptapUseCase.finishTapping()
         case .changeSobakOnOff:
             self._state.isSobakOn.toggle()
