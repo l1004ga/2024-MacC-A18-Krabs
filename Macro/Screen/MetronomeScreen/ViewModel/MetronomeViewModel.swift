@@ -13,15 +13,15 @@ class MetronomeViewModel {
     // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
     private var jangdanRepository: JangdanRepository
     
-    private var templateUseCase: TemplateImplement
-    private var metronomeOnOffUseCase: MetronomeOnOffImplement
-    private var tempoUseCase: TempoImplement
-    private var accentUseCase: AccentImplement
-    private var taptapUseCase: TapTapImplement
+    private var templateUseCase: TemplateUseCase
+    private var metronomeOnOffUseCase: MetronomeOnOffUseCase
+    private var tempoUseCase: TempoUseCase
+    private var accentUseCase: AccentUseCase
+    private var taptapUseCase: TapTapUseCase
     
     private var cancelBag: Set<AnyCancellable> = []
     
-    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateImplement, metronomeOnOffUseCase: MetronomeOnOffImplement, tempoUseCase: TempoImplement, accentUseCase: AccentImplement, taptapUseCase: TapTapImplement) {
+    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
         self.jangdanRepository = jangdanRepository
         self.templateUseCase = templateUseCase
