@@ -58,9 +58,9 @@ extension TapTapUseCase {
         
         guard timeStampList.count > 1 else { return }
         
-        let lastTime: Date = lastTappedDate
-        let interval: TimeInterval = lastTime.timeIntervalSince(timeStampList[0])
-        let tempo: Double = Double(timeStampList.count - 1) / interval * 60
+        let interval: TimeInterval = timeStampList.last!.timeIntervalSince(timeStampList.first!)
+        let averageInterval: TimeInterval = interval / Double(timeStampList.count - 1)
+        let tempo: Double = 60 / averageInterval
         self.tempoUseCase.reflectTempo(by: Int(tempo.rounded()))
     }
     
