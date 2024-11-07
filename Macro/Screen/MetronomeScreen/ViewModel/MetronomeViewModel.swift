@@ -16,12 +16,12 @@ class MetronomeViewModel {
     private var templateUseCase: TemplateImplement
     private var metronomeOnOffUseCase: MetronomeOnOffImplement
     private var tempoUseCase: TempoImplement
-    private var accentUseCase: AccentUseCase
+    private var accentUseCase: AccentImplement
     private var taptapUseCase: TapTapImplement
     
     private var cancelBag: Set<AnyCancellable> = []
     
-    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateImplement, metronomeOnOffUseCase: MetronomeOnOffImplement, tempoUseCase: TempoImplement, accentUseCase: AccentUseCase, taptapUseCase: TapTapImplement) {
+    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateImplement, metronomeOnOffUseCase: MetronomeOnOffImplement, tempoUseCase: TempoImplement, accentUseCase: AccentImplement, taptapUseCase: TapTapImplement) {
         
         self.jangdanRepository = jangdanRepository
         self.templateUseCase = templateUseCase
