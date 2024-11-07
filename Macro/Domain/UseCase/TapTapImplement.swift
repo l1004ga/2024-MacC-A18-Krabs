@@ -1,5 +1,5 @@
 //
-//  TapTapUseCase.swift
+//  TapTapImplement.swift
 //  Macro
 //
 //  Created by Yunki on 10/28/24.
@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class TapTapUseCase {
+class TapTapImplement {
     private var isTapping: Bool
     @Published private var lastTappedDate: Date
     private var timeStampList: [Date] = []
@@ -38,7 +38,7 @@ class TapTapUseCase {
 }
 
 // ViewModel에서 호출할 용도
-extension TapTapUseCase {
+extension TapTapImplement {
     var isTappingPublisher: AnyPublisher<Bool, Never> {
         self.isTappingSubject.eraseToAnyPublisher()
     }
