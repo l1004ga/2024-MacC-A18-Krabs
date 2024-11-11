@@ -5,7 +5,7 @@
 //  Created by Yunki on 10/30/24.
 //
 
-enum Accent {
+enum Accent: String, CaseIterable {
     case strong
     case medium
     case weak

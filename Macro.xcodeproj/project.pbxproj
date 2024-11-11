@@ -51,6 +51,8 @@
 		439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF072CB8220B003F6343 /* SobakToggleView.swift */; };
 		439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF092CB825AE003F6343 /* MetronomeControlView.swift */; };
 		439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */; };
+		579838EE2CE1D31D00866AD4 /* JangdanDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579838ED2CE1D30C00866AD4 /* JangdanDataModel.swift */; };
+		579838F02CE1DDAD00866AD4 /* JangdanDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579838EF2CE1DDAA00866AD4 /* JangdanDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		439ABF072CB8220B003F6343 /* SobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SobakToggleView.swift; sourceTree = "<group>"; };
 		439ABF092CB825AE003F6343 /* MetronomeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeControlView.swift; sourceTree = "<group>"; };
 		439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectSheetView.swift; sourceTree = "<group>"; };
+		579838ED2CE1D30C00866AD4 /* JangdanDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataModel.swift; sourceTree = "<group>"; };
+		579838EF2CE1DDAA00866AD4 /* JangdanDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,7 @@
 		2BE5ADDA2CABC4570094F3C3 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				579838EC2CE1D2F200866AD4 /* Data */,
 				2B9E88E52CDB864700B33A56 /* Repository */,
 				2BE5ADD82CABC4570094F3C3 /* Interface */,
 				438226E02CAEC720007A3B23 /* TemplateImplement.swift */,
@@ -366,6 +371,15 @@
 				3CC5C6152CC6B70E0090BA1F /* DaebakPendulumView.swift */,
 			);
 			path = MetronomeScreen;
+			sourceTree = "<group>";
+		};
+		579838EC2CE1D2F200866AD4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				579838ED2CE1D30C00866AD4 /* JangdanDataModel.swift */,
+				579838EF2CE1DDAA00866AD4 /* JangdanDataManager.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -531,6 +545,7 @@
 				2B96F4912CD1302C00933DE2 /* MetronomeViewModel.swift in Sources */,
 				2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */,
 				2B8861132CBD34D30036C6DB /* JangdanEnum.swift in Sources */,
+				579838EE2CE1D31D00866AD4 /* JangdanDataModel.swift in Sources */,
 				2B88611B2CC3E62A0036C6DB /* BakBarSetView.swift in Sources */,
 				439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */,
 				43774F652CB7FD5300F54EF7 /* MetronomeView.swift in Sources */,
@@ -539,6 +554,7 @@
 				3C6EAFA82CDD1243003F2191 /* MetronomeOnOffUseCase.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */,
+				579838F02CE1DDAD00866AD4 /* JangdanDataManager.swift in Sources */,
 				3C6EAFA62CDD11B7003F2191 /* TempoUseCase.swift in Sources */,
 				438226DF2CAE84A0007A3B23 /* TempoImplement.swift in Sources */,
 				2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */,
