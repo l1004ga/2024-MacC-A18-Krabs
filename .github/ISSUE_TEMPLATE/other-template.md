@@ -1,15 +1,17 @@
 ---
 name: Other Template
 about: 다른 작업시 작성해 주세요
-title: "[{category}] "
+title: "[category] "
 labels: ''
 assignees: ''
 
 ---
 
 <!--
-## Category Naming 
+이슈 제목 양식
+[Category] Issue Title
 
+## Category Naming 
 ```
 - Docs: 문서 수정
 - Refactor: 코드 리팩토링
