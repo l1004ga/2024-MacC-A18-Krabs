@@ -18,7 +18,7 @@ class MetronomeOnOffImplement {
             return jangdan.map { $0.enumerated().map { $0.offset == 0 ? $0.element : .none }}.flatMap { $0 }
         }
     }
-
+    
     private var bpm: Double
     private var currentBeatIndex: Int
     var isSobakOn: Bool
@@ -31,7 +31,7 @@ class MetronomeOnOffImplement {
     private var interval: TimeInterval {
         60.0 / bpm
     }
-    
+    private var lastPlayTime: Date
     private var jangdanRepository: JangdanRepository
     private var soundManager: PlaySoundInterface
     
@@ -40,20 +40,22 @@ class MetronomeOnOffImplement {
         self.bpm = 60.0
         self.currentBeatIndex = 0
         self.isSobakOn = false
-        
+        self.lastPlayTime = .now
         self.jangdanRepository = jangdanRepository
         self.soundManager = soundManager
         
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdanEntity in
             guard let self else { return }
             self.jangdan = jangdanEntity.daebakList.map { $0.bakAccentList }
-            
             let daebakCount = self.jangdan.count
             let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
             let averageSobakCount = Double(bakCount) / Double(daebakCount)
-            self.bpm = Double(jangdanEntity.bpm) * averageSobakCount
             
-            self.timer?.schedule(deadline: .now() + self.interval, repeating: self.interval, leeway: .nanoseconds(1))
+            // 직전 play() 시점 및 interval을 통한 다음 play() 시점 찾기
+            let nextPlayTime = self.lastPlayTime.addingTimeInterval(self.interval)
+            self.bpm = Double(jangdanEntity.bpm) * averageSobakCount
+            let nextStartTime = nextPlayTime.timeIntervalSince(.now)
+            self.timer?.schedule(deadline: .now() + nextStartTime, repeating: self.interval, leeway: .nanoseconds(1))
         }
         .store(in: &self.cancelBag)
     }
@@ -65,7 +67,7 @@ extension MetronomeOnOffImplement: MetronomeOnOffUseCase {
     func changeSobak() {
         self.isSobakOn.toggle()
     }
-
+    
     func play(_ tickHandler: @escaping () -> Void ) {
         // 데이터 갱신
         self.currentBeatIndex = 0
@@ -73,18 +75,18 @@ extension MetronomeOnOffImplement: MetronomeOnOffUseCase {
         // Timer 설정
         if let timer { self.stop() }
         self.timer = DispatchSource.makeTimerSource(queue: self.queue)
-        self.timer?.schedule(deadline: .now(), repeating: self.interval)
+        self.timer?.schedule(deadline: .now(), repeating: self.interval, leeway: .nanoseconds(1))
         self.timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
-
+            self.lastPlayTime = .now
             tickHandler()
             self.timerHandler()
         }
-
+        
         // Timer 실행
         self.timer?.resume()
     }
-
+    
     func stop() {
         UIApplication.shared.isIdleTimerDisabled = false
         self.timer?.cancel()
