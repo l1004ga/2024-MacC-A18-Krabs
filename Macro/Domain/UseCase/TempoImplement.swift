@@ -1,5 +1,5 @@
 //
-//  TempoUseCase.swift
+//  TempoImplement.swift
 //  Macro
 //
 //  Created by Lee Wonsun on 10/3/24.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-class TempoUseCase {
+class TempoImplement {
     private var jangdanRepository: JangdanRepository
     
     init(jangdanRepository: JangdanRepository) {
@@ -16,7 +15,7 @@ class TempoUseCase {
     }
 }
 
-extension TempoUseCase {
+extension TempoImplement: TempoUseCase {
     func updateTempo(newBpm: Int) {
         // 사용자가 변경한 BPM을 각 장단별 데이터 객체에 저장 요청
         switch newBpm {
@@ -32,7 +31,7 @@ extension TempoUseCase {
     }
 }
 
-extension TempoUseCase: ReflectTempoInterface {
+extension TempoImplement: ReflectTempoInterface {
     func reflectTempo(by tempo: Int) {
         self.updateTempo(newBpm: tempo)
     }

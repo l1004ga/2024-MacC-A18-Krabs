@@ -1,5 +1,5 @@
 //
-//  MetronomeOnOffUseCase.swift
+//  MetronomeOnOffImplement.swift
 //  Macro
 //
 //  Created by Yunki on 10/1/24.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import UIKit.UIApplication
 
-class MetronomeOnOffUseCase {
+class MetronomeOnOffImplement {
     private var jangdan: [[Accent]]
     private var jangdanAccentList: [Accent] {
         if self.isSobakOn {
@@ -60,7 +60,7 @@ class MetronomeOnOffUseCase {
 }
 
 // Play / Stop
-extension MetronomeOnOffUseCase {
+extension MetronomeOnOffImplement: MetronomeOnOffUseCase {
     
     func changeSobak() {
         self.isSobakOn.toggle()

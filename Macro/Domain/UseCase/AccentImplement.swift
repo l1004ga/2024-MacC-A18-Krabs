@@ -1,5 +1,5 @@
 //
-//  AccentUseCase.swift
+//  AccentImplement.swift
 //  Macro
 //
 //  Created by leejina on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Combine
 
-class AccentUseCase {
+class AccentImplement {
     private var jangdanRepository: JangdanRepository
     private var daebakList: [JangdanEntity.Daebak]
     
@@ -24,7 +24,7 @@ class AccentUseCase {
     }
 }
 
-extension AccentUseCase {
+extension AccentImplement: AccentUseCase {
     func moveNextAccent(daebakIndex: Int, sobakIndex: Int) {
         self.daebakList[daebakIndex].bakAccentList[sobakIndex] = self.daebakList[daebakIndex].bakAccentList[sobakIndex].nextAccent()
         self.jangdanRepository.updateAccents(daebakList: self.daebakList)
