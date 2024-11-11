@@ -75,7 +75,7 @@ extension MetronomeOnOffImplement: MetronomeOnOffUseCase {
         // Timer 설정
         if let timer { self.stop() }
         self.timer = DispatchSource.makeTimerSource(queue: self.queue)
-        self.timer?.schedule(deadline: .now(), repeating: self.interval)
+        self.timer?.schedule(deadline: .now(), repeating: self.interval, leeway: .nanoseconds(1))
         self.timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
             self.lastPlayTime = .now
