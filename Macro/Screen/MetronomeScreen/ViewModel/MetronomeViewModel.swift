@@ -114,7 +114,6 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.changeSobak()
             if self._state.isPlaying {
                 self.metronomeOnOffUseCase.stop()
-                self.initialDaeSoBakIndex()
                 self._state.pendulumTrigger = false
                 self.metronomeOnOffUseCase.play {
                     self.updateStatePerBak()
