@@ -10,6 +10,9 @@ import SwiftUI
 struct MetronomeControlView: View {
     
     @State var viewModel: MetronomeViewModel
+    @State private var isDecreasing: Bool = false
+    @State private var isIncreasing: Bool = false
+    @State private var delay: Double = 0.5
     
     var body: some View {
         ZStack {
@@ -24,7 +27,7 @@ struct MetronomeControlView: View {
                     
                     HStack(spacing: 16) {
                         Button(action: {
-                            self.viewModel.effect(action: .decreaseBpm)
+                            self.viewModel.effect(action: .decreaseShortBpm)
                         }, label: {
                             Circle()
                                 .frame(width: 56)
@@ -35,7 +38,17 @@ struct MetronomeControlView: View {
                                         .foregroundStyle(.textButtonSecondary)
                                 }
                         })
-                        .buttonRepeatBehavior(.enabled)
+                        .simultaneousGesture(
+                             LongPressGesture(minimumDuration: 0.5)
+                                 .onEnded { _ in
+                                     isDecreasing = true
+                                     delay = 0.5
+                                     startRepeatingDecreaseAction()
+                                 }
+                         )
+                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                            if !isPressing { isDecreasing = false }
+                        }, perform: {})
                         
                         Text("\(viewModel.state.bpm)")
                             .font(.custom("Pretendard-Medium", fixedSize: 64))
@@ -43,7 +56,7 @@ struct MetronomeControlView: View {
                             .frame(width: 120)
                         
                         Button(action: {
-                            self.viewModel.effect(action: .increaseBpm)
+                            self.viewModel.effect(action: .increaseShortBpm)
                         }, label: {
                             Circle()
                                 .frame(width: 56)
@@ -54,7 +67,17 @@ struct MetronomeControlView: View {
                                         .foregroundStyle(.textButtonSecondary)
                                 }
                         })
-                        .buttonRepeatBehavior(.enabled)
+                        .simultaneousGesture(
+                             LongPressGesture(minimumDuration: 0.5)
+                                 .onEnded { _ in
+                                     isIncreasing = true
+                                     delay = 0.5
+                                     startRepeatingIncreaseAction()
+                                 }
+                         )
+                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                            if !isPressing { isIncreasing = false }
+                        }, perform: {})
                     }
                 }
                 
@@ -99,6 +122,26 @@ struct MetronomeControlView: View {
         }
         .frame(maxHeight: 265)
         .padding(.horizontal, 16)
+    }
+    
+    func startRepeatingDecreaseAction() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            if isDecreasing {
+                self.viewModel.effect(action: .decreaseLongBpm)
+                delay = max(0.08, delay * 0.8)
+                startRepeatingDecreaseAction()
+            }
+        }
+    }
+    
+    func startRepeatingIncreaseAction() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            if isIncreasing {
+                self.viewModel.effect(action: .increaseLongBpm)
+                delay = max(0.08, delay * 0.8)
+                startRepeatingIncreaseAction()
+            }
+        }
     }
 }
 
