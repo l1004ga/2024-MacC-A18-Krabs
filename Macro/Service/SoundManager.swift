@@ -10,7 +10,6 @@ import AVFoundation
 class SoundManager {
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]
-    private var isEngineStarted: Bool = false
     
     init?() {
         self.engine = AVAudioEngine()
