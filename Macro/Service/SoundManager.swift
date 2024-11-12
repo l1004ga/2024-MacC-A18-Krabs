@@ -43,6 +43,9 @@ class SoundManager {
             print("SoundManager: 오디오 엔진 시작 중 에러 발생 - \(error)")
             return nil
         }
+        
+        // 더미 노드 분리
+        self.engine.detach(dummyNode)
     }
     
     private func configureSoundPlayers(weak: String, medium: String, strong: String) throws {
@@ -107,5 +110,14 @@ extension SoundManager: PlaySoundInterface {
         
         playerNode.scheduleBuffer(buffer, at: nil, options: .interrupts)
         playerNode.play()
+        
+        // 버퍼의 길이 계산
+        let bufferLength = Double(buffer.frameLength) / buffer.format.sampleRate
+        
+        // 버퍼의 길이만큼 지난 후 playerNode 분리
+        DispatchQueue.main.asyncAfter(deadline: .now() + bufferLength + 1) { [weak self] in
+            guard let self = self else { return }
+            self.engine.detach(playerNode)
+        }
     }
 }
