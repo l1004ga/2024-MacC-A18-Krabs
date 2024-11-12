@@ -28,7 +28,7 @@ struct MetronomeControlView: View {
                         }, label: {
                             Circle()
                                 .frame(width: 56)
-                                .foregroundStyle(.buttonBPMControl)
+                                .foregroundStyle(.buttonBPMControlDefault)
                                 .overlay {
                                     Image(systemName: "minus")
                                         .font(.system(size: 26))
@@ -47,7 +47,7 @@ struct MetronomeControlView: View {
                         }, label: {
                             Circle()
                                 .frame(width: 56)
-                                .foregroundStyle(.buttonBPMControl)
+                                .foregroundStyle(.buttonBPMControlDefault)
                                 .overlay {
                                     Image(systemName: "plus")
                                         .font(.system(size: 26))
