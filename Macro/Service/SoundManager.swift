@@ -43,9 +43,6 @@ class SoundManager {
             print("SoundManager: 오디오 엔진 시작 중 에러 발생 - \(error)")
             return nil
         }
-        
-        // 엔진이 시작된 후 더미 노드 분리
-        self.engine.detach(dummyNode)
     }
     
     private func configureSoundPlayers(weak: String, medium: String, strong: String) throws {
@@ -99,14 +96,14 @@ extension SoundManager: PlaySoundInterface {
     
     func beep(_ accent: Accent) {
         
+        guard let buffer = self.audioBuffers[accent] else { return }
+        
         // 각 강세별 PlayerNode를 동적으로 생성하여 재생
         let playerNode = AVAudioPlayerNode()
         self.engine.attach(playerNode)
         
         let mainMixer = self.engine.mainMixerNode
         self.engine.connect(playerNode, to: mainMixer, format: nil)
-        
-        guard let buffer = self.audioBuffers[accent] else { return }
         
         playerNode.scheduleBuffer(buffer, at: nil, options: .interrupts)
         playerNode.play()
