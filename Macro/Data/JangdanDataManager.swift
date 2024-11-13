@@ -9,11 +9,6 @@ import SwiftData
 import Combine
 import Foundation
 
-enum DataError: Error {
-    case networkError
-    case typeError
-    case unknown
-}
 
 final class JangdanDataManager: JangdanRepository {
     
@@ -185,6 +180,7 @@ extension JangdanDataManager {
             print("해당 이름의 장단을 찾을 수 없습니다.")
         }
     }
+    
     func updateBPM(bpm: Int) {
         self.currentJangdan.bpm = bpm
         publisher.send(currentJangdan)
@@ -207,8 +203,6 @@ extension JangdanDataManager {
 //        )
 //        context.insert(jangdan)
 //    }
-    
-    
     
 }
 

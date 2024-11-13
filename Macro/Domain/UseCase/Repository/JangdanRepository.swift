@@ -9,6 +9,12 @@ import Combine
 import Foundation
 
 
+//enum DataError: Error {
+//    case networkError
+//    case typeError
+//    case unknown
+//}
+
 protocol JangdanRepository {
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> { get }
     
