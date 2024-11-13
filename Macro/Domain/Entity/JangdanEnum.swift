@@ -17,7 +17,6 @@ enum Jangdan: String, CaseIterable {
     case 엇모리
     case 엇중모리
     case 세마치
-    case 커스텀
     
 //    case 노랫가락58855
     
@@ -33,7 +32,6 @@ enum Jangdan: String, CaseIterable {
         case .엇모리: return "엇모리"
         case .엇중모리: return "엇중모리"
         case .세마치: return "세마치"
-        case .커스텀: return "커스텀"
 //        case .노랫가락58855: return "노랫가락 5.8.8.5.5"
         }
     }
