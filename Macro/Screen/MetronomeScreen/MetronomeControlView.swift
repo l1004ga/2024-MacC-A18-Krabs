@@ -27,72 +27,72 @@ struct MetronomeControlView: View {
                         .foregroundStyle(.textTertiary)
                     
                     HStack(spacing: 16) {
-                            Circle()
-                                .frame(width: 56)
-                                .foregroundStyle(.buttonBPMControlDefault)
-                                .overlay {
-                                    Image(systemName: "minus")
-                                        .font(.system(size: 26))
-                                        .foregroundStyle(.textButtonSecondary)
-                        .onTapGesture {
-                            if !isDecreasing {
-                                self.viewModel.effect(action: .decreaseShortBpm)
+                        Circle()
+                            .frame(width: 56)
+                            .foregroundStyle(.buttonBPMControlDefault)
+                            .overlay {
+                                Image(systemName: "minus")
+                                    .font(.system(size: 26))
+                                    .foregroundStyle(.textButtonSecondary)
                             }
-                        }
-                        .simultaneousGesture(
-                             LongPressGesture(minimumDuration: 0.1)
-                                 .onEnded { _ in
-                                     DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
-                                         self.viewModel.effect(action: .roundBpm(currentBpm: downBpm(currentBpm: viewModel.state.bpm)))
-                                         
-                                         isDecreasing = true
-                                         delay = 0.5
-                                         startRepeatingDecreaseAction()
-                                     }
-                                 }
-                         )
-                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
-                            if !isPressing {
-                                isDecreasing = false
+                            .onTapGesture {
+                                if !isDecreasing {
+                                    self.viewModel.effect(action: .decreaseShortBpm)
+                                }
                             }
-                        }, perform: {})
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: 0.1)
+                                    .onEnded { _ in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
+                                            self.viewModel.effect(action: .roundBpm(currentBpm: downBpm(currentBpm: viewModel.state.bpm)))
+                                            
+                                            isDecreasing = true
+                                            delay = 0.5
+                                            startRepeatingDecreaseAction()
+                                        }
+                                    }
+                            )
+                            .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                if !isPressing {
+                                    isDecreasing = false
+                                }
+                            }, perform: {})
                         
                         Text("\(viewModel.state.bpm)")
                             .font(.custom("Pretendard-Medium", fixedSize: 64))
                             .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120)
                         
-                        
-                            Circle()
-                                .frame(width: 56)
-                                .foregroundStyle(.buttonBPMControlDefault)
-                                .overlay {
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 26))
-                                        .foregroundStyle(.textButtonSecondary)
+                        Circle()
+                            .frame(width: 56)
+                            .foregroundStyle(.buttonBPMControlDefault)
+                            .overlay {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 26))
+                                    .foregroundStyle(.textButtonSecondary)
+                            }
+                            .onTapGesture {
+                                if !isIncreasing {
+                                    self.viewModel.effect(action: .increaseShortBpm)
                                 }
-                        .onTapGesture {
-                            if !isIncreasing {
-                                self.viewModel.effect(action: .increaseShortBpm)
                             }
-                        }
-                        .simultaneousGesture(
-                             LongPressGesture(minimumDuration: 0.1)
-                                 .onEnded { _ in
-                                     DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
-                                         self.viewModel.effect(action: .roundBpm(currentBpm: upBpm(currentBpm: viewModel.state.bpm)))
-                                         
-                                         isIncreasing = true
-                                         delay = 0.5
-                                         startRepeatingIncreaseAction()
-                                     }
-                                 }
-                         )
-                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
-                            if !isPressing {
-                                isIncreasing = false
-                            }
-                        }, perform: {})
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: 0.1)
+                                    .onEnded { _ in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
+                                            self.viewModel.effect(action: .roundBpm(currentBpm: upBpm(currentBpm: viewModel.state.bpm)))
+                                            
+                                            isIncreasing = true
+                                            delay = 0.5
+                                            startRepeatingIncreaseAction()
+                                        }
+                                    }
+                            )
+                            .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                if !isPressing {
+                                    isIncreasing = false
+                                }
+                            }, perform: {})
                     }
                 }
                 
