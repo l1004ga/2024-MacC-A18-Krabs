@@ -13,17 +13,25 @@ class MasteryImplement {
     private var masteryRepository: MasteryRepository
     private var startTime: Date!
     private var jangdan: Jangdan?
+    private var isRecording: Bool
     
     private var cancelbag: Set<AnyCancellable> = []
     
     init(jangdanRepository: JangdanRepository, masteryRepository: MasteryRepository) {
         self.jangdanRepository = jangdanRepository
         self.masteryRepository = masteryRepository
+        self.isRecording = false
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdanEntity in
             guard let self else { return }
             self.jangdan = Jangdan(rawValue: jangdanEntity.name)
         }
         .store(in: &cancelbag)
+    }
+    
+    deinit {
+        if isRecording {
+            self.stopRecord()
+        }
     }
 }
 
@@ -34,6 +42,7 @@ extension MasteryImplement: MasteryUseCase {
     }
     
     func startRecord() {
+        self.isRecording = true
         self.startTime = .now
     }
     
@@ -41,5 +50,6 @@ extension MasteryImplement: MasteryUseCase {
         let practiceTime = startTime.timeIntervalSinceNow
         guard let jangdan = self.jangdan else { return }
         self.masteryRepository.updateMastary(practiceTime: Int(practiceTime))
+        self.isRecording = false
     }
 }
