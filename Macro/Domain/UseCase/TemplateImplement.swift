@@ -12,10 +12,40 @@ class TemplateImplement {
     init(jangdanRepository: JangdanRepository) {
         self.jangdanRepository = jangdanRepository
     }
+    
+    enum DataError: Error {
+        case registedName
+    }
 }
 
 extension TemplateImplement: TemplateUseCase {
-    func setJangdan(jangdan: Jangdan) {
-        self.jangdanRepository.fetchJangdanData(jangdan: jangdan)
+    var allDefaultJangdanTemplateNames: [String] {
+        Jangdan.allCases.map { $0.name }
+    }
+    var allCustomJangdanTemplateNames: [String] {
+        return jangdanRepository.fetchAllCustomJangdanNames()
+    }
+    
+    func setJangdan(jangdanName: String) {
+        self.jangdanRepository.fetchJangdanData(jangdanName: jangdanName)
+    }
+    
+    // MARK: - Custom Template CRUD Logic
+    func createCustomJangdan(newData: JangdanEntity) throws {
+        guard self.jangdanRepository.isRepetedName(jangdanName: newData.name) else {
+            throw DataError.registedName
+        }
+        
+    }
+    
+    func editCustomJangdan(targetName: String, newData: JangdanEntity) throws {
+        guard self.jangdanRepository.isRepetedName(jangdanName: newData.name) else {
+            throw DataError.registedName
+        }
+        
+    }
+    
+    func deleteCustomJangdan(target: JangdanEntity) {
+        
     }
 }

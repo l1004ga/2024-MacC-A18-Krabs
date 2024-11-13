@@ -6,5 +6,5 @@
 //
 
 protocol TemplateUseCase {
-    func setJangdan(jangdan: Jangdan)
+    func setJangdan(jangdanName: String)
 }

@@ -172,8 +172,12 @@ extension JangdanDataSource: JangdanRepository {
         self.publisher.eraseToAnyPublisher()
     }
     
-    func fetchJangdanData(jangdan: Jangdan) {
-        self.jangdan = jangdanList.first { $0.name == jangdan.name } ?? jangdanList.first!
+    func fetchAllCustomJangdanNames() -> [String] {
+        return []
+    }
+    
+    func fetchJangdanData(jangdanName: String) {
+        self.jangdan = jangdanList.first { $0.name == jangdanName } ?? jangdanList.first!
         self.publisher.send(self.jangdan)
     }
     
