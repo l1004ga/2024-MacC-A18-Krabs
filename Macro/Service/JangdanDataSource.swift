@@ -167,23 +167,23 @@ class JangdanDataSource {
     var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
 }
 
-extension JangdanDataSource: JangdanRepository {
-    var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
-        self.publisher.eraseToAnyPublisher()
-    }
-    
-    func fetchJangdanData(jangdan: Jangdan) {
-        self.jangdan = jangdanList.first { $0.name == jangdan.name } ?? jangdanList.first!
-        self.publisher.send(self.jangdan)
-    }
-    
-    func updateBPM(bpm: Int) {
-        self.jangdan.bpm = bpm
-        self.publisher.send(self.jangdan)
-    }
-    
-    func updateAccents(daebakList: [JangdanEntity.Daebak]) {
-        self.jangdan.daebakList = daebakList
-        self.publisher.send(self.jangdan)
-    }
-}
+//extension JangdanDataSource: JangdanRepository {
+//    var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
+//        self.publisher.eraseToAnyPublisher()
+//    }
+//    
+//    func fetchJangdanData(jangdan: Jangdan) {
+//        self.jangdan = jangdanList.first { $0.name == jangdan.name } ?? jangdanList.first!
+//        self.publisher.send(self.jangdan)
+//    }
+//    
+//    func updateBPM(bpm: Int) {
+//        self.jangdan.bpm = bpm
+//        self.publisher.send(self.jangdan)
+//    }
+//    
+//    func updateAccents(daebakList: [JangdanEntity.Daebak]) {
+//        self.jangdan.daebakList = daebakList
+//        self.publisher.send(self.jangdan)
+//    }
+//}
