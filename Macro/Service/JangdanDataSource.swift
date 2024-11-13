@@ -190,4 +190,20 @@ extension JangdanDataSource: JangdanRepository {
         self.jangdan.daebakList = daebakList
         self.publisher.send(self.jangdan)
     }
+    
+    func isRepeatedName(jangdanName: String) -> Bool {
+        return false
+    }
+    
+    func saveNewJangdan(jangdan: JangdanEntity) {
+        
+    }
+    
+    func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity) {
+        
+    }
+    
+    func deleteCustomJangdan(target: JangdanEntity) {
+        
+    }
 }

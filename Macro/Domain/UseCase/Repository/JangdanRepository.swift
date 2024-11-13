@@ -19,5 +19,12 @@ protocol JangdanRepository {
     
     func updateAccents(daebakList: [JangdanEntity.Daebak])
     
-    func isRepetedName(jangdanName: String) -> Bool
+    func isRepeatedName(jangdanName: String) -> Bool
+    
+    // MARK: - Custom Template CRUD Logic
+    func saveNewJangdan(jangdan: JangdanEntity)
+    
+    func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity)
+    
+    func deleteCustomJangdan(target: JangdanEntity)
 }

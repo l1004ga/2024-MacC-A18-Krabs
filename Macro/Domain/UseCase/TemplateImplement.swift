@@ -32,20 +32,20 @@ extension TemplateImplement: TemplateUseCase {
     
     // MARK: - Custom Template CRUD Logic
     func createCustomJangdan(newData: JangdanEntity) throws {
-        guard self.jangdanRepository.isRepetedName(jangdanName: newData.name) else {
+        guard self.jangdanRepository.isRepeatedName(jangdanName: newData.name) else {
             throw DataError.registedName
         }
-        
+        self.jangdanRepository.saveNewJangdan(jangdan: newData)
     }
     
     func editCustomJangdan(targetName: String, newData: JangdanEntity) throws {
-        guard self.jangdanRepository.isRepetedName(jangdanName: newData.name) else {
+        guard self.jangdanRepository.isRepeatedName(jangdanName: newData.name) else {
             throw DataError.registedName
         }
-        
+        self.jangdanRepository.updateJangdanTemplate(targetName: targetName, newJangdan: newData)
     }
     
     func deleteCustomJangdan(target: JangdanEntity) {
-        
+        self.jangdanRepository.deleteCustomJangdan(target: target)
     }
 }
