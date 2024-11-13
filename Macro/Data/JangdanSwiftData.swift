@@ -12,7 +12,6 @@ import Foundation
 // JangdanDataModel 정의
 @Model
 final class JangdanDataModel {
-    var id: UUID
     var name: String
     var bakCount: Int
     var daebak: Int
@@ -20,15 +19,14 @@ final class JangdanDataModel {
     var jangdanType: String
     var daebakListStrings: [[String]]
     var instrument: String
-
+    
     // 초기화 메서드
-    init(name: String, bakCount: Int, daebak: Int, bpm: Int, daebakList: [[String]], jangdanType: Jangdan, instrument: String) {
-        self.id = UUID()
+    init(name: String, bakCount: Int, daebak: Int, bpm: Int, daebakList: [[String]], jangdanType: String, instrument: String) {
         self.name = name
         self.bakCount = bakCount
         self.daebak = daebak
         self.bpm = bpm
-        self.jangdanType = jangdanType.rawValue
+        self.jangdanType = jangdanType
         self.daebakListStrings = daebakList
         self.instrument = instrument
     }
