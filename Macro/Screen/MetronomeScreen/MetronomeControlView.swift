@@ -13,9 +13,11 @@ struct MetronomeControlView: View {
     @State private var isDecreasing: Bool = false
     @State private var isIncreasing: Bool = false
     @State private var delay: Double = 0.1
-    @State private var roundedDelay: Double = 0.5
+    @State private var roundedDelay: Double = 0.5  // 10 단위로 반올림 되어질 애들의 딜레이 위한 변수
     @State private var isMinusActive: Bool = false
     @State private var isPlusActive: Bool = false
+    @State private var previousTranslation: CGFloat = .zero  // 드래그 움직임
+    private let threshold: CGFloat = 20 // 드래그 시 숫자변동 빠르기 조절 위한 변수
     
     var body: some View {
         ZStack {
@@ -139,6 +141,35 @@ struct MetronomeControlView: View {
                             }, perform: {})
                     }
                 }
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            
+                            // 현재 위치값을 기준으로 증감 측정
+                            let translationDifference = gesture.translation.width - previousTranslation
+                            
+                            if abs(translationDifference) > threshold {   // 음수값도 있기 때문에 절댓값 사용
+                                if translationDifference > 0 {
+                                    self.viewModel.effect(action: .increaseShortBpm)
+                                    isPlusActive = true
+                                } else if translationDifference < 0 {
+                                    self.viewModel.effect(action: .decreaseShortBpm)
+                                    isMinusActive = true
+                                }
+                                
+                                previousTranslation = gesture.translation.width
+                            }
+                           
+                        }
+                        .onEnded { _ in
+                            if isMinusActive {
+                                isMinusActive = false
+                            } else if isPlusActive {
+                                isPlusActive = false
+                            }
+                            previousTranslation = 0
+                        }
+                )
                 
                 Spacer()
                 
@@ -183,6 +214,7 @@ struct MetronomeControlView: View {
         .padding(.horizontal, 16)
     }
     
+    // 롱탭 시 감소 반복 도와줌
     func startRepeatingDecreaseAction() {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             if isDecreasing {
@@ -193,6 +225,7 @@ struct MetronomeControlView: View {
         }
     }
     
+    // 롱탭 시 증가 반복 도와줌
     func startRepeatingIncreaseAction() {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             if isIncreasing {
