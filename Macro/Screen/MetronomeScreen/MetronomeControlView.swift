@@ -14,6 +14,8 @@ struct MetronomeControlView: View {
     @State private var isIncreasing: Bool = false
     @State private var delay: Double = 0.1
     @State private var roundedDelay: Double = 0.5
+    @State private var isMinusActive: Bool = false
+    @State private var isPlusActive: Bool = false
     
     var body: some View {
         ZStack {
@@ -27,9 +29,10 @@ struct MetronomeControlView: View {
                         .foregroundStyle(.textTertiary)
                     
                     HStack(spacing: 16) {
+                        // 마이너스 버튼
                         Circle()
                             .frame(width: 56)
-                            .foregroundStyle(.buttonBPMControlDefault)
+                            .foregroundStyle(isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .overlay {
                                 Image(systemName: "minus")
                                     .font(.system(size: 26))
@@ -39,9 +42,25 @@ struct MetronomeControlView: View {
                                 if !isDecreasing {
                                     self.viewModel.effect(action: .decreaseShortBpm)
                                 }
+                                
+                                withAnimation {
+                                    isMinusActive = true
+                                }
+                                
+                                // 클릭 후 다시 비활성화 색상
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                    withAnimation {
+                                        isMinusActive = false
+                                    }
+                                }
                             }
                             .simultaneousGesture(
                                 LongPressGesture(minimumDuration: 0.1)
+                                    .onChanged { _ in
+                                        withAnimation {
+                                            isMinusActive = true
+                                        }
+                                    }
                                     .onEnded { _ in
                                         DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
                                             self.viewModel.effect(action: .roundBpm(currentBpm: downBpm(currentBpm: viewModel.state.bpm)))
@@ -53,6 +72,10 @@ struct MetronomeControlView: View {
                                     }
                             )
                             .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                withAnimation {
+                                    isMinusActive = isPressing
+                                }
+                                
                                 if !isPressing {
                                     isDecreasing = false
                                 }
@@ -63,9 +86,10 @@ struct MetronomeControlView: View {
                             .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120)
                         
+                        // 플러스 버튼
                         Circle()
                             .frame(width: 56)
-                            .foregroundStyle(.buttonBPMControlDefault)
+                            .foregroundStyle(isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .overlay {
                                 Image(systemName: "plus")
                                     .font(.system(size: 26))
@@ -75,9 +99,25 @@ struct MetronomeControlView: View {
                                 if !isIncreasing {
                                     self.viewModel.effect(action: .increaseShortBpm)
                                 }
+                                
+                                withAnimation {
+                                    isPlusActive = true
+                                }
+                                
+                                // 클릭 후 다시 비활성화 색상
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                    withAnimation {
+                                        isPlusActive = false
+                                    }
+                                }
                             }
                             .simultaneousGesture(
                                 LongPressGesture(minimumDuration: 0.1)
+                                    .onChanged { _ in
+                                        withAnimation {
+                                            isPlusActive = true
+                                        }
+                                    }
                                     .onEnded { _ in
                                         DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
                                             self.viewModel.effect(action: .roundBpm(currentBpm: upBpm(currentBpm: viewModel.state.bpm)))
@@ -89,6 +129,10 @@ struct MetronomeControlView: View {
                                     }
                             )
                             .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                withAnimation {
+                                    isPlusActive = isPressing
+                                }
+                                
                                 if !isPressing {
                                     isIncreasing = false
                                 }
