@@ -28,6 +28,10 @@
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentImplement.swift */; };
+		3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */; };
+		3C1EB31D2CE4C56D0030FB63 /* MasteryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */; };
+		3C1EB31F2CE4C5C60030FB63 /* MasteryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31E2CE4C5C60030FB63 /* MasteryUseCase.swift */; };
+		3C1EB3212CE4C60A0030FB63 /* MasteryImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB3202CE4C60A0030FB63 /* MasteryImplement.swift */; };
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
@@ -98,6 +102,10 @@
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentImplement.swift; sourceTree = "<group>"; };
+		3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastaryRepository.swift; sourceTree = "<group>"; };
+		3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryDataSource.swift; sourceTree = "<group>"; };
+		3C1EB31E2CE4C5C60030FB63 /* MasteryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryUseCase.swift; sourceTree = "<group>"; };
+		3C1EB3202CE4C60A0030FB63 /* MasteryImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryImplement.swift; sourceTree = "<group>"; };
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
@@ -183,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */,
+				3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -227,6 +236,7 @@
 				3C6EAFA52CDD11B7003F2191 /* TempoUseCase.swift */,
 				3C6EAFA72CDD1243003F2191 /* MetronomeOnOffUseCase.swift */,
 				3C6EAFA92CDD12DE003F2191 /* AccentUseCase.swift */,
+				3C1EB31E2CE4C5C60030FB63 /* MasteryUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -241,6 +251,7 @@
 				2BE5ADFB2CAC118F0094F3C3 /* MetronomeOnOffImplement.swift */,
 				3C1DB7312CB3B58500160970 /* AccentImplement.swift */,
 				2BCA580D2CCF5F8700FA08A9 /* TapTapImplement.swift */,
+				3C1EB3202CE4C60A0030FB63 /* MasteryImplement.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -275,6 +286,7 @@
 			children = (
 				2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */,
 				2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */,
+				3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -535,12 +547,15 @@
 				3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */,
 				2BCA580E2CCF5F8700FA08A9 /* TapTapImplement.swift in Sources */,
 				5798391C2CE4D5A500866AD4 /* JangdanDTO.swift in Sources */,
+				3C1EB3212CE4C60A0030FB63 /* MasteryImplement.swift in Sources */,
 				3C6EAFAA2CDD12DE003F2191 /* AccentUseCase.swift in Sources */,
+				3C1EB31D2CE4C56D0030FB63 /* MasteryDataSource.swift in Sources */,
 				2B96F4932CD131BD00933DE2 /* AccentEnum.swift in Sources */,
 				3C6EAFA42CDD1146003F2191 /* TemplateUseCase.swift in Sources */,
 				2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */,
 				2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentImplement.swift in Sources */,
+				3C1EB31F2CE4C5C60030FB63 /* MasteryUseCase.swift in Sources */,
 				439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */,
 				2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */,
 				439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */,
@@ -564,6 +579,7 @@
 				2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffImplement.swift in Sources */,
+				3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Krabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -788,7 +804,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Krabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
