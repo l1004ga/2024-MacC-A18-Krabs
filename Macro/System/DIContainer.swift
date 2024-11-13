@@ -5,6 +5,7 @@
 //  Created by leejina on 11/7/24.
 //
 
+
 class DIContainer {
     
     static let shared: DIContainer = DIContainer()
@@ -35,7 +36,7 @@ class DIContainer {
     private var _accentUseCase: AccentImplement
     private var _tapTapUseCase: TapTapImplement
     
-    private var _jangdanDataSource: JangdanDataSource
+    private var _jangdanDataSource: JangdanDataManager
     private var _soundManager: SoundManager
     
 }

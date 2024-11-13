@@ -5,7 +5,7 @@
 //  Created by Yunki on 10/30/24.
 //
 
-enum Accent: String, CaseIterable {
+enum Accent: String, CaseIterable, Codable {
     case strong
     case medium
     case weak
@@ -29,5 +29,11 @@ extension Accent: Comparable {
         case (.none, .weak): return true
         default: return false
         }
+    }
+}
+
+extension Accent {
+    static func from(rawValue: String) -> Accent {
+        return Accent(rawValue: rawValue) ?? .none
     }
 }

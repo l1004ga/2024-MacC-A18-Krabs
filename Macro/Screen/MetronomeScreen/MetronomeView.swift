@@ -21,7 +21,6 @@ struct MetronomeView: View {
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
         self.viewModel = viewModel
-        self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
         self.isSobakOn = self.viewModel.state.isSobakOn
     }
     
@@ -65,6 +64,9 @@ struct MetronomeView: View {
             
             MetronomeControlView(viewModel: viewModel)
             
+        }
+        .task {
+            self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
         }
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
