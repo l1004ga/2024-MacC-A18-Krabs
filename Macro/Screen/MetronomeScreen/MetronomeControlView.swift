@@ -27,9 +27,6 @@ struct MetronomeControlView: View {
                         .foregroundStyle(.textTertiary)
                     
                     HStack(spacing: 16) {
-                        Button(action: {
-                            self.viewModel.effect(action: .decreaseShortBpm)
-                        }, label: {
                             Circle()
                                 .frame(width: 56)
                                 .foregroundStyle(.buttonBPMControlDefault)
@@ -37,8 +34,11 @@ struct MetronomeControlView: View {
                                     Image(systemName: "minus")
                                         .font(.system(size: 26))
                                         .foregroundStyle(.textButtonSecondary)
-                                }
-                        })
+                        .onTapGesture {
+                            if !isDecreasing {
+                                self.viewModel.effect(action: .decreaseShortBpm)
+                            }
+                        }
                         .simultaneousGesture(
                              LongPressGesture(minimumDuration: 0.1)
                                  .onEnded { _ in
@@ -51,7 +51,7 @@ struct MetronomeControlView: View {
                                      }
                                  }
                          )
-                        .onLongPressGesture(minimumDuration: 0.1, pressing: { isPressing in
+                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
                             if !isPressing {
                                 isDecreasing = false
                             }
@@ -62,9 +62,7 @@ struct MetronomeControlView: View {
                             .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120)
                         
-                        Button(action: {
-                            self.viewModel.effect(action: .increaseShortBpm)
-                        }, label: {
+                        
                             Circle()
                                 .frame(width: 56)
                                 .foregroundStyle(.buttonBPMControlDefault)
@@ -73,7 +71,11 @@ struct MetronomeControlView: View {
                                         .font(.system(size: 26))
                                         .foregroundStyle(.textButtonSecondary)
                                 }
-                        })
+                        .onTapGesture {
+                            if !isIncreasing {
+                                self.viewModel.effect(action: .increaseShortBpm)
+                            }
+                        }
                         .simultaneousGesture(
                              LongPressGesture(minimumDuration: 0.1)
                                  .onEnded { _ in
@@ -86,7 +88,7 @@ struct MetronomeControlView: View {
                                      }
                                  }
                          )
-                        .onLongPressGesture(minimumDuration: 0.1, pressing: { isPressing in
+                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
                             if !isPressing {
                                 isIncreasing = false
                             }
