@@ -28,6 +28,7 @@
 		2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */; };
 		3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7082CABDA2400160970 /* JangdanEntity.swift */; };
 		3C1DB7322CB3B58500160970 /* AccentImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DB7312CB3B58500160970 /* AccentImplement.swift */; };
+		3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */; };
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
@@ -95,6 +96,7 @@
 		2BE5AE012CAC289C0094F3C3 /* PlaySoundInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundInterface.swift; sourceTree = "<group>"; };
 		3C1DB7082CABDA2400160970 /* JangdanEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEntity.swift; sourceTree = "<group>"; };
 		3C1DB7312CB3B58500160970 /* AccentImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentImplement.swift; sourceTree = "<group>"; };
+		3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastaryRepository.swift; sourceTree = "<group>"; };
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */,
+				3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffImplement.swift in Sources */,
+				3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
