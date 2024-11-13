@@ -73,6 +73,7 @@ class MetronomeViewModel {
         case decreaseLongBpm
         case increaseShortBpm // + button
         case increaseLongBpm
+        case roundBpm(currentBpm: Int)
         case changeAccent(daebak: Int, sobak: Int)
         case stopMetronome
         case estimateBpm
@@ -140,6 +141,9 @@ class MetronomeViewModel {
         case .increaseLongBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
             self.taptapUseCase.finishTapping()
+        
+        case let .roundBpm(currentBpm):
+            self.tempoUseCase.updateTempo(newBpm: currentBpm)
             
         case let .changeAccent(daebak, sobak):
             self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
