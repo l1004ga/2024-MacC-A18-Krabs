@@ -27,31 +27,17 @@ struct MetronomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-//            if self.viewModel.state.currentJangdan?.name == "진양" {
-//                JinYangHanbaeBoardView(
-//                    jangdan: viewModel.state.jangdanAccent,
-//                    isSobakOn: viewModel.state.isSobakOn,
-//                    isPlaying: viewModel.state.isPlaying,
-//                    currentDaebak: viewModel.state.currentDaebak,
-//                    currentSobak: viewModel.state.currentSobak
-//                ) { daebak, sobak in
-//                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
-//                }
-//                .padding(.horizontal, 8)
-//                .padding(.bottom, 14)
-//            } else {
-                HanbaeBoardView(
-                    jangdan: viewModel.state.jangdanAccent,
-                    isSobakOn: viewModel.state.isSobakOn,
-                    isPlaying: viewModel.state.isPlaying,
-                    currentDaebak: viewModel.state.currentDaebak,
-                    currentSobak: viewModel.state.currentSobak
-                ) { daebak, sobak in
-                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
-                }
-                .padding(.horizontal, 8)
-                .padding(.bottom, 26)
-//            }
+            HanbaeBoardView(
+                jangdan: viewModel.state.jangdanAccent,
+                isSobakOn: viewModel.state.isSobakOn,
+                isPlaying: viewModel.state.isPlaying,
+                currentDaebak: viewModel.state.currentDaebak,
+                currentSobak: viewModel.state.currentSobak
+            ) { daebak, sobak in
+                viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+            }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 26)
             
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)
@@ -71,8 +57,7 @@ struct MetronomeView: View {
             let hanbaeTempo = meanTempo * Double(self.viewModel.state.daebakCount)
             let sobakTempo = hanbaeTempo / Double(self.viewModel.state.bakCount)
             let resultTempo =  sobakTempo * Double(self.viewModel.state.jangdanAccent[self.viewModel.state.currentDaebak].count)
-                               
-                               
+            
             withAnimation(.easeInOut(duration: resultTempo)) {
                 self.isPendulumOn = newValue
             }
