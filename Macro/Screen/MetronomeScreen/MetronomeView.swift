@@ -30,10 +30,11 @@ struct MetronomeView: View {
                 jangdan: viewModel.state.jangdanAccent,
                 isSobakOn: viewModel.state.isSobakOn,
                 isPlaying: viewModel.state.isPlaying,
+                currentRow: viewModel.state.currentRow,
                 currentDaebak: viewModel.state.currentDaebak,
                 currentSobak: viewModel.state.currentSobak
-            ) { daebak, sobak in
-                viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+            ) { row, daebak, sobak in
+                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak))
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 26)
