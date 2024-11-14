@@ -21,6 +21,7 @@ struct BakBarView: View {
             return 0
         }
     }
+    var isPlaying: Bool
     var isActive: Bool
     var bakNumber: Int?
     
@@ -29,12 +30,12 @@ struct BakBarView: View {
             ZStack(alignment: .top) {
                 VStack(spacing: 0) {
                     Rectangle()
-                        .foregroundStyle(.frame)
+                        .foregroundStyle(isPlaying && isActive ? .orange.opacity(0.5) : .frame)
                     Rectangle()
                         .frame(height: CGFloat((geo.size.height / 3) * Double(accentHeight)))
-                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]),
-                                                        startPoint: .top, endPoint: .bottom))
-
+                        .foregroundStyle(isActive
+                                         ? LinearGradient(colors: [Color.orange, Color.yellow], startPoint: .top, endPoint: .bottom)
+                                         : LinearGradient(colors: [.bakBarInactive], startPoint: .top, endPoint: .bottom))
                 }
                 if let bakNumber {
                     Text("\(bakNumber)")
@@ -53,5 +54,5 @@ struct BakBarView: View {
 }
 
 #Preview {
-    BakBarView(accent: .medium, isActive: true, bakNumber: 3)
+    BakBarView(accent: .medium, isPlaying: false, isActive: true, bakNumber: 3)
 }

@@ -17,7 +17,7 @@ struct BakBarSetView: View {
     
     var body: some View {
         if isDaebakOnly {
-            BakBarView(accent: accents[0], isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1)
+            BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1)
                 .overlay {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.green, lineWidth: 2)
@@ -31,6 +31,7 @@ struct BakBarSetView: View {
                 ForEach(accents.indices, id: \.self) { index in
                     BakBarView(
                         accent: accents[index],
+                        isPlaying: isPlaying,
                         isActive: !isPlaying || index == activeIndex,
                         bakNumber: index == 0 ? daebakIndex + 1 : nil
                     )
