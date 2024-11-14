@@ -18,6 +18,10 @@ struct BakBarSetView: View {
     var body: some View {
         if isDaebakOnly {
             BakBarView(accent: accents[0], isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.green, lineWidth: 2)
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 4))
                 .onTapGesture {
                     tabBakBarEvent(0)
@@ -47,11 +51,15 @@ struct BakBarSetView: View {
                     }
                 }
             }
+            .overlay {
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.green, lineWidth: 2)
+            }
             .clipShape(RoundedRectangle(cornerRadius: 4))
         }
     }
 }
 
 #Preview {
-    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: true, isPlaying: true, activeIndex: nil) {_ in}
+    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: false, isPlaying: true, activeIndex: nil) {_ in}
 }
