@@ -9,6 +9,18 @@ import SwiftUI
 
 struct BakBarView: View {
     var accent: Accent
+    var accentHeight: Int {
+        switch self.accent {
+        case .strong:
+            return 3
+        case .medium:
+            return 2
+        case .weak:
+            return 1
+        case .none:
+            return 0
+        }
+    }
     var isActive: Bool
     var bakNumber: Int?
     
@@ -17,19 +29,13 @@ struct BakBarView: View {
             ZStack(alignment: .top) {
                 VStack(spacing: 0) {
                     Rectangle()
-                        .fill(accent > .medium
-                              ? isActive ? .bakBarActive: .bakBarInactive
-                              : .frame)
+                        .foregroundStyle(.frame)
                     Rectangle()
-                        .fill(accent > .weak
-                              ? isActive ? .bakBarActive : .bakBarInactive
-                              : .frame)
-                    Rectangle()
-                        .fill(accent > .none
-                              ? isActive ? .bakBarActive : .bakBarInactive
-                              : .frame)
+                        .frame(height: CGFloat((geo.size.height / 3) * Double(accentHeight)))
+                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]),
+                                                        startPoint: .top, endPoint: .bottom))
+
                 }
-                
                 if let bakNumber {
                     Text("\(bakNumber)")
                         .font(.system(size: 32, weight: .semibold))
@@ -40,11 +46,12 @@ struct BakBarView: View {
                             : accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberGray
                         )
                 }
+                
             }
         }
     }
 }
 
 #Preview {
-    BakBarView(accent: .strong, isActive: true, bakNumber: 3)
+    BakBarView(accent: .medium, isActive: true, bakNumber: 3)
 }
