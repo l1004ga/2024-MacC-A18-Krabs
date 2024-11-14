@@ -61,5 +61,5 @@ struct BakBarSetView: View {
 }
 
 #Preview {
-    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: true, isPlaying: true, activeIndex: nil) {_ in}
+    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: false, isPlaying: true, activeIndex: nil) {_ in}
 }
