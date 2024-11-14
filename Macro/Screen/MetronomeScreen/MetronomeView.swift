@@ -16,7 +16,6 @@ struct MetronomeView: View {
     @State private var jangdan: Jangdan
     @State private var isSheetPresented: Bool = false
     @State private var isSobakOn: Bool = false
-    @State private var isPendulumOn: Bool = false
     
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
@@ -51,16 +50,6 @@ struct MetronomeView: View {
         }
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
-        }
-        .onChange(of: self.viewModel.state.pendulumTrigger) { _, newValue in
-            let meanTempo = 60.0 / Double(self.viewModel.state.bpm)
-            let hanbaeTempo = meanTempo * Double(self.viewModel.state.daebakCount)
-            let sobakTempo = hanbaeTempo / Double(self.viewModel.state.bakCount)
-            let resultTempo =  sobakTempo * Double(self.viewModel.state.jangdanAccent[self.viewModel.state.currentDaebak].count)
-            
-            withAnimation(.easeInOut(duration: resultTempo)) {
-                self.isPendulumOn = newValue
-            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

@@ -61,7 +61,6 @@ class MetronomeViewModel {
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
         var bpm: Int = 60
-        var pendulumTrigger: Bool = false
         var isTapping: Bool = false
     }
     
@@ -94,10 +93,6 @@ class MetronomeViewModel {
         
         self._state.currentSobak = nextSobak
         self._state.currentDaebak = nextDaebak
-        
-        if self._state.currentSobak == 0 {
-            self._state.pendulumTrigger.toggle()
-        }
     }
     
     private func initialDaeSoBakIndex() {
@@ -124,7 +119,6 @@ class MetronomeViewModel {
                 }
             } else {
                 self.metronomeOnOffUseCase.stop()
-                self._state.pendulumTrigger = false
             }
         case .decreaseShortBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
@@ -150,7 +144,6 @@ class MetronomeViewModel {
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
-            self._state.pendulumTrigger = false
         case .estimateBpm:
             self.taptapUseCase.tap()
         }
