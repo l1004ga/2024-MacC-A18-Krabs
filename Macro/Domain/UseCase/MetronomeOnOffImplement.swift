@@ -47,8 +47,8 @@ class MetronomeOnOffImplement {
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdanEntity in
             guard let self else { return }
             self.jangdan = jangdanEntity.daebakList.map { $0.map { $0.bakAccentList } }
-            let daebakCount = self.jangdan.count
-            let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
+            let daebakCount = self.jangdan.reduce(0) { $0 + $1.count }
+            let bakCount = self.jangdan.reduce(0) { $0 + $1.reduce(0) { $0 + $1.count } }
             let averageSobakCount = Double(bakCount) / Double(daebakCount)
             
             // 직전 play() 시점 및 interval을 통한 다음 play() 시점 찾기
