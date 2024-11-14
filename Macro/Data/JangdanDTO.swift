@@ -13,7 +13,7 @@ struct JangdanDTO {
     var bakCount: Int
     var daebak: Int
     var bpm: Int
-    var deabakList: [[String]]
+    var daebakList: [[String]]
     var jangdanType: String
     var instrument: String
 }

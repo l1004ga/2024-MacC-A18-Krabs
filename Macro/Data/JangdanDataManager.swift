@@ -31,7 +31,7 @@ final class JangdanDataManager {
             bakCount: 24,
             daebak: 24,
             bpm: 30,
-            deabakList: [
+            daebakList: [
                 ["strong"], ["weak"], ["weak"], ["weak"], ["strong"], ["strong"],
                 ["weak"], ["weak"], ["weak"], ["weak"], ["strong"], ["strong"],
                 ["weak"], ["weak"], ["weak"], ["weak"], ["strong"], ["weak"],
@@ -45,7 +45,7 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 80,
-            deabakList: [
+            daebakList: [
                 ["strong", "weak", "weak"], ["weak", "medium", "medium"],
                 ["weak", "weak", "strong"], ["weak", "weak", "weak"]
             ],
@@ -57,7 +57,7 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 90,
-            deabakList: [
+            daebakList: [
                 ["strong", "weak", "weak"], ["weak", "medium", "medium"],
                 ["weak", "weak", "strong"], ["weak", "weak", "weak"]
             ],
@@ -69,7 +69,7 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 100,
-            deabakList: [
+            daebakList: [
                 ["strong", "none", "none"], ["weak", "none", "none"],
                 ["weak", "none", "none"], ["weak", "none", "none"]
             ],
@@ -81,7 +81,7 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 70,
-            deabakList: [
+            daebakList: [
                 ["strong", "none", "weak"], ["medium", "none", "weak"],
                 ["medium", "none", "weak"], ["medium", "none", "weak"]
             ],
@@ -93,7 +93,7 @@ final class JangdanDataManager {
             bakCount: 8,
             daebak: 4,
             bpm: 80,
-            deabakList: [
+            daebakList: [
                 ["strong", "none"], ["weak", "none"], ["weak", "none"], ["weak", "none"]
             ],
             jangdanType: "동살풀이",
@@ -104,7 +104,7 @@ final class JangdanDataManager {
             bakCount: 4,
             daebak: 2,
             bpm: 200,
-            deabakList: [
+            daebakList: [
                 ["strong", "weak"], ["strong", "weak"]
             ],
             jangdanType: "휘모리",
@@ -115,7 +115,7 @@ final class JangdanDataManager {
             bakCount: 10,
             daebak: 4,
             bpm: 200,
-            deabakList: [
+            daebakList: [
                 ["strong", "none", "weak"], ["medium", "none"],
                 ["medium", "none", "strong"], ["weak", "none"]
             ],
@@ -127,7 +127,7 @@ final class JangdanDataManager {
             bakCount: 6,
             daebak: 6,
             bpm: 200,
-            deabakList: [
+            daebakList: [
                 ["strong"], ["weak"], ["weak"], ["weak"], ["strong"], ["weak"]
             ],
             jangdanType: "엇중모리",
@@ -138,7 +138,7 @@ final class JangdanDataManager {
             bakCount: 9,
             daebak: 3,
             bpm: 80,
-            deabakList: [
+            daebakList: [
                 ["strong", "none", "none"], ["strong", "none", "medium"], ["strong", "medium", "none"]
             ],
             jangdanType: "세마치",
@@ -156,7 +156,7 @@ final class JangdanDataManager {
     
     private func mapToJangdanEntity(dto: JangdanDTO) -> JangdanEntity {
         
-        let daebakList = dto.deabakList.map { accents in
+        let daebakList = dto.daebakList.map { accents in
             JangdanEntity.Daebak(bakAccentList: accents.compactMap { Accent.from(rawValue: $0) })
         }
         
