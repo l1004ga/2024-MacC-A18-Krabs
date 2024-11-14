@@ -10,12 +10,12 @@ import Combine
 import UIKit.UIApplication
 
 class MetronomeOnOffImplement {
-    private var jangdan: [[Accent]]
+    private var jangdan: [[[Accent]]]
     private var jangdanAccentList: [Accent] {
         if self.isSobakOn {
-            return jangdan.flatMap { $0 }
+            return jangdan.flatMap { $0 }.flatMap { $0 }
         } else {
-            return jangdan.map { $0.enumerated().map { $0.offset == 0 ? $0.element : .none }}.flatMap { $0 }
+            return jangdan.flatMap { $0 }.map { $0.enumerated().map { $0.offset == 0 ? $0.element : .none }}.flatMap { $0 }
         }
     }
     
@@ -36,7 +36,7 @@ class MetronomeOnOffImplement {
     private var soundManager: PlaySoundInterface
     
     init(jangdanRepository: JangdanRepository, soundManager: PlaySoundInterface) {
-        self.jangdan = [[.medium]]
+        self.jangdan = [[[.medium]]]
         self.bpm = 60.0
         self.currentBeatIndex = 0
         self.isSobakOn = false
@@ -46,7 +46,7 @@ class MetronomeOnOffImplement {
         
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdanEntity in
             guard let self else { return }
-            self.jangdan = jangdanEntity.daebakList.map { $0.bakAccentList }
+            self.jangdan = jangdanEntity.daebakList.map { $0.map { $0.bakAccentList } }
             let daebakCount = self.jangdan.count
             let bakCount = self.jangdan.reduce(0) { $0 + $1.count }
             let averageSobakCount = Double(bakCount) / Double(daebakCount)
