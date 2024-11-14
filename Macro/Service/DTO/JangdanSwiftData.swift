@@ -17,11 +17,11 @@ final class JangdanDataModel {
     var daebak: Int
     var bpm: Int
     var jangdanType: String
-    var daebakListStrings: [[String]]
+    var daebakListStrings: [[[String]]]
     var instrument: String
     
     // 초기화 메서드
-    init(name: String, bakCount: Int, daebak: Int, bpm: Int, daebakList: [[String]], jangdanType: String, instrument: String) {
+    init(name: String, bakCount: Int, daebak: Int, bpm: Int, daebakList: [[[String]]], jangdanType: String, instrument: String) {
         self.name = name
         self.bakCount = bakCount
         self.daebak = daebak
