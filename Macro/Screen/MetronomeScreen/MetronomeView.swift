@@ -27,11 +27,6 @@ struct MetronomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            DaebakPendulumView(trigger: self.isPendulumOn)
-                .padding(.horizontal, 8)
-                .padding(.top, 24)
-                .padding(.bottom, self.viewModel.state.currentJangdan?.name == "진양" ? 8 : 16)
-            
             if self.viewModel.state.currentJangdan?.name == "진양" {
                 JinYangHanbaeBoardView(
                     jangdan: viewModel.state.jangdanAccent,
