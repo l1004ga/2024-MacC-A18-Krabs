@@ -11,7 +11,7 @@ protocol JangdanRepository {
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> { get }
     
     // 모든 Custom 장단의 name을 배열로 반환 (HomeView용)
-    func fetchAllCustomJangdanNames() -> [String]
+    func fetchAllCustomJangdanNames(instrument: String) -> [String]
     
     func fetchJangdanData(jangdanName: String)
     

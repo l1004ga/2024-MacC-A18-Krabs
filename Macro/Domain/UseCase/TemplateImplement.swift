@@ -8,9 +8,12 @@
 class TemplateImplement {
     // 장단의 정보를 저장하고 있는 레이어
     private var jangdanRepository: JangdanRepository
+    private var instrument: Instrument
+
     
     init(jangdanRepository: JangdanRepository) {
         self.jangdanRepository = jangdanRepository
+        self.instrument = .장구
     }
     
     enum DataError: Error {
@@ -23,7 +26,7 @@ extension TemplateImplement: TemplateUseCase {
         Jangdan.allCases.map { $0.name }
     }
     var allCustomJangdanTemplateNames: [String] {
-        return jangdanRepository.fetchAllCustomJangdanNames()
+        return jangdanRepository.fetchAllCustomJangdanNames(instrument: instrument.rawValue)
     }
     
     func setJangdan(jangdanName: String) {

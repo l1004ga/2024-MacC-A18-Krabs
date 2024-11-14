@@ -32,15 +32,3 @@ final class JangdanDataModel {
     }
 }
 
-
-
-@Model
-final class JangdanPracticeTime {
-    var jangdanType: String
-    var practiceTime: Double
-
-    init(jangdanType: String, practiceTime: Double) {
-        self.jangdanType = jangdanType
-        self.practiceTime = practiceTime
-    }
-}
