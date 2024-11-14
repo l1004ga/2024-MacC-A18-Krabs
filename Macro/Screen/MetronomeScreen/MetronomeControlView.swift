@@ -21,20 +21,28 @@ struct MetronomeControlView: View {
     
     var body: some View {
         ZStack {
-            UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 24, bottomTrailingRadius: 24, topTrailingRadius: 12)
-                .fill(Color.backgroundCard)
-            
-            VStack {
-                VStack(spacing: 18) {
-                    Text("빠르기(BPM)")
-                        .font(.Callout_R)
-                        .foregroundStyle(.textTertiary)
+            VStack(spacing: 0) {
+                // 위에 드래그 제스쳐 되어야 하는 영역
+                VStack(spacing: 0) {
+                    if !self.viewModel.state.isTapping {
+                        Text("빠르기(BPM)")
+                            .font(.Callout_R)
+                            .foregroundStyle(.textTertiary)
+                            .padding(.vertical, 5)
+                    } else {
+                        Text("원하는 빠르기로 계속 탭해주세요")
+                            .font(.Body_SB)
+                            .foregroundStyle(.textDefault)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 16)
+                            .background(Color.backgroundDefault)
+                            .cornerRadius(8)
+                    }
                     
-                    HStack(spacing: 16) {
-                        // 마이너스 버튼
+                    HStack(spacing: 16){
                         Circle()
+                            .fill(isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .frame(width: 56)
-                            .foregroundStyle(isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .overlay {
                                 Image(systemName: "minus")
                                     .font(.system(size: 26))
@@ -86,12 +94,14 @@ struct MetronomeControlView: View {
                         Text("\(viewModel.state.bpm)")
                             .font(.custom("Pretendard-Medium", fixedSize: 64))
                             .foregroundStyle(self.viewModel.state.isTapping ? .textBPMSearch : .textSecondary)
-                            .frame(width: 120)
+                            .frame(width: 120, height: 60)
+                            .padding(8)
+                            .background(self.viewModel.state.isTapping ? .backgroundDefault : .clear)
+                            .cornerRadius(16)
                         
-                        // 플러스 버튼
                         Circle()
+                            .fill(isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .frame(width: 56)
-                            .foregroundStyle(isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .overlay {
                                 Image(systemName: "plus")
                                     .font(.system(size: 26))
@@ -139,8 +149,15 @@ struct MetronomeControlView: View {
                                     isIncreasing = false
                                 }
                             }, perform: {})
-                    }
+                    } .padding(.top, 25)
+                    
+                    Spacer()
                 }
+                .padding(.horizontal, 40.5)
+                .padding(.top, 32)
+                .frame(maxWidth: .infinity)
+                .background(.backgroundCard)
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                 .gesture(
                     DragGesture()
                         .onChanged { gesture in
@@ -159,7 +176,7 @@ struct MetronomeControlView: View {
                                 
                                 previousTranslation = gesture.translation.width
                             }
-                           
+                            
                         }
                         .onEnded { _ in
                             if isMinusActive {
@@ -171,46 +188,35 @@ struct MetronomeControlView: View {
                         }
                 )
                 
-                Spacer()
-                
+                // 아래 시작, 탭 버튼
                 HStack(spacing: 16) {
-                    RoundedRectangle(cornerRadius: 100)
-                        .foregroundStyle(self.viewModel.state.isPlaying ? .buttonPlayStop : .buttonPlayStart)
-                        .overlay {
-                            Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
-                                .font(.LargeTitle_R)
-                                .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonPlayStart)
-                        }
+                    Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
+                        .font(.custom("Pretendard-Medium", fixedSize: 34))
+                        .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonPlayStart)
+                        .frame(maxWidth: .infinity, minHeight: 80)
+                        .background(self.viewModel.state.isPlaying ? .buttonPlayStop : .buttonPlayStart)
+                        .clipShape(RoundedRectangle(cornerRadius: 100))
                         .onTapGesture {
                             self.viewModel.effect(action: .changeIsPlaying)
                         }
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 100)
-                            .foregroundStyle(viewModel.state.isTapping ? .buttonToggleOn : .buttonPrimary)
-                        
-                        if self.viewModel.state.isTapping {
-                            Text("탭")
-                                .font(.custom("Pretendard-Regular", size: 28))
-                                .foregroundStyle(.textButtonPrimary)
-                        } else {
-                            Text("빠르기\n찾기")
-                                .font(.custom("Pretendard-Regular", size: 17))
-                                .multilineTextAlignment(.center)
-                                .foregroundStyle(.textButtonPrimary)
+                    Text(self.viewModel.state.isTapping ? "탭" : "빠르기\n찾기")
+                        .font(self.viewModel.state.isTapping ? .custom("Pretendard-Regular", size: 28) : .custom("Pretendard-Regular", size: 17))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(self.viewModel.state.isTapping ? .textButtonEmphasis : .textButtonPrimary)
+                        .frame(width: 120, height: 80)
+                        .background(self.viewModel.state.isTapping ? .buttonActive : .buttonPrimary)
+                        .clipShape(RoundedRectangle(cornerRadius: 100))
+                        .onTapGesture {
+                            self.viewModel.effect(action: .estimateBpm)
                         }
-                    }
-                    .frame(width: 120)
-                    .onTapGesture {
-                        self.viewModel.effect(action: .estimateBpm)
-                    }
                 }
-                .frame(height: 80)
+                .padding(.horizontal, 12)
+                .padding(.bottom, 24)
+                .background(.backgroundCard)
+                .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 24, bottomTrailingRadius: 24))
             }
-            .padding(.vertical, 24)
-            .padding(.horizontal, 12)
         }
-        .frame(maxHeight: 265)
         .padding(.horizontal, 16)
     }
     
