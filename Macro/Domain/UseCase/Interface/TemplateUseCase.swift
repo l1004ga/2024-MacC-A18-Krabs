@@ -6,5 +6,14 @@
 //
 
 protocol TemplateUseCase {
-    func setJangdan(jangdan: Jangdan)
+    var allDefaultJangdanTemplateNames: [String] { get }
+    var allCustomJangdanTemplateNames: [String] { get }
+    
+    func setJangdan(jangdanName: String)
+    
+    func createCustomJangdan(newData: JangdanEntity) throws
+    
+    func editCustomJangdan(targetName: String, newData: JangdanEntity) throws
+    
+    func deleteCustomJangdan(target: JangdanEntity)
 }

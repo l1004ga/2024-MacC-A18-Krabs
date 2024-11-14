@@ -109,7 +109,7 @@ class MetronomeViewModel {
         switch action {
         case let .selectJangdan(jangdan):
             self._state.currentJangdan = jangdan
-            self.templateUseCase.setJangdan(jangdan: jangdan)
+            self.templateUseCase.setJangdan(jangdanName: jangdan.name)
             self.initialDaeSoBakIndex()
             self.taptapUseCase.finishTapping()
         case .changeSobakOnOff:

@@ -8,9 +8,11 @@
 struct JangdanEntity {
     var name: String
     var bakCount: Int
-    var daebak: Int 
+    var daebak: Int
     var bpm: Int
     var daebakList: [Daebak]
+    var jangdanType: Jangdan  // 부모 장단 타입
+    var instrument: Instrument  // 악기 타입
     
     struct Daebak {
         var bakAccentList: [Accent]
