@@ -14,13 +14,11 @@ struct MetronomeView: View {
     @State var viewModel: MetronomeViewModel
     
     @State private var jangdan: Jangdan
-    @State private var isSheetPresented: Bool = false
     @State private var isSobakOn: Bool = false
     
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
         self.viewModel = viewModel
-        self.isSobakOn = self.viewModel.state.isSobakOn
     }
     
     
@@ -48,6 +46,7 @@ struct MetronomeView: View {
         }
         .task {
             self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+            self.isSobakOn = self.viewModel.state.isSobakOn
         }
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
@@ -68,32 +67,14 @@ struct MetronomeView: View {
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
-                Button(action: {
-                    isSheetPresented.toggle()
-                }) {
-                    HStack(spacing: 0) {
-                        Text("\(jangdan.name)")
-                            .font(.Body_R)
-                            .foregroundStyle(.textSecondary)
-                            .padding(.trailing, 6)
-                        
-                        Image(systemName: "chevron.down")
-                            .foregroundStyle(.textSecondary)
-                            .font(.system(size: 12))
-                    }
-                }
+                Text("\(jangdan.name)")
+                    .font(.Body_R)
+                    .foregroundStyle(.textSecondary)
+                    .padding(.trailing, 6)
             }
         }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
-        .sheet(isPresented: $isSheetPresented) {
-            JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented, sendJangdan: {
-                self.viewModel.effect(action: .stopMetronome)
-                self.isSobakOn = false // view의 소박보기 false
-                self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
-            })
-            .presentationDragIndicator(.visible)
-        }
     }
 }
