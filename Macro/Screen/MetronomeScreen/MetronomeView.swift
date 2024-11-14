@@ -27,19 +27,19 @@ struct MetronomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if self.viewModel.state.currentJangdan?.name == "진양" {
-                JinYangHanbaeBoardView(
-                    jangdan: viewModel.state.jangdanAccent,
-                    isSobakOn: viewModel.state.isSobakOn,
-                    isPlaying: viewModel.state.isPlaying,
-                    currentDaebak: viewModel.state.currentDaebak,
-                    currentSobak: viewModel.state.currentSobak
-                ) { daebak, sobak in
-                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
-                }
-                .padding(.horizontal, 8)
-                .padding(.bottom, 14)
-            } else {
+//            if self.viewModel.state.currentJangdan?.name == "진양" {
+//                JinYangHanbaeBoardView(
+//                    jangdan: viewModel.state.jangdanAccent,
+//                    isSobakOn: viewModel.state.isSobakOn,
+//                    isPlaying: viewModel.state.isPlaying,
+//                    currentDaebak: viewModel.state.currentDaebak,
+//                    currentSobak: viewModel.state.currentSobak
+//                ) { daebak, sobak in
+//                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
+//                }
+//                .padding(.horizontal, 8)
+//                .padding(.bottom, 14)
+//            } else {
                 HanbaeBoardView(
                     jangdan: viewModel.state.jangdanAccent,
                     isSobakOn: viewModel.state.isSobakOn,
@@ -51,7 +51,7 @@ struct MetronomeView: View {
                 }
                 .padding(.horizontal, 8)
                 .padding(.bottom, 26)
-            }
+//            }
             
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)

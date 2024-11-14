@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HanbaeBoardView: View {
-    var jangdan: [[Accent]]
+    var jangdan: [[[Accent]]]
     var isSobakOn: Bool
     var isPlaying: Bool
     var currentDaebak: Int
@@ -16,20 +16,22 @@ struct HanbaeBoardView: View {
     var tabBakBarEvent: (Int, Int) -> Void
     
     var body: some View {
-        Grid(horizontalSpacing: 4) {
-            GridRow {
-                ForEach(jangdan.indices, id: \.self) { daebakIndex in
-                    
-                    BakBarSetView(
-                        accents: jangdan[daebakIndex],
-                        daebakIndex: daebakIndex,
-                        isDaebakOnly: !isSobakOn,
-                        isPlaying: isPlaying,
-                        activeIndex: currentDaebak == daebakIndex ? currentSobak : nil
-                    ) { sobak in
-                        tabBakBarEvent(daebakIndex, sobak)
+        Grid(horizontalSpacing: 4, verticalSpacing: 8) {
+            ForEach(jangdan.indices, id: \.self) { row in
+                GridRow {
+                    ForEach(jangdan[row].indices, id: \.self) { daebakIndex in
+                        
+                        BakBarSetView(
+                            accents: jangdan[row][daebakIndex],
+                            daebakIndex: daebakIndex,
+                            isDaebakOnly: !isSobakOn,
+                            isPlaying: isPlaying,
+                            activeIndex: currentDaebak == daebakIndex ? currentSobak : nil
+                        ) { sobak in
+                            tabBakBarEvent(daebakIndex, sobak)
+                        }
+                        .gridCellColumns(jangdan[row][daebakIndex].count)
                     }
-                    .gridCellColumns(jangdan[daebakIndex].count)
                 }
             }
         }
@@ -39,8 +41,8 @@ struct HanbaeBoardView: View {
 
 #Preview {
     HanbaeBoardView(
-        jangdan: [[.strong, .weak],
+        jangdan: [[[.strong, .weak],
                   [.weak, .medium, .medium],
                   [.weak, .weak],
-                  [.weak, .weak, .weak]], isSobakOn: true, isPlaying: true, currentDaebak: 1, currentSobak: 2) {_,_ in }
+                  [.weak, .weak, .weak]]], isSobakOn: true, isPlaying: true, currentDaebak: 1, currentSobak: 2) {_,_ in }
 }
