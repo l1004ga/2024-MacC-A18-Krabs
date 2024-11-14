@@ -17,7 +17,7 @@ struct MetronomeControlView: View {
     @State private var isMinusActive: Bool = false
     @State private var isPlusActive: Bool = false
     @State private var previousTranslation: CGFloat = .zero  // 드래그 움직임
-    private let threshold: CGFloat = 20 // 드래그 시 숫자변동 빠르기 조절 위한 변수
+    private let threshold: CGFloat = 10 // 드래그 시 숫자변동 빠르기 조절 위한 변수
     
     var body: some View {
         ZStack {
@@ -169,9 +169,11 @@ struct MetronomeControlView: View {
                                 if translationDifference > 0 {
                                     self.viewModel.effect(action: .increaseShortBpm)
                                     isPlusActive = true
+                                    isMinusActive = false
                                 } else if translationDifference < 0 {
                                     self.viewModel.effect(action: .decreaseShortBpm)
                                     isMinusActive = true
+                                    isPlusActive = false
                                 }
                                 
                                 previousTranslation = gesture.translation.width
