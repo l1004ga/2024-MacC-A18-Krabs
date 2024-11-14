@@ -11,7 +11,7 @@ class DIContainer {
     static let shared: DIContainer = DIContainer()
     
     private init() {
-        self._jangdanDataSource = .init()
+        self._jangdanDataSource = .init()!
         self._soundManager = .init()!
         
         self._templateUseCase = TemplateImplement(jangdanRepository: self._jangdanDataSource)

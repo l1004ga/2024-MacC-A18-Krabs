@@ -10,17 +10,18 @@ import Combine
 import Foundation
 
 
-final class JangdanDataManager: JangdanRepository {
+final class JangdanDataManager {
     
     private let container: ModelContainer
     private let context: ModelContext
     
-    init() {
+    init?() {
         do {
             container = try ModelContainer(for: JangdanDataModel.self, JangdanPracticeTime.self)
             context = ModelContext(container)
         } catch {
-            fatalError("ModelContainer 초기화 실패: \(error)")
+            print("ModelContainer 초기화 실패: \(error)")
+            return nil
         }
     }
     
@@ -170,10 +171,9 @@ final class JangdanDataManager: JangdanRepository {
     
 }
 
-extension JangdanDataManager {
-    
-    func fetchJangdanData(jangdan: Jangdan) {
-        if let dto = basicJangdanData.first(where: { $0.name == jangdan.name }) {
+extension JangdanDataManager: JangdanRepository {
+    func fetchJangdanData(jangdanName: String) {
+        if let dto = basicJangdanData.first(where: { $0.name == jangdanName }) {
             self.currentJangdan = mapToJangdanEntity(dto: dto)
             publisher.send(currentJangdan)
         } else {
@@ -191,19 +191,25 @@ extension JangdanDataManager {
         publisher.send(currentJangdan)
     }
     
-//    func addJangdan(jangdanDTO: JangdanDTO) {
-//        let jangdan = JangdanDataModel(
-//            name: jangdanDTO.name,
-//            bakCount: jangdanDTO.bakCount,
-//            daebak: jangdanDTO.daebak,
-//            bpm: jangdanDTO.bpm,
-//            daebakList: jangdanDTO.deabakList,
-//            jangdanType: jangdanDTO.jangdanType,
-//            instrument: jangdanDTO.instrument
-//        )
-//        context.insert(jangdan)
-//    }
+    func fetchAllCustomJangdanNames() -> [String] {
+        return []
+    }
     
+    func isRepeatedName(jangdanName: String) -> Bool {
+        return false
+    }
+    
+    func saveNewJangdan(jangdan: JangdanEntity) {
+        
+    }
+    
+    func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity) {
+        
+    }
+    
+    func deleteCustomJangdan(target: JangdanEntity) {
+        
+    }
 }
 
 
