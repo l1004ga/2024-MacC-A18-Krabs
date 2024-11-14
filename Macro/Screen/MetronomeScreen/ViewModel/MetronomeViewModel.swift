@@ -60,6 +60,7 @@ class MetronomeViewModel {
         var isPlaying: Bool = false
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
+        var currentRow: Int = 0
         var bpm: Int = 60
         var isTapping: Bool = false
     }
@@ -73,7 +74,7 @@ class MetronomeViewModel {
         case increaseShortBpm // + button
         case increaseLongBpm
         case roundBpm(currentBpm: Int)
-        case changeAccent(daebak: Int, sobak: Int)
+        case changeAccent(row: Int, daebak: Int, sobak: Int)
         case stopMetronome
         case estimateBpm
     }
@@ -81,11 +82,16 @@ class MetronomeViewModel {
     private func updateStatePerBak() {
         var nextSobak: Int = self._state.currentSobak
         var nextDaebak: Int = self._state.currentDaebak
+        var nextRow: Int = self._state.currentRow
         
         nextSobak += 1
-        if nextSobak == self._state.jangdanAccent[nextDaebak].count {
+        if nextSobak == self._state.jangdanAccent[nextRow][nextDaebak].count {
             nextDaebak += 1
-            if nextDaebak == self._state.jangdanAccent.count {
+            if nextDaebak == self._state.jangdanAccent[nextRow].count {
+                nextRow += 1
+                if nextRow == self._state.jangdanAccent.count {
+                    nextRow = 0
+                }
                 nextDaebak = 0
             }
             nextSobak = 0
@@ -93,11 +99,13 @@ class MetronomeViewModel {
         
         self._state.currentSobak = nextSobak
         self._state.currentDaebak = nextDaebak
+        self._state.currentRow = nextRow
     }
     
     private func initialDaeSoBakIndex() {
-        self._state.currentDaebak = self._state.jangdanAccent.count - 1
-        self._state.currentSobak = self._state.jangdanAccent[self._state.currentDaebak].count - 1
+        self._state.currentRow = self._state.jangdanAccent.count - 1
+        self._state.currentDaebak = self._state.jangdanAccent[self._state.currentRow].count - 1
+        self._state.currentSobak = self._state.jangdanAccent[self._state.currentRow][self._state.currentDaebak].count - 1
     }
     
     func effect(action: Action) {
@@ -139,8 +147,8 @@ class MetronomeViewModel {
         case let .roundBpm(currentBpm):
             self.tempoUseCase.updateTempo(newBpm: currentBpm)
             
-        case let .changeAccent(daebak, sobak):
-            self.accentUseCase.moveNextAccent(daebakIndex: daebak, sobakIndex: sobak)
+        case let .changeAccent(row, daebak, sobak):
+            self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak)
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()
