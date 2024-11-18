@@ -70,9 +70,9 @@ class MetronomeViewModel {
         case changeSobakOnOff
         case changeIsPlaying
         case decreaseShortBpm // - button
-        case decreaseLongBpm
+        case decreaseLongBpm(roundedBpm: Int)
         case increaseShortBpm // + button
-        case increaseLongBpm
+        case increaseLongBpm(roundedBpm: Int)
         case roundBpm(currentBpm: Int)
         case changeAccent(row: Int, daebak: Int, sobak: Int)
         case stopMetronome
@@ -133,16 +133,16 @@ class MetronomeViewModel {
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
             self.taptapUseCase.finishTapping()
         
-        case .decreaseLongBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 10)
+        case let .decreaseLongBpm(roundedBpm):
+            self.tempoUseCase.updateTempo(newBpm: roundedBpm - 10)
             self.taptapUseCase.finishTapping()
             
         case .increaseShortBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
             self.taptapUseCase.finishTapping()
         
-        case .increaseLongBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 10)
+        case let .increaseLongBpm(roundedBpm):
+            self.tempoUseCase.updateTempo(newBpm: roundedBpm + 10)
             self.taptapUseCase.finishTapping()
         
         case let .roundBpm(currentBpm):
