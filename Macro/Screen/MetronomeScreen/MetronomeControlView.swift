@@ -11,7 +11,7 @@ import Combine
 struct MetronomeControlView: View {
 
     @State var viewModel: MetronomeViewModel
-    @State private var isIncreasing: Bool = false
+    @State private var isLongTapping: Bool = false
     @State private var isMinusActive: Bool = false
     @State private var isPlusActive: Bool = false
     @State private var previousTranslation: CGFloat = .zero  // 드래그 움직임
@@ -49,7 +49,7 @@ struct MetronomeControlView: View {
                                     .foregroundStyle(.textButtonSecondary)
                             }
                             .onTapGesture {
-                                if !isIncreasing {
+                                if !isLongTapping {
                                     self.viewModel.effect(action: .decreaseShortBpm)
                                 }
                                 
@@ -93,7 +93,7 @@ struct MetronomeControlView: View {
                                     .foregroundStyle(.textButtonSecondary)
                             }
                             .onTapGesture {
-                                if !isIncreasing {
+                                if !isLongTapping {
                                     self.viewModel.effect(action: .increaseShortBpm)
                                 }
                                 
