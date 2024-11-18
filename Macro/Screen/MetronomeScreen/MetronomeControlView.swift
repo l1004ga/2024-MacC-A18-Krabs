@@ -6,18 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MetronomeControlView: View {
-    
+
     @State var viewModel: MetronomeViewModel
-    @State private var isDecreasing: Bool = false
     @State private var isIncreasing: Bool = false
-    @State private var delay: Double = 0.1
-    @State private var roundedDelay: Double = 0.5  // 10 단위로 반올림 되어질 애들의 딜레이 위한 변수
     @State private var isMinusActive: Bool = false
     @State private var isPlusActive: Bool = false
     @State private var previousTranslation: CGFloat = .zero  // 드래그 움직임
     private let threshold: CGFloat = 10 // 드래그 시 숫자변동 빠르기 조절 위한 변수
+    @State private var timerCancellable: AnyCancellable? = nil
+    @State private var speed: TimeInterval = 0.5
     
     var body: some View {
         ZStack {
@@ -49,7 +49,7 @@ struct MetronomeControlView: View {
                                     .foregroundStyle(.textButtonSecondary)
                             }
                             .onTapGesture {
-                                if !isDecreasing {
+                                if !isIncreasing {
                                     self.viewModel.effect(action: .decreaseShortBpm)
                                 }
                                 
@@ -64,30 +64,15 @@ struct MetronomeControlView: View {
                                     }
                                 }
                             }
-                            .simultaneousGesture(
-                                LongPressGesture(minimumDuration: 0.1)
-                                    .onChanged { _ in
-                                        withAnimation {
-                                            isMinusActive = true
-                                        }
-                                    }
-                                    .onEnded { _ in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
-                                            self.viewModel.effect(action: .roundBpm(currentBpm: downBpm(currentBpm: viewModel.state.bpm)))
-                                            
-                                            isDecreasing = true
-                                            delay = 0.5
-                                            startRepeatingDecreaseAction()
-                                        }
-                                    }
-                            )
                             .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
                                 withAnimation {
                                     isMinusActive = isPressing
                                 }
                                 
-                                if !isPressing {
-                                    isDecreasing = false
+                                if isPressing {
+                                    startTimer(isIncreasing: false)
+                                } else {
+                                    stopTimer()
                                 }
                             }, perform: {})
                         
@@ -123,30 +108,15 @@ struct MetronomeControlView: View {
                                     }
                                 }
                             }
-                            .simultaneousGesture(
-                                LongPressGesture(minimumDuration: 0.1)
-                                    .onChanged { _ in
-                                        withAnimation {
-                                            isPlusActive = true
-                                        }
-                                    }
-                                    .onEnded { _ in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + roundedDelay) {
-                                            self.viewModel.effect(action: .roundBpm(currentBpm: upBpm(currentBpm: viewModel.state.bpm)))
-                                            
-                                            isIncreasing = true
-                                            delay = 0.5
-                                            startRepeatingIncreaseAction()
-                                        }
-                                    }
-                            )
                             .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
                                 withAnimation {
                                     isPlusActive = isPressing
                                 }
                                 
-                                if !isPressing {
-                                    isIncreasing = false
+                                if isPressing {
+                                    startTimer(isIncreasing: true)
+                                } else {
+                                    stopTimer()
                                 }
                             }, perform: {})
                     } .padding(.top, 25)
@@ -222,36 +192,52 @@ struct MetronomeControlView: View {
         .padding(.horizontal, 16)
     }
     
-    // 롱탭 시 감소 반복 도와줌
-    func startRepeatingDecreaseAction() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            if isDecreasing {
-                self.viewModel.effect(action: .decreaseLongBpm)
-                delay = max(0.08, delay * 0.5)
-                startRepeatingDecreaseAction()
-            }
-        }
-    }
-    
-    // 롱탭 시 증가 반복 도와줌
-    func startRepeatingIncreaseAction() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            if isIncreasing {
-                self.viewModel.effect(action: .increaseLongBpm)
-                delay = max(0.08, delay * 0.5)
-                startRepeatingIncreaseAction()
-            }
-        }
-    }
-    
-    func downBpm(currentBpm: Int) -> Int {
+    func roundedBpm(currentBpm: Int) -> Int {
         
         return currentBpm - (currentBpm % 10)
     }
     
-    func upBpm(currentBpm: Int) -> Int {
+    private func startTimer(isIncreasing: Bool) {
+        speed = 0.5
+        stopTimer()
+        timerCancellable = Timer.publish(every: speed, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                if isIncreasing {
+                    let newBpm = roundedBpm(currentBpm: viewModel.state.bpm)
+                    self.viewModel.effect(action: .increaseLongBpm(roundedBpm: newBpm))
+                    speed = max(0.08, speed * 0.5)
+                    restartTimer(isIncreasing: isIncreasing)
+                } else {
+                    let newBpm = roundedBpm(currentBpm: viewModel.state.bpm) + 10
+                    self.viewModel.effect(action: .decreaseLongBpm(roundedBpm: newBpm))
+                    speed = max(0.08, speed * 0.5)
+                    restartTimer(isIncreasing: isIncreasing)
+                }
+            }
         
-        return currentBpm + (10 - currentBpm % 10)
+    }
+    
+    private func restartTimer(isIncreasing: Bool) {
+        stopTimer()
+        timerCancellable = Timer.publish(every: speed, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                if isIncreasing {
+                    self.viewModel.effect(action: .increaseLongBpm(roundedBpm: roundedBpm(currentBpm: viewModel.state.bpm)))
+                    speed = max(0.08, speed * 0.5)
+                    restartTimer(isIncreasing: isIncreasing)
+                } else {
+                    self.viewModel.effect(action: .decreaseLongBpm(roundedBpm: roundedBpm(currentBpm: viewModel.state.bpm)))
+                    speed = max(0.08, speed * 0.5)
+                    restartTimer(isIncreasing: isIncreasing)
+                }
+            }
+    }
+    
+    private func stopTimer() {
+        timerCancellable?.cancel()
+        timerCancellable = nil
     }
 }
 
