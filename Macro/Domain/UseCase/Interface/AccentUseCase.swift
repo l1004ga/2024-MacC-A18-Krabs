@@ -6,5 +6,5 @@
 //
 
 protocol AccentUseCase {
-    func moveNextAccent(rowIndex: Int, daebakIndex: Int, sobakIndex: Int)
+    func moveNextAccent(rowIndex: Int, daebakIndex: Int, sobakIndex: Int, to: Accent)
 }

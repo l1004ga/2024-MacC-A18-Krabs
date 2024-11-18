@@ -37,7 +37,6 @@
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
-		3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5794402CCF62EE00AE647B /* JinYangHanbaeBoardView.swift */; };
 		3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57946C2CDCD6BF00AE647B /* DIContainer.swift */; };
 		3C6EAFA22CDD1061003F2191 /* TapTapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */; };
 		3C6EAFA42CDD1146003F2191 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */; };
@@ -112,7 +111,6 @@
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
-		3C5794402CCF62EE00AE647B /* JinYangHanbaeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JinYangHanbaeBoardView.swift; sourceTree = "<group>"; };
 		3C57946C2CDCD6BF00AE647B /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapUseCase.swift; sourceTree = "<group>"; };
 		3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
@@ -390,7 +388,6 @@
 				2B8861182CC3E61F0036C6DB /* BakBarView.swift */,
 				2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */,
 				2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */,
-				3C5794402CCF62EE00AE647B /* JinYangHanbaeBoardView.swift */,
 				43774F642CB7FD5300F54EF7 /* MetronomeView.swift */,
 				439ABF072CB8220B003F6343 /* SobakToggleView.swift */,
 				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
@@ -547,7 +544,6 @@
 				3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */,
 				3C6EAFA22CDD1061003F2191 /* TapTapUseCase.swift in Sources */,
 				43774F632CB7EE0C00F54EF7 /* JangdanSelectView.swift in Sources */,
-				3C5794412CCF62EE00AE647B /* JinYangHanbaeBoardView.swift in Sources */,
 				2BCA580E2CCF5F8700FA08A9 /* TapTapImplement.swift in Sources */,
 				3C1EB3212CE4C60A0030FB63 /* MasteryImplement.swift in Sources */,
 				3C6EAFAA2CDD12DE003F2191 /* AccentUseCase.swift in Sources */,

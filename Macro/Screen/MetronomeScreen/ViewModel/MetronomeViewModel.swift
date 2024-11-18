@@ -74,7 +74,7 @@ class MetronomeViewModel {
         case increaseShortBpm // + button
         case increaseLongBpm(roundedBpm: Int)
         case roundBpm(currentBpm: Int)
-        case changeAccent(row: Int, daebak: Int, sobak: Int)
+        case changeAccent(row: Int, daebak: Int, sobak: Int, accent: Accent)
         case stopMetronome
         case estimateBpm
     }
@@ -148,8 +148,8 @@ class MetronomeViewModel {
         case let .roundBpm(currentBpm):
             self.tempoUseCase.updateTempo(newBpm: currentBpm)
             
-        case let .changeAccent(row, daebak, sobak):
-            self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak)
+        case let .changeAccent(row, daebak, sobak, newAccent):
+            self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak, to: newAccent)
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
             self.metronomeOnOffUseCase.stop()

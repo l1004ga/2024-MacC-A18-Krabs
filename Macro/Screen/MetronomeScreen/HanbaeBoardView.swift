@@ -14,7 +14,7 @@ struct HanbaeBoardView: View {
     var currentRow: Int
     var currentDaebak: Int
     var currentSobak: Int
-    var tabBakBarEvent: (Int, Int, Int) -> Void
+    var tabBakBarEvent: (Int, Int, Int, Accent) -> Void
     
     var body: some View {
         Grid(horizontalSpacing: 4, verticalSpacing: 8) {
@@ -28,15 +28,15 @@ struct HanbaeBoardView: View {
                             isDaebakOnly: !isSobakOn,
                             isPlaying: isPlaying,
                             activeIndex: currentRow == row && currentDaebak == daebakIndex ? currentSobak : nil
-                        ) { sobak in
-                            tabBakBarEvent(row, daebakIndex, sobak)
+                        ) { sobakIndex, newAccent in
+                            tabBakBarEvent(row, daebakIndex, sobakIndex, newAccent)
                         }
                         .gridCellColumns(jangdan[row][daebakIndex].count)
                     }
                 }
             }
         }
-        .padding(.vertical, 16)
+        .frame(height: 300)
     }
 }
 
@@ -45,5 +45,5 @@ struct HanbaeBoardView: View {
         jangdan: [[[.strong, .weak],
                   [.weak, .medium, .medium],
                   [.weak, .weak],
-                   [.weak, .weak, .weak]]], isSobakOn: true, isPlaying: true, currentRow: 0, currentDaebak: 1, currentSobak: 2) { _, _, _ in }
+                   [.weak, .weak, .weak]]], isSobakOn: true, isPlaying: true, currentRow: 0, currentDaebak: 1, currentSobak: 2) { _, _, _, _ in }
 }

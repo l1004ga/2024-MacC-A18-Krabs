@@ -13,19 +13,19 @@ struct BakBarSetView: View {
     var isDaebakOnly: Bool
     var isPlaying: Bool
     var activeIndex: Int?
-    var tabBakBarEvent: (Int) -> Void
+    var tabBakBarEvent: (Int, Accent) -> Void
     
     var body: some View {
         if isDaebakOnly {
-            BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.green, lineWidth: 2)
-                }
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-                .onTapGesture {
-                    tabBakBarEvent(0)
-                }
+            BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1) { newAccent in
+                tabBakBarEvent(0, newAccent)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.green, lineWidth: 2)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+            
         } else {
             HStack(spacing: 0) {
                 ForEach(accents.indices, id: \.self) { index in
@@ -34,7 +34,9 @@ struct BakBarSetView: View {
                         isPlaying: isPlaying,
                         isActive: !isPlaying || index == activeIndex,
                         bakNumber: index == 0 ? daebakIndex + 1 : nil
-                    )
+                    ) { newAccent in
+                        tabBakBarEvent(index, newAccent)
+                    }
                     .overlay {
                         // 마지막 인덱스가 아닌 경우에만 테두리 추가
                         if index > 0 {
@@ -46,9 +48,6 @@ struct BakBarSetView: View {
                                 Spacer()
                             }
                         }
-                    }
-                    .onTapGesture {
-                        tabBakBarEvent(index)
                     }
                 }
             }
@@ -62,5 +61,5 @@ struct BakBarSetView: View {
 }
 
 #Preview {
-    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: false, isPlaying: true, activeIndex: nil) {_ in}
+    BakBarSetView(accents: [.strong, .medium, .weak, .none], daebakIndex: 3, isDaebakOnly: false, isPlaying: true, activeIndex: nil) {_, _ in}
 }

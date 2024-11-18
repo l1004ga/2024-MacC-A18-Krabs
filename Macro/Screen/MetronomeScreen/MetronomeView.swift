@@ -24,18 +24,24 @@ struct MetronomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HanbaeBoardView(
-                jangdan: viewModel.state.jangdanAccent,
-                isSobakOn: viewModel.state.isSobakOn,
-                isPlaying: viewModel.state.isPlaying,
-                currentRow: viewModel.state.currentRow,
-                currentDaebak: viewModel.state.currentDaebak,
-                currentSobak: viewModel.state.currentSobak
-            ) { row, daebak, sobak in
-                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak))
+            VStack(spacing: 12) {
+                HanbaeBoardView(
+                    jangdan: viewModel.state.jangdanAccent,
+                    isSobakOn: viewModel.state.isSobakOn,
+                    isPlaying: viewModel.state.isPlaying,
+                    currentRow: viewModel.state.currentRow,
+                    currentDaebak: viewModel.state.currentDaebak,
+                    currentSobak: viewModel.state.currentSobak
+                ) { row, daebak, sobak, newAccent in
+                    withAnimation {
+                        viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                    }
+                }
+                
+                // TODO: if SobakSegment { SobakSegment() }
             }
+            .frame(height: 372)
             .padding(.horizontal, 8)
-            .padding(.bottom, 26)
             
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)

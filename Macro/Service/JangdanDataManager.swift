@@ -283,7 +283,7 @@ extension JangdanDataManager: JangdanRepository {
             bakCount: jangdan.bakCount,
             daebak: jangdan.daebak,
             bpm: jangdan.bpm,
-            daebakList: jangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
+            daebakList: jangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
             jangdanType: jangdan.jangdanType.rawValue,
             instrument: jangdan.instrument.rawValue
         )
@@ -306,7 +306,7 @@ extension JangdanDataManager: JangdanRepository {
                 model.bakCount = newJangdan.bakCount
                 model.daebak = newJangdan.daebak
                 model.bpm = newJangdan.bpm
-                model.daebakListStrings = newJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } }
+                model.daebakListStrings = newJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } }
                 model.jangdanType = newJangdan.jangdanType.rawValue
                 model.instrument = newJangdan.instrument.rawValue
                 
