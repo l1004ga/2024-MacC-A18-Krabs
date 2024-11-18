@@ -27,7 +27,7 @@ struct JinYangHanbaeBoardView: View {
                             isDaebakOnly: !isSobakOn,
                             isPlaying: isPlaying,
                             activeIndex: currentDaebak == newIndex ? currentSobak : nil
-                        ) { sobak in
+                        ) { sobak, _ in
                             tabBakBarEvent(newIndex, sobak)
                         }
                         

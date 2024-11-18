@@ -25,8 +25,8 @@ class AccentImplement {
 }
 
 extension AccentImplement: AccentUseCase {
-    func moveNextAccent(rowIndex: Int, daebakIndex: Int, sobakIndex: Int) {
-        self.daebakList[rowIndex][daebakIndex].bakAccentList[sobakIndex] = self.daebakList[rowIndex][daebakIndex].bakAccentList[sobakIndex].nextAccent()
+    func moveNextAccent(rowIndex: Int, daebakIndex: Int, sobakIndex: Int, to newAccent: Accent) {
+        self.daebakList[rowIndex][daebakIndex].bakAccentList[sobakIndex] = newAccent
         self.jangdanRepository.updateAccents(daebakList: self.daebakList)
     }
 }

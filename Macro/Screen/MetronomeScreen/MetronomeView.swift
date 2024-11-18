@@ -31,8 +31,8 @@ struct MetronomeView: View {
                 currentRow: viewModel.state.currentRow,
                 currentDaebak: viewModel.state.currentDaebak,
                 currentSobak: viewModel.state.currentSobak
-            ) { row, daebak, sobak in
-                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak))
+            ) { row, daebak, sobak, newAccent in
+                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 26)
