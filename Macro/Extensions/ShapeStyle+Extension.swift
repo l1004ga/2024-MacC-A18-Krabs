@@ -1,5 +1,5 @@
 //
-//  Color+Extension.swift
+//  ShapeStyle+Extension.swift
 //  Macro
 //
 //  Created by Yunki on 11/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUICore
 
-extension Color {
+extension ShapeStyle {
     static var bakBarGradient: LinearGradient {
         .init(colors: [.bakBarActiveTop, .bakBarActiveBottom], startPoint: .top, endPoint: .bottom)
     }

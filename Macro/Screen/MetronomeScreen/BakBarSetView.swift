@@ -16,23 +16,23 @@ struct BakBarSetView: View {
     var tabBakBarEvent: (Int, Accent) -> Void
     
     var body: some View {
-        if isDaebakOnly {
-            BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1) { newAccent in
-                tabBakBarEvent(0, newAccent)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.green, lineWidth: 2)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 4))
-            
-        } else {
+//        if isDaebakOnly {
+//            BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1) { newAccent in
+//                tabBakBarEvent(0, newAccent)
+//            }
+//            .overlay {
+//                RoundedRectangle(cornerRadius: 4)
+//                    .stroke(.bakBarBorder, lineWidth: 2)
+//            }
+//            .clipShape(RoundedRectangle(cornerRadius: 4))
+//            
+//        } else {
             HStack(spacing: 0) {
-                ForEach(accents.indices, id: \.self) { index in
+                ForEach(isDaebakOnly ? 0..<1 : accents.indices, id: \.self) { index in
                     BakBarView(
                         accent: accents[index],
                         isPlaying: isPlaying,
-                        isActive: !isPlaying || index == activeIndex,
+                        isActive: !isPlaying || (isDaebakOnly ? activeIndex != nil : index == activeIndex),
                         bakNumber: index == 0 ? daebakIndex + 1 : nil
                     ) { newAccent in
                         tabBakBarEvent(index, newAccent)
@@ -53,10 +53,10 @@ struct BakBarSetView: View {
             }
             .overlay {
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.green, lineWidth: 2)
+                    .stroke(.bakBarBorder, lineWidth: 2)
             }
             .clipShape(RoundedRectangle(cornerRadius: 4))
-        }
+//        }
     }
 }
 

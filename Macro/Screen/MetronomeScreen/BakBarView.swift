@@ -37,7 +37,7 @@ struct BakBarView: View {
                     Rectangle()
                         .frame(height: CGFloat((geo.size.height / 3) * Double(accentHeight)))
                         .foregroundStyle(isActive
-                                         ? LinearGradient(colors: [Color.orange, Color.yellow], startPoint: .top, endPoint: .bottom)
+                                         ? .bakBarGradient
                                          : LinearGradient(colors: [.bakBarInactive], startPoint: .top, endPoint: .bottom))
                 }
                 
