@@ -44,7 +44,7 @@ struct BakBarView: View {
                 if let bakNumber {
                     Text("\(bakNumber)")
                         .font(.system(size: 20, weight: .semibold))
-                        .padding(.top, 16)
+                        .padding(.top, 20)
                         .foregroundColor(
                             isActive
                             ? accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberWhite
