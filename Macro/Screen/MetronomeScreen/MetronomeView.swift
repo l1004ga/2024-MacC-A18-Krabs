@@ -32,7 +32,9 @@ struct MetronomeView: View {
                 currentDaebak: viewModel.state.currentDaebak,
                 currentSobak: viewModel.state.currentSobak
             ) { row, daebak, sobak, newAccent in
-                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                withAnimation {
+                    viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                }
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 26)

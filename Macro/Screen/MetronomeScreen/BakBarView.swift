@@ -26,6 +26,8 @@ struct BakBarView: View {
     var bakNumber: Int?
     var updateAccent: (Accent) -> Void
     
+    @State private var startLocation: CGPoint? = nil
+    
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .top) {
@@ -53,15 +55,22 @@ struct BakBarView: View {
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
-                        let limit = Int(geo.size.height / 3)
-                        let d = Int(gesture.translation.height) / limit
-                        var newGrade = self.accent.rawValue + d
-                        if newGrade > 3 {
-                            newGrade = 3
-                        } else if newGrade < 0 {
-                            newGrade = 0
+                        if startLocation == nil {
+                            startLocation = gesture.location
                         }
-                        updateAccent(Accent(rawValue: newGrade) ?? .none)
+                        
+                        let limit = Int(geo.size.height / 3)
+                        let diff = Int(gesture.location.y - startLocation!.y) / limit
+                        if abs(diff) > 0 {
+                            var newGrade = self.accent.rawValue + diff
+                            if newGrade > 3 {
+                                newGrade = 3
+                            } else if newGrade < 0 {
+                                newGrade = 0
+                            }
+                            updateAccent(Accent(rawValue: newGrade) ?? .none)
+                            startLocation = nil
+                        }
                     }
             )
             .onTapGesture {
