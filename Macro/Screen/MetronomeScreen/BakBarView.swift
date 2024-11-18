@@ -40,9 +40,10 @@ struct BakBarView: View {
                                          ? LinearGradient(colors: [Color.orange, Color.yellow], startPoint: .top, endPoint: .bottom)
                                          : LinearGradient(colors: [.bakBarInactive], startPoint: .top, endPoint: .bottom))
                 }
+                
                 if let bakNumber {
                     Text("\(bakNumber)")
-                        .font(.system(size: 32, weight: .semibold))
+                        .font(.system(size: 20, weight: .semibold))
                         .padding(.top, 16)
                         .foregroundColor(
                             isActive
@@ -50,7 +51,6 @@ struct BakBarView: View {
                             : accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberGray
                         )
                 }
-                
             }
             .gesture(
                 DragGesture()
