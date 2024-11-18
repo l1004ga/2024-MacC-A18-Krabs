@@ -20,14 +20,12 @@ struct BakBarSetView: View {
             BakBarView(accent: accents[0], isPlaying: isPlaying, isActive: !isPlaying || activeIndex != nil, bakNumber: daebakIndex + 1) { newAccent in
                 tabBakBarEvent(0, newAccent)
             }
-                .overlay {
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.green, lineWidth: 2)
-                }
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-//                .onTapGesture {
-//                    tabBakBarEvent(0)
-//                }
+            .overlay {
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.green, lineWidth: 2)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+            
         } else {
             HStack(spacing: 0) {
                 ForEach(accents.indices, id: \.self) { index in
@@ -51,9 +49,6 @@ struct BakBarSetView: View {
                             }
                         }
                     }
-//                    .onTapGesture {
-//                        tabBakBarEvent(index)
-//                    }
                 }
             }
             .overlay {

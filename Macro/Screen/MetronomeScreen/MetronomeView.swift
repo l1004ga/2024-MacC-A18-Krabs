@@ -38,7 +38,7 @@ struct MetronomeView: View {
                     }
                 }
                 
-                // if SobakSegment { SobakSegment() }
+                // TODO: if SobakSegment { SobakSegment() }
             }
             .frame(height: 372)
             .padding(.horizontal, 8)
