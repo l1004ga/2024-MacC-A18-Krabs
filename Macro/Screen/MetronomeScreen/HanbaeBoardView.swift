@@ -36,6 +36,7 @@ struct HanbaeBoardView: View {
                 }
             }
         }
+        .frame(height: 300)
     }
 }
 
