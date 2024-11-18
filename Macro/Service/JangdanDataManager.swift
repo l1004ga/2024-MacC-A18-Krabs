@@ -13,6 +13,7 @@ final class JangdanDataManager {
     
     private let container: ModelContainer
     private let context: ModelContext
+    private let basicJangdanData = BasicJangdanData.all
     
     init?() {
         do {
@@ -23,215 +24,65 @@ final class JangdanDataManager {
             return nil
         }
     }
-    
-    private let basicJangdanData: [JangdanEntity] = [
-        JangdanEntity(
-            name: "진양",
-            bakCount: 24,
-            daebak: 24,
-            bpm: 30,
-            daebakList: [
-                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak])],
-                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
-            ],
-            jangdanType: .진양,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "중모리",
-            bakCount: 24,
-            daebak: 12,
-            bpm: 80,
-            daebakList: [
-                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
-            ],
-            jangdanType: .중모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "중중모리",
-            bakCount: 24,
-            daebak: 12,
-            bpm: 90,
-            daebakList: [
-                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
-            ],
-            jangdanType: .중중모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "자진모리",
-            bakCount: 12,
-            daebak: 4,
-            bpm: 100,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none])
-            ]],
-            jangdanType: .자진모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "굿거리",
-            bakCount: 12,
-            daebak: 4,
-            bpm: 70,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak])
-            ]],
-            jangdanType: .굿거리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "동살풀이",
-            bakCount: 8,
-            daebak: 4,
-            bpm: 80,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none])
-            ]],
-            jangdanType: .동살풀이,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "휘모리",
-            bakCount: 4,
-            daebak: 2,
-            bpm: 200,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .weak])
-            ]],
-            jangdanType: .휘모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "엇모리",
-            bakCount: 10,
-            daebak: 4,
-            bpm: 200,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.medium, .none, .strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .none])
-            ]],
-            jangdanType: .엇모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "엇중모리",
-            bakCount: 6,
-            daebak: 6,
-            bpm: 200,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak])
-            ]],
-            jangdanType: .엇중모리,
-            instrument: .장구
-        ),
-        JangdanEntity(
-            name: "세마치",
-            bakCount: 9,
-            daebak: 3,
-            bpm: 80,
-            daebakList: [[
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .none, .medium]),
-                JangdanEntity.Daebak(bakAccentList: [.strong, .medium, .none])
-            ]],
-            jangdanType: .세마치,
-            instrument: .장구
-        )
-    ]
-    
+
     private var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
-    
     private var currentJangdan: JangdanEntity = .init(name: "자진모리", bakCount: 0, daebak: 0, bpm: 0, daebakList: [[.init(bakAccentList: [.medium])]], jangdanType: .자진모리, instrument: .장구)
     
-    private func mapToJangdanEntity(model: JangdanDataModel) -> JangdanEntity {
-        
-        let daebakList = model.daebakListStrings.map { accents in
-            accents.map { accents in
-                JangdanEntity.Daebak(bakAccentList: accents.compactMap { Accent.from(rawValue: $0) })
+    private func convertToDaebakList(from daebakListStrings: [[[String]]]) -> [[JangdanEntity.Daebak]] {
+        return daebakListStrings.map { daebak in
+            daebak.map { sobak in
+                JangdanEntity.Daebak(bakAccentList: sobak.compactMap { Accent.from(rawValue: $0) })
             }
         }
+    }
+
+    private func mapToJangdanEntity(model: JangdanDataModel) -> JangdanEntity {
         return JangdanEntity(
             name: model.name,
             bakCount: model.bakCount,
             daebak: model.daebak,
             bpm: model.bpm,
-            daebakList: daebakList,
+            daebakList: convertToDaebakList(from: model.daebakListStrings),
             jangdanType: Jangdan(rawValue: model.jangdanType) ?? .진양,
             instrument: Instrument(rawValue: model.instrument) ?? .장구
         )
     }
     
-    
 }
 
 extension JangdanDataManager: JangdanRepository {
+
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
         publisher.eraseToAnyPublisher()
     }
     
-    func fetchJangdanData(jangdanName: String)  {
+    func fetchBasicJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
+        return basicJangdanData.first { $0.name == jangdanName && $0.instrument == Instrument(rawValue: instrument)}
+    }
+
+    func fetchCustomJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
+        let predicate = #Predicate<JangdanDataModel> {
+            $0.name == jangdanName && $0.instrument == instrument
+        }
+        let descriptor = FetchDescriptor(predicate: predicate)
         
-        if let selctJangdan = basicJangdanData.first(where: { $0.name == jangdanName }) {
-            self.currentJangdan = selctJangdan
+        do {
+            if let model = try context.fetch(descriptor).first {
+                return mapToJangdanEntity(model: model)
+            }
+        } catch {
+            print("데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
+        }
+        return nil
+    }
+
+    func fetchJangdanData(jangdanName: String, instrument: String) {
+        if let jangdan = fetchBasicJangdan(jangdanName: jangdanName, instrument: instrument) ??
+                         fetchCustomJangdan(jangdanName: jangdanName, instrument: instrument) {
+            self.currentJangdan = jangdan
             publisher.send(currentJangdan)
         } else {
-            
-            let predicate = #Predicate<JangdanDataModel> { jangdan in
-                jangdan.name == jangdanName
-            }
-            let descriptor = FetchDescriptor(predicate: predicate)
-            
-            do {
-                
-                if let fetchedData = try context.fetch(descriptor).first {
-                    let selctJangdan = mapToJangdanEntity(model: fetchedData)
-                    self.currentJangdan = selctJangdan
-                    publisher.send(currentJangdan)
-                } else {
-                    print("해당 이름의 장단을 찾을 수 없습니다.")
-                }
-            } catch {
-                print("데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
-            }
+            print("해당 이름과 악기에 맞는 장단을 찾을 수 없습니다.")
         }
     }
     
@@ -245,14 +96,27 @@ extension JangdanDataManager: JangdanRepository {
         publisher.send(currentJangdan)
     }
     
+    func fetchBasicJangdanNames(instrument: String) -> [String] {
+        let jangdanList = basicJangdanData
+            .filter { $0.instrument == Instrument(rawValue: instrument) }
+            .map { $0.name }
+        
+        if jangdanList.isEmpty {
+            print("기본 장단 이름 가져오기 실패: 해당 악기에 맞는 데이터가 없습니다.")
+            return []
+        }
+        
+        return jangdanList
+    }
     // MARK: 여기에 악기에 대한 정보는 들어가야 하지 않을까요 해당하는 악기의 커스텀 장단만 불러오도록
-    func fetchAllCustomJangdanNames(instrument: String) -> [String] {
-        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument }
+    func fetchCustomJangdanNames(instrument: String) -> [String] {
+        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument}
         let descriptor = FetchDescriptor(predicate: predicate)
         
         do {
             let jangdanList = try context.fetch(descriptor)
             return jangdanList.map { $0.name }
+            
         } catch {
             print("모든 커스텀 장단 이름을 가져오는 중 오류 발생: \(error.localizedDescription)")
             return []
