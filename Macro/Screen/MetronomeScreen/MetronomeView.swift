@@ -14,49 +14,28 @@ struct MetronomeView: View {
     @State var viewModel: MetronomeViewModel
     
     @State private var jangdan: Jangdan
-    @State private var isSheetPresented: Bool = false
     @State private var isSobakOn: Bool = false
-    @State private var isPendulumOn: Bool = false
     
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
         self.viewModel = viewModel
-        self.isSobakOn = self.viewModel.state.isSobakOn
     }
     
     
     var body: some View {
         VStack(spacing: 0) {
-            DaebakPendulumView(trigger: self.isPendulumOn)
-                .padding(.horizontal, 8)
-                .padding(.top, 24)
-                .padding(.bottom, self.viewModel.state.currentJangdan?.name == "진양" ? 8 : 16)
-            
-            if self.viewModel.state.currentJangdan?.name == "진양" {
-                JinYangHanbaeBoardView(
-                    jangdan: viewModel.state.jangdanAccent,
-                    isSobakOn: viewModel.state.isSobakOn,
-                    isPlaying: viewModel.state.isPlaying,
-                    currentDaebak: viewModel.state.currentDaebak,
-                    currentSobak: viewModel.state.currentSobak
-                ) { daebak, sobak in
-                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
-                }
-                .padding(.horizontal, 8)
-                .padding(.bottom, 14)
-            } else {
-                HanbaeBoardView(
-                    jangdan: viewModel.state.jangdanAccent,
-                    isSobakOn: viewModel.state.isSobakOn,
-                    isPlaying: viewModel.state.isPlaying,
-                    currentDaebak: viewModel.state.currentDaebak,
-                    currentSobak: viewModel.state.currentSobak
-                ) { daebak, sobak in
-                    viewModel.effect(action: .changeAccent(daebak: daebak, sobak: sobak))
-                }
-                .padding(.horizontal, 8)
-                .padding(.bottom, 26)
+            HanbaeBoardView(
+                jangdan: viewModel.state.jangdanAccent,
+                isSobakOn: viewModel.state.isSobakOn,
+                isPlaying: viewModel.state.isPlaying,
+                currentRow: viewModel.state.currentRow,
+                currentDaebak: viewModel.state.currentDaebak,
+                currentSobak: viewModel.state.currentSobak
+            ) { row, daebak, sobak in
+                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak))
             }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 26)
             
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)
@@ -67,20 +46,10 @@ struct MetronomeView: View {
         }
         .task {
             self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+            self.isSobakOn = self.viewModel.state.isSobakOn
         }
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
-        }
-        .onChange(of: self.viewModel.state.pendulumTrigger) { _, newValue in
-            let meanTempo = 60.0 / Double(self.viewModel.state.bpm)
-            let hanbaeTempo = meanTempo * Double(self.viewModel.state.daebakCount)
-            let sobakTempo = hanbaeTempo / Double(self.viewModel.state.bakCount)
-            let resultTempo =  sobakTempo * Double(self.viewModel.state.jangdanAccent[self.viewModel.state.currentDaebak].count)
-                               
-                               
-            withAnimation(.easeInOut(duration: resultTempo)) {
-                self.isPendulumOn = newValue
-            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -98,32 +67,14 @@ struct MetronomeView: View {
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
-                Button(action: {
-                    isSheetPresented.toggle()
-                }) {
-                    HStack(spacing: 0) {
-                        Text("\(jangdan.name)")
-                            .font(.Body_R)
-                            .foregroundStyle(.textSecondary)
-                            .padding(.trailing, 6)
-                        
-                        Image(systemName: "chevron.down")
-                            .foregroundStyle(.textSecondary)
-                            .font(.system(size: 12))
-                    }
-                }
+                Text("\(jangdan.name)")
+                    .font(.Body_R)
+                    .foregroundStyle(.textSecondary)
+                    .padding(.trailing, 6)
             }
         }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
-        .sheet(isPresented: $isSheetPresented) {
-            JangdanSelectSheetView(jangdan: $jangdan, isSheetPresented: $isSheetPresented, sendJangdan: {
-                self.viewModel.effect(action: .stopMetronome)
-                self.isSobakOn = false // view의 소박보기 false
-                self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
-            })
-            .presentationDragIndicator(.visible)
-        }
     }
 }

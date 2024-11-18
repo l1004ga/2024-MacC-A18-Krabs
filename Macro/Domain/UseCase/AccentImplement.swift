@@ -9,7 +9,7 @@ import Combine
 
 class AccentImplement {
     private var jangdanRepository: JangdanRepository
-    private var daebakList: [JangdanEntity.Daebak]
+    private var daebakList: [[JangdanEntity.Daebak]]
     
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -25,8 +25,8 @@ class AccentImplement {
 }
 
 extension AccentImplement: AccentUseCase {
-    func moveNextAccent(daebakIndex: Int, sobakIndex: Int) {
-        self.daebakList[daebakIndex].bakAccentList[sobakIndex] = self.daebakList[daebakIndex].bakAccentList[sobakIndex].nextAccent()
+    func moveNextAccent(rowIndex: Int, daebakIndex: Int, sobakIndex: Int) {
+        self.daebakList[rowIndex][daebakIndex].bakAccentList[sobakIndex] = self.daebakList[rowIndex][daebakIndex].bakAccentList[sobakIndex].nextAccent()
         self.jangdanRepository.updateAccents(daebakList: self.daebakList)
     }
 }

@@ -17,7 +17,7 @@ protocol JangdanRepository {
     func fetchJangdanData(jangdanName: String)
 
     func updateBPM(bpm: Int)
-    func updateAccents(daebakList: [JangdanEntity.Daebak])
+    func updateAccents(daebakList: [[JangdanEntity.Daebak]])
     
     func isRepeatedName(jangdanName: String) -> Bool
     

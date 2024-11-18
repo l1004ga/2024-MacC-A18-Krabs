@@ -9,7 +9,6 @@ import SwiftData
 import Combine
 import Foundation
 
-
 final class JangdanDataManager {
     
     private let container: ModelContainer
@@ -25,53 +24,57 @@ final class JangdanDataManager {
         }
     }
     
-    let basicJangdanData: [JangdanEntity] = [
+    private let basicJangdanData: [JangdanEntity] = [
         JangdanEntity(
             name: "진양",
             bakCount: 24,
             daebak: 24,
             bpm: 30,
             daebakList: [
-                JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-                JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])
+                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
+                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
+                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak])],
+                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
             ],
             jangdanType: .진양,
             instrument: .장구
         ),
         JangdanEntity(
             name: "중모리",
-            bakCount: 12,
-            daebak: 4,
+            bakCount: 24,
+            daebak: 12,
             bpm: 80,
             daebakList: [
-                JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .medium]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .weak, .strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .weak, .weak])
+                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
+                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
             ],
             jangdanType: .중모리,
             instrument: .장구
         ),
         JangdanEntity(
             name: "중중모리",
-            bakCount: 12,
-            daebak: 4,
+            bakCount: 24,
+            daebak: 12,
             bpm: 90,
             daebakList: [
-                JangdanEntity.Daebak(bakAccentList: [.strong, .weak, .weak]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .medium]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .weak, .strong]),
-                JangdanEntity.Daebak(bakAccentList: [.weak, .weak, .weak])
+                [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
+                [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
+                 JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
             ],
             jangdanType: .중중모리,
             instrument: .장구
@@ -81,12 +84,12 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 100,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none])
-            ],
+            ]],
             jangdanType: .자진모리,
             instrument: .장구
         ),
@@ -95,12 +98,12 @@ final class JangdanDataManager {
             bakCount: 12,
             daebak: 4,
             bpm: 70,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none, .weak])
-            ],
+            ]],
             jangdanType: .굿거리,
             instrument: .장구
         ),
@@ -109,12 +112,12 @@ final class JangdanDataManager {
             bakCount: 8,
             daebak: 4,
             bpm: 80,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none])
-            ],
+            ]],
             jangdanType: .동살풀이,
             instrument: .장구
         ),
@@ -123,10 +126,10 @@ final class JangdanDataManager {
             bakCount: 4,
             daebak: 2,
             bpm: 200,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.strong, .weak])
-            ],
+            ]],
             jangdanType: .휘모리,
             instrument: .장구
         ),
@@ -135,12 +138,12 @@ final class JangdanDataManager {
             bakCount: 10,
             daebak: 4,
             bpm: 200,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .weak]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.medium, .none, .strong]),
                 JangdanEntity.Daebak(bakAccentList: [.weak, .none])
-            ],
+            ]],
             jangdanType: .엇모리,
             instrument: .장구
         ),
@@ -149,14 +152,14 @@ final class JangdanDataManager {
             bakCount: 6,
             daebak: 6,
             bpm: 200,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong]),
                 JangdanEntity.Daebak(bakAccentList: [.weak]),
                 JangdanEntity.Daebak(bakAccentList: [.weak]),
                 JangdanEntity.Daebak(bakAccentList: [.weak]),
                 JangdanEntity.Daebak(bakAccentList: [.strong]),
                 JangdanEntity.Daebak(bakAccentList: [.weak])
-            ],
+            ]],
             jangdanType: .엇중모리,
             instrument: .장구
         ),
@@ -165,29 +168,26 @@ final class JangdanDataManager {
             bakCount: 9,
             daebak: 3,
             bpm: 80,
-            daebakList: [
+            daebakList: [[
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
                 JangdanEntity.Daebak(bakAccentList: [.strong, .none, .medium]),
                 JangdanEntity.Daebak(bakAccentList: [.strong, .medium, .none])
-            ],
+            ]],
             jangdanType: .세마치,
             instrument: .장구
         )
     ]
     
-    
     private var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
     
-    var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
-        publisher.eraseToAnyPublisher()
-    }
-    
-    private var currentJangdan: JangdanEntity = .init(name: "", bakCount: 0, daebak: 0, bpm: 0, daebakList: [.init(bakAccentList: [.medium])], jangdanType:.진양, instrument: .장구)
+    private var currentJangdan: JangdanEntity = .init(name: "자진모리", bakCount: 0, daebak: 0, bpm: 0, daebakList: [[.init(bakAccentList: [.medium])]], jangdanType: .자진모리, instrument: .장구)
     
     private func mapToJangdanEntity(model: JangdanDataModel) -> JangdanEntity {
         
         let daebakList = model.daebakListStrings.map { accents in
-            JangdanEntity.Daebak(bakAccentList: accents.compactMap { Accent.from(rawValue: $0) })
+            accents.map { accents in
+                JangdanEntity.Daebak(bakAccentList: accents.compactMap { Accent.from(rawValue: $0) })
+            }
         }
         return JangdanEntity(
             name: model.name,
@@ -204,6 +204,9 @@ final class JangdanDataManager {
 }
 
 extension JangdanDataManager: JangdanRepository {
+    var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
+        publisher.eraseToAnyPublisher()
+    }
     
     func fetchJangdanData(jangdanName: String)  {
         
@@ -237,7 +240,7 @@ extension JangdanDataManager: JangdanRepository {
         publisher.send(currentJangdan)
     }
     
-    func updateAccents(daebakList: [JangdanEntity.Daebak]) {
+    func updateAccents(daebakList: [[JangdanEntity.Daebak]]) {
         self.currentJangdan.daebakList = daebakList
         publisher.send(currentJangdan)
     }
@@ -280,7 +283,7 @@ extension JangdanDataManager: JangdanRepository {
             bakCount: jangdan.bakCount,
             daebak: jangdan.daebak,
             bpm: jangdan.bpm,
-            daebakList: jangdan.daebakList.map { $0.bakAccentList.map { $0.rawValue } },
+            daebakList: jangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
             jangdanType: jangdan.jangdanType.rawValue,
             instrument: jangdan.instrument.rawValue
         )
@@ -303,7 +306,7 @@ extension JangdanDataManager: JangdanRepository {
                 model.bakCount = newJangdan.bakCount
                 model.daebak = newJangdan.daebak
                 model.bpm = newJangdan.bpm
-                model.daebakListStrings = newJangdan.daebakList.map { $0.bakAccentList.map { $0.rawValue } }
+                model.daebakListStrings = newJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } }
                 model.jangdanType = newJangdan.jangdanType.rawValue
                 model.instrument = newJangdan.instrument.rawValue
                 
