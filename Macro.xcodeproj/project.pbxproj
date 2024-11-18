@@ -58,6 +58,7 @@
 		439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */; };
 		579839382CE5F37D00866AD4 /* InstrumentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579839372CE5F36500866AD4 /* InstrumentEnum.swift */; };
 		5798393A2CE61C3800866AD4 /* JangdanDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579839392CE61C2E00866AD4 /* JangdanDTO.swift */; };
+		5798393C2CEB22CD00866AD4 /* BasicJangdanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectSheetView.swift; sourceTree = "<group>"; };
 		579839372CE5F36500866AD4 /* InstrumentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentEnum.swift; sourceTree = "<group>"; };
 		579839392CE61C2E00866AD4 /* JangdanDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDTO.swift; sourceTree = "<group>"; };
+		5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicJangdanData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				2B63CFB12CE5C76A00B4C7AC /* DTO */,
 				2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */,
 				2BB797B62CE62532008173A5 /* JangdanDataManager.swift */,
+				5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */,
 				2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */,
 				3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */,
 			);
@@ -554,6 +557,7 @@
 				2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */,
 				3C1DB7322CB3B58500160970 /* AccentImplement.swift in Sources */,
 				3C1EB31F2CE4C5C60030FB63 /* MasteryUseCase.swift in Sources */,
+				5798393C2CEB22CD00866AD4 /* BasicJangdanData.swift in Sources */,
 				439ABF082CB8220B003F6343 /* SobakToggleView.swift in Sources */,
 				2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */,
 				439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */,

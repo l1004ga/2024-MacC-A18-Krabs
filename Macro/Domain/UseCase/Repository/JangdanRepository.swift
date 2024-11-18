@@ -11,10 +11,9 @@ import Foundation
 protocol JangdanRepository {
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> { get }
     
-    // 모든 Custom 장단의 name을 배열로 반환 (HomeView용)
-    func fetchAllCustomJangdanNames(instrument: String) -> [String]
-    
-    func fetchJangdanData(jangdanName: String)
+    func fetchCustomJangdanNames(instrument: String) -> [String]
+    func fetchBasicJangdanNames(instrument: String) -> [String]
+    func fetchJangdanData(jangdanName: String, instrument: String)
 
     func updateBPM(bpm: Int)
     func updateAccents(daebakList: [[JangdanEntity.Daebak]])
@@ -23,8 +22,6 @@ protocol JangdanRepository {
     
     // MARK: - Custom Template CRUD Logic
     func saveNewJangdan(jangdan: JangdanEntity)
-    
     func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity)
-    
     func deleteCustomJangdan(target: JangdanEntity)
 }

@@ -18,6 +18,7 @@ enum Jangdan: String, CaseIterable {
     case 엇중모리
     case 세마치
     
+    
 //    case 노랫가락58855
     
     var name: String {
