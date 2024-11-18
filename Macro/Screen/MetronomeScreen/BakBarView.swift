@@ -37,14 +37,14 @@ struct BakBarView: View {
                     Rectangle()
                         .frame(height: CGFloat((geo.size.height / 3) * Double(accentHeight)))
                         .foregroundStyle(isActive
-                                         ? LinearGradient(colors: [Color.orange, Color.yellow], startPoint: .top, endPoint: .bottom)
+                                         ? .bakBarGradient
                                          : LinearGradient(colors: [.bakBarInactive], startPoint: .top, endPoint: .bottom))
                 }
                 
                 if let bakNumber {
                     Text("\(bakNumber)")
                         .font(.system(size: 20, weight: .semibold))
-                        .padding(.top, 16)
+                        .padding(.top, 20)
                         .foregroundColor(
                             isActive
                             ? accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberWhite

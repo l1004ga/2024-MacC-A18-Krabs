@@ -164,7 +164,7 @@ struct MetronomeControlView: View {
                 HStack(spacing: 16) {
                     Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
                         .font(.custom("Pretendard-Medium", fixedSize: 34))
-                        .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonPlayStart)
+                        .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonEmphasis)
                         .frame(maxWidth: .infinity, minHeight: 80)
                         .background(self.viewModel.state.isPlaying ? .buttonPlayStop : .buttonPlayStart)
                         .clipShape(RoundedRectangle(cornerRadius: 100))
