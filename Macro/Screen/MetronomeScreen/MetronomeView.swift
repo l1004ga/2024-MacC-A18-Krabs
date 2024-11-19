@@ -38,8 +38,6 @@ struct MetronomeView: View {
                     }
                 }
                 
-                // TODO: if SobakSegment { SobakSegment() }
-                
                 if let sobakSegmentCount = self.viewModel.state.currentJangdan?.sobakSegmentCount {
                     SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
                 }
