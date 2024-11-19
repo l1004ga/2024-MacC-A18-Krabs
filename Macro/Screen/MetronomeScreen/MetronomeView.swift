@@ -16,6 +16,8 @@ struct MetronomeView: View {
     @State private var jangdan: Jangdan
     @State private var isSobakOn: Bool = false
     
+    @AppStorage("isBeepSound") var isBeepSound: Bool = false
+    
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
         self.jangdan = jangdan
         self.viewModel = viewModel
@@ -88,8 +90,24 @@ struct MetronomeView: View {
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
                     }
-                    Button {
-                        // TODO: 데이터 초기화
+                    
+                    Menu {
+                        Button {
+                            isBeepSound.toggle()
+                        } label: {
+                            HStack {
+                                if isBeepSound {
+                                    Image(systemName: "checkmark")
+                                }
+                                Text("비프음으로 변환")
+                            }
+                        }
+                        Button {
+                             
+                        } label: {
+                            Text("장단 내보내기")
+                        }
+                        
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .aspectRatio(contentMode: .fit)
