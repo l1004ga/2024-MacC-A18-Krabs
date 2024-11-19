@@ -49,7 +49,7 @@ class MetronomeControlViewModel {
         .store(in: &self.cancelBag)
     }
     
-    enum ControllerAction {
+    enum Action {
         case decreaseShortBpm
         case decreaseLongBpm(roundedBpm: Int)
         case increaseShortBpm
@@ -58,7 +58,7 @@ class MetronomeControlViewModel {
         case estimateBpm
     }
     
-    func effect(action: ControllerAction) {
+    func effect(action: Action) {
         switch action {
         case .decreaseShortBpm:
             self.tempoUseCase.updateTempo(newBpm: self.bpm - 1)
