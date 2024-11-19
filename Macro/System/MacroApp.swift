@@ -11,7 +11,7 @@ import SwiftUI
 struct MacroApp: App {
     var body: some Scene {
         WindowGroup {
-            JangdanSelectView()
+            HomeView()
         }
     }
 }
