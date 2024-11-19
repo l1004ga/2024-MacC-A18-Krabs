@@ -17,7 +17,9 @@ struct MetronomeView: View {
     @State private var isSobakOn: Bool = false
     
     @State private var exportJandanAlert: Bool = false
-    @State private var inputCustomJangdanName: String = ""
+    @State private var inputCustomJangdanName: String = "룰루"
+    @State private var toastAction: Bool = false
+    @State private var toastOpacity: Double = 1
     
     @AppStorage("isBeepSound") var isBeepSound: Bool = false
     
@@ -29,25 +31,47 @@ struct MetronomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 12) {
-                HanbaeBoardView(
-                    jangdan: viewModel.state.jangdanAccent,
-                    isSobakOn: viewModel.state.isSobakOn,
-                    isPlaying: viewModel.state.isPlaying,
-                    currentRow: viewModel.state.currentRow,
-                    currentDaebak: viewModel.state.currentDaebak,
-                    currentSobak: viewModel.state.currentSobak
-                ) { row, daebak, sobak, newAccent in
-                    withAnimation {
-                        viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+            ZStack {
+                VStack(spacing: 12) {
+                    HanbaeBoardView(
+                        jangdan: viewModel.state.jangdanAccent,
+                        isSobakOn: viewModel.state.isSobakOn,
+                        isPlaying: viewModel.state.isPlaying,
+                        currentRow: viewModel.state.currentRow,
+                        currentDaebak: viewModel.state.currentDaebak,
+                        currentSobak: viewModel.state.currentSobak
+                    ) { row, daebak, sobak, newAccent in
+                        withAnimation {
+                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                        }
+                    }
+                    
+                    // TODO: if SobakSegment { SobakSegment() }
+                }
+                .frame(height: 372)
+                .padding(.horizontal, 8)
+                if toastAction {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.black.opacity(0.8))
+                            .frame(width: 297, height: 54)
+                        
+                        
+                        Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                            .foregroundStyle(Color.white)
+                            .bold()
+                            
+                    }
+                    .opacity(self.toastOpacity)
+                    .onAppear {
+                        withAnimation(.easeIn(duration: 3)) {
+                            self.toastOpacity = 0
+                        } completion: {
+                            self.toastAction = false
+                        }
                     }
                 }
-                
-                // TODO: if SobakSegment { SobakSegment() }
             }
-            .frame(height: 372)
-            .padding(.horizontal, 8)
-            
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
                 .padding(.bottom, 16)
             
@@ -119,15 +143,18 @@ struct MetronomeView: View {
                 }
             }
         }
-//        .alert(isPresented: $exportJandanAlert, content: {
-//            Alert(title: Text("장단 내보내기"), message: Text("저장할 장단 이름을 작성해주세요."), primaryButton: .destructive(Text("취소")), secondaryButton: .default(Text("확인")))
-//            
-//        })
+        //        .alert(isPresented: $exportJandanAlert, content: {
+        //            Alert(title: Text("장단 내보내기"), message: Text("저장할 장단 이름을 작성해주세요."), primaryButton: .destructive(Text("취소")), secondaryButton: .default(Text("확인")))
+        //
+        //        })
         .alert("장단 내보내기", isPresented: $exportJandanAlert) {
             TextField("장단명", text: $inputCustomJangdanName)
             HStack{
                 Button("취소") { }
-                Button("완료") { // TODO: 완료 동작 시 저장 프로세스 추가 필요 }
+                Button("완료") {
+                    // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
+                    toastAction = true
+                }
             }
         } message: {
             Text("저장된 장단명을 작성해주세요.")
