@@ -21,6 +21,13 @@ class MetronomeViewModel {
     
     private var cancelBag: Set<AnyCancellable> = []
     
+    var isLongTapping: Bool
+    var isMinusActive: Bool
+    var isPlusActive: Bool
+    var previousTranslation: CGFloat
+    var timerCancellable: AnyCancellable?
+    var speed: TimeInterval
+    
     init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
         self.jangdanRepository = jangdanRepository
@@ -29,6 +36,13 @@ class MetronomeViewModel {
         self.tempoUseCase = tempoUseCase
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
+        
+        self.isLongTapping = false
+        self.isPlusActive = false
+        self.isMinusActive = false
+        self.previousTranslation = .zero
+        self.timerCancellable = nil
+        self.speed = 0.5
         
         self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
             guard let self else { return }
