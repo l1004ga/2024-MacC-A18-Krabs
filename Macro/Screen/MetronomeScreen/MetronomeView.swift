@@ -16,6 +16,8 @@ struct MetronomeView: View {
     @State private var jangdan: Jangdan
     @State private var isSobakOn: Bool = false
     
+    @State private var initialJangdanAlert: Bool = false
+    
     @State private var exportJandanAlert: Bool = false
     @State private var inputCustomJangdanName: String = "룰루"
     @State private var toastAction: Bool = false
@@ -112,10 +114,21 @@ struct MetronomeView: View {
                 HStack {
                     Button {
                         // TODO: 데이터 초기화
+                        initialJangdanAlert = true
                     } label: {
                         Image(systemName: "arrow.counterclockwise")
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
+                    }
+                    .alert("장단 설정 초기화", isPresented: $initialJangdanAlert) {
+                        HStack{
+                            Button("취소") { }
+                            Button("완료") {
+                                // TODO: 완료 시 선택된장단 데이터 초기화
+                            }
+                        }
+                    } message: {
+                        Text("기본값으로 되돌리겠습니까?")
                     }
                     
                     Menu {
@@ -140,6 +153,18 @@ struct MetronomeView: View {
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
                     }
+                    .alert("장단 내보내기", isPresented: $exportJandanAlert) {
+                        TextField("장단명", text: $inputCustomJangdanName)
+                        HStack{
+                            Button("취소") { }
+                            Button("완료") {
+                                // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
+                                toastAction = true
+                            }
+                        }
+                    } message: {
+                        Text("저장된 장단명을 작성해주세요.")
+                    }
                 }
             }
         }
@@ -147,18 +172,6 @@ struct MetronomeView: View {
         //            Alert(title: Text("장단 내보내기"), message: Text("저장할 장단 이름을 작성해주세요."), primaryButton: .destructive(Text("취소")), secondaryButton: .default(Text("확인")))
         //
         //        })
-        .alert("장단 내보내기", isPresented: $exportJandanAlert) {
-            TextField("장단명", text: $inputCustomJangdanName)
-            HStack{
-                Button("취소") { }
-                Button("완료") {
-                    // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
-                    toastAction = true
-                }
-            }
-        } message: {
-            Text("저장된 장단명을 작성해주세요.")
-        }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
