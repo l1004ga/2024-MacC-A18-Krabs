@@ -137,6 +137,14 @@
 		5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicJangdanData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		579839412CEC5EC100866AD4 /* CustomJangdanListScreen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CustomJangdanListScreen;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		2BE5AD352C9EC9030094F3C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -371,6 +379,7 @@
 		43774F5D2CB7ED4800F54EF7 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				579839412CEC5EC100866AD4 /* CustomJangdanListScreen */,
 				43774F612CB7EDB100F54EF7 /* MetronomeScreen */,
 				43774F602CB7EDA300F54EF7 /* JangdanSelectScreen */,
 			);
@@ -414,6 +423,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				579839412CEC5EC100866AD4 /* CustomJangdanListScreen */,
 			);
 			name = Macro;
 			packageProductDependencies = (
