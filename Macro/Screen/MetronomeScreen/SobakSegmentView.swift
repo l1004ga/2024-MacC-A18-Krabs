@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SobakSegmentsView: View {
     var body: some View {
-        HStack(spacing: 2) {
+        HStack(spacing: 1) {
             Rectangle()
                 .foregroundStyle(.sobakSegmentDaebak)
             Rectangle()
