@@ -40,7 +40,6 @@ enum Jangdan: String, CaseIterable {
         case .진양: return 3
         case .중모리: return 2
         case .엇중모리: return 2
-        case .자진모리: return 3
         default: return nil
         }
     }
