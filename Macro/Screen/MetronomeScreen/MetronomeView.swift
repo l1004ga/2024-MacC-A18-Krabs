@@ -16,6 +16,9 @@ struct MetronomeView: View {
     @State private var jangdan: Jangdan
     @State private var isSobakOn: Bool = false
     
+    @State private var exportJandanAlert: Bool = false
+    @State private var inputCustomJangdanName: String = ""
+    
     @AppStorage("isBeepSound") var isBeepSound: Bool = false
     
     init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
@@ -103,7 +106,7 @@ struct MetronomeView: View {
                             }
                         }
                         Button {
-                             
+                            exportJandanAlert = true
                         } label: {
                             Text("장단 내보내기")
                         }
@@ -115,6 +118,19 @@ struct MetronomeView: View {
                     }
                 }
             }
+        }
+//        .alert(isPresented: $exportJandanAlert, content: {
+//            Alert(title: Text("장단 내보내기"), message: Text("저장할 장단 이름을 작성해주세요."), primaryButton: .destructive(Text("취소")), secondaryButton: .default(Text("확인")))
+//            
+//        })
+        .alert("장단 내보내기", isPresented: $exportJandanAlert) {
+            TextField("장단명", text: $inputCustomJangdanName)
+            HStack{
+                Button("취소") { }
+                Button("완료") { // TODO: 완료 동작 시 저장 프로세스 추가 필요 }
+            }
+        } message: {
+            Text("저장된 장단명을 작성해주세요.")
         }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
