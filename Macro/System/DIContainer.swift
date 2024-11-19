@@ -21,12 +21,21 @@ class DIContainer {
         self._tapTapUseCase = TapTapImplement(tempoUseCase: self._tempoUseCase)
         
         self._metronomeViewModel = MetronomeViewModel(jangdanRepository: self._jangdanDataSource, templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase, tempoUseCase: self._tempoUseCase, accentUseCase: self._accentUseCase, taptapUseCase: self._tapTapUseCase)
+        
+        self._controlViewModel =
+        MetronomeControlViewModel(jangdanRepository: self._jangdanDataSource, taptapUseCase: self._tapTapUseCase, tempoUseCase: self._tempoUseCase)
     }
     
     // ViewModel
     private var _metronomeViewModel: MetronomeViewModel
     var metronomeViewModel: MetronomeViewModel {
         self._metronomeViewModel
+    }
+    
+    // controllerViewModel
+    private var _controlViewModel: MetronomeControlViewModel
+    var controlViewModel: MetronomeControlViewModel {
+        self._controlViewModel
     }
     
     // UseCase Implements

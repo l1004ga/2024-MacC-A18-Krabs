@@ -15,45 +15,22 @@ class MetronomeViewModel {
     
     private var templateUseCase: TemplateUseCase
     private var metronomeOnOffUseCase: MetronomeOnOffUseCase
-    private var tempoUseCase: TempoUseCase
     private var accentUseCase: AccentUseCase
     private var taptapUseCase: TapTapUseCase
     
     private var cancelBag: Set<AnyCancellable> = []
-    
-    var isLongTapping: Bool
-    var isMinusActive: Bool
-    var isPlusActive: Bool
-    var previousTranslation: CGFloat
-    var timerCancellable: AnyCancellable?
-    var speed: TimeInterval
     
     init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
         self.jangdanRepository = jangdanRepository
         self.templateUseCase = templateUseCase
         self.metronomeOnOffUseCase = metronomeOnOffUseCase
-        self.tempoUseCase = tempoUseCase
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
-        
-        self.isLongTapping = false
-        self.isPlusActive = false
-        self.isMinusActive = false
-        self.previousTranslation = .zero
-        self.timerCancellable = nil
-        self.speed = 0.5
-        
-        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
-            guard let self else { return }
-            self._state.isTapping = isTapping
-        }
-        .store(in: &self.cancelBag)
         
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
             self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
-            self._state.bpm = jangdan.bpm
             self._state.bakCount = jangdan.bakCount
             self._state.daebakCount = jangdan.daebakList.count
         }
@@ -75,20 +52,13 @@ class MetronomeViewModel {
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
         var currentRow: Int = 0
-        var bpm: Int = 60
-        var isTapping: Bool = false
     }
     
     enum Action {
         case selectJangdan(jangdan: Jangdan)
         case changeSobakOnOff
         case changeIsPlaying
-        case decreaseShortBpm // - button
-        case decreaseLongBpm(roundedBpm: Int)
-        case increaseShortBpm // + button
-        case increaseLongBpm(roundedBpm: Int)
-        case roundBpm(currentBpm: Int)
-        case changeAccent(row: Int, daebak: Int, sobak: Int, accent: Accent)
+        case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)
         case stopMetronome
         case estimateBpm
         case createCustomJangdan
@@ -144,24 +114,6 @@ class MetronomeViewModel {
             } else {
                 self.metronomeOnOffUseCase.stop()
             }
-        case .decreaseShortBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
-            self.taptapUseCase.finishTapping()
-        
-        case let .decreaseLongBpm(roundedBpm):
-            self.tempoUseCase.updateTempo(newBpm: roundedBpm - 10)
-            self.taptapUseCase.finishTapping()
-            
-        case .increaseShortBpm:
-            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
-            self.taptapUseCase.finishTapping()
-        
-        case let .increaseLongBpm(roundedBpm):
-            self.tempoUseCase.updateTempo(newBpm: roundedBpm + 10)
-            self.taptapUseCase.finishTapping()
-        
-        case let .roundBpm(currentBpm):
-            self.tempoUseCase.updateTempo(newBpm: currentBpm)
             
         case let .changeAccent(row, daebak, sobak, newAccent):
             self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak, to: newAccent)
