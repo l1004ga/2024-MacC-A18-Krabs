@@ -78,6 +78,25 @@ struct MetronomeView: View {
                     .foregroundStyle(.textSecondary)
                     .padding(.trailing, 6)
             }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    Button {
+                        // TODO: 데이터 초기화
+                    } label: {
+                        Image(systemName: "arrow.counterclockwise")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textSecondary)
+                    }
+                    Button {
+                        // TODO: 데이터 초기화
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textSecondary)
+                    }
+                }
+            }
         }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
