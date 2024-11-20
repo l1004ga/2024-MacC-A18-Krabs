@@ -64,6 +64,7 @@ class MetronomeViewModel {
         case estimateBpm
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
+        case changeSoundType
     }
     
     private func updateStatePerBak() {
@@ -130,6 +131,8 @@ class MetronomeViewModel {
         case .initialJangdan:
             guard let currentJangdanName = self.state.currentJangdanName else { return }
             self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
+        case .changeSoundType:
+            self.metronomeOnOffUseCase.setSoundType()
         }
     }
 }

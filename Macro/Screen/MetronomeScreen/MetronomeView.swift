@@ -130,6 +130,7 @@ struct MetronomeView: View {
                     Menu {
                         Button {
                             isBeepSound.toggle()
+                            self.viewModel.effect(action: .changeSoundType)
                         } label: {
                             HStack {
                                 if isBeepSound {
