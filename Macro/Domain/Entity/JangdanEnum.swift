@@ -43,4 +43,11 @@ enum Jangdan: String, CaseIterable {
         default: return nil
         }
     }
+    
+    var bakData: String {
+        switch self {
+        case .동살풀이: return "4박 2소박"
+        default: return "수정해라"
+        }
+    }
 }

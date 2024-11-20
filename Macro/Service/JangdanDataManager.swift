@@ -17,7 +17,8 @@ final class JangdanDataManager {
     
     init?() {
         do {
-            container = try ModelContainer(for: JangdanDataModel.self)
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            container = try ModelContainer(for: JangdanDataModel.self, configurations: config)
             context = ModelContext(container)
         } catch {
             print("ModelContainer 초기화 실패: \(error)")
@@ -141,18 +142,18 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    func saveNewJangdan(jangdan: JangdanEntity) {
+    func saveNewJangdan(newJangdanName: String) {
         let newJangdan = JangdanDataModel(
-            name: jangdan.name,
-            bakCount: jangdan.bakCount,
-            daebak: jangdan.daebak,
-            bpm: jangdan.bpm,
-            daebakList: jangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
-            jangdanType: jangdan.jangdanType.rawValue,
-            instrument: jangdan.instrument.rawValue
+            name: newJangdanName,
+            bakCount: currentJangdan.bakCount,
+            daebak: currentJangdan.daebak,
+            bpm: currentJangdan.bpm,
+            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
+            jangdanType: currentJangdan.jangdanType.rawValue,
+            instrument: currentJangdan.instrument.rawValue
         )
-        
         context.insert(newJangdan)
+        
         do {
             try context.save()
         } catch {
@@ -160,34 +161,9 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity) {
-        let predicate = #Predicate<JangdanDataModel> { $0.name == targetName }
-        let descriptor = FetchDescriptor(predicate: predicate)
-        
-        do {
-            if let model = try context.fetch(descriptor).first {
-                model.name = newJangdan.name
-                model.bakCount = newJangdan.bakCount
-                model.daebak = newJangdan.daebak
-                model.bpm = newJangdan.bpm
-                model.daebakListStrings = newJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } }
-                model.jangdanType = newJangdan.jangdanType.rawValue
-                model.instrument = newJangdan.instrument.rawValue
-                
-                try context.save()
-                print("장단 업데이트가 완료되었습니다.")
-            } else {
-                print("업데이트할 장단을 찾을 수 없습니다.")
-            }
-        } catch {
-            print("장단 업데이트 중 오류 발생: \(error.localizedDescription)")
-        }
-    }
-    
-    func deleteCustomJangdan(target: JangdanEntity) {
-        let targetName = target.name
+    func deleteCustomJangdan(jangdanName: String) {
         let predicate = #Predicate<JangdanDataModel> { jangdan in
-            jangdan.name == targetName
+            jangdan.name == jangdanName
         }
         let descriptor = FetchDescriptor(predicate: predicate)
         

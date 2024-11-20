@@ -19,7 +19,7 @@ struct MetronomeView: View {
     @State private var initialJangdanAlert: Bool = false
     
     @State private var exportJandanAlert: Bool = false
-    @State private var inputCustomJangdanName: String = "룰루"
+    @State private var inputCustomJangdanName: String = ""
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
@@ -48,8 +48,8 @@ struct MetronomeView: View {
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdan?.sobakSegmentCount {
-                      SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
-                  }
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                    }
                 }
                 .frame(height: 372)
                 .padding(.horizontal, 8)
@@ -157,6 +157,8 @@ struct MetronomeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
+                                //
+                                
                                 toastAction = true
                             }
                         }
