@@ -77,7 +77,7 @@ struct HomeView: View {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 7), GridItem(.flexible())], spacing: 12) {
                         ForEach(Jangdan.allCases, id: \.self) { jangdan in
                             // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
-                            NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdan: jangdan)) {
+                            NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 15) {
                                         Text(jangdan.name)

@@ -13,7 +13,8 @@ struct MetronomeView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
     
-    @State private var jangdan: Jangdan
+//    @State private var jangdan: Jangdan
+    private var jangdanName: String
     @State private var isSobakOn: Bool = false
     
     @State private var initialJangdanAlert: Bool = false
@@ -25,8 +26,8 @@ struct MetronomeView: View {
     
     @AppStorage("isBeepSound") var isBeepSound: Bool = false
     
-    init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
-        self.jangdan = jangdan
+    init(viewModel: MetronomeViewModel, jangdanName: String) {
+        self.jangdanName = jangdanName
         self.viewModel = viewModel
     }
     
@@ -80,7 +81,7 @@ struct MetronomeView: View {
             
         }
         .task {
-            self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+            self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
             self.isSobakOn = self.viewModel.state.isSobakOn
         }
         .onChange(of: isSobakOn) {
@@ -102,7 +103,7 @@ struct MetronomeView: View {
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
-                Text("\(jangdan.name)")
+                Text(jangdanName)
                     .font(.Body_R)
                     .foregroundStyle(.textSecondary)
                     .padding(.trailing, 6)

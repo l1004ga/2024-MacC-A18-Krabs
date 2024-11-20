@@ -56,7 +56,7 @@ class MetronomeViewModel {
     }
     
     enum Action {
-        case selectJangdan(jangdan: String)
+        case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
         case changeIsPlaying
         case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)

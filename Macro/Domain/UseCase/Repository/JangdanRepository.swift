@@ -13,7 +13,7 @@ protocol JangdanRepository {
     
     func fetchCustomJangdanNames(instrument: String) -> [String]
     func fetchBasicJangdanNames(instrument: String) -> [String]
-    func fetchJangdanData(jangdanName: String, instrument: String)
+    func fetchJangdanData(jangdanName: String)
 
     func updateBPM(bpm: Int)
     func updateAccents(daebakList: [[JangdanEntity.Daebak]])
