@@ -17,7 +17,8 @@ final class JangdanDataManager {
     
     init?() {
         do {
-            container = try ModelContainer(for: JangdanDataModel.self)
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            container = try ModelContainer(for: JangdanDataModel.self, configurations: config)
             context = ModelContext(container)
         } catch {
             print("ModelContainer 초기화 실패: \(error)")
