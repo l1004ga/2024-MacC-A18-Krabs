@@ -1,5 +1,5 @@
 //
-//  NoCustomJangdanComponentView.swift
+//  EmptyJangdanListView.swift
 //  Macro
 //
 //  Created by jhon on 11/20/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoCustomJangdanComponentView: View {
+struct EmptyJangdanListView: View {
     var body: some View {
         ZStack {
             HStack() {
@@ -40,7 +40,7 @@ struct NoCustomJangdanComponentView: View {
 
 struct NoCustomJangdanComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        NoCustomJangdanComponentView()
+        EmptyJangdanListView()
             .frame(width: 361, height: 97)
     }
 }
