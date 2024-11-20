@@ -10,10 +10,11 @@ import Combine
 
 struct MetronomeView: View {
     
+    @AppStorage("isBeepSound") var isBeepSound: Bool = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
     
-//    @State private var jangdan: Jangdan
     private var jangdanName: String
     @State private var isSobakOn: Bool = false
     
@@ -24,14 +25,11 @@ struct MetronomeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
-    @AppStorage("isBeepSound") var isBeepSound: Bool = false
-    
     init(viewModel: MetronomeViewModel, jangdanName: String) {
         self.jangdanName = jangdanName
         self.viewModel = viewModel
     }
-    
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
