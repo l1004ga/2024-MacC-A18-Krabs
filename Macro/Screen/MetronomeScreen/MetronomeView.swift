@@ -44,10 +44,10 @@ struct MetronomeView: View {
                         currentSobak: viewModel.state.currentSobak
                     ) { row, daebak, sobak, newAccent in
                         withAnimation {
-                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
                         }
                     }
-                    if let sobakSegmentCount = self.viewModel.state.currentJangdan?.sobakSegmentCount {
+                    if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
                         SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
                     }
                 }
@@ -72,7 +72,7 @@ struct MetronomeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
+            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
                 .padding(.bottom, 16)
             
             
