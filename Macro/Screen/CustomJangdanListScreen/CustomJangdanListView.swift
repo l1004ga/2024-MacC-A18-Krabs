@@ -75,10 +75,11 @@ struct CustomJangdanListView: View {
                                 .frame(maxWidth: .infinity)
                         }
                         
-                        Button(action: {
-                            print("편집 선택됨")
+                        Button(role: .destructive, action: {
+                            print("삭제 선택됨")
                         }) {
-                            Text("편집")
+                            Text("삭제")
+                                .foregroundColor(.red)
                                 .frame(maxWidth: .infinity)
                         }
                     } label: {
