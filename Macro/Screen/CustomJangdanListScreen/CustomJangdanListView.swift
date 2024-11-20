@@ -113,6 +113,7 @@ struct CustomJangdanListView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarTitleDisplayMode(.inline)
         }
+        .navigationBarHidden(true)
     }
 }
 
