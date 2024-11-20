@@ -62,7 +62,7 @@ class MetronomeViewModel {
         case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)
         case stopMetronome
         case estimateBpm
-        case createCustomJangdan
+        case createCustomJangdan(newJangdanName: String)
         case initialJangdan
     }
     
@@ -97,7 +97,7 @@ class MetronomeViewModel {
     
     func effect(action: Action) {
         switch action {
-        case let .selectJangdan(jangdanName): // MARK: 삭제- custom/default 모두 해당 메서드를 통해 데이터를 뷰모델로 가져옴
+        case let .selectJangdan(jangdanName):
             self._state.currentJangdanName = jangdanName
             self.templateUseCase.setJangdan(jangdanName: jangdanName)
             self.initialDaeSoBakIndex()
@@ -124,8 +124,9 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.stop()
         case .estimateBpm:
             self.taptapUseCase.tap()
-        case .createCustomJangdan:
-            print("test")
+        case let .createCustomJangdan(newJangdanName):
+            // MARK: 추후 이름 중복 등으로 인해서 생성 실패 시 Error 받아서 사용자 알림 처리 필요
+            try? self.templateUseCase.createCustomJangdan(newJangdanName: newJangdanName)
         case .initialJangdan:
             guard let currentJangdanName = self.state.currentJangdanName else { return }
             self.templateUseCase.setJangdan(jangdanName: currentJangdanName)

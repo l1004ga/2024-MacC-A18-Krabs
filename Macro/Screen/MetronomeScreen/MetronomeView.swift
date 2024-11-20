@@ -75,8 +75,7 @@ struct MetronomeView: View {
             }
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
                 .padding(.bottom, 16)
-            
-            
+
             MetronomeControlView(viewModel: viewModel)
             
         }
@@ -123,7 +122,6 @@ struct MetronomeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                // TODO: 완료 시 선택된장단 데이터 초기화
                                 self.viewModel.effect(action: .initialJangdan)
                             }
                         }
@@ -158,9 +156,7 @@ struct MetronomeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
-                                //
-                                
+                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
                                 toastAction = true
                             }
                         }
