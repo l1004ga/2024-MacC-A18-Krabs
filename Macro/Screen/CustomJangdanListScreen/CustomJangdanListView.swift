@@ -5,10 +5,18 @@
 //  Created by jhon on 11/19/24.
 //
 
+//
+//  CustomJangdanListView.swift
+//  Macro
+//
+//  Created by jhon on 11/19/24.
+//
+
 import SwiftUI
 
 struct CustomJangdanListView: View {
     let jangdanList: [(jangdanType: String, customJangdanName: String, createdDate: String)]
+    @State var isEditing: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -38,7 +46,8 @@ struct CustomJangdanListView: View {
                                     CustomJangdanComponentView(
                                         jangdanType: jangdan.jangdanType,
                                         customJangdanName: jangdan.customJangdanName,
-                                        createdDate: jangdan.createdDate
+                                        createdDate: jangdan.createdDate,
+                                        isEditing: $isEditing // 바인딩 연결
                                     )
                                     .frame(width: 361, height: 97)
                                 }
@@ -66,26 +75,37 @@ struct CustomJangdanListView: View {
                         .foregroundStyle(.textSecondary)
                         .padding(.trailing, 6)
                 }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
+                    if isEditing {
                         Button(action: {
-                            print("장단 만들기 선택됨")
+                            isEditing = false
                         }) {
-                            Text("장단 만들기")
-                                .frame(maxWidth: .infinity)
+                            Text("완료")
+                                .font(.Body_R)
+                                .foregroundStyle(.textSecondary)
                         }
-                        
-                        Button(role: .destructive, action: {
-                            print("삭제 선택됨")
-                        }) {
-                            Text("삭제")
-                                .foregroundColor(.red)
-                                .frame(maxWidth: .infinity)
+                    } else {
+                        Menu {
+                            Button(action: {
+                                print("장단 만들기 선택됨")
+                            }) {
+                                Text("장단 만들기")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            
+                            Button(role: .destructive, action: {
+                                isEditing = true
+                            }) {
+                                Text("삭제")
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        } label: {
+                            Text("편집")
+                                .font(.Body_R)
+                                .foregroundStyle(.textSecondary)
                         }
-                    } label: {
-                        Text("편집")
-                            .font(.Body_R)
-                            .foregroundStyle(.textSecondary)
                     }
                 }
             }
