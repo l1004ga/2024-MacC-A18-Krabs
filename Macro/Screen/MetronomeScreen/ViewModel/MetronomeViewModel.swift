@@ -77,6 +77,7 @@ class MetronomeViewModel {
         case changeAccent(row: Int, daebak: Int, sobak: Int, accent: Accent)
         case stopMetronome
         case estimateBpm
+        case createCustomJangdan
     }
     
     private func updateStatePerBak() {
@@ -155,6 +156,8 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.stop()
         case .estimateBpm:
             self.taptapUseCase.tap()
+        case .createCustomJangdan:
+            print("test")
         }
     }
 }

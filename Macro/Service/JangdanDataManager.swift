@@ -141,18 +141,18 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    func saveNewJangdan(jangdan: JangdanEntity) {
+    func saveNewJangdan(newJangdanName: String) {
         let newJangdan = JangdanDataModel(
-            name: jangdan.name,
-            bakCount: jangdan.bakCount,
-            daebak: jangdan.daebak,
-            bpm: jangdan.bpm,
-            daebakList: jangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
-            jangdanType: jangdan.jangdanType.rawValue,
-            instrument: jangdan.instrument.rawValue
+            name: newJangdanName,
+            bakCount: currentJangdan.bakCount,
+            daebak: currentJangdan.daebak,
+            bpm: currentJangdan.bpm,
+            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
+            jangdanType: currentJangdan.jangdanType.rawValue,
+            instrument: currentJangdan.instrument.rawValue
         )
-        
         context.insert(newJangdan)
+        
         do {
             try context.save()
         } catch {

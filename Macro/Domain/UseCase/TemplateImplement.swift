@@ -24,6 +24,7 @@ class TemplateImplement {
 //MARK: 장단 고를때 악기까지 올 수 있도록 변경해야 함 예시로 .장구 넣어둠
 extension TemplateImplement: TemplateUseCase {
     
+    
     var allDefaultJangdanTemplateNames: [String] {
         Jangdan.allCases.map { $0.name }
     }
@@ -42,12 +43,13 @@ extension TemplateImplement: TemplateUseCase {
     }
     
     // MARK: - Custom Template CRUD Logic
-    func createCustomJangdan(newData: JangdanEntity) throws {
-        guard self.jangdanRepository.isRepeatedName(jangdanName: newData.name) else {
+    func createCustomJangdan(newJangdanName: String) throws {
+        guard self.jangdanRepository.isRepeatedName(jangdanName: newJangdanName) else {
             throw DataError.registedName
         }
-        self.jangdanRepository.saveNewJangdan(jangdan: newData)
+        self.jangdanRepository.saveNewJangdan(newJangdanName: newJangdanName)
     }
+    
     
     func editCustomJangdan(targetName: String, newData: JangdanEntity) throws {
         guard self.jangdanRepository.isRepeatedName(jangdanName: newData.name) else {
