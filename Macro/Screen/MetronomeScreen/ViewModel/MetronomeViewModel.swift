@@ -63,6 +63,7 @@ class MetronomeViewModel {
         case stopMetronome
         case estimateBpm
         case createCustomJangdan
+        case initialJangdan
     }
     
     private func updateStatePerBak() {
@@ -125,6 +126,9 @@ class MetronomeViewModel {
             self.taptapUseCase.tap()
         case .createCustomJangdan:
             print("test")
+        case .initialJangdan:
+            guard let currentJangdanName = self.state.currentJangdanName else { return }
+            self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
         }
     }
 }

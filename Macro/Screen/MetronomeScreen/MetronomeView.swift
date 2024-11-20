@@ -124,6 +124,7 @@ struct MetronomeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 // TODO: 완료 시 선택된장단 데이터 초기화
+                                self.viewModel.effect(action: .initialJangdan)
                             }
                         }
                     } message: {
