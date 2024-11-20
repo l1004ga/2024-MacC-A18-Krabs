@@ -5,141 +5,107 @@
 //  Created by jhon on 11/19/24.
 //
 
-//
-//  CustomJangdanListView.swift
-//  Macro
-//
-//  Created by jhon on 11/19/24.
-//
-
 import SwiftUI
 
 struct CustomJangdanListView: View {
-    let jangdanList: [(jangdanType: String, customJangdanName: String, createdDate: String)]
-    @State var isEditing: Bool = false
+    @Environment(\.dismiss) var dismiss
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    let jangdanList: [(jangdanType: Jangdan, customJangdanName: String, createdDate: Date)]
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if jangdanList.isEmpty {
-                    ScrollView {
-                        NavigationLink(destination: Text("커스텀장단 메트로놈 뷰")) {
-                            NoCustomJangdanComponentView()
-                                .frame(width: 361, height: 97)
-                                .padding(.top, 32)
-                        }
+        List {
+            if jangdanList.isEmpty {
+                ZStack {
+                    EmptyJangdanListView()
+                        .padding(.horizontal, 16)
+                    
+                    NavigationLink {
+                        Text("커스텀장단 생성 뷰")
+                    } label: {
+                        
                     }
-                } else {
-                    ScrollView {
-                        VStack(spacing: 12) {
-                            ForEach(jangdanList.indices, id: \.self) { index in
-                                let jangdan = jangdanList[index]
+                    .opacity(0)
+                }
+                .buttonStyle(.plain)
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowSeparator(.hidden)
+            } else {
+                ForEach(jangdanList, id: \.customJangdanName) { jangdan in
+                    ZStack {
+                        HStack(alignment: .top, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text(jangdan.jangdanType.name)
+                                    .font(.Subheadline_R)
+                                    .foregroundStyle(.textSecondary)
                                 
-                                NavigationLink(
-                                    destination: CustomJangdanView(
-                                        customJangdanName: jangdan.customJangdanName,
-                                        instrument: .장구
-                                    )
-                                ) {
-                                    CustomJangdanComponentView(
-                                        jangdanType: jangdan.jangdanType,
-                                        customJangdanName: jangdan.customJangdanName,
-                                        createdDate: jangdan.createdDate,
-                                        isEditing: $isEditing // 바인딩 연결
-                                    )
-                                    .frame(width: 361, height: 97)
-                                }
-                                .buttonStyle(PlainButtonStyle()) // 버튼 스타일 제거
-                            }
-                        }
-                    }
-                    .padding(.top, 32)
-                }
-            }
-            .navigationTitle("내가 저장한 장단")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.textDefault)
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("내가 저장한 장단")
-                        .font(.Body_R)
-                        .foregroundStyle(.textSecondary)
-                        .padding(.trailing, 6)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if isEditing {
-                        Button(action: {
-                            isEditing = false
-                        }) {
-                            Text("완료")
-                                .font(.Body_R)
-                                .foregroundStyle(.textSecondary)
-                        }
-                    } else {
-                        Menu {
-                            Button(action: {
-                                print("장단 만들기 선택됨")
-                            }) {
-                                Text("장단 만들기")
-                                    .frame(maxWidth: .infinity)
+                                Text(jangdan.customJangdanName)
+                                    .font(.Title3_R)
+                                    .foregroundStyle(.textDefault)
                             }
                             
-                            Button(role: .destructive, action: {
-                                isEditing = true
-                            }) {
-                                Text("삭제")
-                                    .foregroundColor(.red)
-                                    .frame(maxWidth: .infinity)
-                            }
-                        } label: {
-                            Text("편집")
-                                .font(.Body_R)
+                            Spacer()
+                            
+                            Text("날짜")
+                                .font(.Subheadline_R)
                                 .foregroundStyle(.textSecondary)
                         }
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 20)
+                        .background(.backgroundCard)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        
+                        .padding(.horizontal, 16)
+                        
+                        NavigationLink {
+                            Text("커스텀장단 메트로놈 뷰")
+                        } label: {
+                            
+                        }
+                        .opacity(0)
                     }
+                    .buttonStyle(.plain)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowSeparator(.hidden)
+                }
+                .onDelete { _ in
+                    
                 }
             }
-            .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarTitleDisplayMode(.inline)
         }
-    }
-}
-
-// MARK: 실험용 뷰
-struct CustomJangdanView: View {
-    let customJangdanName: String
-    let instrument: Instrument
-    
-    var body: some View {
-        VStack {
-            Text("\(customJangdanName)")
-            Text("\(instrument.rawValue)")
-        }
-    }
-}
-
-struct CustomJangdanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            // 데이터가 없는 경우
-            CustomJangdanListView(jangdanList: [])
+        .listStyle(.plain)
+        .listRowSpacing(12)
+        .padding(.top, 32)
+        .toolbar {
+            // MARK: - 뒤로가기
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.textDefault)
+                }
+            }
             
-            // 데이터가 있는 경우
-            CustomJangdanListView(jangdanList: [
-                (jangdanType: "자진모리", customJangdanName: "변형 자진모리", createdDate: "2024.11.19"),
-                (jangdanType: "진양", customJangdanName: "느린 진양", createdDate: "2024.11.18")
-            ])
+            // MARK: - Title
+            ToolbarItem(placement: .principal) {
+                Text("내가 저장한 장단")
+                    .font(.Body_R)
+                    .foregroundStyle(.textSecondary)
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                EditButton()
+                    .foregroundStyle(.textDefault)
+            }
         }
+        .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
     }
+}
+
+#Preview {
+    CustomJangdanListView(jangdanList: [])
 }
