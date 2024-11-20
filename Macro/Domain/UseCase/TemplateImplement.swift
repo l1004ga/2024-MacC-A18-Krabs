@@ -58,7 +58,7 @@ extension TemplateImplement: TemplateUseCase {
         self.jangdanRepository.updateJangdanTemplate(targetName: targetName, newJangdan: newData)
     }
     
-    func deleteCustomJangdan(target: JangdanEntity) {
-        self.jangdanRepository.deleteCustomJangdan(target: target)
+    func deleteCustomJangdan(jangdanName: String) {
+        self.jangdanRepository.deleteCustomJangdan(jangdanName: jangdanName)
     }
 }

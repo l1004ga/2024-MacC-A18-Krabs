@@ -185,10 +185,9 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    func deleteCustomJangdan(target: JangdanEntity) {
-        let targetName = target.name
+    func deleteCustomJangdan(jangdanName: String) {
         let predicate = #Predicate<JangdanDataModel> { jangdan in
-            jangdan.name == targetName
+            jangdan.name == jangdanName
         }
         let descriptor = FetchDescriptor(predicate: predicate)
         

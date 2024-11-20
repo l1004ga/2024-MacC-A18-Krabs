@@ -15,5 +15,5 @@ protocol TemplateUseCase {
     
     func editCustomJangdan(targetName: String, newData: JangdanEntity) throws
     
-    func deleteCustomJangdan(target: JangdanEntity)
+    func deleteCustomJangdan(jangdanName: String)
 }
