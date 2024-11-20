@@ -53,25 +53,22 @@ struct MetronomeView: View {
                 .frame(height: 372)
                 .padding(.horizontal, 8)
                 if toastAction {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 297, height: 54)
-                        
-                        
-                        Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
-                            .foregroundStyle(Color.white)
-                            .bold()
-                            
-                    }
-                    .opacity(self.toastOpacity)
-                    .onAppear {
-                        withAnimation(.easeIn(duration: 3)) {
-                            self.toastOpacity = 0
-                        } completion: {
-                            self.toastAction = false
+                    Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                        .font(.Body_R)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                        .foregroundStyle(Color.white)
+                        .background(.black.opacity(0.8))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .opacity(self.toastOpacity)
+                        .onAppear {
+                            withAnimation(.easeIn(duration: 3)) {
+                                self.toastOpacity = 0
+                            } completion: {
+                                self.toastAction = false
+                                self.toastOpacity = 1
+                            }
                         }
-                    }
                 }
             }
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
@@ -168,10 +165,6 @@ struct MetronomeView: View {
                 }
             }
         }
-        //        .alert(isPresented: $exportJandanAlert, content: {
-        //            Alert(title: Text("장단 내보내기"), message: Text("저장할 장단 이름을 작성해주세요."), primaryButton: .destructive(Text("취소")), secondaryButton: .default(Text("확인")))
-        //
-        //        })
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
