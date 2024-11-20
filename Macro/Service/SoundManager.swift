@@ -82,9 +82,6 @@ class SoundManager {
 
 // Sound Set 변경
 extension SoundManager {
-    enum SoundType: String {
-        case beep
-    }
     
     func setSoundType(to type: SoundType) {
         do {
