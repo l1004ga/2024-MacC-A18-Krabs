@@ -43,7 +43,8 @@ class MetronomeViewModel {
     }
     
     struct State {
-        var currentJangdan: Jangdan?
+        var currentJangdanName: String?
+        var currentJangdanType: Jangdan?
         var jangdanAccent: [[[Accent]]] = []
         var bakCount: Int = 0
         var daebakCount: Int = 0
@@ -55,7 +56,7 @@ class MetronomeViewModel {
     }
     
     enum Action {
-        case selectJangdan(jangdan: Jangdan)
+        case selectJangdan(jangdan: String)
         case changeSobakOnOff
         case changeIsPlaying
         case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)
@@ -95,9 +96,9 @@ class MetronomeViewModel {
     
     func effect(action: Action) {
         switch action {
-        case let .selectJangdan(jangdan):
-            self._state.currentJangdan = jangdan
-            self.templateUseCase.setJangdan(jangdanName: jangdan.name)
+        case let .selectJangdan(jangdanName): // MARK: 삭제- custom/default 모두 해당 메서드를 통해 데이터를 뷰모델로 가져옴
+            self._state.currentJangdanName = jangdanName
+            self.templateUseCase.setJangdan(jangdanName: jangdanName)
             self.initialDaeSoBakIndex()
             self.taptapUseCase.finishTapping()
             self._state.isSobakOn = false
