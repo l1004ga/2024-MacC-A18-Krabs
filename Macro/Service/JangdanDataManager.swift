@@ -161,30 +161,6 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    func updateJangdanTemplate(targetName: String, newJangdan: JangdanEntity) {
-        let predicate = #Predicate<JangdanDataModel> { $0.name == targetName }
-        let descriptor = FetchDescriptor(predicate: predicate)
-        
-        do {
-            if let model = try context.fetch(descriptor).first {
-                model.name = newJangdan.name
-                model.bakCount = newJangdan.bakCount
-                model.daebak = newJangdan.daebak
-                model.bpm = newJangdan.bpm
-                model.daebakListStrings = newJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } }
-                model.jangdanType = newJangdan.jangdanType.rawValue
-                model.instrument = newJangdan.instrument.rawValue
-                
-                try context.save()
-                print("장단 업데이트가 완료되었습니다.")
-            } else {
-                print("업데이트할 장단을 찾을 수 없습니다.")
-            }
-        } catch {
-            print("장단 업데이트 중 오류 발생: \(error.localizedDescription)")
-        }
-    }
-    
     func deleteCustomJangdan(jangdanName: String) {
         let predicate = #Predicate<JangdanDataModel> { jangdan in
             jangdan.name == jangdanName

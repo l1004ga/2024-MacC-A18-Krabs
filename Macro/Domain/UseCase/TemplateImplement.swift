@@ -50,14 +50,6 @@ extension TemplateImplement: TemplateUseCase {
         self.jangdanRepository.saveNewJangdan(newJangdanName: newJangdanName)
     }
     
-    
-    func editCustomJangdan(targetName: String, newData: JangdanEntity) throws {
-        guard self.jangdanRepository.isRepeatedName(jangdanName: newData.name) else {
-            throw DataError.registedName
-        }
-        self.jangdanRepository.updateJangdanTemplate(targetName: targetName, newJangdan: newData)
-    }
-    
     func deleteCustomJangdan(jangdanName: String) {
         self.jangdanRepository.deleteCustomJangdan(jangdanName: jangdanName)
     }
