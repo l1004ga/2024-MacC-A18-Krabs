@@ -54,9 +54,9 @@ class MetronomeControlViewModel {
     
     enum Action {
         case decreaseShortBpm
-        case decreaseLongBpm(roundedBpm: Int)
+        case decreaseLongBpm(currentBpm: Int)
         case increaseShortBpm
-        case increaseLongBpm(roundedBpm: Int)
+        case increaseLongBpm(currentBpm: Int)
         case roundBpm(currentBpm: Int)
         case estimateBpm
         case toggleActiveState(isIncreasing: Bool, isActive: Bool)
@@ -69,13 +69,15 @@ class MetronomeControlViewModel {
         case .decreaseShortBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
             self.taptapUseCase.finishTapping()
-        case let .decreaseLongBpm(roundedBpm):
+        case let .decreaseLongBpm(currentBpm):
+            let roundedBpm = currentBpm - (currentBpm % 10)
             self.tempoUseCase.updateTempo(newBpm: roundedBpm - 10)
             self.taptapUseCase.finishTapping()
         case .increaseShortBpm:
             self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
             self.taptapUseCase.finishTapping()
-        case let .increaseLongBpm(roundedBpm):
+        case let .increaseLongBpm(currentBpm):
+            let roundedBpm = currentBpm - (currentBpm % 10)
             self.tempoUseCase.updateTempo(newBpm: roundedBpm + 10)
             self.taptapUseCase.finishTapping()
         case let .roundBpm(currentBpm):

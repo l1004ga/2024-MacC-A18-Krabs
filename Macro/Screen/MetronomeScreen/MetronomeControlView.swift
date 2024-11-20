@@ -123,11 +123,6 @@ struct MetronomeControlView: View {
         .padding(.horizontal, 16)
     }
     
-    func roundedBpm(currentBpm: Int) -> Int {
-        
-        return currentBpm - (currentBpm % 10)
-    }
-    
     private func startTimer(isIncreasing: Bool) {
         controlViewModel.effect(action: .setSpeed(speed: 0.5))
         stopTimer()
@@ -135,13 +130,11 @@ struct MetronomeControlView: View {
             .autoconnect()
             .sink { _ in
                 if isIncreasing {
-                    let newBpm = roundedBpm(currentBpm: controlViewModel.state.bpm)
-                    self.controlViewModel.effect(action: .increaseLongBpm(roundedBpm: newBpm))
+                    self.controlViewModel.effect(action: .increaseLongBpm(currentBpm: controlViewModel.state.bpm))
                     controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 } else {
-                    let newBpm = roundedBpm(currentBpm: controlViewModel.state.bpm) + 10
-                    self.controlViewModel.effect(action: .decreaseLongBpm(roundedBpm: newBpm))
+                    self.controlViewModel.effect(action: .decreaseLongBpm(currentBpm: controlViewModel.state.bpm))
                     controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 }
@@ -155,11 +148,11 @@ struct MetronomeControlView: View {
             .autoconnect()
             .sink { _ in
                 if isIncreasing {
-                    self.controlViewModel.effect(action: .increaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.state.bpm)))
+                    self.controlViewModel.effect(action: .increaseLongBpm(currentBpm: controlViewModel.state.bpm))
                     controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 } else {
-                    self.controlViewModel.effect(action: .decreaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.state.bpm)))
+                    self.controlViewModel.effect(action: .decreaseLongBpm(currentBpm: controlViewModel.state.bpm))
                     controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 }
