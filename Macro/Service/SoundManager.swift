@@ -81,7 +81,7 @@ class SoundManager {
 }
 
 // Sound Set 변경
-extension SoundManager {
+extension SoundManager: SetSoundTypeInterface {
     
     func setSoundType(to type: SoundType) {
         do {
