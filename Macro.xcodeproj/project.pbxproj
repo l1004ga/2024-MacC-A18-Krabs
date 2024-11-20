@@ -19,6 +19,7 @@
 		2BB797B72CE62532008173A5 /* JangdanDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB797B62CE62532008173A5 /* JangdanDataManager.swift */; };
 		2BB797B92CE6253B008173A5 /* JangdanSwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB797B82CE6253B008173A5 /* JangdanSwiftData.swift */; };
 		2BBE523D2CEB7AAF00EF1515 /* ShapeStyle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBE523C2CEB7AAF00EF1515 /* ShapeStyle+Extension.swift */; };
+		2BC4BA012CE371E800A90C1F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4BA002CE371E800A90C1F /* HomeView.swift */; };
 		2BCA580E2CCF5F8700FA08A9 /* TapTapImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580D2CCF5F8700FA08A9 /* TapTapImplement.swift */; };
 		2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */; };
 		2BE5ADE92CABC4570094F3C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE5ADDE2CABC4570094F3C3 /* Preview Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		3C1EB31D2CE4C56D0030FB63 /* MasteryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */; };
 		3C1EB31F2CE4C5C60030FB63 /* MasteryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB31E2CE4C5C60030FB63 /* MasteryUseCase.swift */; };
 		3C1EB3212CE4C60A0030FB63 /* MasteryImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB3202CE4C60A0030FB63 /* MasteryImplement.swift */; };
+		3C1EB3252CEC5D880030FB63 /* SobakSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EB3242CEC5D880030FB63 /* SobakSegmentView.swift */; };
 		3C3D70DF2CBF9FCB002A35AB /* beep_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */; };
 		3C3D70E02CBF9FCB002A35AB /* beep_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */; };
 		3C3D70E12CBF9FCB002A35AB /* beep_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */; };
@@ -94,6 +96,7 @@
 		2BB797B62CE62532008173A5 /* JangdanDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataManager.swift; sourceTree = "<group>"; };
 		2BB797B82CE6253B008173A5 /* JangdanSwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSwiftData.swift; sourceTree = "<group>"; };
 		2BBE523C2CEB7AAF00EF1515 /* ShapeStyle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeStyle+Extension.swift"; sourceTree = "<group>"; };
+		2BC4BA002CE371E800A90C1F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2BCA580D2CCF5F8700FA08A9 /* TapTapImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapImplement.swift; sourceTree = "<group>"; };
 		2BCA580F2CCF7CA600FA08A9 /* ReflectTempoInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectTempoInterface.swift; sourceTree = "<group>"; };
 		2BE5AD382C9EC9030094F3C3 /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,7 @@
 		3C1EB31C2CE4C56D0030FB63 /* MasteryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryDataSource.swift; sourceTree = "<group>"; };
 		3C1EB31E2CE4C5C60030FB63 /* MasteryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryUseCase.swift; sourceTree = "<group>"; };
 		3C1EB3202CE4C60A0030FB63 /* MasteryImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryImplement.swift; sourceTree = "<group>"; };
+		3C1EB3242CEC5D880030FB63 /* SobakSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SobakSegmentView.swift; sourceTree = "<group>"; };
 		3C3D70DC2CBF9FCB002A35AB /* beep_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_medium.wav; sourceTree = "<group>"; };
 		3C3D70DD2CBF9FCB002A35AB /* beep_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_strong.wav; sourceTree = "<group>"; };
 		3C3D70DE2CBF9FCB002A35AB /* beep_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_weak.wav; sourceTree = "<group>"; };
@@ -211,6 +215,14 @@
 				3C1EB31A2CE492560030FB63 /* MastaryRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		2BC4B9FF2CE371DB00A90C1F /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2BC4BA002CE371E800A90C1F /* HomeView.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		2BE5AD2F2C9EC9030094F3C3 = {
@@ -378,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				572AB1C92CEDCBAA00778B9B /* CustomJangdanListScreen */,
+				2BC4B9FF2CE371DB00A90C1F /* HomeScreen */,
 				43774F612CB7EDB100F54EF7 /* MetronomeScreen */,
 				43774F602CB7EDA300F54EF7 /* JangdanSelectScreen */,
 			);
@@ -403,6 +416,7 @@
 				439ABF072CB8220B003F6343 /* SobakToggleView.swift */,
 				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
 				439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */,
+				3C1EB3242CEC5D880030FB63 /* SobakSegmentView.swift */,
 			);
 			path = MetronomeScreen;
 			sourceTree = "<group>";
@@ -572,6 +586,7 @@
 				572AB1C52CEDC26200778B9B /* CustomJangdanComponentView.swift in Sources */,
 				572AB1C62CEDC26200778B9B /* CustomJangdanListView.swift in Sources */,
 				572AB1C72CEDC26200778B9B /* NoCustomJangdanComponentView.swift in Sources */,
+				3C1EB3252CEC5D880030FB63 /* SobakSegmentView.swift in Sources */,
 				3C6EAFA42CDD1146003F2191 /* TemplateUseCase.swift in Sources */,
 				2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */,
 				2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */,
@@ -596,6 +611,7 @@
 				579839382CE5F37D00866AD4 /* InstrumentEnum.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */,
+				2BC4BA012CE371E800A90C1F /* HomeView.swift in Sources */,
 				3C6EAFA62CDD11B7003F2191 /* TempoUseCase.swift in Sources */,
 				2BB797B72CE62532008173A5 /* JangdanDataManager.swift in Sources */,
 				438226DF2CAE84A0007A3B23 /* TempoImplement.swift in Sources */,

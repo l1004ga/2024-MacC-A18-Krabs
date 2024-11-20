@@ -17,8 +17,6 @@ enum Jangdan: String, CaseIterable {
     case 엇모리
     case 엇중모리
     case 세마치
-    
-    
 //    case 노랫가락58855
     
     var name: String {
@@ -34,6 +32,15 @@ enum Jangdan: String, CaseIterable {
         case .엇중모리: return "엇중모리"
         case .세마치: return "세마치"
 //        case .노랫가락58855: return "노랫가락 5.8.8.5.5"
+        }
+    }
+    
+    var sobakSegmentCount: Int? {
+        switch self {
+        case .진양: return 3
+        case .중모리: return 2
+        case .엇중모리: return 2
+        default: return nil
         }
     }
 }
