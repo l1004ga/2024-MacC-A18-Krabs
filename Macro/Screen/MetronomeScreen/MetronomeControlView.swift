@@ -19,7 +19,7 @@ struct MetronomeControlView: View {
             VStack(spacing: 0) {
                 // 위에 드래그 제스쳐 되어야 하는 영역
                 VStack(spacing: 0) {
-                    if !self.controlViewModel.isTapping {
+                    if !self.controlViewModel.state.isTapping {
                         Text("빠르기(BPM)")
                             .font(.Callout_R)
                             .foregroundStyle(.textTertiary)
@@ -36,7 +36,7 @@ struct MetronomeControlView: View {
                     
                     HStack(spacing: 16){
                         Circle()
-                            .fill(controlViewModel.isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
+                            .fill(controlViewModel.state.isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .frame(width: 56)
                             .overlay {
                                 Image(systemName: "minus")
@@ -50,16 +50,16 @@ struct MetronomeControlView: View {
                                 tapTwiceAction(isIncreasing: false, isPressing: isPressing)
                             }, perform: {})
                         
-                        Text("\(controlViewModel.bpm)")
+                        Text("\(controlViewModel.state.bpm)")
                             .font(.custom("Pretendard-Medium", fixedSize: 64))
-                            .foregroundStyle(self.controlViewModel.isTapping ? .textBPMSearch : .textSecondary)
+                            .foregroundStyle(self.controlViewModel.state.isTapping ? .textBPMSearch : .textSecondary)
                             .frame(width: 120, height: 60)
                             .padding(8)
-                            .background(self.controlViewModel.isTapping ? .backgroundDefault : .clear)
+                            .background(self.controlViewModel.state.isTapping ? .backgroundDefault : .clear)
                             .cornerRadius(16)
                         
                         Circle()
-                            .fill(controlViewModel.isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
+                            .fill(controlViewModel.state.isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
                             .frame(width: 56)
                             .overlay {
                                 Image(systemName: "plus")
@@ -103,12 +103,12 @@ struct MetronomeControlView: View {
                             self.viewModel.effect(action: .changeIsPlaying)
                         }
                     
-                    Text(self.controlViewModel.isTapping ? "탭" : "빠르기\n찾기")
-                        .font(self.controlViewModel.isTapping ? .custom("Pretendard-Regular", size: 28) : .custom("Pretendard-Regular", size: 17))
+                    Text(self.controlViewModel.state.isTapping ? "탭" : "빠르기\n찾기")
+                        .font(self.controlViewModel.state.isTapping ? .custom("Pretendard-Regular", size: 28) : .custom("Pretendard-Regular", size: 17))
                         .multilineTextAlignment(.center)
-                        .foregroundStyle(self.controlViewModel.isTapping ? .textButtonEmphasis : .textButtonPrimary)
+                        .foregroundStyle(self.controlViewModel.state.isTapping ? .textButtonEmphasis : .textButtonPrimary)
                         .frame(width: 120, height: 80)
-                        .background(self.controlViewModel.isTapping ? .buttonActive : .buttonPrimary)
+                        .background(self.controlViewModel.state.isTapping ? .buttonActive : .buttonPrimary)
                         .clipShape(RoundedRectangle(cornerRadius: 100))
                         .onTapGesture {
                             self.controlViewModel.effect(action: .estimateBpm)
@@ -129,20 +129,20 @@ struct MetronomeControlView: View {
     }
     
     private func startTimer(isIncreasing: Bool) {
-        controlViewModel.speed = 0.5
+        controlViewModel.effect(action: .setSpeed(speed: 0.5))
         stopTimer()
-        controlViewModel.timerCancellable = Timer.publish(every: controlViewModel.speed, on: .main, in: .common)
+        controlViewModel.timerCancellable = Timer.publish(every: controlViewModel.state.speed, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 if isIncreasing {
-                    let newBpm = roundedBpm(currentBpm: controlViewModel.bpm)
+                    let newBpm = roundedBpm(currentBpm: controlViewModel.state.bpm)
                     self.controlViewModel.effect(action: .increaseLongBpm(roundedBpm: newBpm))
-                    controlViewModel.speed = max(0.08, controlViewModel.speed * 0.5)
+                    controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 } else {
-                    let newBpm = roundedBpm(currentBpm: controlViewModel.bpm) + 10
+                    let newBpm = roundedBpm(currentBpm: controlViewModel.state.bpm) + 10
                     self.controlViewModel.effect(action: .decreaseLongBpm(roundedBpm: newBpm))
-                    controlViewModel.speed = max(0.08, controlViewModel.speed * 0.5)
+                    controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 }
             }
@@ -151,16 +151,16 @@ struct MetronomeControlView: View {
     
     private func restartTimer(isIncreasing: Bool) {
         stopTimer()
-        controlViewModel.timerCancellable = Timer.publish(every: controlViewModel.speed, on: .main, in: .common)
+        controlViewModel.timerCancellable = Timer.publish(every: controlViewModel.state.speed, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 if isIncreasing {
-                    self.controlViewModel.effect(action: .increaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.bpm)))
-                    controlViewModel.speed = max(0.08, controlViewModel.speed * 0.5)
+                    self.controlViewModel.effect(action: .increaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.state.bpm)))
+                    controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 } else {
-                    self.controlViewModel.effect(action: .decreaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.bpm)))
-                    controlViewModel.speed = max(0.08, controlViewModel.speed * 0.5)
+                    self.controlViewModel.effect(action: .decreaseLongBpm(roundedBpm: roundedBpm(currentBpm: controlViewModel.state.bpm)))
+                    controlViewModel.effect(action: .setSpeed(speed: max(0.08, controlViewModel.state.speed * 0.5)))
                     restartTimer(isIncreasing: isIncreasing)
                 }
             }
@@ -171,28 +171,19 @@ struct MetronomeControlView: View {
         controlViewModel.timerCancellable = nil
     }
     
-    // 증감 active 체크
-    private func toggleActiveState(isIncreasing: Bool, isActive: Bool) {
-        if isIncreasing {
-            controlViewModel.isPlusActive = isActive
-        } else {
-            controlViewModel.isMinusActive = isActive
-        }
-    }
-    
     // 단일탭 액션
     private func tapOnceAction(isIncreasing: Bool) {
             self.controlViewModel.effect(action: isIncreasing ? .increaseShortBpm : .decreaseShortBpm)
         
         
         withAnimation {
-            toggleActiveState(isIncreasing: isIncreasing, isActive: true)
+            controlViewModel.effect(action: .toggleActiveState(isIncreasing: isIncreasing, isActive: true))
         }
         
         // 클릭 후 다시 비활성화 색상
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
-                toggleActiveState(isIncreasing: isIncreasing, isActive: false)
+                controlViewModel.effect(action: .toggleActiveState(isIncreasing: isIncreasing, isActive: false))
             }
         }
     }
@@ -200,7 +191,7 @@ struct MetronomeControlView: View {
     // 롱탭 액션
     private func tapTwiceAction(isIncreasing: Bool, isPressing: Bool) {
         withAnimation {
-            toggleActiveState(isIncreasing: isIncreasing, isActive: isPressing)
+            controlViewModel.effect(action: .toggleActiveState(isIncreasing: isIncreasing, isActive: isPressing))
         }
         
         if isPressing {
@@ -213,28 +204,28 @@ struct MetronomeControlView: View {
     // 드래그 제스쳐 액션
     private func dragAction(gesture: DragGesture.Value) {
         // 현재 위치값을 기준으로 증감 측정
-        let translationDifference = gesture.translation.width - controlViewModel.previousTranslation
+        let translationDifference = gesture.translation.width - controlViewModel.state.previousTranslation
         
         if abs(translationDifference) > threshold {   // 음수값도 있기 때문에 절댓값 사용
             if translationDifference > 0 {
                 self.controlViewModel.effect(action: .increaseShortBpm)
-                controlViewModel.isPlusActive = true
-                controlViewModel.isMinusActive = false
+                controlViewModel.effect(action: .toggleActiveState(isIncreasing: true, isActive: true))
+                controlViewModel.effect(action: .toggleActiveState(isIncreasing: false, isActive: false))
             } else if translationDifference < 0 {
                 self.controlViewModel.effect(action: .decreaseShortBpm)
-                controlViewModel.isMinusActive = true
-                controlViewModel.isPlusActive = false
+                controlViewModel.effect(action: .toggleActiveState(isIncreasing: false, isActive: true))
+                controlViewModel.effect(action: .toggleActiveState(isIncreasing: true, isActive: false))
             }
             
-            controlViewModel.previousTranslation = gesture.translation.width
+            controlViewModel.effect(action: .setPreviousTranslation(position: gesture.translation.width))
         }
     }
     
     // 드래그 제스쳐 끝났을 때
     private func dragEnded() {
-        controlViewModel.isMinusActive = false
-        controlViewModel.isPlusActive = false
-        controlViewModel.previousTranslation = 0
+        controlViewModel.effect(action: .toggleActiveState(isIncreasing: false, isActive: false))
+        controlViewModel.effect(action: .toggleActiveState(isIncreasing: true, isActive: false))
+        controlViewModel.effect(action: .setPreviousTranslation(position: 0))
     }
 }
 

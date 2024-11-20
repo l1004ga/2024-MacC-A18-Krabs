@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@Observable
 class MetronomeControlViewModel {
     
     private var cancelBag: Set<AnyCancellable> = []
@@ -15,38 +16,40 @@ class MetronomeControlViewModel {
     private var taptapUseCase: TapTapUseCase
     private var tempoUseCase: TempoUseCase
     
-    var isMinusActive: Bool
-    var isPlusActive: Bool
-    var previousTranslation: CGFloat
     var timerCancellable: AnyCancellable?
-    var speed: TimeInterval
-    var isTapping: Bool
-    var bpm: Int
     
     init(jangdanRepository: JangdanRepository, taptapUseCase: TapTapUseCase, tempoUseCase: TempoUseCase) {
         self.jangdanRepository = jangdanRepository
         self.taptapUseCase = taptapUseCase
         self.tempoUseCase = tempoUseCase
         
-        self.isPlusActive = false
-        self.isMinusActive = false
-        self.previousTranslation = .zero
         self.timerCancellable = nil
-        self.speed = 0.5
-        self.isTapping = false
-        self.bpm = 60
         
         self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
             guard let self else { return }
-            self.isTapping = isTapping
+            self._state.isTapping = isTapping
         }
         .store(in: &self.cancelBag)
         
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
-            self.bpm = jangdan.bpm
+            self._state.bpm = jangdan.bpm
         }
         .store(in: &self.cancelBag)
+    }
+    
+    private var _state: State = .init()
+    var state: State {
+        return _state
+    }
+    
+    struct State {
+        var isMinusActive: Bool = false
+        var isPlusActive: Bool = false
+        var previousTranslation: CGFloat = .zero
+        var speed: TimeInterval = 0.5
+        var isTapping: Bool = false
+        var bpm: Int = 60
     }
     
     enum Action {
@@ -56,18 +59,21 @@ class MetronomeControlViewModel {
         case increaseLongBpm(roundedBpm: Int)
         case roundBpm(currentBpm: Int)
         case estimateBpm
+        case toggleActiveState(isIncreasing: Bool, isActive: Bool)
+        case setPreviousTranslation(position: CGFloat)
+        case setSpeed(speed: TimeInterval)
     }
     
     func effect(action: Action) {
         switch action {
         case .decreaseShortBpm:
-            self.tempoUseCase.updateTempo(newBpm: self.bpm - 1)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm - 1)
             self.taptapUseCase.finishTapping()
         case let .decreaseLongBpm(roundedBpm):
             self.tempoUseCase.updateTempo(newBpm: roundedBpm - 10)
             self.taptapUseCase.finishTapping()
         case .increaseShortBpm:
-            self.tempoUseCase.updateTempo(newBpm: self.bpm + 1)
+            self.tempoUseCase.updateTempo(newBpm: self._state.bpm + 1)
             self.taptapUseCase.finishTapping()
         case let .increaseLongBpm(roundedBpm):
             self.tempoUseCase.updateTempo(newBpm: roundedBpm + 10)
@@ -76,6 +82,16 @@ class MetronomeControlViewModel {
             self.tempoUseCase.updateTempo(newBpm: currentBpm)
         case .estimateBpm:
             self.taptapUseCase.tap()
+        case let .toggleActiveState(isIncreasing, isActive):
+            if isIncreasing {
+                self._state.isPlusActive = isActive
+            } else {
+                self._state.isMinusActive = isActive
+            }
+        case let .setPreviousTranslation(position):
+            self._state.previousTranslation = position
+        case let .setSpeed(speed):
+            self._state.speed = speed
         }
     }
 }
