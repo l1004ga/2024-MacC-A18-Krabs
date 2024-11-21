@@ -42,16 +42,6 @@ struct HomeView: View {
                             .onTapGesture {
                                 router.push(.customJangdanList)
                             }
-//                        NavigationLink {
-//                            CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
-//                        } label: {
-//                            Image(systemName: "tray.full.fill")
-//                                .aspectRatio(contentMode: .fit)
-//                                .foregroundStyle(.textSecondary)
-//                                .onTapGesture {
-//                                    router.push("customJangdanList")
-//                                }
-//                        }
                     }
                     
                     

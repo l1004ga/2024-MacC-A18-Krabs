@@ -25,7 +25,7 @@ class Router {
         _ = path.popLast()
     }
     
-    func pop(_: Int) {
-        path.removeLast(path.count)
+    func pop(_ count: Int) {
+        path.removeLast(count)
     }
 }
