@@ -24,6 +24,8 @@ class DIContainer {
         
         self._controlViewModel =
         MetronomeControlViewModel(jangdanRepository: self._jangdanDataSource, taptapUseCase: self._tapTapUseCase, tempoUseCase: self._tempoUseCase)
+        
+        self._homeViewModel = HomeViewModel(metronomeOnOffUseCase: self._metronomeOnOffUseCase)
     }
     
     // ViewModel
@@ -38,6 +40,10 @@ class DIContainer {
         self._controlViewModel
     }
     
+    private var _homeViewModel: HomeViewModel
+    var homeViewModel: HomeViewModel {
+        self._homeViewModel
+    }
     // UseCase Implements
     private var _templateUseCase: TemplateImplement
     private var _tempoUseCase: TempoImplement
