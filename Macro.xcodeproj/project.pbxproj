@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B0BC7BB2CAE72D400FD72D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */; };
 		2B365D202CEEE0E700565F0D /* JangdanTypeSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B365D1F2CEEE0E700565F0D /* JangdanTypeSelectView.swift */; };
+		2B365D222CEEF08A00565F0D /* CustomJangdanCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B365D212CEEF08A00565F0D /* CustomJangdanCreateView.swift */; };
 		2B88610F2CBD2E720036C6DB /* JangdanDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */; };
 		2B8861112CBD2EF10036C6DB /* JangdanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */; };
 		2B8861132CBD34D30036C6DB /* JangdanEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8861122CBD34D30036C6DB /* JangdanEnum.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		2B0BC7BA2CAE72D400FD72D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		2B365D1F2CEEE0E700565F0D /* JangdanTypeSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanTypeSelectView.swift; sourceTree = "<group>"; };
+		2B365D212CEEF08A00565F0D /* CustomJangdanCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanCreateView.swift; sourceTree = "<group>"; };
 		2B88610E2CBD2E720036C6DB /* JangdanDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDataSource.swift; sourceTree = "<group>"; };
 		2B8861102CBD2EF10036C6DB /* JangdanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanRepository.swift; sourceTree = "<group>"; };
 		2B8861122CBD34D30036C6DB /* JangdanEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanEnum.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				572AB1C32CEDC26200778B9B /* CustomJangdanListView.swift */,
 				572AB1C42CEDC26200778B9B /* EmptyJangdanListView.swift */,
 				2B365D1F2CEEE0E700565F0D /* JangdanTypeSelectView.swift */,
+				2B365D212CEEF08A00565F0D /* CustomJangdanCreateView.swift */,
 			);
 			path = CustomJangdanListScreen;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				579839382CE5F37D00866AD4 /* InstrumentEnum.swift in Sources */,
 				2BE5ADF02CABC4570094F3C3 /* MacroApp.swift in Sources */,
 				43774F5C2CB7C1D000F54EF7 /* Font+Extension.swift in Sources */,
+				2B365D222CEEF08A00565F0D /* CustomJangdanCreateView.swift in Sources */,
 				2BC4BA012CE371E800A90C1F /* HomeView.swift in Sources */,
 				3C6EAFA62CDD11B7003F2191 /* TempoUseCase.swift in Sources */,
 				2BB797B72CE62532008173A5 /* JangdanDataManager.swift in Sources */,
