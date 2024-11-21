@@ -57,7 +57,7 @@ struct CustomJangdanListView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            Text("커스텀장단 메트로놈 뷰")
+                            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.name)
                         } label: {
                             
                         }
