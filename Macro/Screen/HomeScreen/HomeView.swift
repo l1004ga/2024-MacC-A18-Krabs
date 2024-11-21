@@ -61,58 +61,44 @@ struct HomeView: View {
                     ScrollView() {
                         // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
                         VStack {
-                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 7), GridItem(.flexible())], spacing: 12) {
+                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
                                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                                    // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
                                     NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
-                                        HStack {
-                                            VStack(alignment: .leading, spacing: 15) {
-                                                Text(jangdan.name)
-                                                
-                                                VStack(alignment: .leading) {
-                                                    HStack(alignment: .bottom) {
-                                                        Text("최근 연습률")
-                                                        Spacer()
-                                                        
-                                                        // TODO: - 조각품 (진), 숙련도도 반영 예정
-                                                        Circle()
-                                                            .frame(width: 60, height: 60)
-                                                    }
-                                                    
-                                                    // TODO: - 숙련도 반영 예정
-                                                    ZStack(alignment: .leading) {
-                                                        RoundedRectangle(cornerRadius: 50)
-                                                            .fill(.black)
-                                                        RoundedRectangle(cornerRadius: 50)
-                                                            .fill(.orange)
-                                                            .frame(width: 40)
-                                                    }
-                                                    .frame(height: 4)
-                                                }
-                                            }
-                                            
-                                            Spacer()
-                                        }
-                                        .tint(.white)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 14)
-                                        .padding(.top, 6)
-                                        .background {
+                                        ZStack {
                                             RoundedRectangle(cornerRadius: 16)
-                                                .fill(.gray)
+                                                .fill(.backgroundCard) // 배경색 설정
+                                                .shadow(radius: 5) // 그림자 효과
+                                            
+                                            Image(.jinyang)
+                                                .resizable()
+                                                .clipShape(Rectangle().offset(y: 100))
+                                                .offset(y: -100)
+                                            
+                                            Text(jangdan.name)
+                                                .font(.Title1_R)
+                                                .foregroundStyle(.textDefault)
+                                                .offset(y: -2.5)
+                                            
+                                            Text("24박 3소박")
+                                                .font(.Body_R)
+                                                .foregroundStyle(.textDefault)
+                                                .offset(y: 30)
                                         }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .aspectRatio(1, contentMode: .fill)
+                                        
                                     }
                                 }
                             }
                         }
                         .padding(.top, 34)
                     }
+                    .scrollIndicators(.hidden)
                     .padding(.horizontal, 16)
                 }
+            }        } else {
+                InstrumentsSelectView()
             }
-        } else {
-            InstrumentsSelectView()
-        }
     }
 }
 
