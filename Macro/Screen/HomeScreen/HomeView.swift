@@ -68,11 +68,13 @@ struct HomeView: View {
                                             RoundedRectangle(cornerRadius: 16)
                                                 .fill(.backgroundCard) // 배경색 설정
                                                 .shadow(radius: 5) // 그림자 효과
-                                            
-                                            Image(.jinyang)
-                                                .resizable()
-                                                .clipShape(Rectangle().offset(y: 100))
-                                                .offset(y: -100)
+                                                .overlay {
+                                                    Image("\(jangdan.englishName)")
+                                                        .resizable()
+                                                        .frame(width: 225, height: 225)
+                                                        .offset(y: -100)
+                                                }
+                                                .clipShape(RoundedRectangle(cornerRadius: 16))
                                             
                                             Text(jangdan.name)
                                                 .font(.Title1_R)
@@ -86,7 +88,6 @@ struct HomeView: View {
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .aspectRatio(1, contentMode: .fill)
-                                        
                                     }
                                 }
                             }

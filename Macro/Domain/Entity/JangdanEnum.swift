@@ -35,6 +35,21 @@ enum Jangdan: String, CaseIterable {
         }
     }
     
+    var englishName: String {
+        switch self {
+        case .진양: return "Jinyang"
+        case .중모리: return "Jungmori"
+        case .중중모리: return "Jungjungmori"
+        case .자진모리: return "Jajinmori"
+        case .굿거리: return "Gutgeori"
+        case .휘모리: return "Hwimori"
+        case .동살풀이: return "Dongsalpuri"
+        case .엇모리: return "Eotmori"
+        case .엇중모리: return "Eotjungmori"
+        case .세마치: return "Semachi"
+        }
+    }
+    
     var sobakSegmentCount: Int? {
         switch self {
         case .진양: return 3
