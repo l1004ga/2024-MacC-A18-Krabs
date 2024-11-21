@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct JangdanTypeSelectView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("만들 장단의\n종류를 선택해주세요.")
@@ -33,6 +35,29 @@ struct JangdanTypeSelectView: View {
             }
             
         }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            // 뒤로가기버튼
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.textDefault)
+                }
+            }
+            
+            // Title
+            ToolbarItem(placement: .principal) {
+                Text("장단 만들기")
+                    .font(.Body_R)
+                    .foregroundStyle(.textSecondary)
+            }
+        }
+        .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarTitleDisplayMode(.inline)
     }
 }
 
