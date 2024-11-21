@@ -59,6 +59,21 @@ enum Jangdan: String, CaseIterable {
         }
     }
     
+    var bakInformation: String {
+        switch self {
+        case .진양: return "24박 3소박"
+        case .중모리: return "12박 2소박"
+        case .중중모리: return "4박 3소박"
+        case .자진모리: return "4박 3소박"
+        case .굿거리: return "4박 3소박"
+        case .휘모리: return "4박 2소박"
+        case .동살풀이: return "4박 2소박"
+        case .엇모리: return "4박 3+2소박"
+        case .엇중모리: return "6박 2소박"
+        case .세마치: return "3박 3소박"
+        }
+    }
+    
     var bakData: String {
         switch self {
         case .동살풀이: return "4박 2소박"

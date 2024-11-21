@@ -81,7 +81,7 @@ struct HomeView: View {
                                                 .foregroundStyle(.textDefault)
                                                 .offset(y: -2.5)
                                             
-                                            Text("24박 3소박")
+                                            Text(jangdan.bakInformation)
                                                 .font(.Body_R)
                                                 .foregroundStyle(.textDefault)
                                                 .offset(y: 30)
