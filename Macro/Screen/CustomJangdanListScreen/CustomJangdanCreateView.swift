@@ -16,6 +16,7 @@ struct CustomJangdanCreateView: View {
     
     @State private var isSobakOn: Bool = false
     
+    @State private var backButtonAlert: Bool = false
     @State private var initialJangdanAlert: Bool = false
     @State private var exportJandanAlert: Bool = false
     @State private var inputCustomJangdanName: String = ""
@@ -53,20 +54,32 @@ struct CustomJangdanCreateView: View {
             self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
             self.isSobakOn = false
         }
+        .onChange(of: isSobakOn) {
+            self.viewModel.effect(action: .changeSobakOnOff)
+        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            // TODO: - Alert 띄우기 - 저장하지 않고 나갈건가용?
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
+                Button {
                     self.viewModel.effect(action: .stopMetronome)
-                    dismiss()
-                }) {
+                    backButtonAlert = true
+                } label: {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
                 }
+                .alert("저장하지 않고\n나가시겠습니까?", isPresented: $backButtonAlert) {
+                    HStack{
+                        Button("확인") {
+                            self.viewModel.effect(action: .stopMetronome)
+                            dismiss()
+                        }
+                        Button("취소") { }
+                    }
+                }
             }
+            
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
@@ -75,10 +88,11 @@ struct CustomJangdanCreateView: View {
                     .foregroundStyle(.textSecondary)
             }
             
+            // 현재 장단 저장하기
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
+                    // 초기화 버튼
                     Button {
-                        // TODO: 데이터 초기화
                         initialJangdanAlert = true
                     } label: {
                         Image(systemName: "arrow.counterclockwise")
@@ -96,18 +110,21 @@ struct CustomJangdanCreateView: View {
                         Text("기본값으로 되돌리겠습니까?")
                     }
                     
-                    // TODO: - 완료
+                    // 장단 저장 버튼
                     Button {
-                        
+                        exportJandanAlert = true
                     } label: {
                         Text("완료")
+                            .font(.Body_R)
+                            .foregroundStyle(.textDefault)
                     }
                     .alert("저장할 장단 이름", isPresented: $exportJandanAlert) {
-                        TextField("장단명", text: $inputCustomJangdanName)
+                        TextField("이름", text: $inputCustomJangdanName)
                         HStack{
                             Button("취소") { }
                             Button("확인") {
                                 self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                dismiss()
                             }
                         }
                     } message: {

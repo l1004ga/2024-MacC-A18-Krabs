@@ -113,13 +113,14 @@ extension JangdanDataManager: JangdanRepository {
         return jangdanList
     }
     // MARK: 여기에 악기에 대한 정보는 들어가야 하지 않을까요 해당하는 악기의 커스텀 장단만 불러오도록
-    func fetchCustomJangdanNames(instrument: String) -> [String] {
-        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument}
+    func fetchAllCustomJangdan(instrument: Instrument) -> [JangdanEntity] {
+        let instrument = instrument.rawValue
+        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument }
         let descriptor = FetchDescriptor(predicate: predicate)
         
         do {
             let jangdanList = try context.fetch(descriptor)
-            return jangdanList.map { $0.name }
+            return jangdanList.map { mapToJangdanEntity(model: $0) }
             
         } catch {
             print("모든 커스텀 장단 이름을 가져오는 중 오류 발생: \(error.localizedDescription)")
@@ -138,7 +139,7 @@ extension JangdanDataManager: JangdanRepository {
         
         do {
             let results = try context.fetch(descriptor)
-            return !results.isEmpty
+            return results.isEmpty
         } catch {
             print("중복 이름 확인 중 오류 발생: \(error.localizedDescription)")
             return true // 오류가 발생하면 기본적으로 중복된 것으로 간주

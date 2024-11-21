@@ -5,9 +5,11 @@
 //  Created by leejina on 11/8/24.
 //
 
+import Foundation
+
 protocol TemplateUseCase {
     var allDefaultJangdanTemplateNames: [String] { get }
-    var allCustomJangdanTemplateNames: [String] { get }
+    var allCustomJangdanTemplate: [JangdanEntity] { get }
     
     func setJangdan(jangdanName: String)
     
