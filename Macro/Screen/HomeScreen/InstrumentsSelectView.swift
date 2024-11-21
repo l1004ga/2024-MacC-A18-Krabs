@@ -10,14 +10,45 @@ import SwiftUI
 struct InstrumentsSelectView: View {
     
     @State private var isSelected: Bool = false
+    @State private var instrumentType: Instrument?
     
     var body: some View {
         ZStack {
             VStack {
                 // 뷰 정렬의 기준점 : vertical 기준 가운데 위치해야 함
                 HStack(spacing: 12) {
-                    RoundedRectangle(cornerRadius: 16)
-                    RoundedRectangle(cornerRadius: 16)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(self.isSelected ? self.instrumentType == .북 ? .buttonActive : .backgroundCard : .backgroundCard)
+                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .북 ? 4 : 0 : 0)
+                            .opacity(self.isSelected ? self.instrumentType == .북 ? 0.2 : 1 : 1)
+                        Image(self.isSelected ? self.instrumentType == .북 ? .bukActive : .bukDefault : .bukDefault)
+                            .resizable()
+                            .frame(width: 96, height: 96)
+                        Text("북")
+                            .font(.Title2_B)
+                            .foregroundStyle(self.isSelected ? self.instrumentType == .북 ? .textDefault : .textTertiary : .textTertiary)
+                    }
+                    .onTapGesture {
+                        self.isSelected = true
+                        self.instrumentType = .북
+                    }
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(self.isSelected ? self.instrumentType == .장구 ? .buttonActive : .backgroundCard : .backgroundCard)
+                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .장구 ? 4 : 0 : 0)
+                            .opacity(self.isSelected ? self.instrumentType == .장구 ? 0.2 : 1 : 1)
+                        Image(self.isSelected ? self.instrumentType == .장구 ? .jangGuActive : .jangGuDefault : .jangGuDefault)
+                            .resizable()
+                            .frame(width: 96, height: 96)
+                        Text("장구")
+                            .font(.Title2_B)
+                            .foregroundStyle(self.isSelected ? self.instrumentType == .장구 ? .textDefault : .textTertiary : .textTertiary)
+                    }
+                    .onTapGesture {
+                        self.isSelected = true
+                        self.instrumentType = .장구
+                    }
                 }
                 .frame(height: 272)
                 .padding(.horizontal, 24)
