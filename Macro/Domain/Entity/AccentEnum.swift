@@ -31,14 +31,3 @@ extension Accent: Comparable {
         }
     }
 }
-
-extension Accent {
-    static func from(rawValue: String) -> Accent {
-        switch rawValue {
-        case "strong": return .strong
-        case "medium": return .medium
-        case "weak": return .weak
-        default: return .none
-        }
-    }
-}
