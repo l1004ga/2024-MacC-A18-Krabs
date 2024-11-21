@@ -5,6 +5,8 @@
 //  Created by Lee Wonsun on 10/3/24.
 //
 
+import Foundation
+
 class TemplateImplement {
     // 장단의 정보를 저장하고 있는 레이어
     private var jangdanRepository: JangdanRepository
@@ -29,12 +31,9 @@ extension TemplateImplement: TemplateUseCase {
         Jangdan.allCases.map { $0.name }
     }
     
-    var allCustomJangdanTemplateNames: [String] {
-        return jangdanRepository.fetchCustomJangdanNames(instrument: instrument.rawValue)
-    }
-    
-    var allBasicJangdanTemplateNames: [String] {
-        return jangdanRepository.fetchBasicJangdanNames(instrument: instrument.rawValue)
+    var allCustomJangdanTemplate: [(type: Jangdan, name: String, lastUpdate: Date)] {
+        return []
+//        return jangdanRepository.fetchCustomJangdanNames(instrument: instrument.rawValue)
     }
     
     //MARK: 장단 고를때 악기까지 올 수 있도록 변경해야 함 예시로 .장구 넣어둠
