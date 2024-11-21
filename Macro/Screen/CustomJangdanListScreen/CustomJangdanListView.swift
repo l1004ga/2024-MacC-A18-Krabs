@@ -72,6 +72,9 @@ struct CustomJangdanListView: View {
                 }
             }
         }
+        .task {
+            self.viewModel.effect(action: .fatchCustomJangdanData)
+        }
         .listStyle(.plain)
         .listRowSpacing(12)
         .padding(.top, 32)
