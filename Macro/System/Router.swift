@@ -19,10 +19,10 @@ enum Route: Hashable {
 @Observable
 class Router {
 
-    var path: [Route] = .init()
+    var path: [Int] = .init()
     
-    func push(_ route: Route) {
-        path.append(route)
+    func push(_ num: Int) {
+        path.append(num)
     }
     
     func pop() {

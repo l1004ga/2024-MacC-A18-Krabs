@@ -15,22 +15,6 @@ struct MacroApp: App {
         WindowGroup {
             NavigationStack(path: $router.path) {
                 HomeView()
-                    .navigationDestination(for: Route.self) { path in
-                        switch path {
-                        case .homeScreen:
-                            HomeView()
-                        case .metoronomeScreen:
-                            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: <#String#>)
-                        case .customJangdanListScreen:
-                            CustomJangdanListView()
-                        case .customJangdanTypeSelectScreen:
-                            JangdanTypeSelectView()
-                        case .customJangdanCreateScreen:
-                            CustomJangdanCreateView()
-                        case .customJangdanPracticeScreen:
-                            MetronomeView()
-                        }
-                    }
             }
         }
         .environment(router)
