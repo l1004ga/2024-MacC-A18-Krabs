@@ -43,7 +43,8 @@ class MetronomeViewModel {
     }
     
     struct State {
-        var currentJangdan: Jangdan?
+        var currentJangdanName: String?
+        var currentJangdanType: Jangdan?
         var jangdanAccent: [[[Accent]]] = []
         var bakCount: Int = 0
         var daebakCount: Int = 0
@@ -55,13 +56,15 @@ class MetronomeViewModel {
     }
     
     enum Action {
-        case selectJangdan(jangdan: Jangdan)
+        case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
         case changeIsPlaying
         case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)
         case stopMetronome
         case estimateBpm
-        case createCustomJangdan
+        case createCustomJangdan(newJangdanName: String)
+        case initialJangdan
+        case changeSoundType
     }
     
     private func updateStatePerBak() {
@@ -95,9 +98,9 @@ class MetronomeViewModel {
     
     func effect(action: Action) {
         switch action {
-        case let .selectJangdan(jangdan):
-            self._state.currentJangdan = jangdan
-            self.templateUseCase.setJangdan(jangdanName: jangdan.name)
+        case let .selectJangdan(jangdanName):
+            self._state.currentJangdanName = jangdanName
+            self.templateUseCase.setJangdan(jangdanName: jangdanName)
             self.initialDaeSoBakIndex()
             self.taptapUseCase.finishTapping()
             self._state.isSobakOn = false
@@ -122,8 +125,14 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.stop()
         case .estimateBpm:
             self.taptapUseCase.tap()
-        case .createCustomJangdan:
-            print("test")
+        case let .createCustomJangdan(newJangdanName):
+            // MARK: 추후 이름 중복 등으로 인해서 생성 실패 시 Error 받아서 사용자 알림 처리 필요
+            try? self.templateUseCase.createCustomJangdan(newJangdanName: newJangdanName)
+        case .initialJangdan:
+            guard let currentJangdanName = self.state.currentJangdanName else { return }
+            self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
+        case .changeSoundType:
+            self.metronomeOnOffUseCase.setSoundType()
         }
     }
 }

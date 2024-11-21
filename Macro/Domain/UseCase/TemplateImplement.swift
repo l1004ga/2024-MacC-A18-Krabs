@@ -39,7 +39,7 @@ extension TemplateImplement: TemplateUseCase {
     
     //MARK: 장단 고를때 악기까지 올 수 있도록 변경해야 함 예시로 .장구 넣어둠
     func setJangdan(jangdanName: String) {
-        self.jangdanRepository.fetchJangdanData(jangdanName: jangdanName, instrument: instrument.rawValue)
+        self.jangdanRepository.fetchJangdanData(jangdanName: jangdanName)
     }
     
     // MARK: - Custom Template CRUD Logic

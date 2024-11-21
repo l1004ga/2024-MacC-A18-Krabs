@@ -9,4 +9,5 @@ protocol MetronomeOnOffUseCase {
     func changeSobak()
     func play(_ tickHandler: @escaping () -> Void )
     func stop()
+    func setSoundType()
 }
