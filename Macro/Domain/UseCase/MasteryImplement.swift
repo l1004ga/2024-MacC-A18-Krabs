@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+// MARK: 숙련도 기능 미사용
 class MasteryImplement {
     private var jangdanRepository: JangdanRepository
     private var masteryRepository: MasteryRepository

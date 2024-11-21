@@ -93,6 +93,10 @@ extension MetronomeOnOffImplement: MetronomeOnOffUseCase {
         self.timer = nil
     }
     
+    func setSoundType() {
+        self.soundManager.setSoundType()
+    }
+    
     private func timerHandler() {
         let accent: Accent = jangdanAccentList[self.currentBeatIndex % jangdanAccentList.count]
         self.soundManager.beep(accent)

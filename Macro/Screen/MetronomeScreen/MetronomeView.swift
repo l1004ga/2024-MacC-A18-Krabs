@@ -10,10 +10,12 @@ import Combine
 
 struct MetronomeView: View {
     
+    @AppStorage("isBeepSound") var isBeepSound: Bool = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
     
-    @State private var jangdan: Jangdan
+    private var jangdanName: String
     @State private var isSobakOn: Bool = false
     
     @State private var initialJangdanAlert: Bool = false
@@ -23,14 +25,11 @@ struct MetronomeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
-    @AppStorage("isBeepSound") var isBeepSound: Bool = false
-    
-    init(viewModel: MetronomeViewModel, jangdan: Jangdan) {
-        self.jangdan = jangdan
+    init(viewModel: MetronomeViewModel, jangdanName: String) {
+        self.jangdanName = jangdanName
         self.viewModel = viewModel
     }
-    
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -44,10 +43,10 @@ struct MetronomeView: View {
                         currentSobak: viewModel.state.currentSobak
                     ) { row, daebak, sobak, newAccent in
                         withAnimation {
-                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, accent: newAccent))
+                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
                         }
                     }
-                    if let sobakSegmentCount = self.viewModel.state.currentJangdan?.sobakSegmentCount {
+                    if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
                         SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
                     }
                 }
@@ -72,15 +71,14 @@ struct MetronomeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdan)
+            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
                 .padding(.bottom, 16)
-            
-            
+
             MetronomeControlView(viewModel: viewModel)
             
         }
         .task {
-            self.viewModel.effect(action: .selectJangdan(jangdan: jangdan))
+            self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
             self.isSobakOn = self.viewModel.state.isSobakOn
         }
         .onChange(of: isSobakOn) {
@@ -102,7 +100,7 @@ struct MetronomeView: View {
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
-                Text("\(jangdan.name)")
+                Text(jangdanName)
                     .font(.Body_R)
                     .foregroundStyle(.textSecondary)
                     .padding(.trailing, 6)
@@ -122,7 +120,7 @@ struct MetronomeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                // TODO: 완료 시 선택된장단 데이터 초기화
+                                self.viewModel.effect(action: .initialJangdan)
                             }
                         }
                     } message: {
@@ -132,6 +130,7 @@ struct MetronomeView: View {
                     Menu {
                         Button {
                             isBeepSound.toggle()
+                            self.viewModel.effect(action: .changeSoundType)
                         } label: {
                             HStack {
                                 if isBeepSound {
@@ -156,9 +155,7 @@ struct MetronomeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                // TODO: 완료 실행 시 장단 저장 프로세스 추가 필요
-                                //
-                                
+                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
                                 toastAction = true
                             }
                         }

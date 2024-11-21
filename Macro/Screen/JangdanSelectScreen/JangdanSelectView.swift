@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: 사용하지 않는 뷰 삭제 필요
 struct JangdanSelectView: View {
     
     var body: some View {
@@ -18,15 +19,14 @@ struct JangdanSelectView: View {
                     .foregroundStyle(.textDefault)
                     .padding(.leading, 16)
                 
-                List {
-                    ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                        NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdan: jangdan)) {
-                            Text("\(jangdan)")
-                                .padding(.vertical, 9)
-                        }
-                    }
-                }
-                
+//                List {
+//                    ForEach(Jangdan.allCases, id: \.self) { jangdan in
+//                        NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.)) {
+//                            Text("\(jangdan)")
+//                                .padding(.vertical, 9)
+//                        }
+//                    }
+//                }
             }
             .padding(.top, 40)
         }

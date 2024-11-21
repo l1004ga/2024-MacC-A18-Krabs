@@ -27,45 +27,15 @@ struct HomeView: View {
                     }
                     
                     Spacer()
-                }
-                
-                // MARK: - 장식용 멘트
-                Text("한배를 완벽하게 깎아봐요")
-                    .padding(.vertical, 52)
-                
-                // MARK: - 커스텀 장단 목록 (가로 스크롤)
-                VStack {
-                    HStack {
-                        Text("내가 저장한 장단")
-                        Spacer()
-                        // TODO: - 더보기뷰로 가는 버튼 (진)
-                        Text("더보기")
-                    }
-                    
-                    // TODO: - 진짜로 저장돼있는 장단 불러오기
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 8) {
-                            ForEach(0..<4) { _ in
-                                // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
-                                HStack {
-                                    VStack(alignment: .leading, spacing: 18) {
-                                        Text("자진모리")
-                                        Text("흥부가 돈타령")
-                                    }
-                                    Spacer()
-                                }
-                                .frame(width: 150)
-                                .padding(.horizontal, 14)
-                                .padding(.top, 16)
-                                .padding(.bottom, 22)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .fill(.gray)
-                                }
-                            }
-                        }
+                    NavigationLink {
+                        CustomJangdanListView(jangdanList: [])
+                    } label: {
+                        Image(systemName: "tray.full.fill")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textSecondary)
                     }
                 }
+            
                 
                 // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
                 VStack {
@@ -77,7 +47,7 @@ struct HomeView: View {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 7), GridItem(.flexible())], spacing: 12) {
                         ForEach(Jangdan.allCases, id: \.self) { jangdan in
                             // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
-                            NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdan: jangdan)) {
+                            NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 15) {
                                         Text(jangdan.name)
@@ -118,7 +88,9 @@ struct HomeView: View {
                         }
                     }
                 }
+                .padding(.top, 34)
             }
+            .padding(.horizontal, 16)
         }
     }
 }

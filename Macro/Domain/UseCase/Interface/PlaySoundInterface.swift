@@ -8,4 +8,5 @@
 // 소리내는 UseCase용
 protocol PlaySoundInterface {
     func beep(_ accent: Accent)
+    func setSoundType()
 }

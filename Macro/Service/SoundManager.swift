@@ -5,13 +5,20 @@
 //  Created by Yunki on 10/3/24.
 //
 
+import SwiftUI
 import AVFoundation
 
 class SoundManager {
+    
+    @AppStorage("isBeepSound") var isBeepSound: Bool = false
+    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]
+    private var soundType: SoundType
     
     init?() {
+        self.soundType = .beep
         self.engine = AVAudioEngine()
 
         // AudioSession 설정
@@ -23,13 +30,8 @@ class SoundManager {
             return nil
         }
         
-        do {
-            // 사운드 파일을 설정
-            try configureSoundPlayers(weak: "beep_weak", medium: "beep_medium", strong: "beep_strong")
-        } catch {
-            return nil
-        }
-        
+        // SoundType에 따라 configureSoundPlayers 구성
+        self.setSoundType()
         
         // 더미 노드 생성 및 연결
         let dummyNode = AVAudioPlayerNode()
@@ -80,21 +82,6 @@ class SoundManager {
     }
 }
 
-// Sound Set 변경
-extension SoundManager {
-    enum SoundType: String {
-        case beep
-    }
-    
-    func setSoundType(to type: SoundType) {
-        do {
-            try self.configureSoundPlayers(weak: "\(type.rawValue)_weak", medium: "\(type.rawValue)_medium", strong: "\(type.rawValue)_strong")
-        } catch {
-            print("SoundManager: Sound Type 변경 실패 - \(error)")
-        }
-    }
-}
-
 extension SoundManager: PlaySoundInterface {
     
     func beep(_ accent: Accent) {
@@ -118,6 +105,24 @@ extension SoundManager: PlaySoundInterface {
         DispatchQueue.main.asyncAfter(deadline: .now() + bufferLength + 1) { [weak self] in
             guard let self = self else { return }
             self.engine.detach(playerNode)
+        }
+    }
+    
+    func setSoundType() {
+        if self.isBeepSound {
+            self.soundType = .beep
+        } else {
+            switch self.selectInstrument {
+            case .북:
+                self.soundType = .buk
+            case .장구:
+                self.soundType = .jangu
+            }
+        }
+        do {
+            try self.configureSoundPlayers(weak: "\(self.soundType.rawValue)_weak", medium: "\(self.soundType.rawValue)_medium", strong: "\(self.soundType.rawValue)_strong")
+        } catch {
+            print("SoundManager: Sound Type 변경 실패 - \(error)")
         }
     }
 }
