@@ -47,7 +47,7 @@ struct HomeView: View {
                         
                         Spacer()
                         NavigationLink {
-                            CustomJangdanListView(jangdanList: [])
+                            CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
                         } label: {
                             Image(systemName: "tray.full.fill")
                                 .aspectRatio(contentMode: .fit)

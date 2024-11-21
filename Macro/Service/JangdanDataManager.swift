@@ -32,10 +32,10 @@ final class JangdanDataManager {
     private var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
     private var currentJangdan: JangdanEntity = .init(name: "자진모리", bakCount: 0, daebak: 0, bpm: 0, daebakList: [[.init(bakAccentList: [.medium])]], jangdanType: .자진모리, instrument: .장구)
     
-    private func convertToDaebakList(from daebakListStrings: [[[String]]]) -> [[JangdanEntity.Daebak]] {
+    private func convertToDaebakList(from daebakListStrings: [[[Int]]]) -> [[JangdanEntity.Daebak]] {
         return daebakListStrings.map { daebak in
             daebak.map { sobak in
-                JangdanEntity.Daebak(bakAccentList: sobak.compactMap { Accent.from(rawValue: $0) })
+                JangdanEntity.Daebak(bakAccentList: sobak.compactMap { Accent(rawValue: $0) })
             }
         }
     }
@@ -46,7 +46,7 @@ final class JangdanDataManager {
             bakCount: model.bakCount,
             daebak: model.daebak,
             bpm: model.bpm,
-            daebakList: convertToDaebakList(from: model.daebakListStrings),
+            daebakList: convertToDaebakList(from: model.daebakAccentList),
             jangdanType: Jangdan(rawValue: model.jangdanType) ?? .진양,
             instrument: Instrument(rawValue: model.instrument) ?? .장구
         )
@@ -113,13 +113,14 @@ extension JangdanDataManager: JangdanRepository {
         return jangdanList
     }
     // MARK: 여기에 악기에 대한 정보는 들어가야 하지 않을까요 해당하는 악기의 커스텀 장단만 불러오도록
-    func fetchCustomJangdanNames(instrument: String) -> [String] {
-        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument}
+    func fetchAllCustomJangdan(instrument: Instrument) -> [JangdanEntity] {
+        let instrument = instrument.rawValue
+        let predicate = #Predicate<JangdanDataModel> { $0.instrument == instrument }
         let descriptor = FetchDescriptor(predicate: predicate)
         
         do {
             let jangdanList = try context.fetch(descriptor)
-            return jangdanList.map { $0.name }
+            return jangdanList.map { mapToJangdanEntity(model: $0) }
             
         } catch {
             print("모든 커스텀 장단 이름을 가져오는 중 오류 발생: \(error.localizedDescription)")
@@ -138,7 +139,7 @@ extension JangdanDataManager: JangdanRepository {
         
         do {
             let results = try context.fetch(descriptor)
-            return !results.isEmpty
+            return results.isEmpty
         } catch {
             print("중복 이름 확인 중 오류 발생: \(error.localizedDescription)")
             return true // 오류가 발생하면 기본적으로 중복된 것으로 간주
@@ -151,7 +152,7 @@ extension JangdanDataManager: JangdanRepository {
             bakCount: currentJangdan.bakCount,
             daebak: currentJangdan.daebak,
             bpm: currentJangdan.bpm,
-            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
+            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
             jangdanType: currentJangdan.jangdanType.rawValue,
             instrument: currentJangdan.instrument.rawValue
         )

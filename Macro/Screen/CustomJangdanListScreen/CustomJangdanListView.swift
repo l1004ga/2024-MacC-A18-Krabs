@@ -10,17 +10,17 @@ import SwiftUI
 struct CustomJangdanListView: View {
     @Environment(\.dismiss) var dismiss
     
-    let jangdanList: [(jangdanType: Jangdan, customJangdanName: String, createdDate: Date)]
+    @State var viewModel: CustomJangdanListViewModel
     
     var body: some View {
         List {
-            if jangdanList.isEmpty {
+            if self.viewModel.state.customJangdanList.isEmpty {
                 ZStack {
                     EmptyJangdanListView()
                         .padding(.horizontal, 16)
                     
                     NavigationLink {
-                        Text("커스텀장단 생성 뷰")
+                        JangdanTypeSelectView()
                     } label: {
                         
                     }
@@ -30,22 +30,22 @@ struct CustomJangdanListView: View {
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 .listRowSeparator(.hidden)
             } else {
-                ForEach(jangdanList, id: \.customJangdanName) { jangdan in
+                ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
                     ZStack {
                         HStack(alignment: .top, spacing: 12) {
                             VStack(alignment: .leading, spacing: 12) {
-                                Text(jangdan.jangdanType.name)
+                                Text(jangdan.type.name)
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
                                 
-                                Text(jangdan.customJangdanName)
+                                Text(jangdan.name)
                                     .font(.Title3_R)
                                     .foregroundStyle(.textDefault)
                             }
                             
                             Spacer()
                             
-                            Text("날짜")
+                            Text(jangdan.lastUpdate.format("yyyy.MM.dd."))
                                 .font(.Subheadline_R)
                                 .foregroundStyle(.textSecondary)
                         }
@@ -57,7 +57,7 @@ struct CustomJangdanListView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            Text("커스텀장단 메트로놈 뷰")
+                            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.name)
                         } label: {
                             
                         }
@@ -71,6 +71,9 @@ struct CustomJangdanListView: View {
                     
                 }
             }
+        }
+        .task {
+            self.viewModel.effect(action: .fatchCustomJangdanData)
         }
         .listStyle(.plain)
         .listRowSpacing(12)
@@ -94,6 +97,7 @@ struct CustomJangdanListView: View {
                     .foregroundStyle(.textSecondary)
             }
             
+            // MARK: - EditMode
             ToolbarItem(placement: .topBarTrailing) {
                 EditButton()
                     .foregroundStyle(.textDefault)
@@ -104,8 +108,4 @@ struct CustomJangdanListView: View {
         .toolbarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
     }
-}
-
-#Preview {
-    CustomJangdanListView(jangdanList: [])
 }
