@@ -32,10 +32,10 @@ final class JangdanDataManager {
     private var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
     private var currentJangdan: JangdanEntity = .init(name: "자진모리", bakCount: 0, daebak: 0, bpm: 0, daebakList: [[.init(bakAccentList: [.medium])]], jangdanType: .자진모리, instrument: .장구)
     
-    private func convertToDaebakList(from daebakListStrings: [[[String]]]) -> [[JangdanEntity.Daebak]] {
+    private func convertToDaebakList(from daebakListStrings: [[[Int]]]) -> [[JangdanEntity.Daebak]] {
         return daebakListStrings.map { daebak in
             daebak.map { sobak in
-                JangdanEntity.Daebak(bakAccentList: sobak.compactMap { Accent.from(rawValue: $0) })
+                JangdanEntity.Daebak(bakAccentList: sobak.compactMap { Accent(rawValue: $0) })
             }
         }
     }
@@ -46,7 +46,7 @@ final class JangdanDataManager {
             bakCount: model.bakCount,
             daebak: model.daebak,
             bpm: model.bpm,
-            daebakList: convertToDaebakList(from: model.daebakListStrings),
+            daebakList: convertToDaebakList(from: model.daebakAccentList),
             jangdanType: Jangdan(rawValue: model.jangdanType) ?? .진양,
             instrument: Instrument(rawValue: model.instrument) ?? .장구
         )
@@ -152,7 +152,7 @@ extension JangdanDataManager: JangdanRepository {
             bakCount: currentJangdan.bakCount,
             daebak: currentJangdan.daebak,
             bpm: currentJangdan.bpm,
-            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { String($0.rawValue) } } },
+            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
             jangdanType: currentJangdan.jangdanType.rawValue,
             instrument: currentJangdan.instrument.rawValue
         )
