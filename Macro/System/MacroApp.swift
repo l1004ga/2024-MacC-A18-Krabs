@@ -10,8 +10,6 @@ import SwiftUI
 @main
 struct MacroApp: App {
     
-    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
-    
     var body: some Scene {
         WindowGroup {
             HomeView()
