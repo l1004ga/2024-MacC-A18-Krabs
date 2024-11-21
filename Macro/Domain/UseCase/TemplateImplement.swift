@@ -32,8 +32,9 @@ extension TemplateImplement: TemplateUseCase {
     }
     
     var allCustomJangdanTemplate: [(type: Jangdan, name: String, lastUpdate: Date)] {
-        return []
-//        return jangdanRepository.fetchCustomJangdanNames(instrument: instrument.rawValue)
+        return jangdanRepository.fetchAllCustomJangdan(instrument: .장구).map { jangdanEntity in
+            return (jangdanEntity.jangdanType, jangdanEntity.name, .now)
+        }
     }
     
     //MARK: 장단 고를때 악기까지 올 수 있도록 변경해야 함 예시로 .장구 넣어둠
