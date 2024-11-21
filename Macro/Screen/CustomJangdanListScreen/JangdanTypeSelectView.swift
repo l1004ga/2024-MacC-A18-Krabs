@@ -25,6 +25,7 @@ struct JangdanTypeSelectView: View {
                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
                     NavigationLink {
                         // MARK: - CustomJangdanCreateView 로 이동
+                        CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.name)
                     } label: {
                         Text(jangdan.name)
                             .foregroundStyle(.primary)
