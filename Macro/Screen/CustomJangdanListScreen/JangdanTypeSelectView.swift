@@ -17,6 +17,7 @@ struct JangdanTypeSelectView: View {
                 .font(.Title1_R)
                 .foregroundStyle(.textDefault)
                 .padding(.leading, 20)
+                .padding(.top, 36)
                 
             
             List {
