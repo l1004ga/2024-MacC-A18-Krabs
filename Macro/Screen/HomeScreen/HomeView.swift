@@ -30,12 +30,13 @@ struct HomeView: View {
                                 self.viewModel.effect(action: .changeSoundType)
                             }
                         } label: {
-                            HStack {
+                            HStack(spacing: 12) {
                                 Text("\(self.selectInstrument)")
+                                    .font(.Callout_R)
                                 Image(systemName: "chevron.down")
                             }
                             .padding(.horizontal, 14)
-                            .frame(height: 38)
+                            .frame(width: 87, height: 42)
                             .background {
                                 RoundedRectangle(cornerRadius: 35)
                                     .stroke(lineWidth: 4)
@@ -55,15 +56,11 @@ struct HomeView: View {
                         .frame(width: 44, height: 44)
                     }
                     .padding(.horizontal, 16)
+                    .padding(.top, 17)
                     
                     ScrollView() {
                         // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
                         VStack {
-                            HStack {
-                                Text("기본 장단")
-                                Spacer()
-                            }
-                            
                             LazyVGrid(columns: [GridItem(.flexible(), spacing: 7), GridItem(.flexible())], spacing: 12) {
                                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
                                     // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
