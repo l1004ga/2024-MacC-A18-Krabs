@@ -9,29 +9,45 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
     @Environment(Router.self) var router
+  
+    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
+    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    
+    @State var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         if self.isSelectedInstrument {
             NavigationStack(path: Binding(
-                get: { router.path },
-                set: { router.path = $0 }
-            )) {
-                ScrollView {
-                    // MARK: - 악기 선택 버튼(예정)
+                get: { router.path },set: { router.path = $0 }
+            )) 
+                {
+                VStack {
                     HStack {
-                        HStack {
-                            Text("장구")
-                            Image(systemName: "chevron.down")
-                        }
-                        .padding(.horizontal, 14)
-                        .frame(height: 38)
-                        .background {
-                            RoundedRectangle(cornerRadius: 35)
-                                .stroke(lineWidth: 4)
-                                .clipShape(RoundedRectangle(cornerRadius: 35))
+                        Menu {
+                            Button("북") {
+                                self.selectInstrument = .북
+                                self.viewModel.effect(action: .changeSoundType)
+                            }
+                            Button("장구") {
+                                self.selectInstrument = .장구
+                                self.viewModel.effect(action: .changeSoundType)
+                            }
+                        } label: {
+                            HStack(spacing: 12) {
+                                Text("\(self.selectInstrument)")
+                                    .font(.Callout_R)
+                                Image(systemName: "chevron.down")
+                            }
+                            .padding(.horizontal, 14)
+                            .frame(width: 87, height: 42)
+                            .background {
+                                RoundedRectangle(cornerRadius: 35)
+                                    .stroke(lineWidth: 4)
+                                    .clipShape(RoundedRectangle(cornerRadius: 35))
+                            }
+                            .foregroundStyle(.buttonReverse)
                         }
                         
                         Spacer()
@@ -42,64 +58,50 @@ struct HomeView: View {
                             .onTapGesture {
                                 router.push(.customJangdanList)
                             }
+                        .frame(width: 44, height: 44)
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 17)
                     
-                    
-                    // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
-                    VStack {
-                        HStack {
-                            Text("기본 장단")
-                            Spacer()
-                        }
-                        
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 7), GridItem(.flexible())], spacing: 12) {
-                            ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                                // TODO: - 해당 장단을 재생하는 MetronomeView로 연결하는 버튼이 될 예정
-                                NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 15) {
-                                            Text(jangdan.name)
+                    ScrollView() {
+                        // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
+                        VStack {
+                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
+                                ForEach(Jangdan.allCases, id: \.self) { jangdan in
+                                    NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(.backgroundCard) // 배경색 설정
+                                                .shadow(radius: 5) // 그림자 효과
+                                                .overlay {
+                                                    jangdan.jangdanLogoImage
+                                                        .resizable()
+                                                        .frame(width: 225, height: 225)
+                                                        .offset(y: -100)
+                                                }
+                                                .clipShape(RoundedRectangle(cornerRadius: 16))
                                             
-                                            VStack(alignment: .leading) {
-                                                HStack(alignment: .bottom) {
-                                                    Text("최근 연습률")
-                                                    Spacer()
-                                                    
-                                                    // TODO: - 조각품 (진), 숙련도도 반영 예정
-                                                    Circle()
-                                                        .frame(width: 60, height: 60)
-                                                }
-                                                
-                                                // TODO: - 숙련도 반영 예정
-                                                ZStack(alignment: .leading) {
-                                                    RoundedRectangle(cornerRadius: 50)
-                                                        .fill(.black)
-                                                    RoundedRectangle(cornerRadius: 50)
-                                                        .fill(.orange)
-                                                        .frame(width: 40)
-                                                }
-                                                .frame(height: 4)
-                                            }
+                                            Text(jangdan.name)
+                                                .font(.Title1_R)
+                                                .foregroundStyle(.textDefault)
+                                                .offset(y: -2.5)
+                                            
+                                            Text(jangdan.bakInformation)
+                                                .font(.Body_R)
+                                                .foregroundStyle(.textDefault)
+                                                .offset(y: 30)
                                         }
-                                        
-                                        Spacer()
-                                    }
-                                    .tint(.white)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 14)
-                                    .padding(.top, 6)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .fill(.gray)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .aspectRatio(1, contentMode: .fill)
                                     }
                                 }
                             }
                         }
+                        .padding(.top, 34)
                     }
-                    .padding(.top, 34)
-                }
-                .padding(.horizontal, 16)
-                .navigationDestination(for: Route.self) { path in
+                    .scrollIndicators(.hidden)
+                    .padding(.horizontal, 16)
+                    .navigationDestination(for: Route.self) { path in
                     switch path {
                     case .customJangdanList:
                         CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
@@ -109,10 +111,10 @@ struct HomeView: View {
                         CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
                     }
                 }
+                }
+            }        } else {
+                InstrumentsSelectView()
             }
-        } else {
-            InstrumentsSelectView()
-        }
     }
 }
 
