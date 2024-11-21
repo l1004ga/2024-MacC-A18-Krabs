@@ -69,7 +69,7 @@ struct HomeView: View {
                                                 .fill(.backgroundCard) // 배경색 설정
                                                 .shadow(radius: 5) // 그림자 효과
                                                 .overlay {
-                                                    Image("\(jangdan.englishName)")
+                                                    jangdan.jangdanLogoImage
                                                         .resizable()
                                                         .frame(width: 225, height: 225)
                                                         .offset(y: -100)

@@ -5,6 +5,8 @@
 //  Created by Yunki on 10/14/24.
 //
 
+import SwiftUI
+
 // TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
 enum Jangdan: String, CaseIterable {
     case 진양
@@ -35,18 +37,18 @@ enum Jangdan: String, CaseIterable {
         }
     }
     
-    var englishName: String {
+    var jangdanLogoImage: Image {
         switch self {
-        case .진양: return "Jinyang"
-        case .중모리: return "Jungmori"
-        case .중중모리: return "Jungjungmori"
-        case .자진모리: return "Jajinmori"
-        case .굿거리: return "Gutgeori"
-        case .휘모리: return "Hwimori"
-        case .동살풀이: return "Dongsalpuri"
-        case .엇모리: return "Eotmori"
-        case .엇중모리: return "Eotjungmori"
-        case .세마치: return "Semachi"
+        case .진양: return Image("Jinyang")
+        case .중모리: return Image("Jungmori")
+        case .중중모리: return Image("Jungjungmori")
+        case .자진모리: return Image("Jajinmori")
+        case .굿거리: return Image("Gutgeori")
+        case .휘모리: return Image("Hwimori")
+        case .동살풀이: return Image("Dongsalpuri")
+        case .엇모리: return Image("Eotmori")
+        case .엇중모리: return Image("Eotjungmori")
+        case .세마치: return Image("Semachi")
         }
     }
     
