@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct InstrumentsSelectView: View {
+    
+    @State private var isSelected: Bool = false
+    
     var body: some View {
         ZStack {
             VStack {
@@ -29,23 +32,25 @@ struct InstrumentsSelectView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 120)
                 Spacer()
-                VStack(spacing: 32) {
-                    Text("악기에 맞춰진 장단을 들을 수 있어요.\n판소리에 특화된 장단이 제공돼요.")
-                        .font(.Subheadline_R)
-                        .foregroundStyle(.textTertiary)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    Text("시작")
-                        .font(.Title1_B)
-                        .bold()
-                        .foregroundStyle(.textButtonEmphasis)
-                        .padding(.vertical, 18.5)
-                        .frame(minWidth: 70, maxWidth: 337)
-                        .background(.buttonPlayStart)
-                        .clipShape(RoundedRectangle(cornerRadius: 100))
+                if isSelected {
+                    VStack(spacing: 32) {
+                        Text("악기에 맞춰진 장단을 들을 수 있어요.\n판소리에 특화된 장단이 제공돼요.")
+                            .font(.Subheadline_R)
+                            .foregroundStyle(.textTertiary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
+                        Text("시작")
+                            .font(.Title1_B)
+                            .bold()
+                            .foregroundStyle(.textButtonEmphasis)
+                            .padding(.vertical, 18.5)
+                            .frame(minWidth: 70, maxWidth: 337)
+                            .background(.buttonPlayStart)
+                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                    }
+                    .padding(.bottom, 36)
                 }
-                .padding(.bottom, 36)
             }
         }
     }
