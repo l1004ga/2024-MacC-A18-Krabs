@@ -10,6 +10,7 @@ import SwiftUI
 struct InstrumentsSelectView: View {
     
     @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
     
     @State private var isSelected: Bool = false
     @State private var instrumentType: Instrument?
@@ -21,9 +22,8 @@ struct InstrumentsSelectView: View {
                 HStack(spacing: 12) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(self.isSelected ? self.instrumentType == .북 ? .buttonActive : .backgroundCard : .backgroundCard)
+                            .fill(self.isSelected ? self.instrumentType == .북 ? .buttonActive.opacity(0.2) : .backgroundCard : .backgroundCard)
                             .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .북 ? 4 : 0 : 0)
-                            .opacity(self.isSelected ? self.instrumentType == .북 ? 0.2 : 1 : 1)
                         Image(self.isSelected ? self.instrumentType == .북 ? .bukActive : .bukDefault : .bukDefault)
                             .resizable()
                             .frame(width: 96, height: 96)
@@ -37,9 +37,8 @@ struct InstrumentsSelectView: View {
                     }
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(self.isSelected ? self.instrumentType == .장구 ? .buttonActive : .backgroundCard : .backgroundCard)
+                            .fill(self.isSelected ? self.instrumentType == .장구 ? .buttonActive.opacity(0.2) : .backgroundCard : .backgroundCard)
                             .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .장구 ? 4 : 0 : 0)
-                            .opacity(self.isSelected ? self.instrumentType == .장구 ? 0.2 : 1 : 1)
                         Image(self.isSelected ? self.instrumentType == .장구 ? .jangGuActive : .jangGuDefault : .jangGuDefault)
                             .resizable()
                             .frame(width: 96, height: 96)
@@ -76,6 +75,7 @@ struct InstrumentsSelectView: View {
                         Button {
                             guard let instrumentType = self.instrumentType else { return }
                             self.selectInstrument = instrumentType
+                            self.isSelectedInstrument = true
                         } label: {
                             Text("시작")
                                 .font(.Title1_B)
