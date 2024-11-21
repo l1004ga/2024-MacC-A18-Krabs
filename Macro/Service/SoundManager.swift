@@ -121,6 +121,7 @@ extension SoundManager: PlaySoundInterface {
         }
         do {
             try self.configureSoundPlayers(weak: "\(self.soundType.rawValue)_weak", medium: "\(self.soundType.rawValue)_medium", strong: "\(self.soundType.rawValue)_strong")
+            print("사운드 변경 \(self.soundType) 성공함")
         } catch {
             print("SoundManager: Sound Type 변경 실패 - \(error)")
         }

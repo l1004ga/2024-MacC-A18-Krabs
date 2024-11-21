@@ -23,7 +23,7 @@ class HomeViewModel {
     func effect(action: Action) {
         switch action {
         case .changeSoundType:
-            self.metronomeOnOffUseCase.changeSobak()
+            self.metronomeOnOffUseCase.setSoundType()
         }
     }
 }

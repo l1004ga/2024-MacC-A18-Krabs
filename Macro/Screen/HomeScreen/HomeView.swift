@@ -12,6 +12,8 @@ struct HomeView: View {
     @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = true
     @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
     
+    @State var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
+    
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         if self.isSelectedInstrument {
@@ -21,9 +23,11 @@ struct HomeView: View {
                         Menu {
                             Button("북") {
                                 self.selectInstrument = .북
+                                self.viewModel.effect(action: .changeSoundType)
                             }
                             Button("장구") {
                                 self.selectInstrument = .장구
+                                self.viewModel.effect(action: .changeSoundType)
                             }
                         } label: {
                             HStack {
