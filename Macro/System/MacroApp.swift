@@ -9,14 +9,12 @@ import SwiftUI
 
 @main
 struct MacroApp: App {
-    @State private var router = Router()
+    var router = Router()
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $router.path) {
                 HomeView()
-            }
+                .environment(router)
         }
-        .environment(router)
     }
 }
