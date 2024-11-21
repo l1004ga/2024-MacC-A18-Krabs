@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InstrumentsSelectView: View {
     
+    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    
     @State private var isSelected: Bool = false
     @State private var instrumentType: Instrument?
     
@@ -71,14 +73,19 @@ struct InstrumentsSelectView: View {
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                         
-                        Text("시작")
-                            .font(.Title1_B)
-                            .bold()
-                            .foregroundStyle(.textButtonEmphasis)
-                            .padding(.vertical, 18.5)
-                            .frame(minWidth: 70, maxWidth: 337)
-                            .background(.buttonPlayStart)
-                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                        Button {
+                            guard let instrumentType = self.instrumentType else { return }
+                            self.selectInstrument = instrumentType
+                        } label: {
+                            Text("시작")
+                                .font(.Title1_B)
+                                .bold()
+                                .foregroundStyle(.textButtonEmphasis)
+                                .padding(.vertical, 18.5)
+                                .frame(minWidth: 70, maxWidth: 337)
+                                .background(.buttonPlayStart)
+                                .clipShape(RoundedRectangle(cornerRadius: 100))
+                        }
                     }
                     .padding(.bottom, 36)
                 }
