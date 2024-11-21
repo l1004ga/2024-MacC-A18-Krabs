@@ -18,25 +18,8 @@ enum Route: Hashable {
 
 @Observable
 class Router {
-    
+
     var path: [Route] = .init()
-    
-//    func view(for route: Route) -> some View {
-//        switch route {
-//        case .homeScreen:
-//            return AnyView(HomeView())
-//        case let .metoronomeScreen(viewModel, jangdanName):
-//            return AnyView(MetronomeView(viewModel: viewModel, jangdanName: jangdanName))
-//        case let .customJangdanListScreen(jangdanList):
-//            return AnyView(CustomJangdanListView(jangdanList: jangdanList))
-//        case .customJangdanTypeSelectScreen:
-//            return AnyView(JangdanTypeSelectView())
-//        case let .customJangdanCreateScreen(viewModel, jangdanName):
-//            return AnyView(CustomJangdanCreateView(viewModel: viewModel, jangdanName: jangdanName))
-//        case let .customJangdanPracticeScreen(viewModel, jangdanName):
-//            return AnyView(MetronomeView(viewModel: viewModel, jangdanName: jangdanName))
-//        }
-//    }
     
     func push(_ route: Route) {
         path.append(route)
