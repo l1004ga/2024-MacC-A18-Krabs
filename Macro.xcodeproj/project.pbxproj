@@ -49,6 +49,7 @@
 		3C46FC082CEE490A0067EE65 /* buk_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C46FBFF2CEE490A0067EE65 /* buk_medium.wav */; };
 		3C46FC092CEE490A0067EE65 /* buk_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C46FC012CEE490A0067EE65 /* buk_weak.wav */; };
 		3C46FC0A2CEE490A0067EE65 /* jangu_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C46FC042CEE490A0067EE65 /* jangu_weak.wav */; };
+		3C46FC0C2CEF0F5F0067EE65 /* InstrumentsSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C46FC0B2CEF0F5F0067EE65 /* InstrumentsSelectView.swift */; };
 		3C57946D2CDCD6BF00AE647B /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57946C2CDCD6BF00AE647B /* DIContainer.swift */; };
 		3C6EAFA22CDD1061003F2191 /* TapTapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */; };
 		3C6EAFA42CDD1146003F2191 /* TemplateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */; };
@@ -138,6 +139,7 @@
 		3C46FC022CEE490A0067EE65 /* jangu_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jangu_medium.wav; sourceTree = "<group>"; };
 		3C46FC032CEE490A0067EE65 /* jangu_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jangu_strong.wav; sourceTree = "<group>"; };
 		3C46FC042CEE490A0067EE65 /* jangu_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jangu_weak.wav; sourceTree = "<group>"; };
+		3C46FC0B2CEF0F5F0067EE65 /* InstrumentsSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsSelectView.swift; sourceTree = "<group>"; };
 		3C57946C2CDCD6BF00AE647B /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		3C6EAFA12CDD1061003F2191 /* TapTapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTapUseCase.swift; sourceTree = "<group>"; };
 		3C6EAFA32CDD1146003F2191 /* TemplateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateUseCase.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				2BC4BA002CE371E800A90C1F /* HomeView.swift */,
+				3C46FC0B2CEF0F5F0067EE65 /* InstrumentsSelectView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				2BCA58102CCF7CA600FA08A9 /* ReflectTempoInterface.swift in Sources */,
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				4349F8F42CEC85D5001FE727 /* MetronomeControlViewModel.swift in Sources */,
+				3C46FC0C2CEF0F5F0067EE65 /* InstrumentsSelectView.swift in Sources */,
 				5798393A2CE61C3800866AD4 /* JangdanDTO.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffImplement.swift in Sources */,
 				3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */,
