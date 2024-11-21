@@ -8,21 +8,17 @@
 import SwiftUI
 
 enum Route: Hashable {
-    case homeScreen
-    case metoronomeScreen
-    case customJangdanListScreen
-    case customJangdanTypeSelectScreen
-    case customJangdanCreateScreen
-    case customJangdanPracticeScreen
+    case customJangdanList
+    case jangdanTypeSelect
+    case customJangdanCreate(jangdanName: String)
 }
 
 @Observable
 class Router {
-
-    var path: [Int] = .init()
+    var path: [Route] = .init()
     
-    func push(_ num: Int) {
-        path.append(num)
+    func push(_ route: Route) {
+        path.append(route)
     }
     
     func pop() {

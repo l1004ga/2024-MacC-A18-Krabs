@@ -10,11 +10,15 @@ import SwiftUI
 struct HomeView: View {
     
     @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
+    @Environment(Router.self) var router
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         if self.isSelectedInstrument {
-            NavigationStack {
+            NavigationStack(path: Binding(
+                get: { router.path },
+                set: { router.path = $0 }
+            )) {
                 ScrollView {
                     // MARK: - 악기 선택 버튼(예정)
                     HStack {
@@ -31,13 +35,23 @@ struct HomeView: View {
                         }
                         
                         Spacer()
-                        NavigationLink {
-                            CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
-                        } label: {
-                            Image(systemName: "tray.full.fill")
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundStyle(.textSecondary)
-                        }
+                        
+                        Image(systemName: "tray.full.fill")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textSecondary)
+                            .onTapGesture {
+                                router.push(.customJangdanList)
+                            }
+//                        NavigationLink {
+//                            CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
+//                        } label: {
+//                            Image(systemName: "tray.full.fill")
+//                                .aspectRatio(contentMode: .fit)
+//                                .foregroundStyle(.textSecondary)
+//                                .onTapGesture {
+//                                    router.push("customJangdanList")
+//                                }
+//                        }
                     }
                     
                     
@@ -95,6 +109,16 @@ struct HomeView: View {
                     .padding(.top, 34)
                 }
                 .padding(.horizontal, 16)
+                .navigationDestination(for: Route.self) { path in
+                    switch path {
+                    case .customJangdanList:
+                        CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
+                    case .jangdanTypeSelect:
+                        JangdanTypeSelectView()
+                    case let .customJangdanCreate(jangdanName):
+                        CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
+                    }
+                }
             }
         } else {
             InstrumentsSelectView()
