@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct MacroApp: App {
+    var router = Router()
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+                HomeView()
+                .environment(router)
         }
     }
 }
