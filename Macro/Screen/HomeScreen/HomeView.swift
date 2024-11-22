@@ -76,6 +76,7 @@ struct HomeView: View {
                                                 .overlay {
                                                     jangdan.jangdanLogoImage
                                                         .resizable()
+                                                        .foregroundStyle(.backgroundNavigationBar)
                                                         .frame(width: 225, height: 225)
                                                         .offset(y: -100)
                                                 }
