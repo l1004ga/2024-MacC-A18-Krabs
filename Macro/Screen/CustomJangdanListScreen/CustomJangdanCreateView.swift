@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomJangdanCreateView: View {
-    @Environment(Router.self) var router
+    @Environment(\.dismiss) private var dismiss
     
     @State var viewModel: MetronomeViewModel
     
@@ -73,7 +73,7 @@ struct CustomJangdanCreateView: View {
                     HStack{
                         Button("확인") {
                             self.viewModel.effect(action: .stopMetronome)
-                            router.pop()
+                            dismiss()
                         }
                         Button("취소") { }
                     }
@@ -124,7 +124,7 @@ struct CustomJangdanCreateView: View {
                             Button("취소") { }
                             Button("확인") {
                                 self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                router.pop(2)
+                                dismiss()
                             }
                         }
                     } message: {

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct JangdanTypeSelectView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(Router.self) var router
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -24,15 +23,18 @@ struct JangdanTypeSelectView: View {
             List {
                 // TODO: - 악기 종류에 따라 표시되는 장단 리스트 달라야함
                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                    Button {
-                        router.push(.customJangdanCreate(jangdanName: jangdan.name))
+                    NavigationLink {
+                        // MARK: - CustomJangdanCreateView 로 이동
+                        CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.name)
                     } label: {
                         Text(jangdan.name)
+                            .foregroundStyle(.primary)
                             .padding(.vertical, 9)
                     }
+                    
                 }
+                
             }
-            .foregroundStyle(.primary)
             
         }
         .navigationBarBackButtonHidden()
@@ -40,8 +42,7 @@ struct JangdanTypeSelectView: View {
             // 뒤로가기버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-//                    dismiss()
-                    router.pop()
+                    dismiss()
                 } label: {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
