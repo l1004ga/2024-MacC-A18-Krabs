@@ -16,6 +16,7 @@ struct HomeView: View {
     
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
     @State private var isSelectedJangdan: Bool = false
+    @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
@@ -75,12 +76,12 @@ struct HomeView: View {
                                         NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
                                             ZStack {
                                                 RoundedRectangle(cornerRadius: 16)
-                                                    .fill(.backgroundCard) // 배경색 설정
+                                                    .fill(buttonPressedStates[jangdan] == true ? .buttonActive : .backgroundCard) // 배경색 설정
                                                     .shadow(radius: 5) // 그림자 효과
                                                     .overlay {
                                                         jangdan.jangdanLogoImage
                                                             .resizable()
-                                                            .foregroundStyle(.backgroundNavigationBar)
+                                                            .foregroundStyle(buttonPressedStates[jangdan] == true ? .yellow : .backgroundNavigationBar)
                                                             .frame(width: 225, height: 225)
                                                             .offset(y: -100)
                                                     }
@@ -88,19 +89,25 @@ struct HomeView: View {
                                                 
                                                 Text(jangdan.name)
                                                     .font(.Title1_R)
-                                                    .foregroundStyle(.textDefault)
+                                                    .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
+                                                    .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
                                                     .offset(y: -2.5)
                                                 
                                                 Text(jangdan.bakInformation)
                                                     .font(.Body_R)
-                                                    .foregroundStyle(.textDefault)
+                                                    .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
+                                                    .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
                                                     .offset(y: 30)
                                             }
                                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                                             .aspectRatio(1, contentMode: .fill)
                                         }
                                     }
-                                    .buttonStyle(PressableButtonStyle())
+                                    .simultaneousGesture(
+                                        DragGesture(minimumDistance: 0)
+                                            .onChanged { _ in buttonPressedStates[jangdan] = true } // 특정 id의 상태를 true로 변경
+                                            .onEnded { _ in buttonPressedStates[jangdan] = false } // 특정 id의 상태를 false로 변경
+                                    )
                                 }
                             }
                         }
@@ -127,15 +134,4 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-}
-
-struct PressableButtonStyle: ButtonStyle {
-    var pressedColor: Color = .yellow
-    var defaultColor: Color = .red
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? pressedColor : defaultColor)
-            .cornerRadius(16)
-    }
 }
