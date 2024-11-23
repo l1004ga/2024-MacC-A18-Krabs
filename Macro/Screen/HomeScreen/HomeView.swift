@@ -68,7 +68,7 @@ struct HomeView: View {
                         // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
                         VStack {
                             LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
-                                ForEach(Jangdan.allCases, id: \.self) { jangdan in
+                                ForEach(selectInstrument.defaultJangdans, id: \.self) { jangdan in
                                     NavigationLink("\(jangdan.name)", destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
                                     .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
                                 }
