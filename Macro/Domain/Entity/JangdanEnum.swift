@@ -8,7 +8,7 @@
 import SwiftUI
 
 // TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
-enum Jangdan: String, CaseIterable, Hashable {
+enum Jangdan: String, CaseIterable {
     case 진양
     case 중모리
     case 중중모리

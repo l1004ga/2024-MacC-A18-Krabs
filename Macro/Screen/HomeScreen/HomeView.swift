@@ -16,7 +16,6 @@ struct HomeView: View {
     
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
     @State private var isSelectedJangdan: Bool = false
-    @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
