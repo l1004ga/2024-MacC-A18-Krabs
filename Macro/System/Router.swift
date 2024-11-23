@@ -17,15 +17,22 @@ enum Route: Hashable {
 class Router {
     var path: [Route] = .init()
     
+    func view(for route: Route) -> some View {
+        switch route {
+        case .customJangdanList:
+            return AnyView(CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel))
+        case .jangdanTypeSelect:
+            return AnyView(JangdanTypeSelectView())
+        case let .customJangdanCreate(jangdanName):
+            return AnyView(CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName))
+        }
+    }
+    
     func push(_ route: Route) {
         path.append(route)
     }
     
-    func pop() {
-        _ = path.popLast()
-    }
-    
-    func pop(_ count: Int) {
+    func pop(_ count: Int = 1) {
         path.removeLast(count)
     }
 }
