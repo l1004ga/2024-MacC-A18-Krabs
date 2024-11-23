@@ -60,11 +60,11 @@ extension JangdanDataManager: JangdanRepository {
         publisher.eraseToAnyPublisher()
     }
     
-    func fetchBasicJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
+    private func fetchBasicJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
         return basicJangdanData.first { $0.name == jangdanName && $0.instrument == Instrument(rawValue: instrument)}
     }
 
-    func fetchCustomJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
+    private func fetchCustomJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
         let predicate = #Predicate<JangdanDataModel> {
             $0.name == jangdanName && $0.instrument == instrument
         }
@@ -100,18 +100,6 @@ extension JangdanDataManager: JangdanRepository {
         publisher.send(currentJangdan)
     }
     
-    func fetchBasicJangdanNames(instrument: String) -> [String] {
-        let jangdanList = basicJangdanData
-            .filter { $0.instrument == Instrument(rawValue: instrument) }
-            .map { $0.name }
-        
-        if jangdanList.isEmpty {
-            print("기본 장단 이름 가져오기 실패: 해당 악기에 맞는 데이터가 없습니다.")
-            return []
-        }
-        
-        return jangdanList
-    }
     // MARK: 여기에 악기에 대한 정보는 들어가야 하지 않을까요 해당하는 악기의 커스텀 장단만 불러오도록
     func fetchAllCustomJangdan(instrument: Instrument) -> [JangdanEntity] {
         let instrument = instrument.rawValue

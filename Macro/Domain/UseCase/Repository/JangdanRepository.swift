@@ -12,7 +12,7 @@ protocol JangdanRepository {
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> { get }
     
     func fetchAllCustomJangdan(instrument: Instrument) -> [JangdanEntity]
-    func fetchBasicJangdanNames(instrument: String) -> [String]
+    
     func fetchJangdanData(jangdanName: String)
 
     func updateBPM(bpm: Int)
