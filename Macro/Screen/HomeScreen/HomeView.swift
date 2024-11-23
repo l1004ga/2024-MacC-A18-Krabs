@@ -14,7 +14,8 @@ struct HomeView: View {
     @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
     @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
     
-    @State var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
+    @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
+    @State private var isSelectedJangdan: Bool = false
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
@@ -68,32 +69,8 @@ struct HomeView: View {
                         VStack {
                             LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
                                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                                    NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .fill(.backgroundCard) // 배경색 설정
-                                                .shadow(radius: 5) // 그림자 효과
-                                                .overlay {
-                                                    jangdan.jangdanLogoImage
-                                                        .resizable()
-                                                        .frame(width: 225, height: 225)
-                                                        .offset(y: -100)
-                                                }
-                                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                            
-                                            Text(jangdan.name)
-                                                .font(.Title1_R)
-                                                .foregroundStyle(.textDefault)
-                                                .offset(y: -2.5)
-                                            
-                                            Text(jangdan.bakInformation)
-                                                .font(.Body_R)
-                                                .foregroundStyle(.textDefault)
-                                                .offset(y: 30)
-                                        }
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .aspectRatio(1, contentMode: .fill)
-                                    }
+                                    NavigationLink("\(jangdan.name)", destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
+                                    .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
                                 }
                             }
                         }
@@ -120,4 +97,38 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(Router().self)
+}
+
+struct JangdanLogoButtonStyle: ButtonStyle {
+    var jangdan: Jangdan
+    
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .foregroundStyle(configuration.isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
+                .shadow(radius: 5) // 그림자 효과
+                .overlay {
+                    jangdan.jangdanLogoImage
+                        .resizable()
+                        .foregroundStyle(configuration.isPressed ? .sobakSegmentSobak : .backgroundNavigationBar)
+                        .frame(width: 225, height: 225)
+                        .offset(y: -100)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            
+            Text(jangdan.name)
+                .font(configuration.isPressed ? .Title1_B : .Title1_R)
+                .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                .offset(y: -2.5)
+            
+            Text(jangdan.bakInformation)
+                .font(.Body_R)
+                .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                .offset(y: 30)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1, contentMode: .fill)
+        .contentShape(Rectangle())
+    }
 }

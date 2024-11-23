@@ -96,4 +96,5 @@ struct InstrumentsSelectView: View {
 
 #Preview {
     InstrumentsSelectView()
+        .environment(Router().self)
 }
