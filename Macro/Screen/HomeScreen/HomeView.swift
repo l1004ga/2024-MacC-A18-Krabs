@@ -70,47 +70,8 @@ struct HomeView: View {
                         VStack {
                             LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
                                 ForEach(Jangdan.allCases, id: \.self) { jangdan in
-                                    
-                                    NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .fill(buttonPressedStates[jangdan] == true ? .buttonActive : .backgroundCard) // 배경색 설정
-                                                .shadow(radius: 5) // 그림자 효과
-                                                .overlay {
-                                                    jangdan.jangdanLogoImage
-                                                        .resizable()
-                                                        .foregroundStyle(buttonPressedStates[jangdan] == true ? .sobakSegmentSobak : .backgroundNavigationBar)
-                                                        .frame(width: 225, height: 225)
-                                                        .offset(y: -100)
-                                                }
-                                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                            
-                                            Text(jangdan.name)
-                                                .font(.Title1_R)
-                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
-                                                .offset(y: -2.5)
-                                            
-                                            Text(jangdan.bakInformation)
-                                                .font(.Body_R)
-                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
-                                                .offset(y: 30)
-                                        }
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .aspectRatio(1, contentMode: .fill)
-                                    }
-                                    .contentShape(Rectangle())
-                                    .buttonStyle(NoHighlightButtonStyle())
-                                    .simultaneousGesture(
-                                        DragGesture(minimumDistance: 0)
-                                            .onChanged { _ in
-                                                buttonPressedStates[jangdan] = true
-                                            } // 특정 id의 상태를 true로 변경
-                                            .onEnded { _ in
-                                                buttonPressedStates[jangdan] = false
-                                            } // 특정 id의 상태를 false로 변경
-                                    )
+                                    NavigationLink("\(jangdan.name)", destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
+                                    .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
                                 }
                             }
                         }
@@ -140,9 +101,35 @@ struct HomeView: View {
         .environment(Router().self)
 }
 
-struct NoHighlightButtonStyle: ButtonStyle {
+struct JangdanLogoButtonStyle: ButtonStyle {
+    var jangdan: Jangdan
+    
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .opacity(configuration.isPressed ? 1.0 : 1.0) // 눌림 상태에도 변경 없음
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .foregroundStyle(configuration.isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
+                .shadow(radius: 5) // 그림자 효과
+                .overlay {
+                    jangdan.jangdanLogoImage
+                        .resizable()
+                        .foregroundStyle(configuration.isPressed ? .sobakSegmentSobak : .backgroundNavigationBar)
+                        .frame(width: 225, height: 225)
+                        .offset(y: -100)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            
+            Text(jangdan.name)
+                .font(configuration.isPressed ? .Title1_B : .Title1_R)
+                .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                .offset(y: -2.5)
+            
+            Text(jangdan.bakInformation)
+                .font(.Body_R)
+                .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                .offset(y: 30)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1, contentMode: .fill)
+        .contentShape(Rectangle())
     }
 }
