@@ -100,10 +100,16 @@ struct HomeView: View {
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .aspectRatio(1, contentMode: .fill)
                                     }
+                                    .contentShape(Rectangle())
+                                    .buttonStyle(NoHighlightButtonStyle())
                                     .simultaneousGesture(
                                         DragGesture(minimumDistance: 0)
-                                            .onChanged { _ in buttonPressedStates[jangdan] = true } // 특정 id의 상태를 true로 변경
-                                            .onEnded { _ in buttonPressedStates[jangdan] = false } // 특정 id의 상태를 false로 변경
+                                            .onChanged { _ in
+                                                buttonPressedStates[jangdan] = true
+                                            } // 특정 id의 상태를 true로 변경
+                                            .onEnded { _ in
+                                                buttonPressedStates[jangdan] = false
+                                            } // 특정 id의 상태를 false로 변경
                                     )
                                 }
                             }
@@ -131,4 +137,11 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+}
+
+struct NoHighlightButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 1.0 : 1.0) // 눌림 상태에도 변경 없음
+    }
 }
