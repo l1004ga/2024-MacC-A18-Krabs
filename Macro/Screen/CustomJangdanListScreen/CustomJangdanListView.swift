@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomJangdanListView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(Router.self) var router
     
     @State var viewModel: CustomJangdanListViewModel
     
@@ -18,13 +19,9 @@ struct CustomJangdanListView: View {
                 ZStack {
                     EmptyJangdanListView()
                         .padding(.horizontal, 16)
-                    
-                    NavigationLink {
-                        JangdanTypeSelectView()
-                    } label: {
-                        
-                    }
-                    .opacity(0)
+                        .onTapGesture {
+                            router.push(.jangdanTypeSelect)
+                        }
                 }
                 .buttonStyle(.plain)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
