@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = true
+    @Environment(Router.self) var router
+  
+    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
     @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
     
     @State var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
@@ -17,7 +19,10 @@ struct HomeView: View {
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         if self.isSelectedInstrument {
-            NavigationStack {
+            NavigationStack(path: Binding(
+                get: { router.path },set: { router.path = $0 }
+            )) 
+                {
                 VStack {
                     HStack {
                         Menu {
@@ -46,13 +51,13 @@ struct HomeView: View {
                         }
                         
                         Spacer()
-                        NavigationLink {
-                            CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
-                        } label: {
-                            Image(systemName: "tray.full.fill")
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundStyle(.textSecondary)
-                        }
+                        
+                        Image(systemName: "tray.full.fill")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textSecondary)
+                            .onTapGesture {
+                                router.push(.customJangdanList)
+                            }
                         .frame(width: 44, height: 44)
                     }
                     .padding(.horizontal, 16)
@@ -96,6 +101,16 @@ struct HomeView: View {
                     }
                     .scrollIndicators(.hidden)
                     .padding(.horizontal, 16)
+                    .navigationDestination(for: Route.self) { path in
+                    switch path {
+                    case .customJangdanList:
+                        CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
+                    case .jangdanTypeSelect:
+                        JangdanTypeSelectView()
+                    case let .customJangdanCreate(jangdanName):
+                        CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
+                    }
+                }
                 }
             }        } else {
                 InstrumentsSelectView()
