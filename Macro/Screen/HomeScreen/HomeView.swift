@@ -79,14 +79,7 @@ struct HomeView: View {
                     .scrollIndicators(.hidden)
                     .padding(.horizontal, 16)
                     .navigationDestination(for: Route.self) { path in
-                    switch path {
-                    case .customJangdanList:
-                        CustomJangdanListView(viewModel: DIContainer.shared.customJangdanListViewModel)
-                    case .jangdanTypeSelect:
-                        JangdanTypeSelectView()
-                    case let .customJangdanCreate(jangdanName):
-                        CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
-                    }
+                        router.view(for: path)
                 }
                 }
             }        } else {
