@@ -9,8 +9,7 @@ import SwiftUI
 
 struct InstrumentsSelectView: View {
     
-    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
-    @AppStorage("isSelectedInstrument") var isSelectedInstrument: Bool = false
+    @State private var appState: AppState = .shared
     
     @State private var isSelected: Bool = false
     @State private var instrumentType: Instrument?
@@ -74,8 +73,8 @@ struct InstrumentsSelectView: View {
                         
                         Button {
                             guard let instrumentType = self.instrumentType else { return }
-                            self.selectInstrument = instrumentType
-                            self.isSelectedInstrument = true
+                            self.appState.setInstrument(instrumentType)
+                            self.appState.appLaunched()
                         } label: {
                             Text("시작")
                                 .font(.Title1_B)
