@@ -11,20 +11,33 @@ import SwiftUI
 class AppState {
     static let shared = AppState()
     
-    private init() {}
-    
-    // 최초실행여부
-    var isSelectedInstrument: Bool {
-        get { UserDefaults.standard.bool(forKey: "isSelectedInstrument") }
-        set { UserDefaults.standard.set(newValue, forKey: "isSelectedInstrument") }
+    private init() {
+        self._isFirstLaunch = UserDefaults.standard.bool(forKey: "isFirstLaunch")
+        
+        let instrument = UserDefaults.standard.string(forKey: "selectedInstrument") ?? "장구"
+        self._selectedInstrument = Instrument(rawValue: instrument) ?? .장구
     }
     
+    // 최초실행여부
+    private var _isFirstLaunch: Bool
+    
     // 선택된 악기
-    var selectInstrument: Instrument {
-        get {
-            guard let instrument = UserDefaults.standard.string(forKey: "selectInstrument") else { return .장구 }
-            return Instrument(rawValue: instrument) ?? .장구
-        }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "isSelectedInstrument") }
+    private var _selectedInstrument: Instrument
+    
+}
+
+extension AppState {
+    var isFirstLaunch: Bool { self._isFirstLaunch }
+    
+    var selectedInstrument: Instrument { self._selectedInstrument }
+    
+    func appLaunched() {
+        self._isFirstLaunch = true
+        UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+    }
+    
+    func setInstrument(_ instrument: Instrument) {
+        self._selectedInstrument = instrument
+        UserDefaults.standard.set(instrument.rawValue, forKey: "selectedInstrument")
     }
 }
