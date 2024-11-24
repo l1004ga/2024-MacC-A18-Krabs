@@ -12,14 +12,14 @@ class AppState {
     static let shared = AppState()
     
     private init() {
-        self._isFirstLaunch = UserDefaults.standard.bool(forKey: "isFirstLaunch")
+        self._didLaunchedBefore = UserDefaults.standard.bool(forKey: "didLaunchedBefore")
         
         let instrument = UserDefaults.standard.string(forKey: "selectedInstrument") ?? "장구"
         self._selectedInstrument = Instrument(rawValue: instrument) ?? .장구
     }
     
     // 최초실행여부
-    private var _isFirstLaunch: Bool
+    private var _didLaunchedBefore: Bool
     
     // 선택된 악기
     private var _selectedInstrument: Instrument
@@ -27,13 +27,13 @@ class AppState {
 }
 
 extension AppState {
-    var isFirstLaunch: Bool { self._isFirstLaunch }
+    var didLaunchedBefore: Bool { self._didLaunchedBefore }
     
     var selectedInstrument: Instrument { self._selectedInstrument }
     
     func appLaunched() {
-        self._isFirstLaunch = true
-        UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+        self._didLaunchedBefore = true
+        UserDefaults.standard.set(true, forKey: "didLaunchedBefore")
     }
     
     func setInstrument(_ instrument: Instrument) {

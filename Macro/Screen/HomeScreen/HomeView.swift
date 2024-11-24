@@ -18,7 +18,7 @@ struct HomeView: View {
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
-        if self.appState.isFirstLaunch {
+        if self.appState.didLaunchedBefore {
             NavigationStack(path: Binding(
                 get: { router.path },set: { router.path = $0 }
             ))
