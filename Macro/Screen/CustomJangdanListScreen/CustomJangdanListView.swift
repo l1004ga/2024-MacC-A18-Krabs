@@ -69,12 +69,12 @@ struct CustomJangdanListView: View {
                         let jangdanName = self.viewModel.state.customJangdanList[index].name
                         self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
                     }
-                    self.viewModel.effect(action: .fatchCustomJangdanData)
+                    self.viewModel.effect(action: .fetchCustomJangdanData)
                 }
             }
         }
         .task {
-            self.viewModel.effect(action: .fatchCustomJangdanData)
+            self.viewModel.effect(action: .fetchCustomJangdanData)
         }
         .listStyle(.plain)
         .listRowSpacing(12)
