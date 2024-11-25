@@ -10,12 +10,12 @@ import Foundation
 class TemplateImplement {
     // 장단의 정보를 저장하고 있는 레이어
     private var jangdanRepository: JangdanRepository
-    private var instrument: Instrument
+    private var appState: AppState
 
     
     init(jangdanRepository: JangdanRepository) {
         self.jangdanRepository = jangdanRepository
-        self.instrument = .장구
+        self.appState = .shared
     }
     
     enum DataError: Error {
@@ -32,7 +32,7 @@ extension TemplateImplement: TemplateUseCase {
     }
     
     var allCustomJangdanTemplate: [JangdanEntity] {
-        return jangdanRepository.fetchAllCustomJangdan(instrument: .장구)
+        return jangdanRepository.fetchAllCustomJangdan(instrument: self.appState.selectedInstrument)
     }
     
     //MARK: 장단 고를때 악기까지 올 수 있도록 변경해야 함 예시로 .장구 넣어둠
