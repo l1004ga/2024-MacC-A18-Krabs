@@ -65,10 +65,9 @@ struct CustomJangdanListView: View {
                     .listRowSeparator(.hidden)
                 }
                 .onDelete { indexSet in
-                    if let index = indexSet.first {
-                        let jangdanName = self.viewModel.state.customJangdanList[index].name
-                        self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
-                    }
+                    guard let index = indexSet.first else { return }
+                    let jangdanName = self.viewModel.state.customJangdanList[index].name
+                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
                     self.viewModel.effect(action: .fetchCustomJangdanData)
                 }
             }
