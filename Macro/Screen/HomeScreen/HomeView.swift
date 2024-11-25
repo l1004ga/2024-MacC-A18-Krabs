@@ -87,7 +87,7 @@ struct HomeView: View {
                                             Text(jangdan.name)
                                                 .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
+                                                .bold(buttonPressedStates[jangdan] ?? false)
                                                 .offset(y: -2.5)
                                             
                                             Text(jangdan.bakInformation)
