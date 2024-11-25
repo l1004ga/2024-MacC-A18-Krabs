@@ -11,6 +11,8 @@ struct JangdanTypeSelectView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(Router.self) var router
     
+    @State private var appState: AppState = .shared
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("만들 장단의\n종류를 선택해주세요.")
@@ -23,7 +25,7 @@ struct JangdanTypeSelectView: View {
             
             List {
                 // TODO: - 악기 종류에 따라 표시되는 장단 리스트 달라야함
-                ForEach(Jangdan.allCases, id: \.self) { jangdan in
+                ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
                     Button {
                         router.push(.customJangdanCreate(jangdanName: jangdan.name))
                     } label: {
