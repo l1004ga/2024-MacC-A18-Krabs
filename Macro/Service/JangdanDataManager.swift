@@ -8,11 +8,10 @@
 import SwiftData
 import Combine
 import Foundation
-import SwiftUI
 
 final class JangdanDataManager {
     
-    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    private var appState: AppState = .shared
     
     private let container: ModelContainer
     private let context: ModelContext
@@ -81,8 +80,8 @@ extension JangdanDataManager: JangdanRepository {
     }
 
     func fetchJangdanData(jangdanName: String) {
-        if let jangdan = fetchBasicJangdan(jangdanName: jangdanName, instrument: self.selectInstrument.rawValue) ??
-            fetchCustomJangdan(jangdanName: jangdanName, instrument: self.selectInstrument.rawValue) {
+        if let jangdan = fetchBasicJangdan(jangdanName: jangdanName, instrument: self.appState.selectedInstrument.rawValue) ??
+            fetchCustomJangdan(jangdanName: jangdanName, instrument: self.appState.selectedInstrument.rawValue) {
             self.currentJangdan = jangdan
             publisher.send(currentJangdan)
         } else {
