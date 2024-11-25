@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomJangdanListView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) private var editMode
     @Environment(Router.self) var router
     
     @State var viewModel: CustomJangdanListViewModel
@@ -16,17 +17,20 @@ struct CustomJangdanListView: View {
     var body: some View {
         List {
             if self.viewModel.state.customJangdanList.isEmpty {
-                ZStack {
-                    EmptyJangdanListView()
-                        .padding(.horizontal, 16)
-                        .onTapGesture {
-                            router.push(.jangdanTypeSelect)
-                        }
+                if editMode?.wrappedValue == .inactive {
+                    ZStack {
+                        EmptyJangdanListView()
+                            .padding(.horizontal, 16)
+                            .onTapGesture {
+                                router.push(.jangdanTypeSelect)
+                            }
+                    }
+                    .buttonStyle(.plain)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowSeparator(.hidden)
                 }
-                .buttonStyle(.plain)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .listRowSeparator(.hidden)
             } else {
+                
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
                     ZStack {
                         HStack(alignment: .top, spacing: 12) {
@@ -64,13 +68,16 @@ struct CustomJangdanListView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
-                .onDelete { _ in
-                    
+                .onDelete { indexSet in
+                    guard let index = indexSet.first else { return }
+                    let jangdanName = self.viewModel.state.customJangdanList[index].name
+                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+                    self.viewModel.effect(action: .fetchCustomJangdanData)
                 }
             }
         }
         .task {
-            self.viewModel.effect(action: .fatchCustomJangdanData)
+            self.viewModel.effect(action: .fetchCustomJangdanData)
         }
         .listStyle(.plain)
         .listRowSpacing(12)

@@ -27,15 +27,18 @@ class CustomJangdanListViewModel {
 
 extension CustomJangdanListViewModel {
     enum Action {
-        case fatchCustomJangdanData
+        case fetchCustomJangdanData
+        case deleteCustomJangdanData(jangdanName: String)
     }
     
     func effect(action: Action) {
         switch action {
-        case .fatchCustomJangdanData:
+        case .fetchCustomJangdanData:
             self._state.customJangdanList = templateUseCase.allCustomJangdanTemplate.map { jangdanEntity in
                 return (jangdanEntity.jangdanType, jangdanEntity.name, .now)
             }
+        case let .deleteCustomJangdanData(jangdanName):
+            self.templateUseCase.deleteCustomJangdan(jangdanName: jangdanName)
         }
     }
 }
