@@ -96,6 +96,19 @@ struct MetronomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
                 }
+                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: Binding(
+                    get: { viewModel.state.isAccentChanged },
+                    set: { viewModel.effect(action: .alertTrigger(active: $0)) }
+                )) {
+                    Button("취소") {
+                        viewModel.effect(action: .alertTrigger(active: false))
+                    }
+                    Button("확인") {
+                        viewModel.effect(action: .alertTrigger(active: false))
+                        // TODO: 저장시키기
+                        // TODO: 뒤로 백 시키기
+                    }
+                }
             }
             
             // 장단 선택 List title
