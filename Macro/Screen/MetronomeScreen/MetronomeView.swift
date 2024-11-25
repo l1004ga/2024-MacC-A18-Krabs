@@ -10,10 +10,10 @@ import Combine
 
 struct MetronomeView: View {
     
-    @AppStorage("isBeepSound") var isBeepSound: Bool = false
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
+    
+    @State private var appState: AppState = .shared
     
     private var jangdanName: String
     @State private var isSobakOn: Bool = false
@@ -129,11 +129,11 @@ struct MetronomeView: View {
                     
                     Menu {
                         Button {
-                            isBeepSound.toggle()
+                            self.appState.toggleBeepSound()
                             self.viewModel.effect(action: .changeSoundType)
                         } label: {
                             HStack {
-                                if isBeepSound {
+                                if self.appState.isBeepSound {
                                     Image(systemName: "checkmark")
                                 }
                                 Text("비프음으로 변환")

@@ -10,8 +10,7 @@ import AVFoundation
 
 class SoundManager {
     
-    @AppStorage("isBeepSound") var isBeepSound: Bool = false
-    @AppStorage("selectInstrument") var selectInstrument: Instrument = .장구
+    private var appState: AppState = .shared
     
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]
@@ -109,10 +108,10 @@ extension SoundManager: PlaySoundInterface {
     }
     
     func setSoundType() {
-        if self.isBeepSound {
+        if self.appState.isBeepSound {
             self.soundType = .beep
         } else {
-            switch self.selectInstrument {
+            switch self.appState.selectedInstrument {
             case .북:
                 self.soundType = .buk
             case .장구:

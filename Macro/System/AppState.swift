@@ -47,8 +47,8 @@ extension AppState {
         UserDefaults.standard.set(instrument.rawValue, forKey: "selectedInstrument")
     }
     
-    func setBeepSound(_ isBeepSound: Bool) {
-        self._isBeepSound = isBeepSound
-        UserDefaults.standard.set(isBeepSound, forKey: "isBeepSound")
+    func toggleBeepSound() {
+        self._isBeepSound.toggle()
+        UserDefaults.standard.set(self._isBeepSound, forKey: "isBeepSound")
     }
 }
