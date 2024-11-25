@@ -47,7 +47,7 @@ struct MetronomeView: View {
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
                     }
                 }
                 .frame(height: 372)
@@ -71,8 +71,16 @@ struct MetronomeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn)
-                .padding(.bottom, 16)
+            
+            
+            
+            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                ViewSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            } else {
+                ListenSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            }
 
             MetronomeControlView(viewModel: viewModel)
             

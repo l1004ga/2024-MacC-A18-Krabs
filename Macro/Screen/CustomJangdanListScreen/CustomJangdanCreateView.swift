@@ -38,13 +38,13 @@ struct CustomJangdanCreateView: View {
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: false)
                     }
                 }
                 .frame(height: 372)
                 .padding(.horizontal, 8)
             }
-            SobakToggleView(isSobakOn: $isSobakOn)
+            ListenSobakToggleView(isSobakOn: $isSobakOn)
                 .padding(.bottom, 16)
             
             MetronomeControlView(viewModel: viewModel)

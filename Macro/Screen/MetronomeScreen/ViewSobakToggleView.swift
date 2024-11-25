@@ -1,18 +1,21 @@
 //
-//  SobakToggleView.swift
+//  viewSobakToggleView.swift
 //  Macro
 //
-//  Created by Lee Wonsun on 10/10/24.
+//  Created by leejina on 11/26/24.
 //
 
 import SwiftUI
 
-struct SobakToggleView: View {
-    
+struct ViewSobakToggleView: View {
     @Binding var isSobakOn: Bool
     
     var body: some View {
         HStack {
+            Image(.viewSobak)
+                .aspectRatio(contentMode: .fit)
+                .padding(.trailing, 10)
+            
             Text("소박 보기")
                 .font(.Title3_R)
                 .foregroundColor(.textSecondary)
@@ -33,7 +36,7 @@ struct SobakToggleView: View {
     }
 }
 
-
-//#Preview {
-//    SobakToggleView()
-//}
+#Preview {
+    @Previewable @State var isSobakOn: Bool = false
+    ViewSobakToggleView(isSobakOn: $isSobakOn)
+}
