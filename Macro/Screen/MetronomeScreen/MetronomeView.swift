@@ -71,7 +71,7 @@ struct MetronomeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
+            SobakToggleView(isSobakOn: $isSobakOn)
                 .padding(.bottom, 16)
 
             MetronomeControlView(viewModel: viewModel)
