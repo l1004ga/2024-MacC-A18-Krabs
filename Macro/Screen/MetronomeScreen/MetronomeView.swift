@@ -155,8 +155,10 @@ struct MetronomeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                toastAction = true
+                                if !inputCustomJangdanName.isEmpty && inputCustomJangdanName.count < 14 {
+                                    self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                    toastAction = true
+                                }
                             }
                         }
                     } message: {

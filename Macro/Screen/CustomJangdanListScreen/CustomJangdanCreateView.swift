@@ -123,9 +123,11 @@ struct CustomJangdanCreateView: View {
                         HStack{
                             Button("취소") { }
                             Button("확인") {
-                                self.viewModel.effect(action: .stopMetronome)
-                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                router.pop(2)
+                                if !inputCustomJangdanName.isEmpty && inputCustomJangdanName.count < 14 {
+                                    self.viewModel.effect(action: .stopMetronome)
+                                    self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                    router.pop(2)
+                                }
                             }
                         }
                     } message: {
@@ -142,4 +144,5 @@ struct CustomJangdanCreateView: View {
 
 #Preview {
     CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
+        .environment(Router().self)
 }

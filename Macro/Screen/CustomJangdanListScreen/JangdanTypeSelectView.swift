@@ -64,4 +64,5 @@ struct JangdanTypeSelectView: View {
 
 #Preview {
     JangdanTypeSelectView()
+        .environment(Router().self)
 }
