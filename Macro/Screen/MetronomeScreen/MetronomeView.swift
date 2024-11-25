@@ -36,7 +36,7 @@ struct MetronomeView: View {
                 VStack(spacing: 12) {
                     HanbaeBoardView(
                         jangdan: viewModel.state.jangdanAccent,
-                        isSobakOn: viewModel.state.isSobakOn,
+                        isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
                         isPlaying: viewModel.state.isPlaying,
                         currentRow: viewModel.state.currentRow,
                         currentDaebak: viewModel.state.currentDaebak,
