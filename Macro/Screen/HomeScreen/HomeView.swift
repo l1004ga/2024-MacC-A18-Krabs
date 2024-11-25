@@ -85,7 +85,7 @@ struct HomeView: View {
                                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                             
                                             Text(jangdan.name)
-                                                .font(.Title1_R)
+                                                .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
                                                 .bold(((buttonPressedStates[jangdan] == true ? 1 : 0) != 0))
                                                 .offset(y: -2.5)
