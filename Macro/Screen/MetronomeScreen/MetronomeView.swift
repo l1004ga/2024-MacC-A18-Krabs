@@ -25,6 +25,8 @@ struct MetronomeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
+    @State private var isAlertOn: Bool = false
+    
     init(viewModel: MetronomeViewModel, jangdanName: String) {
         self.jangdanName = jangdanName
         self.viewModel = viewModel
@@ -89,22 +91,22 @@ struct MetronomeView: View {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
+                    if self.viewModel.state.accentChangedCount > 1 {
+                        isAlertOn = true
+                    }
                     self.viewModel.effect(action: .stopMetronome)
-                    presentationMode.wrappedValue.dismiss()
+//                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
                 }
-                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: Binding(
-                    get: { viewModel.state.isAccentChanged },
-                    set: { viewModel.effect(action: .alertTrigger(active: $0)) }
-                )) {
+                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: $isAlertOn) {
                     Button("취소") {
-                        viewModel.effect(action: .alertTrigger(active: false))
+                        isAlertOn = false
                     }
                     Button("확인") {
-                        viewModel.effect(action: .alertTrigger(active: false))
+                        isAlertOn = false
                         // TODO: 저장시키기
                         // TODO: 뒤로 백 시키기
                         
