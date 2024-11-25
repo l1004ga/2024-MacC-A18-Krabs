@@ -64,8 +64,12 @@ struct CustomJangdanListView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
-                .onDelete { _ in
-                    
+                .onDelete { indexSet in
+                    if let index = indexSet.first {
+                        let jangdanName = self.viewModel.state.customJangdanList[index].name
+                        self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+                    }
+                    self.viewModel.effect(action: .fatchCustomJangdanData)
                 }
             }
         }
