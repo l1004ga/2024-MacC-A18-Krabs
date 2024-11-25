@@ -122,6 +122,10 @@ class MetronomeViewModel {
             self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak, to: newAccent)
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
+            if self._state.isSobakOn {
+                self._state.isSobakOn = false
+                self.metronomeOnOffUseCase.changeSobak()
+            }
             self.metronomeOnOffUseCase.stop()
         case .estimateBpm:
             self.taptapUseCase.tap()
