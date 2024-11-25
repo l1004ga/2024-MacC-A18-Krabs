@@ -21,18 +21,18 @@ struct BasicJangdanData {
         daebak: 24,
         bpm: 30,
         daebakList: [
-            [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
+            [JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])]
         ],
         jangdanType: .진양,
         instrument: .장구
@@ -44,12 +44,12 @@ struct BasicJangdanData {
         daebak: 12,
         bpm: 90,
         daebakList: [
-            [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
+            [JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none])]
         ],
         jangdanType: .중모리,
         instrument: .장구
@@ -165,18 +165,18 @@ struct BasicJangdanData {
         daebak: 24,
         bpm: 38,
         daebakList: [
-            [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.weak])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
+            [JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none])]
         ],
         jangdanType: .진양,
         instrument: .북
@@ -188,12 +188,12 @@ struct BasicJangdanData {
         daebak: 12,
         bpm: 70,
         daebakList: [
-            [JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.medium]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])],
-            [JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.weak]), JangdanEntity.Daebak(bakAccentList: [.weak]),
-             JangdanEntity.Daebak(bakAccentList: [.strong]), JangdanEntity.Daebak(bakAccentList: [.strong])]
+            [JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none])],
+            [JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.weak, .none]), JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+             JangdanEntity.Daebak(bakAccentList: [.strong, .none]), JangdanEntity.Daebak(bakAccentList: [.strong, .none])]
         ],
         jangdanType: .중모리,
         instrument: .북
@@ -267,12 +267,12 @@ struct BasicJangdanData {
         daebak: 6,
         bpm: 78,
         daebakList: [[
-            JangdanEntity.Daebak(bakAccentList: [.strong]),
-            JangdanEntity.Daebak(bakAccentList: [.weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak]),
-            JangdanEntity.Daebak(bakAccentList: [.medium]),
-            JangdanEntity.Daebak(bakAccentList: [.weak])
+            JangdanEntity.Daebak(bakAccentList: [.strong, .none]),
+            JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+            JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
+            JangdanEntity.Daebak(bakAccentList: [.weak, .none]),
+            JangdanEntity.Daebak(bakAccentList: [.medium, .none]),
+            JangdanEntity.Daebak(bakAccentList: [.weak, .none])
         ]],
         jangdanType: .엇중모리,
         instrument: .북

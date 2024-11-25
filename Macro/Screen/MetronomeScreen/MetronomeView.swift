@@ -36,7 +36,7 @@ struct MetronomeView: View {
                 VStack(spacing: 12) {
                     HanbaeBoardView(
                         jangdan: viewModel.state.jangdanAccent,
-                        isSobakOn: viewModel.state.isSobakOn,
+                        isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
                         isPlaying: viewModel.state.isPlaying,
                         currentRow: viewModel.state.currentRow,
                         currentDaebak: viewModel.state.currentDaebak,
@@ -47,7 +47,7 @@ struct MetronomeView: View {
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
                     }
                 }
                 .frame(height: 372)
@@ -71,8 +71,16 @@ struct MetronomeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
-                .padding(.bottom, 16)
+            
+            
+            
+            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                ViewSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            } else {
+                ListenSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            }
 
             MetronomeControlView(viewModel: viewModel)
             
