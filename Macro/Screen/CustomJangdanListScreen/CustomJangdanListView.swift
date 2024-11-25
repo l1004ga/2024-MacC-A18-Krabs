@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomJangdanListView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) private var editMode
     @Environment(Router.self) var router
     
     @State var viewModel: CustomJangdanListViewModel
@@ -16,17 +17,20 @@ struct CustomJangdanListView: View {
     var body: some View {
         List {
             if self.viewModel.state.customJangdanList.isEmpty {
-                ZStack {
-                    EmptyJangdanListView()
-                        .padding(.horizontal, 16)
-                        .onTapGesture {
-                            router.push(.jangdanTypeSelect)
-                        }
+                if editMode?.wrappedValue == .inactive {
+                    ZStack {
+                        EmptyJangdanListView()
+                            .padding(.horizontal, 16)
+                            .onTapGesture {
+                                router.push(.jangdanTypeSelect)
+                            }
+                    }
+                    .buttonStyle(.plain)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowSeparator(.hidden)
                 }
-                .buttonStyle(.plain)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .listRowSeparator(.hidden)
             } else {
+                
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
                     ZStack {
                         HStack(alignment: .top, spacing: 12) {
