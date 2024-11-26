@@ -46,11 +46,12 @@ struct CustomJangdanPracticeView: View {
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
                     }
                 }
                 .frame(height: 372)
                 .padding(.horizontal, 8)
+                
                 if toastAction {
                     Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
                         .font(.Body_R)
@@ -70,8 +71,14 @@ struct CustomJangdanPracticeView: View {
                         }
                 }
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
-                .padding(.bottom, 16)
+            
+            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                ViewSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            } else {
+                ListenSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            }
             
             MetronomeControlView(viewModel: viewModel)
             
