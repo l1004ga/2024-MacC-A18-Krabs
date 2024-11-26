@@ -48,6 +48,10 @@ extension TemplateImplement: TemplateUseCase {
         self.jangdanRepository.saveNewJangdan(newJangdanName: newJangdanName)
     }
     
+    func updateCustomJangdan() {
+        self.jangdanRepository.updateCustomJangdan()
+    }
+    
     func deleteCustomJangdan(jangdanName: String) {
         self.jangdanRepository.deleteCustomJangdan(jangdanName: jangdanName)
     }
