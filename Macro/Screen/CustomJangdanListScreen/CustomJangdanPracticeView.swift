@@ -11,6 +11,7 @@ struct CustomJangdanPracticeView: View {
     @Environment(Router.self) var router
     
     @State var viewModel: MetronomeViewModel
+    @State var customListViewModel: CustomJangdanListViewModel
     
     @State private var appState: AppState = .shared
     
@@ -162,6 +163,15 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 내보내기")
                         }
+                        
+                        Button {
+                            // 장단 삭제 기능
+                            self.customListViewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+                            router.pop()
+                        } label: {
+                            Text("장단 삭제하기")
+                        }
+
                         
                     } label: {
                         Image(systemName: "ellipsis.circle")
