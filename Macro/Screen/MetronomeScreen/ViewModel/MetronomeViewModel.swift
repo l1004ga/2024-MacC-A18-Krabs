@@ -65,6 +65,7 @@ class MetronomeViewModel {
         case stopMetronome
         case estimateBpm
         case createCustomJangdan(newJangdanName: String)
+        case updateCustomJangdan
         case initialJangdan
         case changeSoundType
         case resetAccentCount
@@ -136,6 +137,8 @@ class MetronomeViewModel {
         case let .createCustomJangdan(newJangdanName):
             // MARK: 추후 이름 중복 등으로 인해서 생성 실패 시 Error 받아서 사용자 알림 처리 필요
             try? self.templateUseCase.createCustomJangdan(newJangdanName: newJangdanName)
+        case .updateCustomJangdan:
+            self.templateUseCase.updateCustomJangdan()
         case .initialJangdan:
             guard let currentJangdanName = self.state.currentJangdanName else { return }
             self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
