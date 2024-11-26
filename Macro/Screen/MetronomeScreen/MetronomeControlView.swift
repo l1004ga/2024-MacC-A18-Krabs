@@ -16,70 +16,70 @@ struct MetronomeControlView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
+            VStack(alignment: .center, spacing: 0) {
                 // 위에 드래그 제스쳐 되어야 하는 영역
-                VStack(spacing: 0) {
-                    if !self.controlViewModel.state.isTapping {
-                        Text("빠르기(BPM)")
-                            .font(.Callout_R)
-                            .foregroundStyle(.textTertiary)
-                            .padding(.vertical, 5)
-                    } else {
-                        Text("원하는 빠르기로 계속 탭해주세요")
-                            .font(.Body_SB)
-                            .foregroundStyle(.textDefault)
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 16)
-                            .background(Color.backgroundDefault)
-                            .cornerRadius(8)
+                ZStack {
+                    Rectangle()
+                        .foregroundStyle(.backgroundCard)
+                    
+                    VStack(alignment: .center, spacing: 10) {
+                        if !self.controlViewModel.state.isTapping {
+                            Text("빠르기(BPM)")
+                                .font(.Callout_R)
+                                .foregroundStyle(.textTertiary)
+                                .padding(.vertical, 5)
+                        } else {
+                            Text("원하는 빠르기로 계속 탭해주세요")
+                                .font(.Body_SB)
+                                .foregroundStyle(.textDefault)
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 16)
+                                .background(.backgroundDefault)
+                                .cornerRadius(8)
+                        }
+                        
+                        HStack(spacing: 12) {
+                            Circle()
+                                .fill(controlViewModel.state.isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
+                                .frame(width: 56)
+                                .overlay {
+                                    Image(systemName: "minus")
+                                        .font(.system(size: 26))
+                                        .foregroundStyle(.textButtonSecondary)
+                                }
+                                .onTapGesture {
+                                    tapOnceAction(isIncreasing: false)
+                                }
+                                .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                    tapTwiceAction(isIncreasing: false, isPressing: isPressing)
+                                }, perform: {})
+                            
+                            Text("\(controlViewModel.state.bpm)")
+                                .font(.custom("Pretendard-Medium", fixedSize: 64))
+                                .foregroundStyle(self.controlViewModel.state.isTapping ? .textBPMSearch : .textSecondary)
+                                .frame(width: 120, height: 60)
+                                .padding(8)
+                                .background(self.controlViewModel.state.isTapping ? .backgroundDefault : .clear)
+                                .cornerRadius(16)
+                            
+                            Circle()
+                                .fill(controlViewModel.state.isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
+                                .frame(width: 56)
+                                .overlay {
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 26))
+                                        .foregroundStyle(.textButtonSecondary)
+                                }
+                                .onTapGesture {
+                                    tapOnceAction(isIncreasing: true)
+                                }
+                                .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                    tapTwiceAction(isIncreasing: true, isPressing: isPressing)
+                                }, perform: {})
+                        }
                     }
-                    
-                    HStack(spacing: 16){
-                        Circle()
-                            .fill(controlViewModel.state.isMinusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
-                            .frame(width: 56)
-                            .overlay {
-                                Image(systemName: "minus")
-                                    .font(.system(size: 26))
-                                    .foregroundStyle(.textButtonSecondary)
-                            }
-                            .onTapGesture {
-                                tapOnceAction(isIncreasing: false)
-                            }
-                            .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
-                                tapTwiceAction(isIncreasing: false, isPressing: isPressing)
-                            }, perform: {})
-                        
-                        Text("\(controlViewModel.state.bpm)")
-                            .font(.custom("Pretendard-Medium", fixedSize: 64))
-                            .foregroundStyle(self.controlViewModel.state.isTapping ? .textBPMSearch : .textSecondary)
-                            .frame(width: 120, height: 60)
-                            .padding(8)
-                            .background(self.controlViewModel.state.isTapping ? .backgroundDefault : .clear)
-                            .cornerRadius(16)
-                        
-                        Circle()
-                            .fill(controlViewModel.state.isPlusActive ? .buttonBPMControlActive : .buttonBPMControlDefault)
-                            .frame(width: 56)
-                            .overlay {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 26))
-                                    .foregroundStyle(.textButtonSecondary)
-                            }
-                            .onTapGesture {
-                                tapOnceAction(isIncreasing: true)
-                            }
-                            .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
-                                tapTwiceAction(isIncreasing: true, isPressing: isPressing)
-                            }, perform: {})
-                    } .padding(.top, 25)
-                    
-                    Spacer()
+                    .frame(maxWidth: .infinity)
                 }
-                .padding(.horizontal, 40.5)
-                .padding(.top, 32)
-                .frame(maxWidth: .infinity)
-                .background(.backgroundCard)
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                 .gesture(
                     DragGesture()
@@ -96,7 +96,8 @@ struct MetronomeControlView: View {
                     Text(self.viewModel.state.isPlaying ? "멈춤" : "시작")
                         .font(.custom("Pretendard-Medium", fixedSize: 34))
                         .foregroundStyle(self.viewModel.state.isPlaying ? .textButtonPrimary : .textButtonEmphasis)
-                        .frame(maxWidth: .infinity, minHeight: 80)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 80)
                         .background(self.viewModel.state.isPlaying ? .buttonPlayStop : .buttonPlayStart)
                         .clipShape(RoundedRectangle(cornerRadius: 100))
                         .onTapGesture {
