@@ -55,7 +55,7 @@ struct InstrumentsSelectView: View {
             }
             
             VStack {
-                Text("메트로놈 소리를 \n 선택해주세요.")
+                Text("메트로놈 소리를\n선택해주세요.")
                     .font(.Title1_R)
                     .foregroundStyle(.textDefault)
                     .lineLimit(nil)
@@ -65,7 +65,7 @@ struct InstrumentsSelectView: View {
                 Spacer()
                 if isSelected {
                     VStack(spacing: 32) {
-                        Text("악기에 맞춰진 장단을 들을 수 있어요.\n판소리에 특화된 장단이 제공돼요.")
+                        Text("악기에 맞춰진 장단을 들을 수 있어요.\n\(self.instrumentType == .북 ? "판소리" : "민요")에 특화된 장단이 제공돼요.")
                             .font(.Subheadline_R)
                             .foregroundStyle(.textTertiary)
                             .multilineTextAlignment(.center)
