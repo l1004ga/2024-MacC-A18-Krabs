@@ -138,6 +138,7 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 self.viewModel.effect(action: .initialJangdan)
+                                self.viewModel.effect(action: .resetAccentCount)
                             }
                         }
                     } message: {
