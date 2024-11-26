@@ -27,6 +27,7 @@ struct CustomJangdanPracticeView: View {
     @State private var toastOpacity: Double = 1
     
     @State private var isAlertOn: Bool = false
+    @State private var deleteJangdanAlert: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -168,9 +169,7 @@ struct CustomJangdanPracticeView: View {
                         }
                         
                         Button {
-                            // 장단 삭제 기능
-                            self.customListViewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
-                            router.pop()
+                            deleteJangdanAlert = true
                         } label: {
                             Text("장단 삭제하기")
                         }
@@ -180,6 +179,18 @@ struct CustomJangdanPracticeView: View {
                         Image(systemName: "ellipsis.circle")
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
+                    }
+                    .alert("장단 삭제하기", isPresented: $deleteJangdanAlert) {
+                        Button("예") {
+                            deleteJangdanAlert = false
+                            self.customListViewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+                            router.pop()
+                        }
+                        Button("아니오") {
+                            deleteJangdanAlert = false
+                        }
+                    } message: {
+                        Text("현재 장단을 삭제하시겠습니까?")
                     }
                     .alert("장단 내보내기", isPresented: $exportJandanAlert) {
                         TextField("장단명", text: $inputCustomJangdanName)
