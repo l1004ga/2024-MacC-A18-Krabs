@@ -54,7 +54,6 @@ class MetronomeViewModel {
         var currentDaebak: Int = 0
         var currentRow: Int = 0
         var accentChangedCount: Int = 0
-        var isAccentChanged: Bool = false
     }
     
     enum Action {
@@ -67,7 +66,6 @@ class MetronomeViewModel {
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
         case changeSoundType
-        case alertTrigger(active: Bool)
         case resetAccentCount
     }
     
@@ -142,8 +140,6 @@ class MetronomeViewModel {
             self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
         case .changeSoundType:
             self.metronomeOnOffUseCase.setSoundType()
-        case let .alertTrigger(active):
-            self._state.isAccentChanged = active
         case .resetAccentCount:
             self._state.accentChangedCount = 0
         }
