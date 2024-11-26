@@ -1,35 +1,32 @@
 //
-//  MetronomeView.swift
+//  CustomJangdanPracticeView.swift
 //  Macro
 //
-//  Created by Lee Wonsun on 10/10/24.
+//  Created by Lee Wonsun on 11/26/24.
 //
 
 import SwiftUI
-import Combine
 
-struct MetronomeView: View {
+struct CustomJangdanPracticeView: View {
+    @Environment(Router.self) var router
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
     
     @State private var appState: AppState = .shared
     
-    private var jangdanName: String
+    var jangdanName: String
+    var jangdanType: String
+    
     @State private var isSobakOn: Bool = false
     
     @State private var initialJangdanAlert: Bool = false
-    
     @State private var exportJandanAlert: Bool = false
     @State private var inputCustomJangdanName: String = ""
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
-    init(viewModel: MetronomeViewModel, jangdanName: String) {
-        self.jangdanName = jangdanName
-        self.viewModel = viewModel
-    }
-
+    @State private var isAlertOn: Bool = false
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -73,38 +70,58 @@ struct MetronomeView: View {
             }
             SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
                 .padding(.bottom, 16)
-
+            
             MetronomeControlView(viewModel: viewModel)
             
         }
         .task {
             self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
-            self.isSobakOn = self.viewModel.state.isSobakOn
+            self.isSobakOn = false
         }
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
         }
+        .onAppear { self.viewModel.effect(action: .resetAccentCount) }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
+                Button {
+                    if self.viewModel.state.accentChangedCount > 1 {
+                        isAlertOn = true
+                    } else {
+                        router.pop()
+                    }
                     self.viewModel.effect(action: .stopMetronome)
-                    presentationMode.wrappedValue.dismiss()
-                }) {
+                } label: {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
                 }
+                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: $isAlertOn) {
+                    HStack{
+                        Button("확인") {
+                            isAlertOn = false
+                            self.viewModel.effect(action: .stopMetronome)
+                            router.pop()
+                            // TODO: 저장시키기
+                        }
+                        Button("취소") {
+                            isAlertOn = false
+                            router.pop()
+                        }
+                    }
+                }
             }
             
-            // 장단 선택 List title
+            
+            // 연습 장단 이름
             ToolbarItem(placement: .principal) {
-                Text(jangdanName)
+                Text("\(jangdanType) | \(jangdanName)")
                     .font(.Body_R)
                     .foregroundStyle(.textSecondary)
-                    .padding(.trailing, 6)
             }
+            
             
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
@@ -170,3 +187,7 @@ struct MetronomeView: View {
         .toolbarTitleDisplayMode(.inline)
     }
 }
+
+//#Preview {
+//    CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
+//}

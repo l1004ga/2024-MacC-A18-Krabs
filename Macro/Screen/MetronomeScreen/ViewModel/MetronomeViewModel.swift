@@ -68,6 +68,7 @@ class MetronomeViewModel {
         case initialJangdan
         case changeSoundType
         case alertTrigger(active: Bool)
+        case resetAccentCount
     }
     
     private func updateStatePerBak() {
@@ -143,6 +144,8 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.setSoundType()
         case let .alertTrigger(active):
             self._state.isAccentChanged = active
+        case .resetAccentCount:
+            self._state.accentChangedCount = 0
         }
     }
 }
