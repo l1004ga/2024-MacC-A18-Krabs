@@ -11,14 +11,15 @@ struct SobakSegmentsView: View {
     var sobakSegmentCount: Int
     var currentSobak: Int
     var isPlaying: Bool
+    var isSobakOn: Bool
     
     var body: some View {
         HStack(spacing: 1) {
             ForEach(0..<sobakSegmentCount, id: \.self) { index in
                 Rectangle()
-                    .foregroundStyle(isPlaying
+                    .foregroundStyle(isSobakOn ? isPlaying
                                      ? self.currentSobak == index ? index == 0 ? .sobakSegmentDaebak : .sobakSegmentSobak : .frame
-                                     : .frame)
+                                     : .frame : .frame)
             }
         }
         .background(isPlaying ? .bakBarBorder : .bakBarLine)
@@ -34,6 +35,6 @@ struct SobakSegmentsView: View {
 }
 
 #Preview {
-    SobakSegmentsView(sobakSegmentCount: 3, currentSobak: 2, isPlaying: true)
+    SobakSegmentsView(sobakSegmentCount: 3, currentSobak: 2, isPlaying: true, isSobakOn: false)
 }
 

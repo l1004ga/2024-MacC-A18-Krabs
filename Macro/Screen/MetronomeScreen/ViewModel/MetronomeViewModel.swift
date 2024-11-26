@@ -31,6 +31,7 @@ class MetronomeViewModel {
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
             self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
+            self._state.currentJangdanType = jangdan.jangdanType
             self._state.bakCount = jangdan.bakCount
             self._state.daebakCount = jangdan.daebakList.count
         }

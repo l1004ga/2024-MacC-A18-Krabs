@@ -27,7 +27,7 @@ struct CustomJangdanCreateView: View {
                 VStack(spacing: 12) {
                     HanbaeBoardView(
                         jangdan: viewModel.state.jangdanAccent,
-                        isSobakOn: viewModel.state.isSobakOn,
+                        isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
                         isPlaying: viewModel.state.isPlaying,
                         currentRow: viewModel.state.currentRow,
                         currentDaebak: viewModel.state.currentDaebak,
@@ -37,15 +37,22 @@ struct CustomJangdanCreateView: View {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
                         }
                     }
+                    
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying)
+                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
                     }
                 }
                 .frame(height: 372)
                 .padding(.horizontal, 8)
             }
-            SobakToggleView(isSobakOn: $isSobakOn, jangdan: viewModel.state.currentJangdanType)
-                .padding(.bottom, 16)
+            
+            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                ViewSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            } else {
+                ListenSobakToggleView(isSobakOn: $isSobakOn)
+                    .padding(.bottom, 16)
+            }
             
             MetronomeControlView(viewModel: viewModel)
             
@@ -123,9 +130,11 @@ struct CustomJangdanCreateView: View {
                         HStack{
                             Button("취소") { }
                             Button("확인") {
-                                self.viewModel.effect(action: .stopMetronome)
-                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                router.pop(2)
+                                if !inputCustomJangdanName.isEmpty && inputCustomJangdanName.count < 14 {
+                                    self.viewModel.effect(action: .stopMetronome)
+                                    self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                    router.pop(2)
+                                }
                             }
                         }
                     } message: {
@@ -142,4 +151,5 @@ struct CustomJangdanCreateView: View {
 
 #Preview {
     CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
+        .environment(Router().self)
 }
