@@ -11,6 +11,7 @@ enum Route: Hashable {
     case customJangdanList
     case jangdanTypeSelect
     case customJangdanCreate(jangdanName: String)
+    case customJangdanPractice(jangdanName: String, jangdanType: String)
 }
 
 @Observable
@@ -25,6 +26,8 @@ class Router {
             return AnyView(JangdanTypeSelectView())
         case let .customJangdanCreate(jangdanName):
             return AnyView(CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName))
+        case let .customJangdanPractice(jangdanName, jangdanType):
+            return AnyView(CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, customListViewModel: DIContainer.shared.customJangdanListViewModel, jangdanName: jangdanName, jangdanType: jangdanType))
         }
     }
     

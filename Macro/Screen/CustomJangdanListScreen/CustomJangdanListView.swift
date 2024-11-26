@@ -56,13 +56,9 @@ struct CustomJangdanListView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         
                         .padding(.horizontal, 16)
-                        
-                        NavigationLink {
-                            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.name)
-                        } label: {
-                            
+                        .onTapGesture {
+                            router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
                         }
-                        .opacity(0)
                     }
                     .buttonStyle(.plain)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
