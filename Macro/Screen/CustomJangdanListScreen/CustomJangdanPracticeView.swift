@@ -121,6 +121,9 @@ struct CustomJangdanPracticeView: View {
                 Text("\(jangdanType) | \(jangdanName)")
                     .font(.Body_R)
                     .foregroundStyle(.textSecondary)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(width: 200)
             }
             
             
