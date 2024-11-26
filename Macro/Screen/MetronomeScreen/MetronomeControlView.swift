@@ -167,8 +167,7 @@ struct MetronomeControlView: View {
     
     // 단일탭 액션
     private func tapOnceAction(isIncreasing: Bool) {
-            self.controlViewModel.effect(action: isIncreasing ? .increaseShortBpm : .decreaseShortBpm)
-        
+        self.controlViewModel.effect(action: isIncreasing ? .increaseShortBpm : .decreaseShortBpm)
         
         withAnimation {
             controlViewModel.effect(action: .toggleActiveState(isIncreasing: isIncreasing, isActive: true))
@@ -222,7 +221,3 @@ struct MetronomeControlView: View {
         controlViewModel.effect(action: .setPreviousTranslation(position: 0))
     }
 }
-
-//#Preview {
-//    MetronomeControlView()
-//}
