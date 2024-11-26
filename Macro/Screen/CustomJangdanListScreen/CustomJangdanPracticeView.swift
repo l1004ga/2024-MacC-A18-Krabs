@@ -106,7 +106,7 @@ struct CustomJangdanPracticeView: View {
                             isAlertOn = false
                             self.viewModel.effect(action: .stopMetronome)
                             router.pop()
-                            // TODO: 저장시키기
+                            // TODO: (룰루) 수정 사항 UPDATE하기
                         }
                         Button("취소") {
                             isAlertOn = false
