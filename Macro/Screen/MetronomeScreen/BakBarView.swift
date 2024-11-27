@@ -63,7 +63,7 @@ struct BakBarView: View {
                         guard let startLocation = startLocation else { return }
                         
                         // 드래그 작동하게 설정한 거리
-                        let limit = geo.size.height / 6
+                        let limit = geo.size.height / 8
                         let dragDistance = gesture.location.y - startLocation.y
                         
                         if abs(dragDistance) > limit {
