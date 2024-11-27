@@ -13,7 +13,7 @@ struct MacroApp: App {
     
     var body: some Scene {
         WindowGroup {
-                HomeView()
+            HomeView()
                 .environment(router)
         }
     }

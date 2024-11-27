@@ -78,11 +78,11 @@ struct CustomJangdanCreateView: View {
                 }
                 .alert("저장하지 않고\n나가시겠습니까?", isPresented: $backButtonAlert) {
                     HStack{
-                        Button("확인") {
+                        Button("취소") { }
+                        Button("나가기") {
                             self.viewModel.effect(action: .stopMetronome)
                             router.pop()
                         }
-                        Button("취소") { }
                     }
                 }
             }
@@ -121,7 +121,7 @@ struct CustomJangdanCreateView: View {
                     Button {
                         exportJandanAlert = true
                     } label: {
-                        Text("완료")
+                        Text("저장")
                             .font(.Body_R)
                             .foregroundStyle(.textDefault)
                     }

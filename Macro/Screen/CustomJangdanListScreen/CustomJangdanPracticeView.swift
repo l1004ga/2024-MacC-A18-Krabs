@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+enum ToastType {
+    case save
+    case export(jangdanName: String)
+    case changeName
+    
+    var massage: String {
+        switch self {
+        case .save:
+            return "장단을 저장했습니다."
+        case let .export(jangdanName):
+            return "\(jangdanName) 내보내기가 완료되었습니다."
+        case .changeName:
+            return "장단명을 변경했습니다."
+        }
+    }
+}
+
 struct CustomJangdanPracticeView: View {
     @Environment(Router.self) var router
     
@@ -25,12 +42,10 @@ struct CustomJangdanPracticeView: View {
     @State private var inputCustomJangdanName: String = ""
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
-    
-    @State private var isAlertOn: Bool = false
+    @State private var toastType: ToastType = .save
+
     @State private var deleteJangdanAlert: Bool = false
     @State private var updateJandanNameAlert: Bool = false
-    
-    @State private var accentChangedCount: Int = 0
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,7 +61,6 @@ struct CustomJangdanPracticeView: View {
                     ) { row, daebak, sobak, newAccent in
                         withAnimation {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
-                            accentChangedCount += 1
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
@@ -57,7 +71,7 @@ struct CustomJangdanPracticeView: View {
                 .padding(.horizontal, 8)
                 
                 if toastAction {
-                    Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                    Text(self.toastType.massage)
                         .font(.Body_R)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 16)
@@ -99,30 +113,12 @@ struct CustomJangdanPracticeView: View {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    if self.accentChangedCount > 1 {
-                        isAlertOn = true
-                    } else {
-                        router.pop()
-                    }
                     self.viewModel.effect(action: .stopMetronome)
+                    router.pop()
                 } label: {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
-                }
-                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: $isAlertOn) {
-                    HStack{
-                        Button("확인") {
-                            isAlertOn = false
-                            self.viewModel.effect(action: .stopMetronome)
-                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
-                            router.pop()
-                        }
-                        Button("취소") {
-                            isAlertOn = false
-                            router.pop()
-                        }
-                    }
                 }
             }
             
@@ -171,22 +167,32 @@ struct CustomJangdanPracticeView: View {
                                 Text("비프음으로 변환")
                             }
                         }
+                        
                         Button {
-                            exportJandanAlert = true
+                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
+                            self.toastType = .save
+                            self.toastAction = true
+                        } label: {
+                            Text("장단 저장하기")
+                        }
+
+                        
+                        Button {
+                            self.exportJandanAlert = true
                         } label: {
                             Text("장단 내보내기")
                         }
                         
                         Button {
-                            inputCustomJangdanName = jangdanName
-                            updateJandanNameAlert = true
+                            self.inputCustomJangdanName = jangdanName
+                            self.updateJandanNameAlert = true
                         } label: {
                             Text("장단이름 변경하기")
                         }
                         
                         
                         Button {
-                            deleteJangdanAlert = true
+                            self.deleteJangdanAlert = true
                         } label: {
                             Text("장단 삭제하기")
                         }
@@ -215,6 +221,7 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                self.toastType = .export(jangdanName: self.inputCustomJangdanName)
                                 toastAction = true
                             }
                         }
@@ -229,6 +236,8 @@ struct CustomJangdanPracticeView: View {
                                 self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
                                 self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
                                 self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                                self.toastType = .changeName
+                                self.toastAction = true
                             }
                         }
                     } message: {
