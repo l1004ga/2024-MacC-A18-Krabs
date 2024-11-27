@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum ToastType {
+    case save
+    case export
+}
+
 struct CustomJangdanPracticeView: View {
     @Environment(Router.self) var router
     
@@ -25,6 +30,7 @@ struct CustomJangdanPracticeView: View {
     @State private var inputCustomJangdanName: String = ""
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
+    @State private var toastType: ToastType = .save
     
     @State private var isAlertOn: Bool = false
     @State private var deleteJangdanAlert: Bool = false
@@ -57,7 +63,7 @@ struct CustomJangdanPracticeView: View {
                 .padding(.horizontal, 8)
                 
                 if toastAction {
-                    Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                    Text(self.toastType == .save ?  "장단을 저장했습니다." : "'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
                         .font(.Body_R)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 16)
@@ -115,7 +121,6 @@ struct CustomJangdanPracticeView: View {
                         Button("확인") {
                             isAlertOn = false
                             self.viewModel.effect(action: .stopMetronome)
-//                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
                             router.pop()
                         }
                         Button("취소") {
@@ -170,22 +175,34 @@ struct CustomJangdanPracticeView: View {
                                 Text("비프음으로 변환")
                             }
                         }
+                        
                         Button {
-                            exportJandanAlert = true
+                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
+                            self.accentChangedCount = 0
+                            self.toastType = .save
+                            self.toastAction = true
+                        } label: {
+                            Text("장단 저장하기")
+                        }
+
+                        
+                        Button {
+                            self.toastType = .export
+                            self.exportJandanAlert = true
                         } label: {
                             Text("장단 내보내기")
                         }
                         
                         Button {
-                            inputCustomJangdanName = jangdanName
-                            updateJandanNameAlert = true
+                            self.inputCustomJangdanName = jangdanName
+                            self.updateJandanNameAlert = true
                         } label: {
                             Text("장단이름 변경하기")
                         }
                         
                         
                         Button {
-                            deleteJangdanAlert = true
+                            self.deleteJangdanAlert = true
                         } label: {
                             Text("장단 삭제하기")
                         }
