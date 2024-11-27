@@ -19,7 +19,11 @@ final class JangdanDataManager {
     
     init?() {
         do {
+#if DEBUG
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
+#else
+            let config = ModelConfiguration(isStoredInMemoryOnly: false)
+#endif
             container = try ModelContainer(for: JangdanDataModel.self, configurations: config)
             context = ModelContext(container)
         } catch {
