@@ -120,6 +120,9 @@ struct CustomJangdanListView: View {
                 HStack {
                     Button {
                         self.router.push(.jangdanTypeSelect)
+                        if editMode?.wrappedValue == .active {
+                            editMode?.wrappedValue = .inactive
+                        }
                     } label: {
                         Image(systemName: "plus")
                             .aspectRatio(contentMode: .fit)
