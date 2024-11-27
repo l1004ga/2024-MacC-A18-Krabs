@@ -10,6 +10,7 @@ import SwiftUI
 enum ToastType {
     case save
     case export(jangdanName: String)
+    case changeName
     
     var massage: String {
         switch self {
@@ -17,6 +18,8 @@ enum ToastType {
             return "장단을 저장했습니다."
         case let .export(jangdanName):
             return "\(jangdanName) 내보내기가 완료되었습니다."
+        case .changeName:
+            return "장단명을 변경했습니다."
         }
     }
 }
@@ -255,6 +258,8 @@ struct CustomJangdanPracticeView: View {
                                 self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
                                 self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
                                 self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                                self.toastType = .changeName
+                                self.toastAction = true
                             }
                         }
                     } message: {
