@@ -19,12 +19,20 @@ struct HanbaeBoardView: View {
     var body: some View {
         Grid(horizontalSpacing: 4, verticalSpacing: 8) {
             ForEach(jangdan.indices, id: \.self) { row in
+                // 이전까지의 대박 갯수 누적합
+                let prefixSum: Int = {
+                    var sum = 0
+                    for _ in 0..<row {
+                        sum += jangdan[row].count
+                    }
+                    return sum
+                }()
+                
                 GridRow {
                     ForEach(jangdan[row].indices, id: \.self) { daebakIndex in
-                        
                         BakBarSetView(
                             accents: jangdan[row][daebakIndex],
-                            daebakIndex: daebakIndex,
+                            daebakIndex: daebakIndex + prefixSum,
                             isDaebakOnly: !isSobakOn,
                             isPlaying: isPlaying,
                             activeIndex: currentRow == row && currentDaebak == daebakIndex ? currentSobak : nil
@@ -43,7 +51,7 @@ struct HanbaeBoardView: View {
 #Preview {
     HanbaeBoardView(
         jangdan: [[[.strong, .weak],
-                  [.weak, .medium, .medium],
-                  [.weak, .weak],
+                   [.weak, .medium, .medium],
+                   [.weak, .weak],
                    [.weak, .weak, .weak]]], isSobakOn: true, isPlaying: true, currentRow: 0, currentDaebak: 1, currentSobak: 2) { _, _, _, _ in }
 }
