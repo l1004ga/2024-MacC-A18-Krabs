@@ -14,6 +14,8 @@ struct CustomJangdanListView: View {
     
     @State var viewModel: CustomJangdanListViewModel
     
+    @State private var deleteButtonAlert: Bool = false
+    
     var body: some View {
         List {
             if self.viewModel.state.customJangdanList.isEmpty {
@@ -30,44 +32,63 @@ struct CustomJangdanListView: View {
                     .listRowSeparator(.hidden)
                 }
             } else {
-                
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
-                    ZStack {
-                        HStack(alignment: .top, spacing: 12) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text(jangdan.type.name)
+                    ZStack(alignment: .leading) {
+                        ZStack {
+                            HStack(alignment: .top, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Text(jangdan.type.name)
+                                        .font(.Subheadline_R)
+                                        .foregroundStyle(.textSecondary)
+                                    
+                                    Text(jangdan.name)
+                                        .font(.Title3_R)
+                                        .foregroundStyle(.textDefault)
+                                }
+                                
+                                Spacer()
+                                
+                                Text(jangdan.lastUpdate.format("yyyy.MM.dd."))
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
-                                
-                                Text(jangdan.name)
-                                    .font(.Title3_R)
-                                    .foregroundStyle(.textDefault)
                             }
+                            .offset(x: editMode?.wrappedValue == .active ? 68 : 0) 
+                            .animation(.easeInOut, value: editMode?.wrappedValue)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 20)
+                            .background(.backgroundCard)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                             
-                            Spacer()
-                            
-                            Text(jangdan.lastUpdate.format("yyyy.MM.dd."))
-                                .font(.Subheadline_R)
-                                .foregroundStyle(.textSecondary)
+                            .padding(.horizontal, 16)
+                            .onTapGesture {
+                                router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
+                            }
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 20)
-                        .background(.backgroundCard)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .padding(.horizontal, 16)
-                        .onTapGesture {
-                            router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
-                        }
+                        
+                        // 삭제버튼 위치(opacity로 조정)
+                        Image(systemName: "trash.fill")
+                            .font(.system(size: 17))
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 36.5)
+                            .padding(.horizontal, 25)
+                            .background(.red)
+                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 16, bottomLeadingRadius: 16))
+                            .padding(.leading, 16)
+                            .opacity(editMode?.wrappedValue == .inactive ? 0 : 1)
+                            .onTapGesture {
+                                deleteButtonAlert = true
+                            }
+                            .alert("'\(jangdan.name.truncated(5))'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
+                                Button("취소", role: .cancel) { }
+                                Button("삭제", role: .destructive) {
+                                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
+                                    self.viewModel.effect(action: .fetchCustomJangdanData)
+                                }
+                            }
                     }
                     .buttonStyle(PlainListButton())
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
-                }
-                .onDelete { indexSet in
-                    guard let index = indexSet.first else { return }
-                    let jangdanName = self.viewModel.state.customJangdanList[index].name
-                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
-                    self.viewModel.effect(action: .fetchCustomJangdanData)
                 }
             }
         }
@@ -101,6 +122,9 @@ struct CustomJangdanListView: View {
                 HStack {
                     Button {
                         self.router.push(.jangdanTypeSelect)
+                        if editMode?.wrappedValue == .active {
+                            editMode?.wrappedValue = .inactive
+                        }
                     } label: {
                         Image(systemName: "plus")
                             .aspectRatio(contentMode: .fit)
