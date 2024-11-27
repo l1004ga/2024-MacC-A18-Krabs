@@ -110,17 +110,16 @@ struct CustomJangdanPracticeView: View {
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
                 }
-                .alert("수정된 내용을\n반영하고 나갈까요?", isPresented: $isAlertOn) {
+                .alert("저장하지 않고\n나가시겠습니까?", isPresented: $isAlertOn) {
                     HStack{
                         Button("확인") {
                             isAlertOn = false
                             self.viewModel.effect(action: .stopMetronome)
-                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
+//                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
                             router.pop()
                         }
                         Button("취소") {
                             isAlertOn = false
-                            router.pop()
                         }
                     }
                 }
