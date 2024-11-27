@@ -78,7 +78,7 @@ struct HomeView: View {
                                                 .overlay {
                                                     jangdan.jangdanLogoImage
                                                         .resizable()
-                                                        .foregroundStyle(buttonPressedStates[jangdan] == true ? .sobakSegmentSobak : .buttonBPMControlDefault)
+                                                        .foregroundStyle(buttonPressedStates[jangdan] == true ? .backgroundImageActive : .backgroundImageDefault)
                                                         .frame(width: 225, height: 225)
                                                         .offset(y: -116)
                                                 }
