@@ -5,6 +5,8 @@
 //  Created by Lee Wonsun on 10/10/24.
 //
 
+import SwiftUI
+
 extension Font {
     static func pretendardMedium(size: CGFloat) -> Font {
         return Font.custom("Pretendard-Medium", size: size)
