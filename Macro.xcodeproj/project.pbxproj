@@ -60,8 +60,8 @@
 		3C6EAFA82CDD1243003F2191 /* MetronomeOnOffUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA72CDD1243003F2191 /* MetronomeOnOffUseCase.swift */; };
 		3C6EAFAA2CDD12DE003F2191 /* AccentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAFA92CDD12DE003F2191 /* AccentUseCase.swift */; };
 		3C719E432CEF532900D233DC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C719E422CEF532900D233DC /* HomeViewModel.swift */; };
-		4303C81D2CF5995E00EB956A /* CustomJangdanPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4303C81C2CF5995E00EB956A /* CustomJangdanPracticeView.swift */; };
 		3CE4C4862CF4E13400FDE6AA /* ViewSobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE4C4852CF4E13400FDE6AA /* ViewSobakToggleView.swift */; };
+		4303C81D2CF5995E00EB956A /* CustomJangdanPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4303C81C2CF5995E00EB956A /* CustomJangdanPracticeView.swift */; };
 		4349F8F42CEC85D5001FE727 /* MetronomeControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349F8F32CEC85D5001FE727 /* MetronomeControlViewModel.swift */; };
 		435BE54D2CEF221A00CCA4CA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435BE54C2CEF221A00CCA4CA /* Router.swift */; };
 		43774F532CB7C10E00F54EF7 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */; };
@@ -79,7 +79,6 @@
 		572AB1C62CEDC26200778B9B /* CustomJangdanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572AB1C32CEDC26200778B9B /* CustomJangdanListView.swift */; };
 		572AB1C72CEDC26200778B9B /* EmptyJangdanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572AB1C42CEDC26200778B9B /* EmptyJangdanListView.swift */; };
 		579839382CE5F37D00866AD4 /* InstrumentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579839372CE5F36500866AD4 /* InstrumentEnum.swift */; };
-		5798393A2CE61C3800866AD4 /* JangdanDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579839392CE61C2E00866AD4 /* JangdanDTO.swift */; };
 		5798393C2CEB22CD00866AD4 /* BasicJangdanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,8 +156,8 @@
 		3C6EAFA72CDD1243003F2191 /* MetronomeOnOffUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeOnOffUseCase.swift; sourceTree = "<group>"; };
 		3C6EAFA92CDD12DE003F2191 /* AccentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentUseCase.swift; sourceTree = "<group>"; };
 		3C719E422CEF532900D233DC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		4303C81C2CF5995E00EB956A /* CustomJangdanPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanPracticeView.swift; sourceTree = "<group>"; };
 		3CE4C4852CF4E13400FDE6AA /* ViewSobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSobakToggleView.swift; sourceTree = "<group>"; };
+		4303C81C2CF5995E00EB956A /* CustomJangdanPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanPracticeView.swift; sourceTree = "<group>"; };
 		4349F8F32CEC85D5001FE727 /* MetronomeControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeControlViewModel.swift; sourceTree = "<group>"; };
 		435BE54C2CEF221A00CCA4CA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		43774F522CB7C10E00F54EF7 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -177,7 +176,6 @@
 		572AB1C32CEDC26200778B9B /* CustomJangdanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanListView.swift; sourceTree = "<group>"; };
 		572AB1C42CEDC26200778B9B /* EmptyJangdanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyJangdanListView.swift; sourceTree = "<group>"; };
 		579839372CE5F36500866AD4 /* InstrumentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentEnum.swift; sourceTree = "<group>"; };
-		579839392CE61C2E00866AD4 /* JangdanDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanDTO.swift; sourceTree = "<group>"; };
 		5798393B2CEB22C100866AD4 /* BasicJangdanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicJangdanData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,7 +215,6 @@
 		2B63CFB12CE5C76A00B4C7AC /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				579839392CE61C2E00866AD4 /* JangdanDTO.swift */,
 				2BB797B82CE6253B008173A5 /* JangdanSwiftData.swift */,
 			);
 			path = DTO;
@@ -701,7 +698,6 @@
 				2BE5AE022CAC289C0094F3C3 /* PlaySoundInterface.swift in Sources */,
 				4349F8F42CEC85D5001FE727 /* MetronomeControlViewModel.swift in Sources */,
 				3C46FC0C2CEF0F5F0067EE65 /* InstrumentsSelectView.swift in Sources */,
-				5798393A2CE61C3800866AD4 /* JangdanDTO.swift in Sources */,
 				2BE5ADFC2CAC118F0094F3C3 /* MetronomeOnOffImplement.swift in Sources */,
 				3C1EB31B2CE492560030FB63 /* MastaryRepository.swift in Sources */,
 			);

@@ -8,7 +8,6 @@
 import SwiftData
 import Foundation
 
-
 // JangdanDataModel 정의
 @Model
 final class JangdanDataModel {
@@ -19,9 +18,9 @@ final class JangdanDataModel {
     var jangdanType: String
     var daebakAccentList: [[[Int]]]
     var instrument: String
+    var createdAt: Date?
     
-    // 초기화 메서드
-    init(name: String, bakCount: Int, daebak: Int, bpm: Int, daebakList: [[[Int]]], jangdanType: String, instrument: String) {
+    init(name: String, bakCount: Int, daebak: Int, bpm: Int, jangdanType: String, daebakList: [[[Int]]], instrument: String, createdAt: Date? = .now) {
         self.name = name
         self.bakCount = bakCount
         self.daebak = daebak
@@ -29,6 +28,7 @@ final class JangdanDataModel {
         self.jangdanType = jangdanType
         self.daebakAccentList = daebakList
         self.instrument = instrument
+        self.createdAt = createdAt
     }
 }
 
