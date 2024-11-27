@@ -30,7 +30,6 @@ struct CustomJangdanListView: View {
                     .listRowSeparator(.hidden)
                 }
             } else {
-                
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
                     ZStack(alignment: .leading) {
                         ZStack {
@@ -51,6 +50,8 @@ struct CustomJangdanListView: View {
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
                             }
+                            .offset(x: editMode?.wrappedValue == .active ? 74 : 0) // 삭제 버튼 너비만큼 이동
+                            .animation(.easeInOut, value: editMode?.wrappedValue)
                             .padding(.horizontal, 24)
                             .padding(.vertical, 20)
                             .background(.backgroundCard)
@@ -66,12 +67,16 @@ struct CustomJangdanListView: View {
                         Image(systemName: "trash.fill")
                             .font(.system(size: 17))
                             .foregroundStyle(.white)
-                            .padding(.vertical, 37.5)
+                            .padding(.vertical, 36)
                             .padding(.horizontal, 25)
                             .background(.red)
                             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 16, bottomLeadingRadius: 16))
                             .padding(.leading, 16)
                             .opacity(editMode?.wrappedValue == .inactive ? 0 : 1)
+                            .onTapGesture {
+                                self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
+                                self.viewModel.effect(action: .fetchCustomJangdanData)
+                            }
                     }
                     .buttonStyle(PlainListButton())
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
