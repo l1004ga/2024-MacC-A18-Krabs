@@ -58,19 +58,25 @@ struct BakBarView: View {
                         if startLocation == nil {
                             startLocation = gesture.location
                         }
+                    }
+                    .onEnded { gesture in
+                        guard let startLocation = startLocation else { return }
                         
-                        let limit = Int(geo.size.height / 3)
-                        let diff = Int(gesture.location.y - startLocation!.y) / limit
-                        if abs(diff) > 0 {
-                            var newGrade = self.accent.rawValue + diff
-                            if newGrade > 3 {
-                                newGrade = 3
-                            } else if newGrade < 0 {
-                                newGrade = 0
+                        // 드래그 작동하게 설정한 거리
+                        let limit = geo.size.height / 6
+                        let dragDistance = gesture.location.y - startLocation.y
+                        
+                        if abs(dragDistance) > limit {
+                            let adjustment = dragDistance > 0 ? 1 : -1
+                            let newGrade = self.accent.rawValue + adjustment
+                            
+                            if (0...3).contains(newGrade) {
+                                updateAccent(Accent(rawValue: newGrade) ?? .none)
                             }
-                            updateAccent(Accent(rawValue: newGrade) ?? .none)
-                            startLocation = nil
                         }
+                        
+                        // 드래그 완료 후 초기화
+                        self.startLocation = nil
                     }
             )
             .onTapGesture {
