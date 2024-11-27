@@ -43,12 +43,9 @@ struct CustomJangdanPracticeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     @State private var toastType: ToastType = .save
-    
-    @State private var isAlertOn: Bool = false
+
     @State private var deleteJangdanAlert: Bool = false
     @State private var updateJandanNameAlert: Bool = false
-    
-    @State private var accentChangedCount: Int = 0
     
     var body: some View {
         VStack(spacing: 0) {
@@ -62,7 +59,6 @@ struct CustomJangdanPracticeView: View {
                         currentDaebak: viewModel.state.currentDaebak,
                         currentSobak: viewModel.state.currentSobak
                     ) { row, daebak, sobak, newAccent in
-                        accentChangedCount += 1
                         withAnimation {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
                         }
@@ -174,7 +170,6 @@ struct CustomJangdanPracticeView: View {
                         
                         Button {
                             self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
-                            self.accentChangedCount = 0
                             self.toastType = .save
                             self.toastAction = true
                         } label: {
