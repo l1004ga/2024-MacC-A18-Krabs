@@ -147,6 +147,7 @@ struct CustomJangdanPracticeView: View {
                     Button {
                         // TODO: 데이터 초기화
                         initialJangdanAlert = true
+                        self.accentChangedCount = 0
                     } label: {
                         Image(systemName: "arrow.counterclockwise")
                             .aspectRatio(contentMode: .fit)
