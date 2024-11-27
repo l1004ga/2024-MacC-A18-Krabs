@@ -39,10 +39,10 @@ struct HomeView: View {
                             HStack(spacing: 12) {
                                 Text("\(self.appState.selectedInstrument.rawValue)")
                                     .font(.Callout_R)
+                                    .frame(width: 30)
                                 Image(systemName: "chevron.down")
                             }
-                            .padding(.horizontal, 14)
-                            .frame(width: 87, height: 42)
+                            .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 12))
                             .background {
                                 RoundedRectangle(cornerRadius: 35)
                                     .stroke(lineWidth: 2)
