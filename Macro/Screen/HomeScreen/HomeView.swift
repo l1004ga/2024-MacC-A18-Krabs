@@ -54,6 +54,7 @@ struct HomeView: View {
                         Spacer()
                         
                         Image(systemName: "tray.full.fill")
+                            .font(.system(size: 22))
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
                             .onTapGesture {
