@@ -80,11 +80,13 @@ struct CustomJangdanPracticeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .opacity(self.toastOpacity)
                         .onAppear {
-                            withAnimation(.easeIn(duration: 3)) {
-                                self.toastOpacity = 0
-                            } completion: {
-                                self.toastAction = false
-                                self.toastOpacity = 1
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation(.easeIn) {
+                                    self.toastOpacity = 0
+                                } completion: {
+                                    self.toastAction = false
+                                    self.toastOpacity = 1
+                                }
                             }
                         }
                 }
