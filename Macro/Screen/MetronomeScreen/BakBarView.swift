@@ -60,17 +60,17 @@ struct BakBarView: View {
                         }
                     }
                     .onEnded { gesture in
-                        guard let startLocation = startLocation else { return }
+                        guard let startLocation else { return }
                         
                         // 드래그 작동하게 설정한 거리
-                        let limit = geo.size.height / 8
+                        let limit = geo.size.height / 9
                         let dragDistance = gesture.location.y - startLocation.y
                         
                         if abs(dragDistance) > limit {
                             let adjustment = dragDistance > 0 ? 1 : -1
                             let newGrade = self.accent.rawValue + adjustment
                             
-                            if (0...3).contains(newGrade) {
+                            if 0...3 ~= newGrade {
                                 updateAccent(Accent(rawValue: newGrade) ?? .none)
                             }
                         }
