@@ -47,7 +47,7 @@ struct BakBarView: View {
                         .padding(.top, 20)
                         .foregroundColor(
                             isActive
-                            ? accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberWhite
+                            ? .bakBarNumberWhite
                             : accent == .strong ? .bakBarNumberBlack : geo.size.height < 100 && accent == .medium ? .bakBarNumberBlack : .bakBarNumberGray
                         )
                 }
