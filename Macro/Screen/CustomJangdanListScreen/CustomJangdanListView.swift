@@ -14,6 +14,8 @@ struct CustomJangdanListView: View {
     
     @State var viewModel: CustomJangdanListViewModel
     
+    @State private var deleteButtonAlert: Bool = false
+    
     var body: some View {
         List {
             if self.viewModel.state.customJangdanList.isEmpty {
@@ -74,8 +76,14 @@ struct CustomJangdanListView: View {
                             .padding(.leading, 16)
                             .opacity(editMode?.wrappedValue == .inactive ? 0 : 1)
                             .onTapGesture {
-                                self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
-                                self.viewModel.effect(action: .fetchCustomJangdanData)
+                                deleteButtonAlert = true
+                            }
+                            .alert("'\(jangdan.name)'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
+                                Button("취소", role: .cancel) { }
+                                Button("삭제", role: .destructive) {
+                                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
+                                    self.viewModel.effect(action: .fetchCustomJangdanData)
+                                }
                             }
                     }
                     .buttonStyle(PlainListButton())
