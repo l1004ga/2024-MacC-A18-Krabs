@@ -80,7 +80,7 @@ struct HomeView: View {
                                                         .resizable()
                                                         .foregroundStyle(buttonPressedStates[jangdan] == true ? .sobakSegmentSobak : .buttonBPMControlDefault)
                                                         .frame(width: 225, height: 225)
-                                                        .offset(y: -100)
+                                                        .offset(y: -116)
                                                 }
                                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                             
