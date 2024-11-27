@@ -50,9 +50,9 @@ struct CustomJangdanPracticeView: View {
                         currentDaebak: viewModel.state.currentDaebak,
                         currentSobak: viewModel.state.currentSobak
                     ) { row, daebak, sobak, newAccent in
+                        accentChangedCount += 1
                         withAnimation {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
-                            accentChangedCount += 1
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
@@ -105,7 +105,7 @@ struct CustomJangdanPracticeView: View {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    if self.accentChangedCount > 1 {
+                    if self.accentChangedCount > 0 {
                         isAlertOn = true
                     } else {
                         router.pop()
