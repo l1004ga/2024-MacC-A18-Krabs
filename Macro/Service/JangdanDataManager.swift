@@ -152,14 +152,22 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
-    private func updateJangdanSave(jangdanName: String, instrument: String) {
+    // MARK: 장단이름 변경하지 않고 내용만 변경 시
+    func updateCustomJangdan(newJangdanName: String?) {
+        
+        let currentName = self.currentJangdan.name
+        let instrument = self.currentJangdan.instrument.rawValue
+        
         let predicate = #Predicate<JangdanDataModel> {
-            $0.name == jangdanName && $0.instrument == instrument
+            $0.name == currentName && $0.instrument == instrument
         }
         let descriptor = FetchDescriptor(predicate: predicate)
         
         do {
             if let savedJangdan = try context.fetch(descriptor).first {
+                if let newJangdanName {
+                    savedJangdan.name = newJangdanName
+                }
                 savedJangdan.daebakAccentList = currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } }
                 savedJangdan.bpm = currentJangdan.bpm
                 
@@ -168,11 +176,6 @@ extension JangdanDataManager: JangdanRepository {
         } catch {
             print("데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
         }
-    }
-    
-    // MARK: 장단이름 변경하지 않고 내용만 변경 시
-    func updateCustomJangdan() {
-        updateJangdanSave(jangdanName: self.currentJangdan.name, instrument: self.currentJangdan.instrument.rawValue)
     }
     
     func deleteCustomJangdan(jangdanName: String) {
