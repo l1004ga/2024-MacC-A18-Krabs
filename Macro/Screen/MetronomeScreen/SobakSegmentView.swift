@@ -22,10 +22,10 @@ struct SobakSegmentsView: View {
                                      : .frame : .frame)
             }
         }
-        .background(isPlaying ? .bakBarBorder : .bakBarLine)
+        .background(isSobakOn ? .bakBarBorder : .bakBarLine)
         .frame(height: 20)
         .overlay {
-            if isPlaying {
+            if isSobakOn {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(.bakBarBorder, lineWidth: 2)
             }
