@@ -32,32 +32,46 @@ struct CustomJangdanListView: View {
             } else {
                 
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
-                    ZStack {
-                        HStack(alignment: .top, spacing: 12) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text(jangdan.type.name)
+                    ZStack(alignment: .leading) {
+                        ZStack {
+                            HStack(alignment: .top, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Text(jangdan.type.name)
+                                        .font(.Subheadline_R)
+                                        .foregroundStyle(.textSecondary)
+                                    
+                                    Text(jangdan.name)
+                                        .font(.Title3_R)
+                                        .foregroundStyle(.textDefault)
+                                }
+                                
+                                Spacer()
+                                
+                                Text(jangdan.lastUpdate.format("yyyy.MM.dd."))
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
-                                
-                                Text(jangdan.name)
-                                    .font(.Title3_R)
-                                    .foregroundStyle(.textDefault)
                             }
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 20)
+                            .background(.backgroundCard)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                             
-                            Spacer()
-                            
-                            Text(jangdan.lastUpdate.format("yyyy.MM.dd."))
-                                .font(.Subheadline_R)
-                                .foregroundStyle(.textSecondary)
+                            .padding(.horizontal, 16)
+                            .onTapGesture {
+                                router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
+                            }
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 20)
-                        .background(.backgroundCard)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .padding(.horizontal, 16)
-                        .onTapGesture {
-                            router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
-                        }
+                        
+                        // 삭제버튼 위치(opacity로 조정)
+                        Image(systemName: "trash.fill")
+                            .font(.system(size: 17))
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 37.5)
+                            .padding(.horizontal, 25)
+                            .background(.red)
+                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 16, bottomLeadingRadius: 16))
+                            .padding(.leading, 16)
+                            .opacity(editMode?.wrappedValue == .inactive ? 0 : 1)
                     }
                     .buttonStyle(PlainListButton())
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
