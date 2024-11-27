@@ -18,13 +18,14 @@ struct HomeView: View {
     @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         if self.appState.didLaunchedBefore {
             NavigationStack(path: Binding(
-                get: { router.path },set: { router.path = $0 }
+                get: { router.path }, set: { router.path = $0 }
             ))
             {
-                VStack {
+                VStack(spacing: 0) {
                     HStack {
                         Menu {
                             Button("북") {
@@ -39,21 +40,23 @@ struct HomeView: View {
                             HStack(spacing: 12) {
                                 Text("\(self.appState.selectedInstrument.rawValue)")
                                     .font(.Callout_R)
+                                    .frame(width: 30)
                                 Image(systemName: "chevron.down")
                             }
-                            .padding(.horizontal, 14)
-                            .frame(width: 87, height: 42)
+                            .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 12))
                             .background {
                                 RoundedRectangle(cornerRadius: 35)
-                                    .stroke(lineWidth: 4)
+                                    .stroke(lineWidth: 2)
                                     .clipShape(RoundedRectangle(cornerRadius: 35))
                             }
                             .foregroundStyle(.buttonReverse)
                         }
+                        .padding(.leading, 8)
                         
                         Spacer()
                         
                         Image(systemName: "tray.full.fill")
+                            .font(.system(size: 22))
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textSecondary)
                             .onTapGesture {

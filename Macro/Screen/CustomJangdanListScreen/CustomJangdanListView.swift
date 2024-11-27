@@ -25,7 +25,7 @@ struct CustomJangdanListView: View {
                                 router.push(.jangdanTypeSelect)
                             }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PlainListButton())
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
@@ -54,13 +54,12 @@ struct CustomJangdanListView: View {
                         .padding(.vertical, 20)
                         .background(.backgroundCard)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
-                        
                         .padding(.horizontal, 16)
                         .onTapGesture {
                             router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PlainListButton())
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
@@ -117,5 +116,14 @@ struct CustomJangdanListView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
+    }
+}
+
+extension CustomJangdanListView {
+    private struct PlainListButton: ButtonStyle {
+        func makeBody(configuration: Self.Configuration) -> some View {
+            configuration.label
+                .animation(nil, value: configuration.isPressed)
+        }
     }
 }
