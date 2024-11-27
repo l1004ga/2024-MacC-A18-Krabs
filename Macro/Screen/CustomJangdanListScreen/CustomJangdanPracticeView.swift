@@ -117,28 +117,12 @@ struct CustomJangdanPracticeView: View {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    if self.accentChangedCount > 0 {
-                        isAlertOn = true
-                    } else {
-                        router.pop()
-                    }
                     self.viewModel.effect(action: .stopMetronome)
+                    router.pop()
                 } label: {
                     Image(systemName: "chevron.backward")
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.textDefault)
-                }
-                .alert("저장하지 않고\n나가시겠습니까?", isPresented: $isAlertOn) {
-                    HStack{
-                        Button("확인") {
-                            isAlertOn = false
-                            self.viewModel.effect(action: .stopMetronome)
-                            router.pop()
-                        }
-                        Button("취소") {
-                            isAlertOn = false
-                        }
-                    }
                 }
             }
             
@@ -159,7 +143,6 @@ struct CustomJangdanPracticeView: View {
                     Button {
                         // TODO: 데이터 초기화
                         initialJangdanAlert = true
-                        self.accentChangedCount = 0
                     } label: {
                         Image(systemName: "arrow.counterclockwise")
                             .aspectRatio(contentMode: .fit)
