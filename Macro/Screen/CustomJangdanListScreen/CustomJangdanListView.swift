@@ -78,7 +78,7 @@ struct CustomJangdanListView: View {
                             .onTapGesture {
                                 deleteButtonAlert = true
                             }
-                            .alert("'\(jangdan.name)'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
+                            .alert("'\(jangdan.name.truncated(5))'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
                                 Button("취소", role: .cancel) { }
                                 Button("삭제", role: .destructive) {
                                     self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
