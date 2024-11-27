@@ -20,7 +20,7 @@ final class JangdanDataModel {
     var instrument: String
     var createdAt: Date?
     
-    init(name: String, bakCount: Int, daebak: Int, bpm: Int, jangdanType: String, daebakList: [[[Int]]], instrument: String, createdAt: Date? = nil) {
+    init(name: String, bakCount: Int, daebak: Int, bpm: Int, jangdanType: String, daebakList: [[[Int]]], instrument: String, createdAt: Date? = .now) {
         self.name = name
         self.bakCount = bakCount
         self.daebak = daebak
