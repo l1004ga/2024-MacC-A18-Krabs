@@ -99,8 +99,18 @@ struct CustomJangdanListView: View {
             
             // MARK: - EditMode
             ToolbarItem(placement: .topBarTrailing) {
-                EditButton()
-                    .foregroundStyle(.textDefault)
+                HStack {
+                    Button {
+                        self.router.push(.jangdanTypeSelect)
+                    } label: {
+                        Image(systemName: "plus")
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.textDefault)
+                    }
+
+                    EditButton()
+                        .foregroundStyle(.textDefault)
+                }
             }
         }
         .toolbarBackground(.backgroundNavigationBar, for: .navigationBar)
