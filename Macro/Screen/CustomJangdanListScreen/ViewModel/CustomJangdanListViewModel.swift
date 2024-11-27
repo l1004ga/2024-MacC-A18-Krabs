@@ -36,7 +36,7 @@ extension CustomJangdanListViewModel {
         switch action {
         case .fetchCustomJangdanData:
             self._state.customJangdanList = templateUseCase.allCustomJangdanTemplate.map { jangdanEntity in
-                return (jangdanEntity.jangdanType, jangdanEntity.name, .now)
+                return (jangdanEntity.jangdanType, jangdanEntity.name, jangdanEntity.createdAt ?? .now)
             }
         case let .updateCustomJangdan(newJangdanName):
             self.templateUseCase.updateCustomJangdan(newJangdanName: newJangdanName)
