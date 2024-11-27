@@ -18,13 +18,14 @@ struct HomeView: View {
     @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         if self.appState.didLaunchedBefore {
             NavigationStack(path: Binding(
-                get: { router.path },set: { router.path = $0 }
+                get: { router.path }, set: { router.path = $0 }
             ))
             {
-                VStack {
+                VStack(spacing: 0) {
                     HStack {
                         Menu {
                             Button("북") {
@@ -50,6 +51,7 @@ struct HomeView: View {
                             }
                             .foregroundStyle(.buttonReverse)
                         }
+                        .padding(.leading, 8)
                         
                         Spacer()
                         
