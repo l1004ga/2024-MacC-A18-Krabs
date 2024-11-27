@@ -79,7 +79,7 @@ struct BasicJangdanData {
             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .medium]),
-            JangdanEntity.Daebak(bakAccentList: [.none, .medium, .none])
+            JangdanEntity.Daebak(bakAccentList: [.weak, .medium, .none])
         ]],
         jangdanType: .자진모리,
         instrument: .장구
@@ -222,7 +222,7 @@ struct BasicJangdanData {
         daebakList: [[
             JangdanEntity.Daebak(bakAccentList: [.strong, .none, .none]),
             JangdanEntity.Daebak(bakAccentList: [.weak, .none, .none]),
-            JangdanEntity.Daebak(bakAccentList: [.weak, .none, .medium]),
+            JangdanEntity.Daebak(bakAccentList: [.medium, .none, .medium]),
             JangdanEntity.Daebak(bakAccentList: [.none, .medium, .none])
         ]],
         jangdanType: .자진모리,
