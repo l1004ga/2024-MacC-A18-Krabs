@@ -28,6 +28,7 @@ class CustomJangdanListViewModel {
 extension CustomJangdanListViewModel {
     enum Action {
         case fetchCustomJangdanData
+        case updateCustomJangdan(newJangdanName: String?)
         case deleteCustomJangdanData(jangdanName: String)
     }
     
@@ -37,6 +38,8 @@ extension CustomJangdanListViewModel {
             self._state.customJangdanList = templateUseCase.allCustomJangdanTemplate.map { jangdanEntity in
                 return (jangdanEntity.jangdanType, jangdanEntity.name, .now)
             }
+        case let .updateCustomJangdan(newJangdanName):
+            self.templateUseCase.updateCustomJangdan(newJangdanName: newJangdanName)
         case let .deleteCustomJangdanData(jangdanName):
             self.templateUseCase.deleteCustomJangdan(jangdanName: jangdanName)
         }
