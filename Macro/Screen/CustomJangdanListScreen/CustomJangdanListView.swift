@@ -52,7 +52,7 @@ struct CustomJangdanListView: View {
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
                             }
-                            .offset(x: editMode?.wrappedValue == .active ? 74 : 0) // 삭제 버튼 너비만큼 이동
+                            .offset(x: editMode?.wrappedValue == .active ? 68 : 0) 
                             .animation(.easeInOut, value: editMode?.wrappedValue)
                             .padding(.horizontal, 24)
                             .padding(.vertical, 20)
