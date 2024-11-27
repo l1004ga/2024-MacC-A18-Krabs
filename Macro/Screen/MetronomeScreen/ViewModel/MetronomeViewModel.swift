@@ -63,7 +63,7 @@ class MetronomeViewModel {
         var currentRow: Int = 0
     }
     
-    enum Action {
+    enum Action: Equatable {
         case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
         case changeIsPlaying
@@ -106,7 +106,7 @@ class MetronomeViewModel {
     }
     
     func effect(action: Action) {
-        if case .estimateBpm = action { } else {
+        if action != .estimateBpm {
             self.taptapUseCase.finishTapping()
         }
         
