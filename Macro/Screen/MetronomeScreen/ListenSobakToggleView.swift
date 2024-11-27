@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ListenSobakToggleView: View {
-    
     @Binding var isSobakOn: Bool
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(.listenSobak)
                 .aspectRatio(contentMode: .fit)
                 .padding(.trailing, 10)
@@ -38,6 +37,7 @@ struct ListenSobakToggleView: View {
 }
 
 
-//#Preview {
-//    SobakToggleView()
-//}
+#Preview {
+    @Previewable @State var isSobakOn: Bool = false
+    ListenSobakToggleView(isSobakOn: $isSobakOn)
+}

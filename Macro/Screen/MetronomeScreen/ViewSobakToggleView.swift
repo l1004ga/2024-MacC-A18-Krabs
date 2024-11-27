@@ -11,7 +11,7 @@ struct ViewSobakToggleView: View {
     @Binding var isSobakOn: Bool
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(.viewSobak)
                 .aspectRatio(contentMode: .fit)
                 .padding(.trailing, 10)
