@@ -106,6 +106,10 @@ class MetronomeViewModel {
     }
     
     func effect(action: Action) {
+        if case .estimateBpm = action { } else {
+            self.taptapUseCase.finishTapping()
+        }
+        
         switch action {
         case let .selectJangdan(jangdanName):
             self._state.currentJangdanName = jangdanName
