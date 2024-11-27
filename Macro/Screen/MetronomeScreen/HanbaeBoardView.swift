@@ -16,23 +16,24 @@ struct HanbaeBoardView: View {
     var currentSobak: Int
     var tabBakBarEvent: (Int, Int, Int, Accent) -> Void
     
+    // 대박 누적합 미리 연산
+    private var prefixSumList: [Int] {
+        guard self.jangdan.count > 0 else { return [] }
+        var sumList: [Int] = .init(repeating: 0, count: self.jangdan.count)
+        for i in 1..<self.jangdan.count {
+            sumList[i] = sumList[i - 1] + jangdan[i].count
+        }
+        return sumList
+    }
+    
     var body: some View {
         Grid(horizontalSpacing: 4, verticalSpacing: 8) {
             ForEach(jangdan.indices, id: \.self) { row in
-                // 이전까지의 대박 갯수 누적합
-                let prefixSum: Int = {
-                    var sum = 0
-                    for _ in 0..<row {
-                        sum += jangdan[row].count
-                    }
-                    return sum
-                }()
-                
                 GridRow {
                     ForEach(jangdan[row].indices, id: \.self) { daebakIndex in
                         BakBarSetView(
                             accents: jangdan[row][daebakIndex],
-                            daebakIndex: daebakIndex + prefixSum,
+                            daebakIndex: daebakIndex + prefixSumList[row],
                             isDaebakOnly: !isSobakOn,
                             isPlaying: isPlaying,
                             activeIndex: currentRow == row && currentDaebak == daebakIndex ? currentSobak : nil
