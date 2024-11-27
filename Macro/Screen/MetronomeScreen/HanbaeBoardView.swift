@@ -18,10 +18,10 @@ struct HanbaeBoardView: View {
     
     // 대박 누적합 미리 연산
     private var prefixSumList: [Int] {
-        guard self.jangdan.count > 0 else { return [] }
+        guard !self.jangdan.isEmpty else { return [] }
         var sumList: [Int] = .init(repeating: 0, count: self.jangdan.count)
-        for i in 1..<self.jangdan.count {
-            sumList[i] = sumList[i - 1] + jangdan[i].count
+        for row in 1..<self.jangdan.count {
+            sumList[row] = sumList[row - 1] + jangdan[row].count
         }
         return sumList
     }
