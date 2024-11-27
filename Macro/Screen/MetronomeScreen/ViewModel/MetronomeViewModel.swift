@@ -28,6 +28,12 @@ class MetronomeViewModel {
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
         
+        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
+            guard let self else { return }
+            self._state.isTapping = isTapping
+        }
+        .store(in: &self.cancelBag)
+        
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
             self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
@@ -51,18 +57,20 @@ class MetronomeViewModel {
         var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
+        var isTapping: Bool = false
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
         var currentRow: Int = 0
     }
     
-    enum Action {
+    enum Action: Equatable {
         case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
         case changeIsPlaying
         case changeAccent(row: Int, daebak: Int, sobak: Int, newAccent: Accent)
         case stopMetronome
         case estimateBpm
+        case disableEstimateBpm
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
         case changeSoundType
@@ -98,6 +106,10 @@ class MetronomeViewModel {
     }
     
     func effect(action: Action) {
+        if action != .estimateBpm {
+            self.taptapUseCase.finishTapping()
+        }
+        
         switch action {
         case let .selectJangdan(jangdanName):
             self._state.currentJangdanName = jangdanName
@@ -130,6 +142,8 @@ class MetronomeViewModel {
             self.metronomeOnOffUseCase.stop()
         case .estimateBpm:
             self.taptapUseCase.tap()
+        case .disableEstimateBpm:
+            self.taptapUseCase.finishTapping()
         case let .createCustomJangdan(newJangdanName):
             // MARK: 추후 이름 중복 등으로 인해서 생성 실패 시 Error 받아서 사용자 알림 처리 필요
             try? self.templateUseCase.createCustomJangdan(newJangdanName: newJangdanName)
