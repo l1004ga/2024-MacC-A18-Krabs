@@ -22,6 +22,8 @@ protocol JangdanRepository {
     
     // MARK: - Custom Template CRUD Logic
     func saveNewJangdan(newJangdanName: String)
+    
+    func updateCustomJangdan(newJangdanName: String?)
 
     func deleteCustomJangdan(jangdanName: String)
 }

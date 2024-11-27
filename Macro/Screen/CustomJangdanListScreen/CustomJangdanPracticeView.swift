@@ -15,7 +15,7 @@ struct CustomJangdanPracticeView: View {
     
     @State private var appState: AppState = .shared
     
-    var jangdanName: String
+    @State var jangdanName: String
     var jangdanType: String
     
     @State private var isSobakOn: Bool = false
@@ -28,6 +28,9 @@ struct CustomJangdanPracticeView: View {
     
     @State private var isAlertOn: Bool = false
     @State private var deleteJangdanAlert: Bool = false
+    @State private var updateJandanNameAlert: Bool = false
+    
+    @State private var accentChangedCount: Int = 0
     
     var body: some View {
         VStack(spacing: 0) {
@@ -43,6 +46,7 @@ struct CustomJangdanPracticeView: View {
                     ) { row, daebak, sobak, newAccent in
                         withAnimation {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
+                            accentChangedCount += 1
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
@@ -90,13 +94,12 @@ struct CustomJangdanPracticeView: View {
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
         }
-        .onAppear { self.viewModel.effect(action: .resetAccentCount) }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    if self.viewModel.state.accentChangedCount > 1 {
+                    if self.accentChangedCount > 1 {
                         isAlertOn = true
                     } else {
                         router.pop()
@@ -112,8 +115,8 @@ struct CustomJangdanPracticeView: View {
                         Button("확인") {
                             isAlertOn = false
                             self.viewModel.effect(action: .stopMetronome)
+                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
                             router.pop()
-                            // TODO: (룰루) 수정 사항 UPDATE하기
                         }
                         Button("취소") {
                             isAlertOn = false
@@ -150,7 +153,6 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 self.viewModel.effect(action: .initialJangdan)
-                                self.viewModel.effect(action: .resetAccentCount)
                             }
                         }
                     } message: {
@@ -174,6 +176,14 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 내보내기")
                         }
+                        
+                        Button {
+                            inputCustomJangdanName = jangdanName
+                            updateJandanNameAlert = true
+                        } label: {
+                            Text("장단이름 변경하기")
+                        }
+                        
                         
                         Button {
                             deleteJangdanAlert = true
@@ -210,6 +220,19 @@ struct CustomJangdanPracticeView: View {
                         }
                     } message: {
                         Text("저장된 장단명을 작성해주세요.")
+                    }
+                    .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
+                        TextField(jangdanName, text: $inputCustomJangdanName)
+                        HStack{
+                            Button("취소") { }
+                            Button("완료") {
+                                self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
+                                self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
+                                self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                            }
+                        }
+                    } message: {
+                        Text("새로운 장단명을 작성해주세요.")
                     }
                 }
             }

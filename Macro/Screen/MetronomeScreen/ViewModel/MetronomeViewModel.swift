@@ -54,7 +54,6 @@ class MetronomeViewModel {
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
         var currentRow: Int = 0
-        var accentChangedCount: Int = 0
     }
     
     enum Action {
@@ -67,7 +66,6 @@ class MetronomeViewModel {
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
         case changeSoundType
-        case resetAccentCount
     }
     
     private func updateStatePerBak() {
@@ -123,7 +121,6 @@ class MetronomeViewModel {
             
         case let .changeAccent(row, daebak, sobak, newAccent):
             self.accentUseCase.moveNextAccent(rowIndex: row, daebakIndex: daebak, sobakIndex: sobak, to: newAccent)
-            self._state.accentChangedCount += 1
         case .stopMetronome: // 시트 변경 시 소리 중지를 위해 사용함
             self._state.isPlaying = false
             if self._state.isSobakOn {
@@ -141,8 +138,6 @@ class MetronomeViewModel {
             self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
         case .changeSoundType:
             self.metronomeOnOffUseCase.setSoundType()
-        case .resetAccentCount:
-            self._state.accentChangedCount = 0
         }
     }
 }

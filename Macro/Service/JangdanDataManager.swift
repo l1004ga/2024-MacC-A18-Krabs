@@ -152,6 +152,32 @@ extension JangdanDataManager: JangdanRepository {
         }
     }
     
+    // MARK: 장단이름 변경하지 않고 내용만 변경 시
+    func updateCustomJangdan(newJangdanName: String?) {
+        
+        let currentName = self.currentJangdan.name
+        let instrument = self.currentJangdan.instrument.rawValue
+        
+        let predicate = #Predicate<JangdanDataModel> {
+            $0.name == currentName && $0.instrument == instrument
+        }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        
+        do {
+            if let savedJangdan = try context.fetch(descriptor).first {
+                if let newJangdanName {
+                    savedJangdan.name = newJangdanName
+                }
+                savedJangdan.daebakAccentList = currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } }
+                savedJangdan.bpm = currentJangdan.bpm
+                
+                try context.save()
+            }
+        } catch {
+            print("데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
+        }
+    }
+    
     func deleteCustomJangdan(jangdanName: String) {
         let predicate = #Predicate<JangdanDataModel> { jangdan in
             jangdan.name == jangdanName
