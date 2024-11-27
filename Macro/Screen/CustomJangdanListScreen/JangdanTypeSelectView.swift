@@ -21,7 +21,7 @@ struct JangdanTypeSelectView: View {
                 .foregroundStyle(.textDefault)
                 .padding(.leading, 20)
                 .padding(.top, 36)
-                
+                .padding(.bottom, 24)
             
             List {
                 // TODO: - 악기 종류에 따라 표시되는 장단 리스트 달라야함
@@ -34,6 +34,7 @@ struct JangdanTypeSelectView: View {
                     }
                 }
             }
+            .contentMargins(.top, 0, for: .scrollContent)
             .foregroundStyle(.primary)
             
         }
