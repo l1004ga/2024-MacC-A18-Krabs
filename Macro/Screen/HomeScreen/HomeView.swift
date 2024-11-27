@@ -45,7 +45,7 @@ struct HomeView: View {
                             .frame(width: 87, height: 42)
                             .background {
                                 RoundedRectangle(cornerRadius: 35)
-                                    .stroke(lineWidth: 4)
+                                    .stroke(lineWidth: 2)
                                     .clipShape(RoundedRectangle(cornerRadius: 35))
                             }
                             .foregroundStyle(.buttonReverse)
