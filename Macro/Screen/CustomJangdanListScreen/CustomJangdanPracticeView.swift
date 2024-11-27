@@ -15,7 +15,7 @@ struct CustomJangdanPracticeView: View {
     
     @State private var appState: AppState = .shared
     
-    var jangdanName: String
+    @State var jangdanName: String
     var jangdanType: String
     
     @State private var isSobakOn: Bool = false
@@ -28,6 +28,7 @@ struct CustomJangdanPracticeView: View {
     
     @State private var isAlertOn: Bool = false
     @State private var deleteJangdanAlert: Bool = false
+    @State private var updateJandanNameAlert: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -112,7 +113,7 @@ struct CustomJangdanPracticeView: View {
                         Button("확인") {
                             isAlertOn = false
                             self.viewModel.effect(action: .stopMetronome)
-                            self.viewModel.effect(action: .updateCustomJangdan)
+                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
                             router.pop()
                         }
                         Button("취소") {
@@ -176,6 +177,14 @@ struct CustomJangdanPracticeView: View {
                         }
                         
                         Button {
+                            inputCustomJangdanName = jangdanName
+                            updateJandanNameAlert = true
+                        } label: {
+                            Text("장단이름 변경하기")
+                        }
+                        
+                        
+                        Button {
                             deleteJangdanAlert = true
                         } label: {
                             Text("장단 삭제하기")
@@ -210,6 +219,19 @@ struct CustomJangdanPracticeView: View {
                         }
                     } message: {
                         Text("저장된 장단명을 작성해주세요.")
+                    }
+                    .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
+                        TextField(jangdanName, text: $inputCustomJangdanName)
+                        HStack{
+                            Button("취소") { }
+                            Button("완료") {
+                                self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
+                                self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
+                                self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                            }
+                        }
+                    } message: {
+                        Text("새로운 장단명을 작성해주세요.")
                     }
                 }
             }
