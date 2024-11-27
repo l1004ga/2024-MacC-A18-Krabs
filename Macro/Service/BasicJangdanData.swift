@@ -16,8 +16,8 @@ struct BasicJangdanData {
     
     
     static let jinyangJanggu = JangdanEntity(
-        name: "진양", // MARK: 소박보기 3소박 소박 세그먼트 로직 생각하기
-        bakCount: 24,
+        name: "진양",
+        bakCount: 72,
         daebak: 24,
         bpm: 30,
         daebakList: [
@@ -40,7 +40,7 @@ struct BasicJangdanData {
 
     static let jungmoriJanggu = JangdanEntity(
         name: "중모리",
-        bakCount: 12, // MARK: 소박보기 2소박 소박 세그먼트 로직 생각하기
+        bakCount: 24,
         daebak: 12,
         bpm: 90,
         daebakList: [
@@ -161,7 +161,7 @@ struct BasicJangdanData {
     
     static let jinyangBuk = JangdanEntity(
         name: "진양",
-        bakCount: 24,
+        bakCount: 72,
         daebak: 24,
         bpm: 38,
         daebakList: [
@@ -184,7 +184,7 @@ struct BasicJangdanData {
     
     static let jungmoriBuk = JangdanEntity(
         name: "중모리",
-        bakCount: 12, // MARK: 소박보기 2소박 소박 세그먼트 로직 생각하기
+        bakCount: 24,
         daebak: 12,
         bpm: 70,
         daebakList: [
@@ -263,7 +263,7 @@ struct BasicJangdanData {
     
     static let eotjungmoriBuk = JangdanEntity(
         name: "엇중모리",
-        bakCount: 6, // MARK: 소박보기 2소박 소박 세그먼트 로직 생각하기
+        bakCount: 12,
         daebak: 6,
         bpm: 78,
         daebakList: [[
