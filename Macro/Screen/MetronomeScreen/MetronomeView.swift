@@ -48,6 +48,7 @@ struct MetronomeView: View {
                         }
                         if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
                             SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
+                                .padding(.bottom, -4)
                         }
                     }
                     .frame(height: 372)
