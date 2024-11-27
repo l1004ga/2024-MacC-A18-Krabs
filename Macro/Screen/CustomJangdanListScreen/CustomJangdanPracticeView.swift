@@ -30,6 +30,8 @@ struct CustomJangdanPracticeView: View {
     @State private var deleteJangdanAlert: Bool = false
     @State private var updateJandanNameAlert: Bool = false
     
+    @State private var accentChangedCount: Int = 0
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -44,6 +46,7 @@ struct CustomJangdanPracticeView: View {
                     ) { row, daebak, sobak, newAccent in
                         withAnimation {
                             viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
+                            accentChangedCount += 1
                         }
                     }
                     if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
@@ -91,13 +94,12 @@ struct CustomJangdanPracticeView: View {
         .onChange(of: isSobakOn) {
             self.viewModel.effect(action: .changeSobakOnOff)
         }
-        .onAppear { self.viewModel.effect(action: .resetAccentCount) }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             // 뒤로가기 chevron
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    if self.viewModel.state.accentChangedCount > 1 {
+                    if self.accentChangedCount > 1 {
                         isAlertOn = true
                     } else {
                         router.pop()
@@ -151,7 +153,6 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 self.viewModel.effect(action: .initialJangdan)
-                                self.viewModel.effect(action: .resetAccentCount)
                             }
                         }
                     } message: {
