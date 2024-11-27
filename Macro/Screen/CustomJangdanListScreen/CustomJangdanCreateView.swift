@@ -121,7 +121,7 @@ struct CustomJangdanCreateView: View {
                     Button {
                         exportJandanAlert = true
                     } label: {
-                        Text("완료")
+                        Text("저장")
                             .font(.Body_R)
                             .foregroundStyle(.textDefault)
                     }
