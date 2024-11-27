@@ -77,12 +77,12 @@ struct CustomJangdanListView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
-                .onDelete { indexSet in
-                    guard let index = indexSet.first else { return }
-                    let jangdanName = self.viewModel.state.customJangdanList[index].name
-                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
-                    self.viewModel.effect(action: .fetchCustomJangdanData)
-                }
+//                .onDelete { indexSet in
+//                    guard let index = indexSet.first else { return }
+//                    let jangdanName = self.viewModel.state.customJangdanList[index].name
+//                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+//                    self.viewModel.effect(action: .fetchCustomJangdanData)
+//                }
             }
         }
         .task {
