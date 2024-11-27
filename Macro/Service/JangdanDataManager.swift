@@ -42,6 +42,7 @@ final class JangdanDataManager {
     private func mapToJangdanEntity(model: JangdanDataModel) -> JangdanEntity {
         return JangdanEntity(
             name: model.name,
+            createdAt: model.createdAt,
             bakCount: model.bakCount,
             daebak: model.daebak,
             bpm: model.bpm,
@@ -139,10 +140,12 @@ extension JangdanDataManager: JangdanRepository {
             bakCount: currentJangdan.bakCount,
             daebak: currentJangdan.daebak,
             bpm: currentJangdan.bpm,
-            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
             jangdanType: currentJangdan.jangdanType.rawValue,
-            instrument: currentJangdan.instrument.rawValue
+            daebakList: currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } },
+            instrument: currentJangdan.instrument.rawValue,
+            createdAt: .now
         )
+        
         context.insert(newJangdan)
         
         do {
@@ -170,6 +173,7 @@ extension JangdanDataManager: JangdanRepository {
                 }
                 savedJangdan.daebakAccentList = currentJangdan.daebakList.map { $0.map { $0.bakAccentList.map { $0.rawValue } } }
                 savedJangdan.bpm = currentJangdan.bpm
+                savedJangdan.createdAt = .now
                 
                 try context.save()
             }
