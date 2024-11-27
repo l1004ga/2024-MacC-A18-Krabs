@@ -15,7 +15,7 @@ protocol TemplateUseCase {
     
     func createCustomJangdan(newJangdanName: String) throws
     
-    func updateCustomJangdan()
+    func updateCustomJangdan(newJangdanName: String?)
 
     func deleteCustomJangdan(jangdanName: String)
 }
