@@ -28,6 +28,12 @@ class MetronomeViewModel {
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
         
+        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
+            guard let self else { return }
+            self._state.isTapping = isTapping
+        }
+        .store(in: &self.cancelBag)
+        
         self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
             guard let self else { return }
             self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
@@ -51,6 +57,7 @@ class MetronomeViewModel {
         var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
+        var isTapping: Bool = false
         var currentSobak: Int = 0
         var currentDaebak: Int = 0
         var currentRow: Int = 0

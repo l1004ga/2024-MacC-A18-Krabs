@@ -31,13 +31,6 @@ struct MetronomeView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    self.viewModel.effect(action: .disableEstimateBpm)
-                }
-            
             VStack(spacing: 0) {
                 ZStack {
                     VStack(spacing: 12) {
@@ -92,7 +85,11 @@ struct MetronomeView: View {
                 MetronomeControlView(viewModel: viewModel)
                 
             }
-        }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.viewModel.effect(action: .disableEstimateBpm)
+            }
+        
         .task {
             self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
             self.isSobakOn = self.viewModel.state.isSobakOn
