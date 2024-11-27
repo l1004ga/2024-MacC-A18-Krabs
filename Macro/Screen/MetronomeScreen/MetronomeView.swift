@@ -31,59 +31,67 @@ struct MetronomeView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                VStack(spacing: 12) {
-                    HanbaeBoardView(
-                        jangdan: viewModel.state.jangdanAccent,
-                        isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
-                        isPlaying: viewModel.state.isPlaying,
-                        currentRow: viewModel.state.currentRow,
-                        currentDaebak: viewModel.state.currentDaebak,
-                        currentSobak: viewModel.state.currentSobak
-                    ) { row, daebak, sobak, newAccent in
-                        withAnimation {
-                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
-                        }
-                    }
-                    if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
-                    }
+        ZStack {
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    self.viewModel.effect(action: .disableEstimateBpm)
                 }
-                .frame(height: 372)
-                .padding(.horizontal, 8)
-                if toastAction {
-                    Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
-                        .font(.Body_R)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .foregroundStyle(Color.white)
-                        .background(.black.opacity(0.8))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .opacity(self.toastOpacity)
-                        .onAppear {
-                            withAnimation(.easeIn(duration: 3)) {
-                                self.toastOpacity = 0
-                            } completion: {
-                                self.toastAction = false
-                                self.toastOpacity = 1
+            
+            VStack(spacing: 0) {
+                ZStack {
+                    VStack(spacing: 12) {
+                        HanbaeBoardView(
+                            jangdan: viewModel.state.jangdanAccent,
+                            isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
+                            isPlaying: viewModel.state.isPlaying,
+                            currentRow: viewModel.state.currentRow,
+                            currentDaebak: viewModel.state.currentDaebak,
+                            currentSobak: viewModel.state.currentSobak
+                        ) { row, daebak, sobak, newAccent in
+                            withAnimation {
+                                viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
                             }
                         }
+                        if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                            SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
+                        }
+                    }
+                    .frame(height: 372)
+                    .padding(.horizontal, 8)
+                    if toastAction {
+                        Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                            .font(.Body_R)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .foregroundStyle(Color.white)
+                            .background(.black.opacity(0.8))
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .opacity(self.toastOpacity)
+                            .onAppear {
+                                withAnimation(.easeIn(duration: 3)) {
+                                    self.toastOpacity = 0
+                                } completion: {
+                                    self.toastAction = false
+                                    self.toastOpacity = 1
+                                }
+                            }
+                    }
                 }
+                
+                
+                
+                if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
+                    ViewSobakToggleView(isSobakOn: $isSobakOn)
+                        .padding(.bottom, 16)
+                } else {
+                    ListenSobakToggleView(isSobakOn: $isSobakOn)
+                        .padding(.bottom, 16)
+                }
+                
+                MetronomeControlView(viewModel: viewModel)
+                
             }
-            
-            
-            
-            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                ViewSobakToggleView(isSobakOn: $isSobakOn)
-                    .padding(.bottom, 16)
-            } else {
-                ListenSobakToggleView(isSobakOn: $isSobakOn)
-                    .padding(.bottom, 16)
-            }
-
-            MetronomeControlView(viewModel: viewModel)
-            
         }
         .task {
             self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))

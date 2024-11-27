@@ -59,7 +59,6 @@ class MetronomeControlViewModel {
         case increaseLongBpm(currentBpm: Int)
         case roundBpm(currentBpm: Int)
         case estimateBpm
-        case disableEstimateBpm
         case toggleActiveState(isIncreasing: Bool, isActive: Bool)
         case setPreviousTranslation(position: CGFloat)
         case setSpeed(speed: TimeInterval)
@@ -85,8 +84,6 @@ class MetronomeControlViewModel {
             self.tempoUseCase.updateTempo(newBpm: currentBpm)
         case .estimateBpm:
             self.taptapUseCase.tap()
-        case .disableEstimateBpm:
-            self.taptapUseCase.finishTapping()
         case let .toggleActiveState(isIncreasing, isActive):
             if isIncreasing {
                 self._state.isPlusActive = isActive
