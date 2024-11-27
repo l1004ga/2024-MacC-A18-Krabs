@@ -9,7 +9,16 @@ import SwiftUI
 
 enum ToastType {
     case save
-    case export
+    case export(jangdanName: String)
+    
+    var massage: String {
+        switch self {
+        case .save:
+            return "장단을 저장했습니다."
+        case let .export(jangdanName):
+            return "\(jangdanName) 내보내기가 완료되었습니다."
+        }
+    }
 }
 
 struct CustomJangdanPracticeView: View {
@@ -63,7 +72,7 @@ struct CustomJangdanPracticeView: View {
                 .padding(.horizontal, 8)
                 
                 if toastAction {
-                    Text(self.toastType == .save ?  "장단을 저장했습니다." : "'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                    Text(self.toastType.massage)
                         .font(.Body_R)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 16)
@@ -188,7 +197,6 @@ struct CustomJangdanPracticeView: View {
 
                         
                         Button {
-                            self.toastType = .export
                             self.exportJandanAlert = true
                         } label: {
                             Text("장단 내보내기")
@@ -232,6 +240,7 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                self.toastType = .export(jangdanName: self.inputCustomJangdanName)
                                 toastAction = true
                             }
                         }
