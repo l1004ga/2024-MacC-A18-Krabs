@@ -69,7 +69,7 @@ struct CustomJangdanListView: View {
                         Image(systemName: "trash.fill")
                             .font(.system(size: 17))
                             .foregroundStyle(.white)
-                            .padding(.vertical, 36)
+                            .padding(.vertical, 36.5)
                             .padding(.horizontal, 25)
                             .background(.red)
                             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 16, bottomLeadingRadius: 16))
