@@ -94,7 +94,7 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    private struct JangdanLogoButtonStyle: PrimitiveButtonStyle {
+    private struct JangdanLogoPrimitiveButtonStyle: PrimitiveButtonStyle {
         @State private var isPressed: Bool = false
         
         var jangdan: Jangdan
@@ -129,31 +129,54 @@ extension HomeView {
             .onTapGesture {
                 withAnimation {
                     isPressed = true
-                } completion: {
-                    isPressed = false
                 }
                 configuration.trigger()
+                withAnimation {
+                    isPressed = false
+                }
             }
 //            .simultaneousGesture(
 //                TapGesture()
 //                    .onEnded {
-//                        
 //                        withAnimation {
-//                            isPressed = true
-//                        } completion: {
 //                            isPressed = false
 //                        }
 //                        configuration.trigger()
 //                    }
 //                )
-//            .simultaneousGesture(
-//                LongPressGesture(minimumDuration: 10, maximumDistance: 5)
-//                    .onEnded { _ in
-//                        withAnimation {
-//                            isPressed = false
-//                        }
-//                    }
-//            )
+        }
+    }
+    
+    private struct JangdanLogoButtonStyle: ButtonStyle {
+        var jangdan: Jangdan
+        
+        func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(configuration.isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
+                    .shadow(radius: 5) // 그림자 효과
+                    .overlay {
+                        jangdan.jangdanLogoImage
+                            .resizable()
+                            .foregroundStyle(configuration.isPressed ? .backgroundImageActive : .backgroundImageDefault)
+                            .frame(width: 225, height: 225)
+                            .offset(y: -116)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                
+                Text(jangdan.name)
+                    .font(configuration.isPressed ? .Title1_B : .Title1_R)
+                    .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                    .offset(y: -2.5)
+                
+                Text(jangdan.bakInformation)
+                    .font(.Body_R)
+                    .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
+                    .offset(y: 30)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: .fill)
+            .contentShape(Rectangle())
         }
     }
 }
