@@ -17,7 +17,7 @@ struct HomeView: View {
     @State private var isSelectedJangdan: Bool = false
     @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
-    let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
+    private let columns: [GridItem] = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
     
     var body: some View {
         if self.appState.didLaunchedBefore {
@@ -70,9 +70,8 @@ struct HomeView: View {
                     ScrollView() {
                         // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
                         VStack {
-                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 7.5), GridItem(.flexible())], spacing: 7.5) {
+                            LazyVGrid(columns: columns, spacing: 8) {
                                 ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
-                                    
                                     NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 16)
@@ -90,13 +89,11 @@ struct HomeView: View {
                                             Text(jangdan.name)
                                                 .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
                                                 .offset(y: -2.5)
                                             
                                             Text(jangdan.bakInformation)
                                                 .font(.Body_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
                                                 .offset(y: 30)
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -107,11 +104,19 @@ struct HomeView: View {
                                     .simultaneousGesture(
                                         DragGesture(minimumDistance: 0)
                                             .onChanged { _ in
-                                                buttonPressedStates[jangdan] = true
-                                            } // 특정 id의 상태를 true로 변경
+                                                if buttonPressedStates[jangdan] == nil {
+                                                    buttonPressedStates[jangdan] = true
+                                                } else {
+                                                    withAnimation(.linear(duration: 0.2)) {
+                                                        buttonPressedStates[jangdan] = false
+                                                    }
+                                                }
+                                            }
                                             .onEnded { _ in
-                                                buttonPressedStates[jangdan] = false
-                                            } // 특정 id의 상태를 false로 변경
+                                                withAnimation {
+                                                    buttonPressedStates.removeAll()
+                                                }
+                                            }
                                     )
                                 }
                             }
@@ -131,14 +136,16 @@ struct HomeView: View {
     }
 }
 
+extension HomeView {
+    private struct StaticButtonStyle: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .animation(nil, value: configuration.isPressed)
+        }
+    }
+}
+
 #Preview {
     HomeView()
         .environment(Router().self)
-}
-
-struct StaticButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .opacity(configuration.isPressed ? 1.0 : 1.0) // 눌림 상태에도 변경 없음
-    }
 }
