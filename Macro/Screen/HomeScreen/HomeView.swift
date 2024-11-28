@@ -144,6 +144,6 @@ struct HomeView: View {
 struct StaticButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .opacity(configuration.isPressed ? 1.0 : 1.0) // 눌림 상태에도 변경 없음
+            .animation(nil, value: configuration.isPressed)
     }
 }
