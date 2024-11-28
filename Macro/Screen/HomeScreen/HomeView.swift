@@ -136,14 +136,16 @@ struct HomeView: View {
     }
 }
 
+extension HomeView {
+    private struct StaticButtonStyle: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .animation(nil, value: configuration.isPressed)
+        }
+    }
+}
+
 #Preview {
     HomeView()
         .environment(Router().self)
-}
-
-struct StaticButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .animation(nil, value: configuration.isPressed)
-    }
 }
