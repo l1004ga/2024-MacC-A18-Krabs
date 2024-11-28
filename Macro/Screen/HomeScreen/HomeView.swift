@@ -73,8 +73,54 @@ struct HomeView: View {
                             LazyVGrid(columns: columns, spacing: 8) {
                                 ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
                                     
-                                    NavigationLink(jangdan.name, destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
-                                        .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
+                                    NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(buttonPressedStates[jangdan] == true ? .buttonActive : .backgroundCard) // 배경색 설정
+                                                .shadow(radius: 5) // 그림자 효과
+                                                .overlay {
+                                                    jangdan.jangdanLogoImage
+                                                        .resizable()
+                                                        .foregroundStyle(buttonPressedStates[jangdan] == true ? .backgroundImageActive : .backgroundImageDefault)
+                                                        .frame(width: 225, height: 225)
+                                                        .offset(y: -116)
+                                                }
+                                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                            
+                                            Text(jangdan.name)
+                                                .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
+                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
+                                                .bold(buttonPressedStates[jangdan, default: false])
+                                                .offset(y: -2.5)
+                                            
+                                            Text(jangdan.bakInformation)
+                                                .font(.Body_R)
+                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
+                                                .bold(buttonPressedStates[jangdan, default: false])
+                                                .offset(y: 30)
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .aspectRatio(1, contentMode: .fill)
+                                    }
+                                    .contentShape(Rectangle())
+                                    .buttonStyle(StaticButtonStyle())
+                                    .simultaneousGesture(
+                                        DragGesture(minimumDistance: 0)
+                                            .onChanged { _ in
+                                                if buttonPressedStates[jangdan] == nil {
+                                                    buttonPressedStates[jangdan] = true
+                                                } else {
+                                                    withAnimation(.linear(duration: 0.2)) {
+                                                        buttonPressedStates[jangdan] = false
+                                                    }
+                                                }
+                                            }
+                                            .onEnded { _ in
+                                                withAnimation {
+                                                    buttonPressedStates.removeAll()
+                                                }
+                                            }
+                                    )
                                 }
                             }
                         }
@@ -89,94 +135,6 @@ struct HomeView: View {
             }
         } else {
             InstrumentsSelectView()
-        }
-    }
-}
-
-extension HomeView {
-    private struct JangdanLogoPrimitiveButtonStyle: PrimitiveButtonStyle {
-        @State private var isPressed: Bool = false
-        
-        var jangdan: Jangdan
-        
-        func makeBody(configuration: PrimitiveButtonStyleConfiguration) -> some View {
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
-                    .shadow(radius: 5) // 그림자 효과
-                    .overlay {
-                        jangdan.jangdanLogoImage
-                            .resizable()
-                            .foregroundStyle(isPressed ? .backgroundImageActive : .backgroundImageDefault)
-                            .frame(width: 225, height: 225)
-                            .offset(y: -116)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                
-                Text(jangdan.name)
-                    .font(isPressed ? .Title1_B : .Title1_R)
-                    .foregroundStyle(isPressed ? .textButtonEmphasis : .textDefault)
-                    .offset(y: -2.5)
-                
-                Text(jangdan.bakInformation)
-                    .font(.Body_R)
-                    .foregroundStyle(isPressed ? .textButtonEmphasis : .textDefault)
-                    .offset(y: 30)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .aspectRatio(1, contentMode: .fill)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                withAnimation {
-                    isPressed = true
-                }
-                configuration.trigger()
-                withAnimation {
-                    isPressed = false
-                }
-            }
-//            .simultaneousGesture(
-//                TapGesture()
-//                    .onEnded {
-//                        withAnimation {
-//                            isPressed = false
-//                        }
-//                        configuration.trigger()
-//                    }
-//                )
-        }
-    }
-    
-    private struct JangdanLogoButtonStyle: ButtonStyle {
-        var jangdan: Jangdan
-        
-        func makeBody(configuration: ButtonStyleConfiguration) -> some View {
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(configuration.isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
-                    .shadow(radius: 5) // 그림자 효과
-                    .overlay {
-                        jangdan.jangdanLogoImage
-                            .resizable()
-                            .foregroundStyle(configuration.isPressed ? .backgroundImageActive : .backgroundImageDefault)
-                            .frame(width: 225, height: 225)
-                            .offset(y: -116)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                
-                Text(jangdan.name)
-                    .font(configuration.isPressed ? .Title1_B : .Title1_R)
-                    .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
-                    .offset(y: -2.5)
-                
-                Text(jangdan.bakInformation)
-                    .font(.Body_R)
-                    .foregroundStyle(configuration.isPressed ? .textButtonEmphasis : .textDefault)
-                    .offset(y: 30)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .aspectRatio(1, contentMode: .fill)
-            .contentShape(Rectangle())
         }
     }
 }
