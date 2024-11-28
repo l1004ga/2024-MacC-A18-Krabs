@@ -72,7 +72,6 @@ struct HomeView: View {
                         VStack {
                             LazyVGrid(columns: columns, spacing: 8) {
                                 ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
-                                    
                                     NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 16)
@@ -90,13 +89,11 @@ struct HomeView: View {
                                             Text(jangdan.name)
                                                 .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
                                                 .offset(y: -2.5)
                                             
                                             Text(jangdan.bakInformation)
                                                 .font(.Body_R)
                                                 .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
                                                 .offset(y: 30)
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
