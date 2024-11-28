@@ -73,46 +73,8 @@ struct HomeView: View {
                             LazyVGrid(columns: columns, spacing: 8) {
                                 ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
                                     
-                                    NavigationLink(destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue)) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .fill(buttonPressedStates[jangdan] == true ? .buttonActive : .backgroundCard) // 배경색 설정
-                                                .shadow(radius: 5) // 그림자 효과
-                                                .overlay {
-                                                    jangdan.jangdanLogoImage
-                                                        .resizable()
-                                                        .foregroundStyle(buttonPressedStates[jangdan] == true ? .backgroundImageActive : .backgroundImageDefault)
-                                                        .frame(width: 225, height: 225)
-                                                        .offset(y: -116)
-                                                }
-                                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                            
-                                            Text(jangdan.name)
-                                                .font(buttonPressedStates[jangdan] == true ? .Title1_B : .Title1_R)
-                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
-                                                .offset(y: -2.5)
-                                            
-                                            Text(jangdan.bakInformation)
-                                                .font(.Body_R)
-                                                .foregroundStyle(buttonPressedStates[jangdan] == true ? .textButtonEmphasis : .textDefault)
-                                                .bold(buttonPressedStates[jangdan, default: false])
-                                                .offset(y: 30)
-                                        }
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .aspectRatio(1, contentMode: .fill)
-                                    }
-                                    .contentShape(Rectangle())
-                                    .buttonStyle(StaticButtonStyle())
-                                    .simultaneousGesture(
-                                        DragGesture(minimumDistance: 0)
-                                            .onChanged { _ in
-                                                buttonPressedStates[jangdan] = true
-                                            } // 특정 id의 상태를 true로 변경
-                                            .onEnded { _ in
-                                                buttonPressedStates[jangdan] = false
-                                            } // 특정 id의 상태를 false로 변경
-                                    )
+                                    NavigationLink(jangdan.name, destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
+                                        .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
                                 }
                             }
                         }
@@ -127,6 +89,71 @@ struct HomeView: View {
             }
         } else {
             InstrumentsSelectView()
+        }
+    }
+}
+
+extension HomeView {
+    private struct JangdanLogoButtonStyle: PrimitiveButtonStyle {
+        @State private var isPressed: Bool = false
+        
+        var jangdan: Jangdan
+        
+        func makeBody(configuration: PrimitiveButtonStyleConfiguration) -> some View {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(isPressed ? .buttonActive : .backgroundCard) // 배경색 설정
+                    .shadow(radius: 5) // 그림자 효과
+                    .overlay {
+                        jangdan.jangdanLogoImage
+                            .resizable()
+                            .foregroundStyle(isPressed ? .backgroundImageActive : .backgroundImageDefault)
+                            .frame(width: 225, height: 225)
+                            .offset(y: -116)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                
+                Text(jangdan.name)
+                    .font(isPressed ? .Title1_B : .Title1_R)
+                    .foregroundStyle(isPressed ? .textButtonEmphasis : .textDefault)
+                    .offset(y: -2.5)
+                
+                Text(jangdan.bakInformation)
+                    .font(.Body_R)
+                    .foregroundStyle(isPressed ? .textButtonEmphasis : .textDefault)
+                    .offset(y: 30)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: .fill)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation {
+                    isPressed = true
+                } completion: {
+                    isPressed = false
+                }
+                configuration.trigger()
+            }
+//            .simultaneousGesture(
+//                TapGesture()
+//                    .onEnded {
+//                        
+//                        withAnimation {
+//                            isPressed = true
+//                        } completion: {
+//                            isPressed = false
+//                        }
+//                        configuration.trigger()
+//                    }
+//                )
+//            .simultaneousGesture(
+//                LongPressGesture(minimumDuration: 10, maximumDistance: 5)
+//                    .onEnded { _ in
+//                        withAnimation {
+//                            isPressed = false
+//                        }
+//                    }
+//            )
         }
     }
 }
