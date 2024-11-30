@@ -13,6 +13,7 @@ struct MetronomeControlView: View {
     @State var viewModel: MetronomeViewModel
     @State var controlViewModel = DIContainer.shared.controlViewModel
     private let threshold: CGFloat = 10 // 드래그 시 숫자변동 빠르기 조절 위한 변수
+    @State private var tapFeedback: Int = 0
     
     var body: some View {
         ZStack {
@@ -77,6 +78,7 @@ struct MetronomeControlView: View {
                                     tapTwiceAction(isIncreasing: true, isPressing: isPressing)
                                 }, perform: {})
                         }
+                        .sensoryFeedback(.impact(flexibility: .rigid), trigger: controlViewModel.state.bpm)
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -113,7 +115,9 @@ struct MetronomeControlView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 100))
                         .onTapGesture {
                             self.controlViewModel.effect(action: .estimateBpm)
+                            self.tapFeedback += 1
                         }
+                        .sensoryFeedback(.impact(flexibility: .rigid), trigger: self.tapFeedback)
                 }
                 .padding(.horizontal, 12)
                 .padding(.bottom, 24)
