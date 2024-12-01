@@ -14,10 +14,8 @@ struct HomeView: View {
     @State private var appState: AppState = .shared
     
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
-    @State private var isSelectedJangdan: Bool = false
-    @State private var buttonPressedStates: [Jangdan: Bool] = [:]
     
-    private let columns: [GridItem] = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+    private let columns: [GridItem] = .init(repeating: GridItem(.flexible(), spacing: 8), count: 2)
     
     var body: some View {
         if self.appState.didLaunchedBefore {
@@ -131,7 +129,7 @@ extension HomeView {
                     .onChanged { _ in
                         if isPressed == nil { // 처음 탭될때만 버튼 Active
                             isPressed = true
-                        } else { // 아니면 드래그 (스크롤) 중이라는 뜻이니까 deActive
+                        } else if !configuration.isPressed { // 버튼 자체적으로 isPressed 상태가 해제되는경우 deActive
                             withAnimation(.linear(duration: 0.2)) {
                                 isPressed = false
                             }
