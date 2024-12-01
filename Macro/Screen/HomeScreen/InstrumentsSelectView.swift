@@ -22,7 +22,7 @@ struct InstrumentsSelectView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(self.isSelected ? self.instrumentType == .북 ? .buttonActive.opacity(0.2) : .backgroundCard : .backgroundCard)
-                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .북 ? 4 : 0 : 0)
+                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .북 ? 2 : 0 : 0)
                         Image(self.isSelected ? self.instrumentType == .북 ? .bukActive : .bukDefault : .bukDefault)
                             .resizable()
                             .frame(width: 96, height: 96)
@@ -37,7 +37,7 @@ struct InstrumentsSelectView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(self.isSelected ? self.instrumentType == .장구 ? .buttonActive.opacity(0.2) : .backgroundCard : .backgroundCard)
-                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .장구 ? 4 : 0 : 0)
+                            .stroke(.buttonActive, lineWidth: self.isSelected ? self.instrumentType == .장구 ? 2 : 0 : 0)
                         Image(self.isSelected ? self.instrumentType == .장구 ? .jangGuActive : .jangGuDefault : .jangGuDefault)
                             .resizable()
                             .frame(width: 96, height: 96)
