@@ -227,9 +227,11 @@ struct CustomJangdanPracticeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                self.toastType = .export(jangdanName: self.inputCustomJangdanName)
-                                toastAction = true
+                                if !inputCustomJangdanName.isEmpty {
+                                    self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                    self.toastType = .export(jangdanName: self.inputCustomJangdanName)
+                                    toastAction = true
+                                }
                             }
                         }
                     } message: {
