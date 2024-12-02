@@ -45,9 +45,8 @@ struct CustomJangdanListView: View {
                                     .padding(.horizontal, 25)
                                     .onTapGesture {
                                         self.deletedJangdanName = jangdan.name
-                                        deleteButtonAlert = true
+                                        self.deleteButtonAlert = true
                                     }
-                                    
                             }
                         }
                         
@@ -100,7 +99,9 @@ struct CustomJangdanListView: View {
             Button("삭제", role: .destructive) {
                 guard let deletedJangdanName else { return }
                 self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: deletedJangdanName))
-                self.viewModel.effect(action: .fetchCustomJangdanData)
+                withAnimation {
+                    self.viewModel.effect(action: .fetchCustomJangdanData)
+                }
             }
         }
         .toolbar {
