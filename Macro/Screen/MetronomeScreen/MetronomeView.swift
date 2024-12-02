@@ -166,10 +166,15 @@ struct MetronomeView: View {
                         }
                         .alert("장단 내보내기", isPresented: $exportJandanAlert) {
                             TextField("장단명", text: $inputCustomJangdanName)
+                                .onChange(of: inputCustomJangdanName) { _, newValue in
+                                                                if newValue.count > 10 {
+                                                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                                                }
+                                                            }
                             HStack{
                                 Button("취소") { }
                                 Button("완료") {
-                                    if !inputCustomJangdanName.isEmpty && inputCustomJangdanName.count < 14 {
+                                    if !inputCustomJangdanName.isEmpty {
                                         self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
                                         toastAction = true
                                     }

@@ -127,10 +127,15 @@ struct CustomJangdanCreateView: View {
                     }
                     .alert("저장할 장단 이름", isPresented: $exportJandanAlert) {
                         TextField("이름", text: $inputCustomJangdanName)
+                            .onChange(of: inputCustomJangdanName) { _, newValue in
+                                                        if newValue.count > 10 {
+                                                            inputCustomJangdanName = String(newValue.prefix(10))
+                                                        }
+                                                    }
                         HStack{
                             Button("취소") { }
                             Button("확인") {
-                                if !inputCustomJangdanName.isEmpty && inputCustomJangdanName.count < 14 {
+                                if !inputCustomJangdanName.isEmpty {
                                     self.viewModel.effect(action: .stopMetronome)
                                     self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
                                     router.pop(2)
