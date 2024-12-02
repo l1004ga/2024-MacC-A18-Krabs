@@ -128,10 +128,10 @@ struct CustomJangdanCreateView: View {
                     .alert("저장할 장단 이름", isPresented: $exportJandanAlert) {
                         TextField("이름", text: $inputCustomJangdanName)
                             .onChange(of: inputCustomJangdanName) { _, newValue in
-                                                        if newValue.count > 10 {
-                                                            inputCustomJangdanName = String(newValue.prefix(10))
-                                                        }
-                                                    }
+                                if newValue.count > 10 {
+                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                }
+                            }
                         HStack{
                             Button("취소") { }
                             Button("확인") {

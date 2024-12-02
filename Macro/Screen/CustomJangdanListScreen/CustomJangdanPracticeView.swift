@@ -43,7 +43,7 @@ struct CustomJangdanPracticeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     @State private var toastType: ToastType = .save
-
+    
     @State private var deleteJangdanAlert: Bool = false
     @State private var updateJandanNameAlert: Bool = false
     
@@ -177,7 +177,7 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 저장하기")
                         }
-
+                        
                         
                         Button {
                             self.exportJandanAlert = true
@@ -198,7 +198,7 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 삭제하기")
                         }
-
+                        
                         
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -220,10 +220,10 @@ struct CustomJangdanPracticeView: View {
                     .alert("장단 내보내기", isPresented: $exportJandanAlert) {
                         TextField("장단명", text: $inputCustomJangdanName)
                             .onChange(of: inputCustomJangdanName) { _, newValue in
-                                                        if newValue.count > 10 {
-                                                            inputCustomJangdanName = String(newValue.prefix(10))
-                                                        }
-                                                    }
+                                if newValue.count > 10 {
+                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                }
+                            }
                         HStack{
                             Button("취소") { }
                             Button("완료") {
@@ -240,10 +240,10 @@ struct CustomJangdanPracticeView: View {
                     .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
                         TextField(jangdanName, text: $inputCustomJangdanName)
                             .onChange(of: inputCustomJangdanName) { _, newValue in
-                                                        if newValue.count > 10 {
-                                                            inputCustomJangdanName = String(newValue.prefix(10))
-                                                        }
-                                                    }
+                                if newValue.count > 10 {
+                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                }
+                            }
                         HStack{
                             Button("취소") { }
                             Button("완료") {
