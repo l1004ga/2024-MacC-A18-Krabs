@@ -219,9 +219,9 @@ struct CustomJangdanPracticeView: View {
                     }
                     .alert("장단 내보내기", isPresented: $exportJandanAlert) {
                         TextField("장단명", text: $inputCustomJangdanName)
-                            .onChange(of: inputCustomJangdanName) { _, newValue in
+                            .onChange(of: inputCustomJangdanName) { oldValue, newValue in
                                 if newValue.count > 10 {
-                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                    inputCustomJangdanName = oldValue
                                 }
                             }
                         HStack{
@@ -239,9 +239,9 @@ struct CustomJangdanPracticeView: View {
                     }
                     .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
                         TextField(jangdanName, text: $inputCustomJangdanName)
-                            .onChange(of: inputCustomJangdanName) { _, newValue in
+                            .onChange(of: inputCustomJangdanName) { oldValue, newValue in
                                 if newValue.count > 10 {
-                                    inputCustomJangdanName = String(newValue.prefix(10))
+                                    inputCustomJangdanName = oldValue
                                 }
                             }
                         HStack{
