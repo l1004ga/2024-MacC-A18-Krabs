@@ -179,7 +179,6 @@ struct MetronomeView: View {
                                     toastAction = true
                                 }
                             }
-                        }
                     } message: {
                         Text("저장된 장단명을 작성해주세요.")
                     }

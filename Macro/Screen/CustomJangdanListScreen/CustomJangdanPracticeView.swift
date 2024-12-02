@@ -17,7 +17,7 @@ enum ToastType {
         case .save:
             return "장단을 저장했습니다."
         case let .export(jangdanName):
-            return "\(jangdanName) 내보내기가 완료되었습니다."
+            return "'\(jangdanName)' 내보내기가 완료되었습니다."
         case .changeName:
             return "장단명을 변경했습니다."
         }
@@ -86,6 +86,7 @@ struct CustomJangdanPracticeView: View {
                                 } completion: {
                                     self.toastAction = false
                                     self.toastOpacity = 1
+                                    inputCustomJangdanName = ""
                                 }
                             }
                         }
@@ -235,7 +236,7 @@ struct CustomJangdanPracticeView: View {
                             }
                         }
                     } message: {
-                        Text("저장된 장단명을 작성해주세요.")
+                        Text("저장될 이름을 작성해주세요.")
                     }
                     .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
                         TextField(jangdanName, text: $inputCustomJangdanName)
