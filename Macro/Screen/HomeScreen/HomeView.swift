@@ -88,11 +88,8 @@ struct HomeView: View {
                         }
                         
                         Rectangle()
-                            .foregroundStyle(.clear)
+                            .foregroundStyle(LinearGradient(colors: [.black, .black.opacity(0)], startPoint: .top, endPoint: .bottom))
                             .frame(height: 36)
-                            .background(
-                                LinearGradient(colors: [.black, .black.opacity(0)], startPoint: .top, endPoint: .bottom)
-                            )
                     }
                 }
             }
