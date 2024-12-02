@@ -40,6 +40,9 @@ struct HomeView: View {
                                     .font(.Callout_R)
                                     .frame(width: 30)
                                 Image(systemName: "chevron.down")
+                                    .font(.system(size: 16))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 22)
                             }
                             .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 12))
                             .background {
