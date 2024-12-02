@@ -15,6 +15,7 @@ struct CustomJangdanListView: View {
     @State var viewModel: CustomJangdanListViewModel
     
     @State private var deleteButtonAlert: Bool = false
+    @State private var deletedJangdanName: String?
     
     var body: some View {
         List {
@@ -43,15 +44,10 @@ struct CustomJangdanListView: View {
                                     .foregroundStyle(.white)
                                     .padding(.horizontal, 25)
                                     .onTapGesture {
+                                        self.deletedJangdanName = jangdan.name
                                         deleteButtonAlert = true
                                     }
-                                    .alert("'\(jangdan.name.truncated(5))'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
-                                        Button("취소", role: .cancel) { }
-                                        Button("삭제", role: .destructive) {
-                                            self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
-                                            self.viewModel.effect(action: .fetchCustomJangdanData)
-                                        }
-                                    }
+                                    
                             }
                         }
                         
@@ -97,6 +93,16 @@ struct CustomJangdanListView: View {
         .listStyle(.plain)
         .listRowSpacing(12)
         .padding(.top, 32)
+        .alert("'\(deletedJangdanName?.truncated(5) ?? "")'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
+            Button("취소", role: .cancel) {
+                self.deletedJangdanName = nil
+            }
+            Button("삭제", role: .destructive) {
+                guard let deletedJangdanName else { return }
+                self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: deletedJangdanName))
+                self.viewModel.effect(action: .fetchCustomJangdanData)
+            }
+        }
         .toolbar {
             // MARK: - 뒤로가기
             ToolbarItem(placement: .topBarLeading) {
