@@ -68,6 +68,7 @@ struct MetronomeView: View {
                                 } completion: {
                                     self.toastAction = false
                                     self.toastOpacity = 1
+                                    inputCustomJangdanName = ""
                                 }
                             }
                     }
