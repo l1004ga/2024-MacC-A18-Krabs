@@ -63,7 +63,7 @@ struct HomeView: View {
                             .frame(width: 44, height: 44)
                     }
                     .padding(.horizontal, 16)
-                    .padding(.top, 17)
+                    .padding(.top, 11)
                     
                     ScrollView() {
                         // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
