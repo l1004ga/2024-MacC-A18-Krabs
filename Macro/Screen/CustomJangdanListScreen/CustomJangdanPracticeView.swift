@@ -229,7 +229,7 @@ struct CustomJangdanPracticeView: View {
                             }
                         }
                     } message: {
-                        Text("저장된 장단명을 작성해주세요.")
+                        Text("저장될 이름을 작성해주세요.")
                     }
                     .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
                         TextField(jangdanName, text: $inputCustomJangdanName)

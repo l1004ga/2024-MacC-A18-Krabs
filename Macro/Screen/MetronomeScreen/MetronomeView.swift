@@ -177,7 +177,7 @@ struct MetronomeView: View {
                                 }
                             }
                         } message: {
-                            Text("저장된 장단명을 작성해주세요.")
+                            Text("저장될 이름을 작성해주세요.")
                         }
                     }
                 }
