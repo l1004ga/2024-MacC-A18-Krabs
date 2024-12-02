@@ -43,7 +43,7 @@ struct CustomJangdanPracticeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     @State private var toastType: ToastType = .save
-
+    
     @State private var deleteJangdanAlert: Bool = false
     @State private var updateJandanNameAlert: Bool = false
     
@@ -178,7 +178,7 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 저장하기")
                         }
-
+                        
                         
                         Button {
                             self.exportJandanAlert = true
@@ -199,7 +199,7 @@ struct CustomJangdanPracticeView: View {
                         } label: {
                             Text("장단 삭제하기")
                         }
-
+                        
                         
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -220,12 +220,19 @@ struct CustomJangdanPracticeView: View {
                     }
                     .alert("장단 내보내기", isPresented: $exportJandanAlert) {
                         TextField("장단명", text: $inputCustomJangdanName)
+                            .onChange(of: inputCustomJangdanName) { oldValue, newValue in
+                                if newValue.count > 10 {
+                                    inputCustomJangdanName = oldValue
+                                }
+                            }
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
-                                self.toastType = .export(jangdanName: self.inputCustomJangdanName)
-                                toastAction = true
+                                if !inputCustomJangdanName.isEmpty {
+                                    self.viewModel.effect(action: .createCustomJangdan(newJangdanName: inputCustomJangdanName))
+                                    self.toastType = .export(jangdanName: self.inputCustomJangdanName)
+                                    toastAction = true
+                                }
                             }
                         }
                     } message: {
@@ -233,14 +240,21 @@ struct CustomJangdanPracticeView: View {
                     }
                     .alert("장단이름 변경하기", isPresented: $updateJandanNameAlert) {
                         TextField(jangdanName, text: $inputCustomJangdanName)
+                            .onChange(of: inputCustomJangdanName) { oldValue, newValue in
+                                if newValue.count > 10 {
+                                    inputCustomJangdanName = oldValue
+                                }
+                            }
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
-                                self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
-                                self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
-                                self.toastType = .changeName
-                                self.toastAction = true
+                                if !inputCustomJangdanName.isEmpty {
+                                    self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
+                                    self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
+                                    self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                                    self.toastType = .changeName
+                                    self.toastAction = true
+                                }
                             }
                         }
                     } message: {
