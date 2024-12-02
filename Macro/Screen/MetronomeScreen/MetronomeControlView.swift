@@ -14,6 +14,7 @@ struct MetronomeControlView: View {
     @State var controlViewModel = DIContainer.shared.controlViewModel
     private let threshold: CGFloat = 10 // 드래그 시 숫자변동 빠르기 조절 위한 변수
     @State private var tapFeedback: Int = 0
+    @State private var isChangeBpm: Bool = false
     
     var body: some View {
         ZStack {
@@ -49,9 +50,11 @@ struct MetronomeControlView: View {
                                         .foregroundStyle(.textButtonSecondary)
                                 }
                                 .onTapGesture {
+                                    isChangeBpm = true
                                     tapOnceAction(isIncreasing: false)
                                 }
                                 .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                    isChangeBpm = true
                                     tapTwiceAction(isIncreasing: false, isPressing: isPressing)
                                 }, perform: {})
                             
@@ -72,13 +75,18 @@ struct MetronomeControlView: View {
                                         .foregroundStyle(.textButtonSecondary)
                                 }
                                 .onTapGesture {
+                                    isChangeBpm = true
                                     tapOnceAction(isIncreasing: true)
                                 }
                                 .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                                    isChangeBpm = true
                                     tapTwiceAction(isIncreasing: true, isPressing: isPressing)
                                 }, perform: {})
                         }
-                        .sensoryFeedback(.selection, trigger: controlViewModel.state.bpm)
+//                        .sensoryFeedback(.selection, trigger: controlViewModel.state.bpm)
+                        .sensoryFeedback(.selection, trigger: self.controlViewModel.state.bpm) { _, _ in
+                            return isChangeBpm
+                        }
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -86,6 +94,7 @@ struct MetronomeControlView: View {
                 .gesture(
                     DragGesture()
                         .onChanged { gesture in
+                            isChangeBpm = true
                             dragAction(gesture: gesture)
                         }
                         .onEnded { _ in
