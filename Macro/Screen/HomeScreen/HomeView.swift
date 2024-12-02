@@ -65,22 +65,31 @@ struct HomeView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 11)
                     
-                    ScrollView() {
-                        // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
-                        VStack {
-                            LazyVGrid(columns: columns, spacing: 8) {
-                                ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
-                                    NavigationLink(jangdan.name, destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
-                                        .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
+                    ZStack(alignment: .top) {
+                        ScrollView() {
+                            // MARK: - 기본 장단 목록 (2칸씩 수직 그리드)
+                            VStack {
+                                LazyVGrid(columns: columns, spacing: 8) {
+                                    ForEach(self.appState.selectedInstrument.defaultJangdans, id: \.self) { jangdan in
+                                        NavigationLink(jangdan.name, destination: MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdan.rawValue))
+                                            .buttonStyle(JangdanLogoButtonStyle(jangdan: jangdan))
+                                    }
                                 }
                             }
+                            .padding(.top, 34)
                         }
-                        .padding(.top, 34)
-                    }
-                    .scrollIndicators(.hidden)
-                    .padding(.horizontal, 16)
-                    .navigationDestination(for: Route.self) { path in
-                        router.view(for: path)
+                        .scrollIndicators(.hidden)
+                        .padding(.horizontal, 16)
+                        .navigationDestination(for: Route.self) { path in
+                            router.view(for: path)
+                        }
+                        
+                        Rectangle()
+                            .foregroundStyle(.clear)
+                            .frame(height: 36)
+                            .background(
+                                LinearGradient(colors: [.black, .black.opacity(0)], startPoint: .top, endPoint: .bottom)
+                            )
                     }
                 }
             }
