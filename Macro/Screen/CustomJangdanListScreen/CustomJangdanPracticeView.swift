@@ -17,7 +17,7 @@ enum ToastType {
         case .save:
             return "장단을 저장했습니다."
         case let .export(jangdanName):
-            return "\(jangdanName) 내보내기가 완료되었습니다."
+            return "'\(jangdanName)' 내보내기가 완료되었습니다."
         case .changeName:
             return "장단명을 변경했습니다."
         }
@@ -86,6 +86,7 @@ struct CustomJangdanPracticeView: View {
                                 } completion: {
                                     self.toastAction = false
                                     self.toastOpacity = 1
+                                    inputCustomJangdanName = ""
                                 }
                             }
                         }
