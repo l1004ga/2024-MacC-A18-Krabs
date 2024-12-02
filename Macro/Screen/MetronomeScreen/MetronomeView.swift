@@ -72,9 +72,6 @@ struct MetronomeView: View {
                         }
                 }
             }
-            
-            
-            
             if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
                 ViewSobakToggleView(isSobakOn: $isSobakOn)
                     .padding(.bottom, 16)
@@ -82,9 +79,7 @@ struct MetronomeView: View {
                 ListenSobakToggleView(isSobakOn: $isSobakOn)
                     .padding(.bottom, 16)
             }
-            
             MetronomeControlView(viewModel: viewModel)
-            
         }
         .contentShape(Rectangle())
         .onTapGesture {
