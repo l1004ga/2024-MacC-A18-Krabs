@@ -139,9 +139,8 @@ extension HomeView {
                         }
                     }
             )
-            .sensoryFeedback(.impact(weight: .medium), trigger: isPressed) { _, _ in
-                guard let isPressed = isPressed else { return false }
-                return isPressed
+            .sensoryFeedback(.impact(weight: .medium), trigger: isPressed) { _, newValue in
+                return newValue == true
             }
         }
     }
