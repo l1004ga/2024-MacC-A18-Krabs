@@ -247,11 +247,13 @@ struct CustomJangdanPracticeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
-                                self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
-                                self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
-                                self.toastType = .changeName
-                                self.toastAction = true
+                                if !inputCustomJangdanName.isEmpty {
+                                    self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
+                                    self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
+                                    self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                                    self.toastType = .changeName
+                                    self.toastAction = true
+                                }
                             }
                         }
                     } message: {
