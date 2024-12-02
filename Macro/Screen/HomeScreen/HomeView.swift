@@ -10,9 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @Environment(Router.self) var router
-    
     @State private var appState: AppState = .shared
-    
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
     
     private let columns: [GridItem] = .init(repeating: GridItem(.flexible(), spacing: 8), count: 2)
@@ -141,6 +139,10 @@ extension HomeView {
                         }
                     }
             )
+            .sensoryFeedback(.impact(weight: .medium), trigger: isPressed) { _, _ in
+                guard let isPressed = isPressed else { return false }
+                return isPressed
+            }
         }
     }
 }
