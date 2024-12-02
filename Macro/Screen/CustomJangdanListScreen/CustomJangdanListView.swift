@@ -33,7 +33,28 @@ struct CustomJangdanListView: View {
                 }
             } else {
                 ForEach(self.viewModel.state.customJangdanList, id: \.name) { jangdan in
-                    ZStack(alignment: .leading) {
+                    HStack(spacing: 0) {
+                        if editMode?.wrappedValue == .active {
+                            ZStack {
+                                Color.red
+                                // 삭제버튼 위치(opacity로 조정)
+                                Image(systemName: "trash.fill")
+                                    .font(.system(size: 17))
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 25)
+                                    .onTapGesture {
+                                        deleteButtonAlert = true
+                                    }
+                                    .alert("'\(jangdan.name.truncated(5))'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
+                                        Button("취소", role: .cancel) { }
+                                        Button("삭제", role: .destructive) {
+                                            self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
+                                            self.viewModel.effect(action: .fetchCustomJangdanData)
+                                        }
+                                    }
+                            }
+                        }
+                        
                         ZStack {
                             HStack(alignment: .top, spacing: 12) {
                                 VStack(alignment: .leading, spacing: 12) {
@@ -52,41 +73,19 @@ struct CustomJangdanListView: View {
                                     .font(.Subheadline_R)
                                     .foregroundStyle(.textSecondary)
                             }
-                            .offset(x: editMode?.wrappedValue == .active ? 68 : 0) 
                             .animation(.easeInOut, value: editMode?.wrappedValue)
                             .padding(.horizontal, 24)
                             .padding(.vertical, 20)
                             .background(.backgroundCard)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            
-                            .padding(.horizontal, 16)
                             .onTapGesture {
                                 router.push(.customJangdanPractice(jangdanName: jangdan.name, jangdanType: jangdan.type.rawValue))
                             }
                         }
-                        
-                        // 삭제버튼 위치(opacity로 조정)
-                        Image(systemName: "trash.fill")
-                            .font(.system(size: 17))
-                            .foregroundStyle(.white)
-                            .padding(.vertical, 36.5)
-                            .padding(.horizontal, 25)
-                            .background(.red)
-                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 16, bottomLeadingRadius: 16))
-                            .padding(.leading, 16)
-                            .opacity(editMode?.wrappedValue == .inactive ? 0 : 1)
-                            .onTapGesture {
-                                deleteButtonAlert = true
-                            }
-                            .alert("'\(jangdan.name.truncated(5))'를\n삭제하시겠습니까?", isPresented: $deleteButtonAlert) {
-                                Button("취소", role: .cancel) { }
-                                Button("삭제", role: .destructive) {
-                                    self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdan.name))
-                                    self.viewModel.effect(action: .fetchCustomJangdanData)
-                                }
-                            }
+                        .layoutPriority(2)
                     }
                     .buttonStyle(PlainListButton())
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .padding(.horizontal, 16)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowSeparator(.hidden)
                 }
@@ -130,7 +129,7 @@ struct CustomJangdanListView: View {
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(.textDefault)
                     }
-
+                    
                     EditButton()
                         .foregroundStyle(.textDefault)
                 }
