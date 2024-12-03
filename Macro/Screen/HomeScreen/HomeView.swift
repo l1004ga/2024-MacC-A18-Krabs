@@ -154,7 +154,7 @@ extension HomeView {
             )
             .sensoryFeedback(.impact(weight: .medium), trigger: isRealPressed) { _, newValue in
                 self.isRealPressed = false
-                return newValue == true
+                return newValue
             }
         }
     }
