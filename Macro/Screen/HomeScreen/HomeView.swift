@@ -100,6 +100,7 @@ struct HomeView: View {
 extension HomeView {
     private struct JangdanLogoButtonStyle: ButtonStyle {
         @State private var isPressed: Bool?
+        @State private var isRealPressed: Bool = false
         
         var jangdan: Jangdan
         
@@ -143,12 +144,15 @@ extension HomeView {
                         }
                     }
                     .onEnded { _ in // 제스처 끝날때 도로 nil로 초기화
+                        if isPressed == true {
+                            self.isRealPressed = true
+                        }
                         withAnimation {
                             isPressed = nil
                         }
                     }
             )
-            .sensoryFeedback(.impact(weight: .medium), trigger: isPressed) { _, newValue in
+            .sensoryFeedback(.impact(weight: .medium), trigger: isRealPressed) { _, newValue in
                 return newValue == true
             }
         }
