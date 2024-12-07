@@ -23,7 +23,6 @@ class SoundManager {
 
         // AudioSession 설정
         do {
-//            try self.audioSession.setCategory(.playback, mode: .default)
             try self.audioSession.setCategory(.playback, options: [.mixWithOthers])
             try self.audioSession.setActive(true)
         } catch {
