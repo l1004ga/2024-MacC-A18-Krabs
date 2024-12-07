@@ -14,18 +14,17 @@ class SoundManager {
     
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]
+    private let audioSession = AVAudioSession.sharedInstance()
     private var soundType: SoundType
     
     init?() {
         self.soundType = .beep
         self.engine = AVAudioEngine()
 
-        let audioSession = AVAudioSession.sharedInstance()
-        
         // AudioSession 설정
         do {
-            try audioSession.setCategory(.playback, mode: .default)
-            try audioSession.setActive(true)
+            try self.audioSession.setCategory(.playback, mode: .default)
+            try self.audioSession.setActive(true)
         } catch {
             print("SoundManager: 오디오 세션 설정 중 에러 발생 - \(error)")
             return nil
