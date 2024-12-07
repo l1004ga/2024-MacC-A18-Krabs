@@ -20,10 +20,12 @@ class SoundManager {
         self.soundType = .beep
         self.engine = AVAudioEngine()
 
+        let audioSession = AVAudioSession.sharedInstance()
+        
         // AudioSession 설정
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
+            try audioSession.setCategory(.playback, mode: .default)
+            try audioSession.setActive(true)
         } catch {
             print("SoundManager: 오디오 세션 설정 중 에러 발생 - \(error)")
             return nil
