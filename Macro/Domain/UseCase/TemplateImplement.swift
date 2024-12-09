@@ -10,7 +10,7 @@ import Foundation
 class TemplateImplement {
     // 장단의 정보를 저장하고 있는 레이어
     private var jangdanRepository: JangdanRepository
-    var appState: AppState
+    private var appState: AppState
 
     
     init(jangdanRepository: JangdanRepository, appState: AppState) {

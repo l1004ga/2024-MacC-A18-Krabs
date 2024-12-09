@@ -11,7 +11,7 @@ import Foundation
 
 final class JangdanDataManager {
     
-    var appState: AppState
+    private var appState: AppState
     
     private let container: ModelContainer
     private let context: ModelContext

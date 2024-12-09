@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InstrumentsSelectView: View {
     
-    @State var appState: AppState = DIContainer.shared.appState
+    @State private var appState: AppState = DIContainer.shared.appState
     
     @State private var isSelected: Bool = false
     @State private var instrumentType: Instrument?

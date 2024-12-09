@@ -10,7 +10,7 @@ import AVFoundation
 
 class SoundManager {
     
-    var appState: AppState
+    private var appState: AppState
     
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]

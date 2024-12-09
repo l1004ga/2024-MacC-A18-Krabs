@@ -10,7 +10,7 @@ import SwiftUI
 struct JangdanTypeSelectView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @State var appState: AppState = DIContainer.shared.appState
+    @State private var appState: AppState = DIContainer.shared.appState
     var router: Router = DIContainer.shared.router
     
     var body: some View {
