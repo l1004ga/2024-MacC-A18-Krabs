@@ -25,12 +25,12 @@ enum ToastType {
 }
 
 struct CustomJangdanPracticeView: View {
-    @Environment(Router.self) var router
     
     @State var viewModel: MetronomeViewModel
     @State var customListViewModel: CustomJangdanListViewModel
     
     @State private var appState: AppState = .shared
+    var router: Router = DIContainer.shared.router
     
     @State var jangdanName: String
     var jangdanType: String

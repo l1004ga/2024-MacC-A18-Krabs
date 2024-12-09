@@ -9,9 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Environment(Router.self) var router
     @State private var appState: AppState = .shared
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
+    var router: Router = DIContainer.shared.router
     
     private let columns: [GridItem] = .init(repeating: GridItem(.flexible(), spacing: 8), count: 2)
     
@@ -162,5 +162,4 @@ extension HomeView {
 
 #Preview {
     HomeView()
-        .environment(Router().self)
 }

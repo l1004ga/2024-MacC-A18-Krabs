@@ -27,6 +27,7 @@ class DIContainer {
         
         self._homeViewModel = HomeViewModel(metronomeOnOffUseCase: self._metronomeOnOffUseCase)
         self._customJangdanListViewModel = CustomJangdanListViewModel(templateUseCase: self._templateUseCase)
+        self._router = .init()
     }
     
     // ViewModel
@@ -60,5 +61,11 @@ class DIContainer {
     
     private var _jangdanDataSource: JangdanDataManager
     private var _soundManager: SoundManager
+    
+    //router
+    private var _router: Router
+    var router: Router {
+        self._router
+    }
     
 }

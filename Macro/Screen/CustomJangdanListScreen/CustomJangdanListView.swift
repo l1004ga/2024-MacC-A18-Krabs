@@ -10,9 +10,9 @@ import SwiftUI
 struct CustomJangdanListView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
-    @Environment(Router.self) var router
     
     @State var viewModel: CustomJangdanListViewModel
+    var router: Router = DIContainer.shared.router
     
     @State private var deleteButtonAlert: Bool = false
     @State private var deletedJangdanName: String?

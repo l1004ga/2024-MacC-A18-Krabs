@@ -9,9 +9,9 @@ import SwiftUI
 
 struct JangdanTypeSelectView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(Router.self) var router
     
     @State private var appState: AppState = .shared
+    var router: Router = DIContainer.shared.router
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -67,5 +67,4 @@ struct JangdanTypeSelectView: View {
 
 #Preview {
     JangdanTypeSelectView()
-        .environment(Router().self)
 }
