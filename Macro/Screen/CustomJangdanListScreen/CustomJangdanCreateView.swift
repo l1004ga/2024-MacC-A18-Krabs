@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CustomJangdanCreateView: View {
-    @Environment(Router.self) var router
     
     @State var viewModel: MetronomeViewModel
-    
+    var router: Router = DIContainer.shared.router
+
     var jangdanName: String
     
     @State private var isSobakOn: Bool = false
@@ -156,5 +156,4 @@ struct CustomJangdanCreateView: View {
 
 #Preview {
     CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
-        .environment(Router().self)
 }

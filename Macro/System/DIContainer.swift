@@ -11,10 +11,11 @@ class DIContainer {
     static let shared: DIContainer = DIContainer()
     
     private init() {
-        self._jangdanDataSource = .init()!
-        self._soundManager = .init()!
+        self._appState = .init()
+        self._jangdanDataSource = .init(appState: self._appState)!
+        self._soundManager = .init(appState: self._appState)!
         
-        self._templateUseCase = TemplateImplement(jangdanRepository: self._jangdanDataSource)
+        self._templateUseCase = TemplateImplement(jangdanRepository: self._jangdanDataSource, appState: self._appState)
         self._tempoUseCase = TempoImplement(jangdanRepository: self._jangdanDataSource)
         self._metronomeOnOffUseCase = MetronomeOnOffImplement(jangdanRepository: self._jangdanDataSource, soundManager: _soundManager)
         self._accentUseCase = AccentImplement(jangdanRepository: self._jangdanDataSource)
@@ -27,6 +28,8 @@ class DIContainer {
         
         self._homeViewModel = HomeViewModel(metronomeOnOffUseCase: self._metronomeOnOffUseCase)
         self._customJangdanListViewModel = CustomJangdanListViewModel(templateUseCase: self._templateUseCase)
+        
+        self._router = .init()
     }
     
     // ViewModel
@@ -60,5 +63,17 @@ class DIContainer {
     
     private var _jangdanDataSource: JangdanDataManager
     private var _soundManager: SoundManager
+    
+    //router
+    private var _router: Router
+    var router: Router {
+        self._router
+    }
+    
+    //appState
+    private var _appState: AppState
+    var appState: AppState {
+        self._appState
+    }
     
 }

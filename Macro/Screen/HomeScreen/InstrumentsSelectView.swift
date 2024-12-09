@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InstrumentsSelectView: View {
     
-    @State private var appState: AppState = .shared
+    @State private var appState: AppState = DIContainer.shared.appState
     
     @State private var isSelected: Bool = false
     @State private var instrumentType: Instrument?
@@ -95,5 +95,4 @@ struct InstrumentsSelectView: View {
 
 #Preview {
     InstrumentsSelectView()
-        .environment(Router().self)
 }

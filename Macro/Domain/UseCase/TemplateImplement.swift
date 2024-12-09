@@ -13,9 +13,9 @@ class TemplateImplement {
     private var appState: AppState
 
     
-    init(jangdanRepository: JangdanRepository) {
+    init(jangdanRepository: JangdanRepository, appState: AppState) {
         self.jangdanRepository = jangdanRepository
-        self.appState = .shared
+        self.appState = appState
     }
     
     enum DataError: Error {

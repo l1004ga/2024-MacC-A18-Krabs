@@ -14,7 +14,6 @@ struct MacroApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environment(router)
         }
     }
 }

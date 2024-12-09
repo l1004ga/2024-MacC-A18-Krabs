@@ -11,13 +11,14 @@ import Foundation
 
 final class JangdanDataManager {
     
-    private var appState: AppState = .shared
+    private var appState: AppState
     
     private let container: ModelContainer
     private let context: ModelContext
     private let basicJangdanData = BasicJangdanData.all
     
-    init?() {
+    init?(appState: AppState) {
+        self.appState = appState
         do {
 #if DEBUG
             let config = ModelConfiguration(isStoredInMemoryOnly: true)

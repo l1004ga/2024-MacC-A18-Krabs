@@ -9,9 +9,8 @@ import SwiftUI
 
 @Observable
 class AppState {
-    static let shared = AppState()
     
-    private init() {
+    init() {
 #if DEBUG
         self._didLaunchedBefore = false
 #else
