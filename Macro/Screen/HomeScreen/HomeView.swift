@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @State private var viewModel: HomeViewModel = DIContainer.shared.homeViewModel
     private var router: Router = DIContainer.shared.router
-    var appState: AppState = DIContainer.shared.appState
+    private var appState: AppState = DIContainer.shared.appState
     
     private let columns: [GridItem] = .init(repeating: GridItem(.flexible(), spacing: 8), count: 2)
     

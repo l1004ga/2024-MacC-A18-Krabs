@@ -13,7 +13,7 @@ struct MetronomeView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
     
-    @State var appState: AppState = DIContainer.shared.appState
+    @State private var appState: AppState = DIContainer.shared.appState
     
     private var jangdanName: String
     @State private var isSobakOn: Bool = false
