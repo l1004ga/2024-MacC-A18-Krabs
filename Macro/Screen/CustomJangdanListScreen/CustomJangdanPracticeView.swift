@@ -29,7 +29,7 @@ struct CustomJangdanPracticeView: View {
     @State var viewModel: MetronomeViewModel
     @State var customListViewModel: CustomJangdanListViewModel
     
-    @State private var appState: AppState = .shared
+    @State var appState: AppState = DIContainer.shared.appState
     var router: Router = DIContainer.shared.router
     
     @State var jangdanName: String

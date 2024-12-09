@@ -10,14 +10,15 @@ import AVFoundation
 
 class SoundManager {
     
-    private var appState: AppState = .shared
+    var appState: AppState
     
     private var engine: AVAudioEngine
     private var audioBuffers: [Accent: AVAudioPCMBuffer] = [:]
     private let audioSession = AVAudioSession.sharedInstance()
     private var soundType: SoundType
     
-    init?() {
+    init?(appState: AppState) {
+        self.appState = appState
         self.soundType = .beep
         self.engine = AVAudioEngine()
 

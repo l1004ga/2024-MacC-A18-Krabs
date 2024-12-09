@@ -10,12 +10,13 @@ import Foundation
 class TemplateImplement {
     // 장단의 정보를 저장하고 있는 레이어
     private var jangdanRepository: JangdanRepository
-    private var appState: AppState
+    var appState: AppState
 
     
-    init(jangdanRepository: JangdanRepository) {
+    init(jangdanRepository: JangdanRepository, appState: AppState) {
         self.jangdanRepository = jangdanRepository
-        self.appState = .shared
+//        self.appState = .shared
+        self.appState = appState
     }
     
     enum DataError: Error {
