@@ -46,7 +46,7 @@ struct CustomJangdanPracticeView: View {
     @State private var updateJandanNameAlert: Bool = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
             
             if toastAction {
