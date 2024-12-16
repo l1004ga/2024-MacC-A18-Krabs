@@ -35,8 +35,6 @@ struct CustomJangdanPracticeView: View {
     @State var jangdanName: String
     var jangdanType: String
     
-    @State private var isSobakOn: Bool = false
-    
     @State private var initialJangdanAlert: Bool = false
     @State private var exportJandanAlert: Bool = false
     @State private var inputCustomJangdanName: String = ""
