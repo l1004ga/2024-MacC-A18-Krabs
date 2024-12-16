@@ -216,6 +216,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		2B58BC5E2D0FFC9F006C507B /* BuiltInJangdanScreen */ = {
+			isa = PBXGroup;
+			children = (
+				43774F642CB7FD5300F54EF7 /* BuiltinJangdanPracticeView.swift */,
+			);
+			path = BuiltInJangdanScreen;
+			sourceTree = "<group>";
+		};
 		2B63CFB12CE5C76A00B4C7AC /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,8 +462,9 @@
 		43774F5D2CB7ED4800F54EF7 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				572AB1C92CEDCBAA00778B9B /* CustomJangdanListScreen */,
 				2BC4B9FF2CE371DB00A90C1F /* HomeScreen */,
+				2B58BC5E2D0FFC9F006C507B /* BuiltInJangdanScreen */,
+				572AB1C92CEDCBAA00778B9B /* CustomJangdanListScreen */,
 				43774F612CB7EDB100F54EF7 /* MetronomeScreen */,
 				43774F602CB7EDA300F54EF7 /* JangdanSelectScreen */,
 			);
@@ -477,7 +486,6 @@
 				2B8861182CC3E61F0036C6DB /* BakBarView.swift */,
 				2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */,
 				2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */,
-				43774F642CB7FD5300F54EF7 /* BuiltinJangdanPracticeView.swift */,
 				439ABF072CB8220B003F6343 /* ListenSobakToggleView.swift */,
 				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
 				439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */,
