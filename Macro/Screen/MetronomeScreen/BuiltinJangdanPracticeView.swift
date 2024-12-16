@@ -1,5 +1,5 @@
 //
-//  MetronomeView.swift
+//  BuiltinJangdanPracticeView.swift
 //  Macro
 //
 //  Created by Lee Wonsun on 10/10/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct MetronomeView: View {
+struct BuiltinJangdanPracticeView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewModel: MetronomeViewModel
