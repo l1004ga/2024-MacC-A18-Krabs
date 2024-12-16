@@ -15,7 +15,6 @@ struct BuiltinJangdanPracticeView: View {
     @State private var appState: AppState = DIContainer.shared.appState
     
     private var jangdanName: String
-    @State private var isSobakOn: Bool = false
     
     @State private var initialJangdanAlert: Bool = false
     
@@ -30,7 +29,29 @@ struct BuiltinJangdanPracticeView: View {
     }
     
     var body: some View {
-        MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
+        ZStack(alignment: .top) {
+            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
+            
+            if toastAction {
+                Text("'\(inputCustomJangdanName)' 내보내기가 완료되었습니다.")
+                    .font(.Body_R)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
+                    .foregroundStyle(Color.white)
+                    .background(.black.opacity(0.8))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .frame(height: 372)
+                    .opacity(self.toastOpacity)
+                    .onAppear {
+                        withAnimation(.easeIn(duration: 3)) {
+                            self.toastOpacity = 0
+                        } completion: {
+                            self.toastAction = false
+                            self.toastOpacity = 1
+                        }
+                    }
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             // 뒤로가기 chevron
