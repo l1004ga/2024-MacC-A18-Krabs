@@ -48,68 +48,31 @@ struct CustomJangdanPracticeView: View {
     @State private var updateJandanNameAlert: Bool = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                VStack(spacing: 12) {
-                    HanbaeBoardView(
-                        jangdan: viewModel.state.jangdanAccent,
-                        isSobakOn: self.viewModel.state.currentJangdanType?.sobakSegmentCount == nil ? viewModel.state.isSobakOn : false,
-                        isPlaying: viewModel.state.isPlaying,
-                        currentRow: viewModel.state.currentRow,
-                        currentDaebak: viewModel.state.currentDaebak,
-                        currentSobak: viewModel.state.currentSobak
-                    ) { row, daebak, sobak, newAccent in
-                        withAnimation {
-                            viewModel.effect(action: .changeAccent(row: row, daebak: daebak, sobak: sobak, newAccent: newAccent))
-                        }
-                    }
-                    if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                        SobakSegmentsView(sobakSegmentCount: sobakSegmentCount, currentSobak: self.viewModel.state.currentSobak, isPlaying: self.viewModel.state.isPlaying, isSobakOn: self.viewModel.state.isSobakOn)
-                    }
-                }
-                .frame(height: 372)
-                .padding(.horizontal, 8)
-                
-                if toastAction {
-                    Text(self.toastType.massage)
-                        .font(.Body_R)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .foregroundStyle(Color.white)
-                        .background(.black.opacity(0.8))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .opacity(self.toastOpacity)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation(.easeIn) {
-                                    self.toastOpacity = 0
-                                } completion: {
-                                    self.toastAction = false
-                                    self.toastOpacity = 1
-                                    inputCustomJangdanName = ""
-                                }
+        ZStack {
+            MetronomeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName)
+            
+            if toastAction {
+                Text(self.toastType.massage)
+                    .font(.Body_R)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
+                    .foregroundStyle(Color.white)
+                    .background(.black.opacity(0.8))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .frame(height: 372)
+                    .opacity(self.toastOpacity)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation(.easeIn) {
+                                self.toastOpacity = 0
+                            } completion: {
+                                self.toastAction = false
+                                self.toastOpacity = 1
+                                inputCustomJangdanName = ""
                             }
                         }
-                }
+                    }
             }
-            
-            if let sobakSegmentCount = self.viewModel.state.currentJangdanType?.sobakSegmentCount {
-                ViewSobakToggleView(isSobakOn: $isSobakOn)
-                    .padding(.bottom, 16)
-            } else {
-                ListenSobakToggleView(isSobakOn: $isSobakOn)
-                    .padding(.bottom, 16)
-            }
-            
-            MetronomeControlView(viewModel: viewModel)
-            
-        }
-        .task {
-            self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.jangdanName))
-            self.isSobakOn = false
-        }
-        .onChange(of: isSobakOn) {
-            self.viewModel.effect(action: .changeSobakOnOff)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
