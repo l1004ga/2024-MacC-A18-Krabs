@@ -10,9 +10,6 @@ import Combine
 
 @Observable
 class MetronomeViewModel {
-    // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
-    private var jangdanRepository: JangdanRepository
-    
     private var templateUseCase: TemplateUseCase
     private var metronomeOnOffUseCase: MetronomeOnOffUseCase
     private var accentUseCase: AccentUseCase
@@ -22,11 +19,16 @@ class MetronomeViewModel {
     
     init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
-        self.jangdanRepository = jangdanRepository
         self.templateUseCase = templateUseCase
         self.metronomeOnOffUseCase = metronomeOnOffUseCase
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
+        
+        self.templateUseCase.currentJangdanTypePublisher.sink { [weak self] jangdanType in
+            guard let self else { return }
+            self._state.currentJangdanType = jangdanType
+        }
+        .store(in: &self.cancelBag)
         
         self.accentUseCase.accentListPublisher.sink { [weak self] accentList in
             guard let self else { return }
@@ -37,12 +39,6 @@ class MetronomeViewModel {
         self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
             guard let self else { return }
             self._state.isTapping = isTapping
-        }
-        .store(in: &self.cancelBag)
-        
-        self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
-            guard let self else { return }
-            self._state.currentJangdanType = jangdan.jangdanType
         }
         .store(in: &self.cancelBag)
     }
