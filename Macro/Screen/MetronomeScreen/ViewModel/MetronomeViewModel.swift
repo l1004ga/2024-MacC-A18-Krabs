@@ -59,7 +59,9 @@ class MetronomeViewModel {
         var currentDaebak: Int = 0
         var currentRow: Int = 0
     }
-    
+}
+
+extension MetronomeViewModel {
     enum Action: Equatable {
         case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
@@ -71,35 +73,6 @@ class MetronomeViewModel {
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
         case changeSoundType
-    }
-    
-    private func updateStatePerBak() {
-        var nextSobak: Int = self._state.currentSobak
-        var nextDaebak: Int = self._state.currentDaebak
-        var nextRow: Int = self._state.currentRow
-        
-        nextSobak += 1
-        if nextSobak == self._state.jangdanAccent[nextRow][nextDaebak].count {
-            nextDaebak += 1
-            if nextDaebak == self._state.jangdanAccent[nextRow].count {
-                nextRow += 1
-                if nextRow == self._state.jangdanAccent.count {
-                    nextRow = 0
-                }
-                nextDaebak = 0
-            }
-            nextSobak = 0
-        }
-        
-        self._state.currentSobak = nextSobak
-        self._state.currentDaebak = nextDaebak
-        self._state.currentRow = nextRow
-    }
-    
-    private func initialDaeSoBakIndex() {
-        self._state.currentRow = self._state.jangdanAccent.count - 1
-        self._state.currentDaebak = self._state.jangdanAccent[self._state.currentRow].count - 1
-        self._state.currentSobak = self._state.jangdanAccent[self._state.currentRow][self._state.currentDaebak].count - 1
     }
     
     func effect(action: Action) {
@@ -150,5 +123,34 @@ class MetronomeViewModel {
         case .changeSoundType:
             self.metronomeOnOffUseCase.setSoundType()
         }
+    }
+    
+    private func updateStatePerBak() {
+        var nextSobak: Int = self._state.currentSobak
+        var nextDaebak: Int = self._state.currentDaebak
+        var nextRow: Int = self._state.currentRow
+        
+        nextSobak += 1
+        if nextSobak == self._state.jangdanAccent[nextRow][nextDaebak].count {
+            nextDaebak += 1
+            if nextDaebak == self._state.jangdanAccent[nextRow].count {
+                nextRow += 1
+                if nextRow == self._state.jangdanAccent.count {
+                    nextRow = 0
+                }
+                nextDaebak = 0
+            }
+            nextSobak = 0
+        }
+        
+        self._state.currentSobak = nextSobak
+        self._state.currentDaebak = nextDaebak
+        self._state.currentRow = nextRow
+    }
+    
+    private func initialDaeSoBakIndex() {
+        self._state.currentRow = self._state.jangdanAccent.count - 1
+        self._state.currentDaebak = self._state.jangdanAccent[self._state.currentRow].count - 1
+        self._state.currentSobak = self._state.jangdanAccent[self._state.currentRow][self._state.currentDaebak].count - 1
     }
 }
