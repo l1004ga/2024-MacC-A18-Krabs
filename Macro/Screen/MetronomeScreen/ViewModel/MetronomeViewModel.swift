@@ -38,8 +38,6 @@ class MetronomeViewModel {
             guard let self else { return }
             self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
             self._state.currentJangdanType = jangdan.jangdanType
-            self._state.bakCount = jangdan.bakCount
-            self._state.daebakCount = jangdan.daebakList.count
         }
         .store(in: &self.cancelBag)
     }
@@ -53,8 +51,6 @@ class MetronomeViewModel {
         var currentJangdanName: String?
         var currentJangdanType: Jangdan?
         var jangdanAccent: [[[Accent]]] = []
-        var bakCount: Int = 0
-        var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
         var isTapping: Bool = false
