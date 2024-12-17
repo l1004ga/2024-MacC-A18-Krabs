@@ -5,9 +5,11 @@
 //  Created by leejina on 11/8/24.
 //
 
-import Foundation
+import Combine
 
 protocol TemplateUseCase {
+    var currentJangdanTypePublisher: AnyPublisher<Jangdan, Never> { get }
+    
     var allDefaultJangdanTemplateNames: [String] { get }
     var allCustomJangdanTemplate: [JangdanEntity] { get }
     
