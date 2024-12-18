@@ -211,7 +211,7 @@ struct CustomJangdanPracticeView: View {
                                 if !inputCustomJangdanName.isEmpty {
                                     self.viewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
                                     self.viewModel.effect(action: .selectJangdan(jangdanName: self.inputCustomJangdanName))
-                                    self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
+                                    self.jangdanName = inputCustomJangdanName
                                     self.toastType = .changeName
                                     self.toastAction = true
                                 }

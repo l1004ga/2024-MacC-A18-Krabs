@@ -32,7 +32,6 @@ class CustomJangdanPracticeViewModel {
     }
     
     struct State {
-        var currentJangdanName: String?
         var currentJangdanType: Jangdan?
     }
 }
@@ -51,7 +50,6 @@ extension CustomJangdanPracticeViewModel {
     func effect(action: Action) {
         switch action {
         case let .selectJangdan(jangdanName):
-            self._state.currentJangdanName = jangdanName
             self.templateUseCase.setJangdan(jangdanName: jangdanName)
         case let .initialJangdan(jangdanName):
             self.templateUseCase.setJangdan(jangdanName: jangdanName)
