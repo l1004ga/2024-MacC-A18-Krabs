@@ -58,6 +58,7 @@
 		3CE4C4862CF4E13400FDE6AA /* ViewSobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE4C4852CF4E13400FDE6AA /* ViewSobakToggleView.swift */; };
 		3CF498732D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498722D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift */; };
 		3CF498752D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498742D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift */; };
+		3CF498772D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498762D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift */; };
 		3CF8AD3C2D00715F00B5209D /* buk_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD382D00715F00B5209D /* buk_weak.wav */; };
 		3CF8AD3D2D00715F00B5209D /* buk_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD372D00715F00B5209D /* buk_strong.wav */; };
 		3CF8AD3E2D00715F00B5209D /* jangu_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD392D00715F00B5209D /* jangu_medium.wav */; };
@@ -158,6 +159,7 @@
 		3CE4C4852CF4E13400FDE6AA /* ViewSobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSobakToggleView.swift; sourceTree = "<group>"; };
 		3CF498722D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInJangdanPracticeViewModel.swift; sourceTree = "<group>"; };
 		3CF498742D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanPracticeViewModel.swift; sourceTree = "<group>"; };
+		3CF498762D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanCreateViewModel.swift; sourceTree = "<group>"; };
 		3CF8AD372D00715F00B5209D /* buk_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buk_strong.wav; sourceTree = "<group>"; };
 		3CF8AD382D00715F00B5209D /* buk_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buk_weak.wav; sourceTree = "<group>"; };
 		3CF8AD392D00715F00B5209D /* jangu_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jangu_medium.wav; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				2B365D242CEF196100565F0D /* CustomJangdanListViewModel.swift */,
 				3CF498742D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift */,
+				3CF498762D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				2B88611B2CC3E62A0036C6DB /* BakBarSetView.swift in Sources */,
 				439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */,
 				43774F652CB7FD5300F54EF7 /* BuiltinJangdanPracticeView.swift in Sources */,
+				3CF498772D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift in Sources */,
 				3CE4C4862CF4E13400FDE6AA /* ViewSobakToggleView.swift in Sources */,
 				2BBE523D2CEB7AAF00EF1515 /* ShapeStyle+Extension.swift in Sources */,
 				3C1DB7092CABDA2400160970 /* JangdanEntity.swift in Sources */,

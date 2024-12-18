@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomJangdanCreateView: View {
     
-    @State var viewModel: MetronomeViewModel
+    @State var viewModel: CustomJangdanCreateViewModel
     var router: Router = DIContainer.shared.router
 
     var jangdanName: String
@@ -47,7 +47,7 @@ struct CustomJangdanCreateView: View {
             
             // 장단 선택 List title
             ToolbarItem(placement: .principal) {
-                Text("\(self.viewModel.state.currentJangdanName ?? "") 장단 만들기")
+                Text("\(self.viewModel.state.currentJangdanType ?? .굿거리) 장단 만들기")
                     .font(.Body_R)
                     .foregroundStyle(.textSecondary)
             }
@@ -112,5 +112,5 @@ struct CustomJangdanCreateView: View {
 }
 
 #Preview {
-    CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
+    CustomJangdanCreateView(viewModel: DIContainer.shared.customJangdanCreateViewModel, jangdanName: "진양")
 }
