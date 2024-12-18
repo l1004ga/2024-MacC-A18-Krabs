@@ -48,8 +48,8 @@ extension BuiltInJangdanPracticeViewModel {
     func effect(action: Action) {
         switch action {
         case .initialJangdan:
-            guard let currentJangdanName = self.state.currentJangdanName else { return }
-            self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
+            guard let currentJangdanType = self.state.currentJangdanType else { return }
+            self.templateUseCase.setJangdan(jangdanName: currentJangdanType.rawValue)
         case .stopMetronome:
             self.metronomeOnOffUseCase.stop()
         case let .createCustomJangdan(newJangdanName):
