@@ -111,7 +111,7 @@ struct CustomJangdanPracticeView: View {
                         HStack{
                             Button("취소") { }
                             Button("완료") {
-                                self.viewModel.effect(action: .initialJangdan)
+                                self.viewModel.effect(action: .initialJangdan(jangdanName: self.jangdanName))
                             }
                         }
                     } message: {

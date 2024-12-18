@@ -40,7 +40,7 @@ class CustomJangdanPracticeViewModel {
 extension CustomJangdanPracticeViewModel {
     enum Action {
         case selectJangdan(jangdanName: String)
-        case initialJangdan
+        case initialJangdan(jangdanName: String)
         case stopMetronome
         case createCustomJangdan(newJangdanName: String)
         case changeSoundType
@@ -53,9 +53,8 @@ extension CustomJangdanPracticeViewModel {
         case let .selectJangdan(jangdanName):
             self._state.currentJangdanName = jangdanName
             self.templateUseCase.setJangdan(jangdanName: jangdanName)
-        case .initialJangdan:
-            guard let currentJangdanName = self.state.currentJangdanName else { return }
-            self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
+        case let .initialJangdan(jangdanName):
+            self.templateUseCase.setJangdan(jangdanName: jangdanName)
         case .stopMetronome:
             self.metronomeOnOffUseCase.stop()
         case let .createCustomJangdan(newJangdanName):
