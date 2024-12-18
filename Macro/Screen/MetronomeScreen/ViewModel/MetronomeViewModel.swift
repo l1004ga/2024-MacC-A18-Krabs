@@ -10,9 +10,6 @@ import Combine
 
 @Observable
 class MetronomeViewModel {
-    // TODO: - Repository는 ViewModel에서 직접적으로 사용하지 않도록 변경할것
-    private var jangdanRepository: JangdanRepository
-    
     private var templateUseCase: TemplateUseCase
     private var metronomeOnOffUseCase: MetronomeOnOffUseCase
     private var accentUseCase: AccentUseCase
@@ -20,26 +17,28 @@ class MetronomeViewModel {
     
     private var cancelBag: Set<AnyCancellable> = []
     
-    init(jangdanRepository: JangdanRepository, templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
+    init(templateUseCase: TemplateUseCase, metronomeOnOffUseCase: MetronomeOnOffUseCase, tempoUseCase: TempoUseCase, accentUseCase: AccentUseCase, taptapUseCase: TapTapUseCase) {
         
-        self.jangdanRepository = jangdanRepository
         self.templateUseCase = templateUseCase
         self.metronomeOnOffUseCase = metronomeOnOffUseCase
         self.accentUseCase = accentUseCase
         self.taptapUseCase = taptapUseCase
         
-        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
+        self.templateUseCase.currentJangdanTypePublisher.sink { [weak self] jangdanType in
             guard let self else { return }
-            self._state.isTapping = isTapping
+            self._state.currentJangdanType = jangdanType
         }
         .store(in: &self.cancelBag)
         
-        self.jangdanRepository.jangdanPublisher.sink { [weak self] jangdan in
+        self.accentUseCase.accentListPublisher.sink { [weak self] accentList in
             guard let self else { return }
-            self._state.jangdanAccent = jangdan.daebakList.map { $0.map { $0.bakAccentList } }
-            self._state.currentJangdanType = jangdan.jangdanType
-            self._state.bakCount = jangdan.bakCount
-            self._state.daebakCount = jangdan.daebakList.count
+            self._state.jangdanAccent = accentList
+        }
+        .store(in: &self.cancelBag)
+        
+        self.taptapUseCase.isTappingPublisher.sink { [weak self] isTapping in
+            guard let self else { return }
+            self._state.isTapping = isTapping
         }
         .store(in: &self.cancelBag)
     }
@@ -53,8 +52,6 @@ class MetronomeViewModel {
         var currentJangdanName: String?
         var currentJangdanType: Jangdan?
         var jangdanAccent: [[[Accent]]] = []
-        var bakCount: Int = 0
-        var daebakCount: Int = 0
         var isSobakOn: Bool = false
         var isPlaying: Bool = false
         var isTapping: Bool = false
@@ -62,7 +59,9 @@ class MetronomeViewModel {
         var currentDaebak: Int = 0
         var currentRow: Int = 0
     }
-    
+}
+
+extension MetronomeViewModel {
     enum Action: Equatable {
         case selectJangdan(selectedJangdanName: String)
         case changeSobakOnOff
@@ -74,35 +73,6 @@ class MetronomeViewModel {
         case createCustomJangdan(newJangdanName: String)
         case initialJangdan
         case changeSoundType
-    }
-    
-    private func updateStatePerBak() {
-        var nextSobak: Int = self._state.currentSobak
-        var nextDaebak: Int = self._state.currentDaebak
-        var nextRow: Int = self._state.currentRow
-        
-        nextSobak += 1
-        if nextSobak == self._state.jangdanAccent[nextRow][nextDaebak].count {
-            nextDaebak += 1
-            if nextDaebak == self._state.jangdanAccent[nextRow].count {
-                nextRow += 1
-                if nextRow == self._state.jangdanAccent.count {
-                    nextRow = 0
-                }
-                nextDaebak = 0
-            }
-            nextSobak = 0
-        }
-        
-        self._state.currentSobak = nextSobak
-        self._state.currentDaebak = nextDaebak
-        self._state.currentRow = nextRow
-    }
-    
-    private func initialDaeSoBakIndex() {
-        self._state.currentRow = self._state.jangdanAccent.count - 1
-        self._state.currentDaebak = self._state.jangdanAccent[self._state.currentRow].count - 1
-        self._state.currentSobak = self._state.jangdanAccent[self._state.currentRow][self._state.currentDaebak].count - 1
     }
     
     func effect(action: Action) {
@@ -153,5 +123,34 @@ class MetronomeViewModel {
         case .changeSoundType:
             self.metronomeOnOffUseCase.setSoundType()
         }
+    }
+    
+    private func updateStatePerBak() {
+        var nextSobak: Int = self._state.currentSobak
+        var nextDaebak: Int = self._state.currentDaebak
+        var nextRow: Int = self._state.currentRow
+        
+        nextSobak += 1
+        if nextSobak == self._state.jangdanAccent[nextRow][nextDaebak].count {
+            nextDaebak += 1
+            if nextDaebak == self._state.jangdanAccent[nextRow].count {
+                nextRow += 1
+                if nextRow == self._state.jangdanAccent.count {
+                    nextRow = 0
+                }
+                nextDaebak = 0
+            }
+            nextSobak = 0
+        }
+        
+        self._state.currentSobak = nextSobak
+        self._state.currentDaebak = nextDaebak
+        self._state.currentRow = nextRow
+    }
+    
+    private func initialDaeSoBakIndex() {
+        self._state.currentRow = self._state.jangdanAccent.count - 1
+        self._state.currentDaebak = self._state.jangdanAccent[self._state.currentRow].count - 1
+        self._state.currentSobak = self._state.jangdanAccent[self._state.currentRow][self._state.currentDaebak].count - 1
     }
 }
