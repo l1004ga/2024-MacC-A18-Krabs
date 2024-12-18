@@ -149,6 +149,6 @@ struct BuiltinJangdanPracticeView: View {
     }
 }
 
-//#Preview {
-//    BuiltinJangdanPracticeView(viewModel: DIContainer.shared., jangdanName: "진양")
-//}
+#Preview {
+    BuiltinJangdanPracticeView(viewModel: DIContainer.shared.builtInJangdanPracticeViewModel, jangdanName: "진양")
+}
