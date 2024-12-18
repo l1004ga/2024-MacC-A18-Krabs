@@ -30,6 +30,7 @@ class DIContainer {
         self._customJangdanListViewModel = CustomJangdanListViewModel(templateUseCase: self._templateUseCase)
         self._builtInJangdanPracticeViewModel = BuiltInJangdanPracticeViewModel(templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase)
         self._customJangdanPracticeViewModel = CustomJangdanPracticeViewModel(templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase)
+        self._customJangdanCreateViewModel = CustomJangdanCreateViewModel(templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase)
         
         self._router = .init()
     }
@@ -64,6 +65,11 @@ class DIContainer {
     private var _customJangdanPracticeViewModel: CustomJangdanPracticeViewModel
     var customJangdanPracticeViewModel: CustomJangdanPracticeViewModel {
         self._customJangdanPracticeViewModel
+    }
+    
+    private var _customJangdanCreateViewModel: CustomJangdanCreateViewModel
+    var customJangdanCreateViewModel: CustomJangdanCreateViewModel {
+        self._customJangdanCreateViewModel
     }
 
     // UseCase Implements
