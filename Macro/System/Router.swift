@@ -27,7 +27,7 @@ class Router {
         case let .customJangdanCreate(jangdanName):
             return AnyView(CustomJangdanCreateView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: jangdanName))
         case let .customJangdanPractice(jangdanName, jangdanType):
-            return AnyView(CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, customListViewModel: DIContainer.shared.customJangdanListViewModel, jangdanName: jangdanName, jangdanType: jangdanType))
+            return AnyView(CustomJangdanPracticeView(viewModel: DIContainer.shared.customJangdanPracticeViewModel, jangdanName: jangdanName, jangdanType: jangdanType))
         }
     }
     

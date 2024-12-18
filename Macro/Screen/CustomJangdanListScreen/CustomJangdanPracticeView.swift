@@ -26,8 +26,7 @@ enum ToastType {
 
 struct CustomJangdanPracticeView: View {
     
-    @State var viewModel: MetronomeViewModel
-    @State var customListViewModel: CustomJangdanListViewModel
+    @State var viewModel: CustomJangdanPracticeViewModel
     
     @State private var appState: AppState = DIContainer.shared.appState
     var router: Router = DIContainer.shared.router
@@ -133,7 +132,7 @@ struct CustomJangdanPracticeView: View {
                         }
                         
                         Button {
-                            self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
+                            self.viewModel.effect(action: .updateCustomJangdan(newJangdanName: nil))
                             self.toastType = .save
                             self.toastAction = true
                         } label: {
@@ -170,7 +169,7 @@ struct CustomJangdanPracticeView: View {
                     .alert("장단 삭제하기", isPresented: $deleteJangdanAlert) {
                         Button("예") {
                             deleteJangdanAlert = false
-                            self.customListViewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
+                            self.viewModel.effect(action: .deleteCustomJangdanData(jangdanName: jangdanName))
                             router.pop()
                         }
                         Button("아니오") {
@@ -210,8 +209,8 @@ struct CustomJangdanPracticeView: View {
                             Button("취소") { }
                             Button("완료") {
                                 if !inputCustomJangdanName.isEmpty {
-                                    self.customListViewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
-                                    self.viewModel.effect(action: .selectJangdan(selectedJangdanName: self.inputCustomJangdanName))
+                                    self.viewModel.effect(action: .updateCustomJangdan(newJangdanName: self.inputCustomJangdanName))
+                                    self.viewModel.effect(action: .selectJangdan(jangdanName: self.inputCustomJangdanName))
                                     self.jangdanName = self.viewModel.state.currentJangdanName ?? inputCustomJangdanName
                                     self.toastType = .changeName
                                     self.toastAction = true
@@ -231,5 +230,5 @@ struct CustomJangdanPracticeView: View {
 }
 
 #Preview {
-    CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, customListViewModel: DIContainer.shared.customJangdanListViewModel, jangdanName: "진양", jangdanType: "진양")
+    CustomJangdanPracticeView(viewModel: DIContainer.shared.customJangdanPracticeViewModel, jangdanName: "진양", jangdanType: "진양")
 }
