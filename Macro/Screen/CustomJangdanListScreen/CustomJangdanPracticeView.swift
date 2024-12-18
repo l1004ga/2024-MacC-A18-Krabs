@@ -230,6 +230,6 @@ struct CustomJangdanPracticeView: View {
     }
 }
 
-//#Preview {
-//    CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
-//}
+#Preview {
+    CustomJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, customListViewModel: DIContainer.shared.customJangdanListViewModel, jangdanName: "진양", jangdanType: "진양")
+}

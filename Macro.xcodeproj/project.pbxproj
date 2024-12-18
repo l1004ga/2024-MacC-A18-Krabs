@@ -219,6 +219,7 @@
 		2B58BC5E2D0FFC9F006C507B /* BuiltInJangdanScreen */ = {
 			isa = PBXGroup;
 			children = (
+				3CBEEF262D12CC3F00B44571 /* ViewModel */,
 				43774F642CB7FD5300F54EF7 /* BuiltinJangdanPracticeView.swift */,
 			);
 			path = BuiltInJangdanScreen;
@@ -434,6 +435,13 @@
 			isa = PBXGroup;
 			children = (
 				3C719E422CEF532900D233DC /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3CBEEF262D12CC3F00B44571 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

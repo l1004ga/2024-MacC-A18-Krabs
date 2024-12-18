@@ -148,3 +148,7 @@ struct BuiltinJangdanPracticeView: View {
         .toolbarTitleDisplayMode(.inline)
     }
 }
+
+#Preview {
+    BuiltinJangdanPracticeView(viewModel: DIContainer.shared.metronomeViewModel, jangdanName: "진양")
+}
