@@ -70,9 +70,6 @@ extension MetronomeViewModel {
         case stopMetronome
         case estimateBpm
         case disableEstimateBpm
-        case createCustomJangdan(newJangdanName: String)
-        case initialJangdan
-        case changeSoundType
     }
     
     func effect(action: Action) {
@@ -114,14 +111,6 @@ extension MetronomeViewModel {
             self.taptapUseCase.tap()
         case .disableEstimateBpm:
             self.taptapUseCase.finishTapping()
-        case let .createCustomJangdan(newJangdanName):
-            // MARK: 추후 이름 중복 등으로 인해서 생성 실패 시 Error 받아서 사용자 알림 처리 필요
-            try? self.templateUseCase.createCustomJangdan(newJangdanName: newJangdanName)
-        case .initialJangdan:
-            guard let currentJangdanName = self.state.currentJangdanName else { return }
-            self.templateUseCase.setJangdan(jangdanName: currentJangdanName)
-        case .changeSoundType:
-            self.metronomeOnOffUseCase.setSoundType()
         }
     }
     

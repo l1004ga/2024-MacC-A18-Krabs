@@ -28,7 +28,6 @@ class CustomJangdanListViewModel {
 extension CustomJangdanListViewModel {
     enum Action {
         case fetchCustomJangdanData
-        case updateCustomJangdan(newJangdanName: String?)
         case deleteCustomJangdanData(jangdanName: String)
     }
     
@@ -40,8 +39,6 @@ extension CustomJangdanListViewModel {
             }.sorted {
                 $0.lastUpdate > $1.lastUpdate
             }
-        case let .updateCustomJangdan(newJangdanName):
-            self.templateUseCase.updateCustomJangdan(newJangdanName: newJangdanName)
         case let .deleteCustomJangdanData(jangdanName):
             self.templateUseCase.deleteCustomJangdan(jangdanName: jangdanName)
         }

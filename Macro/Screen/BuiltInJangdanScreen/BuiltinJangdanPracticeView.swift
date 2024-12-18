@@ -10,7 +10,7 @@ import SwiftUI
 struct BuiltinJangdanPracticeView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var viewModel: MetronomeViewModel
+    @State var viewModel: BuiltInJangdanPracticeViewModel
     
     @State private var appState: AppState = DIContainer.shared.appState
     
@@ -23,7 +23,7 @@ struct BuiltinJangdanPracticeView: View {
     @State private var toastAction: Bool = false
     @State private var toastOpacity: Double = 1
     
-    init(viewModel: MetronomeViewModel, jangdanName: String) {
+    init(viewModel: BuiltInJangdanPracticeViewModel, jangdanName: String) {
         self.jangdanName = jangdanName
         self.viewModel = viewModel
     }
@@ -147,4 +147,8 @@ struct BuiltinJangdanPracticeView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
     }
+}
+
+#Preview {
+    BuiltinJangdanPracticeView(viewModel: DIContainer.shared.builtInJangdanPracticeViewModel, jangdanName: "진양")
 }
