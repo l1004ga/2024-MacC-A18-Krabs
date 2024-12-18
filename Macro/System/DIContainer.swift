@@ -21,7 +21,7 @@ class DIContainer {
         self._accentUseCase = AccentImplement(jangdanRepository: self._jangdanDataSource)
         self._tapTapUseCase = TapTapImplement(tempoUseCase: self._tempoUseCase)
         
-        self._metronomeViewModel = MetronomeViewModel(jangdanRepository: self._jangdanDataSource, templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase, tempoUseCase: self._tempoUseCase, accentUseCase: self._accentUseCase, taptapUseCase: self._tapTapUseCase)
+        self._metronomeViewModel = MetronomeViewModel(templateUseCase: self._templateUseCase, metronomeOnOffUseCase: self._metronomeOnOffUseCase, tempoUseCase: self._tempoUseCase, accentUseCase: self._accentUseCase, taptapUseCase: self._tapTapUseCase)
         
         self._controlViewModel =
         MetronomeControlViewModel(jangdanRepository: self._jangdanDataSource, taptapUseCase: self._tapTapUseCase, tempoUseCase: self._tempoUseCase)
