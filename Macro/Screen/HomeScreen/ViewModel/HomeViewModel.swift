@@ -15,7 +15,9 @@ class HomeViewModel {
     init(metronomeOnOffUseCase: MetronomeOnOffUseCase) {
         self.metronomeOnOffUseCase = metronomeOnOffUseCase
     }
-    
+}
+
+extension HomeViewModel {
     enum Action {
         case changeSoundType
     }

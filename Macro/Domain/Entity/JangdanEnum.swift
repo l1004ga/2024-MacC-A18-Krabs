@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// TODO: 진양, 노랫가락58855의 경우 예외처리를 진행할 예정으로 추후 추가
 enum Jangdan: String, CaseIterable {
     case 진양
     case 중모리
@@ -19,7 +18,6 @@ enum Jangdan: String, CaseIterable {
     case 엇모리
     case 엇중모리
     case 세마치
-//    case 노랫가락58855
     
     var name: String {
         switch self {
@@ -33,7 +31,6 @@ enum Jangdan: String, CaseIterable {
         case .엇모리: return "엇모리"
         case .엇중모리: return "엇중모리"
         case .세마치: return "세마치"
-//        case .노랫가락58855: return "노랫가락 5.8.8.5.5"
         }
     }
     

@@ -83,7 +83,6 @@ struct MetronomeControlView: View {
                                     tapTwiceAction(isIncreasing: true, isPressing: isPressing)
                                 }, perform: {})
                         }
-//                        .sensoryFeedback(.selection, trigger: controlViewModel.state.bpm)
                         .sensoryFeedback(.selection, trigger: self.controlViewModel.state.bpm) { _, _ in
                             return isChangeBpm
                         }

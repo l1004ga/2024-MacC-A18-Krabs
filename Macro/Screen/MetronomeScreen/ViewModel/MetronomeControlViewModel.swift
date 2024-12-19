@@ -51,7 +51,9 @@ class MetronomeControlViewModel {
         var isTapping: Bool = false
         var bpm: Int = 60
     }
-    
+}
+
+extension MetronomeControlViewModel {
     enum Action {
         case decreaseShortBpm
         case decreaseLongBpm(currentBpm: Int)
@@ -98,5 +100,3 @@ class MetronomeControlViewModel {
         }
     }
 }
-
-

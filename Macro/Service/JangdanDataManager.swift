@@ -32,7 +32,7 @@ final class JangdanDataManager {
             return nil
         }
     }
-
+    
     private var publisher: PassthroughSubject<JangdanEntity, Never> = .init()
     private var currentJangdan: JangdanEntity = .init(name: "자진모리", bakCount: 0, daebak: 0, bpm: 0, daebakList: [[.init(bakAccentList: [.medium])]], jangdanType: .자진모리, instrument: .장구)
     
@@ -43,7 +43,7 @@ final class JangdanDataManager {
             }
         }
     }
-
+    
     private func mapToJangdanEntity(model: JangdanDataModel) -> JangdanEntity {
         return JangdanEntity(
             name: model.name,
@@ -60,7 +60,7 @@ final class JangdanDataManager {
 }
 
 extension JangdanDataManager: JangdanRepository {
-
+    
     var jangdanPublisher: AnyPublisher<JangdanEntity, Never> {
         publisher.eraseToAnyPublisher()
     }
@@ -68,7 +68,7 @@ extension JangdanDataManager: JangdanRepository {
     private func fetchBasicJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
         return basicJangdanData.first { $0.name == jangdanName && $0.instrument == Instrument(rawValue: instrument)}
     }
-
+    
     private func fetchCustomJangdan(jangdanName: String, instrument: String) -> JangdanEntity? {
         let predicate = #Predicate<JangdanDataModel> {
             $0.name == jangdanName && $0.instrument == instrument
@@ -84,7 +84,7 @@ extension JangdanDataManager: JangdanRepository {
         }
         return nil
     }
-
+    
     func fetchJangdanData(jangdanName: String) {
         if let jangdan = fetchBasicJangdan(jangdanName: jangdanName, instrument: self.appState.selectedInstrument.rawValue) ??
             fetchCustomJangdan(jangdanName: jangdanName, instrument: self.appState.selectedInstrument.rawValue) {

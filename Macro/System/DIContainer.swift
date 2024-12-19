@@ -51,7 +51,7 @@ class DIContainer {
     var homeViewModel: HomeViewModel {
         self._homeViewModel
     }
-  
+    
     private var _customJangdanListViewModel: CustomJangdanListViewModel
     var customJangdanListViewModel: CustomJangdanListViewModel {
         self._customJangdanListViewModel
@@ -71,7 +71,7 @@ class DIContainer {
     var customJangdanCreateViewModel: CustomJangdanCreateViewModel {
         self._customJangdanCreateViewModel
     }
-
+    
     // UseCase Implements
     private var _templateUseCase: TemplateImplement
     private var _tempoUseCase: TempoImplement

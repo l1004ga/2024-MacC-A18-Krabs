@@ -10,7 +10,6 @@ import Combine
 protocol TemplateUseCase {
     var currentJangdanTypePublisher: AnyPublisher<Jangdan, Never> { get }
     
-    var allDefaultJangdanTemplateNames: [String] { get }
     var allCustomJangdanTemplate: [JangdanEntity] { get }
     
     func setJangdan(jangdanName: String)
@@ -18,6 +17,6 @@ protocol TemplateUseCase {
     func createCustomJangdan(newJangdanName: String) throws
     
     func updateCustomJangdan(newJangdanName: String?)
-
+    
     func deleteCustomJangdan(jangdanName: String)
 }
