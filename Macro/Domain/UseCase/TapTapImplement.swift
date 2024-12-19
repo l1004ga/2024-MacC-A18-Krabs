@@ -48,7 +48,7 @@ extension TapTapImplement: TapTapUseCase {
             isTapping = true
             self.isTappingSubject.send(self.isTapping)
         }
-      
+        
         lastTappedDate = .now
         self.timeStampList.append(lastTappedDate)
         

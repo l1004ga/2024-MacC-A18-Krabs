@@ -100,7 +100,6 @@ struct CustomJangdanPracticeView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Button {
-                        // TODO: 데이터 초기화
                         initialJangdanAlert = true
                     } label: {
                         Image(systemName: "arrow.counterclockwise")

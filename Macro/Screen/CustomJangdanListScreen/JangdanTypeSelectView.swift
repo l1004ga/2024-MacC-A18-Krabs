@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct JangdanTypeSelectView: View {
-    @Environment(\.dismiss) private var dismiss
     
     @State private var appState: AppState = DIContainer.shared.appState
     var router: Router = DIContainer.shared.router
@@ -43,7 +42,6 @@ struct JangdanTypeSelectView: View {
             // 뒤로가기버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-//                    dismiss()
                     router.pop()
                 } label: {
                     Image(systemName: "chevron.backward")

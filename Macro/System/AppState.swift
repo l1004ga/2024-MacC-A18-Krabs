@@ -40,7 +40,7 @@ extension AppState {
     var selectedInstrument: Instrument { self._selectedInstrument }
     
     var isBeepSound: Bool { self._isBeepSound }
-
+    
     func appLaunched() {
         self._didLaunchedBefore = true
         UserDefaults.standard.set(true, forKey: "didLaunchedBefore")

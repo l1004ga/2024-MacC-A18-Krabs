@@ -14,7 +14,7 @@ protocol JangdanRepository {
     func fetchAllCustomJangdan(instrument: Instrument) -> [JangdanEntity]
     
     func fetchJangdanData(jangdanName: String)
-
+    
     func updateBPM(bpm: Int)
     func updateAccents(daebakList: [[JangdanEntity.Daebak]])
     
@@ -24,6 +24,6 @@ protocol JangdanRepository {
     func saveNewJangdan(newJangdanName: String)
     
     func updateCustomJangdan(newJangdanName: String?)
-
+    
     func deleteCustomJangdan(jangdanName: String)
 }

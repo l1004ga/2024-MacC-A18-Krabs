@@ -21,7 +21,7 @@ class SoundManager {
         self.appState = appState
         self.soundType = .beep
         self.engine = AVAudioEngine()
-
+        
         // AudioSession 설정
         do {
             try self.audioSession.setCategory(.playback, options: [.mixWithOthers])
@@ -38,7 +38,7 @@ class SoundManager {
         let dummyNode = AVAudioPlayerNode()
         self.engine.attach(dummyNode)
         self.engine.connect(dummyNode, to: self.engine.mainMixerNode, format: nil)
-
+        
         // 엔진 시작
         do {
             try engine.start()
