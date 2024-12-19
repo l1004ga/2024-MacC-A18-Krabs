@@ -10,7 +10,6 @@ import Combine
 protocol TemplateUseCase {
     var currentJangdanTypePublisher: AnyPublisher<Jangdan, Never> { get }
     
-    var allDefaultJangdanTemplateNames: [String] { get }
     var allCustomJangdanTemplate: [JangdanEntity] { get }
     
     func setJangdan(jangdanName: String)
