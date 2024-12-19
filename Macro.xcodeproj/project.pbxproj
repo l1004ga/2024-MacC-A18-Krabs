@@ -74,7 +74,6 @@
 		438226E12CAEC728007A3B23 /* TemplateImplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438226E02CAEC720007A3B23 /* TemplateImplement.swift */; };
 		439ABF082CB8220B003F6343 /* ListenSobakToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF072CB8220B003F6343 /* ListenSobakToggleView.swift */; };
 		439ABF0A2CB825AE003F6343 /* MetronomeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF092CB825AE003F6343 /* MetronomeControlView.swift */; };
-		439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */; };
 		572AB1C62CEDC26200778B9B /* CustomJangdanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572AB1C32CEDC26200778B9B /* CustomJangdanListView.swift */; };
 		572AB1C72CEDC26200778B9B /* EmptyJangdanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572AB1C42CEDC26200778B9B /* EmptyJangdanListView.swift */; };
 		579839382CE5F37D00866AD4 /* InstrumentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579839372CE5F36500866AD4 /* InstrumentEnum.swift */; };
@@ -170,7 +169,6 @@
 		438226E02CAEC720007A3B23 /* TemplateImplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateImplement.swift; sourceTree = "<group>"; };
 		439ABF072CB8220B003F6343 /* ListenSobakToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenSobakToggleView.swift; sourceTree = "<group>"; };
 		439ABF092CB825AE003F6343 /* MetronomeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeControlView.swift; sourceTree = "<group>"; };
-		439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JangdanSelectSheetView.swift; sourceTree = "<group>"; };
 		572AB1C32CEDC26200778B9B /* CustomJangdanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanListView.swift; sourceTree = "<group>"; };
 		572AB1C42CEDC26200778B9B /* EmptyJangdanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyJangdanListView.swift; sourceTree = "<group>"; };
 		579839372CE5F36500866AD4 /* InstrumentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentEnum.swift; sourceTree = "<group>"; };
@@ -477,11 +475,10 @@
 				2B8861182CC3E61F0036C6DB /* BakBarView.swift */,
 				2B88611A2CC3E62A0036C6DB /* BakBarSetView.swift */,
 				2B8861162CC3E4850036C6DB /* HanbaeBoardView.swift */,
-				439ABF072CB8220B003F6343 /* ListenSobakToggleView.swift */,
-				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
-				439ABF0B2CB90E11003F6343 /* JangdanSelectSheetView.swift */,
 				3C1EB3242CEC5D880030FB63 /* SobakSegmentView.swift */,
+				439ABF072CB8220B003F6343 /* ListenSobakToggleView.swift */,
 				3CE4C4852CF4E13400FDE6AA /* ViewSobakToggleView.swift */,
+				439ABF092CB825AE003F6343 /* MetronomeControlView.swift */,
 				2B58BC5C2D0FEB5B006C507B /* MetronomeView.swift */,
 			);
 			path = MetronomeScreen;
@@ -670,7 +667,6 @@
 				3C46FBEA2CEE38230067EE65 /* SoundEnum.swift in Sources */,
 				439ABF082CB8220B003F6343 /* ListenSobakToggleView.swift in Sources */,
 				2B8861192CC3E61F0036C6DB /* BakBarView.swift in Sources */,
-				439ABF0C2CB90E11003F6343 /* JangdanSelectSheetView.swift in Sources */,
 				2B365D252CEF196100565F0D /* CustomJangdanListViewModel.swift in Sources */,
 				2B8861172CC3E4850036C6DB /* HanbaeBoardView.swift in Sources */,
 				3CF498732D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift in Sources */,
