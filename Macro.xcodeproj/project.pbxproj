@@ -54,6 +54,7 @@
 		3CF498732D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498722D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift */; };
 		3CF498752D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498742D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift */; };
 		3CF498772D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498762D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift */; };
+		3CF498792D159C4E00D361D6 /* CICDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF498782D159C4E00D361D6 /* CICDTests.swift */; };
 		3CF8AD3C2D00715F00B5209D /* buk_weak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD382D00715F00B5209D /* buk_weak.wav */; };
 		3CF8AD3D2D00715F00B5209D /* buk_strong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD372D00715F00B5209D /* buk_strong.wav */; };
 		3CF8AD3E2D00715F00B5209D /* jangu_medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8AD392D00715F00B5209D /* jangu_medium.wav */; };
@@ -148,6 +149,7 @@
 		3CF498722D12CCF000D361D6 /* BuiltInJangdanPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInJangdanPracticeViewModel.swift; sourceTree = "<group>"; };
 		3CF498742D12DB2100D361D6 /* CustomJangdanPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanPracticeViewModel.swift; sourceTree = "<group>"; };
 		3CF498762D12DFB100D361D6 /* CustomJangdanCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJangdanCreateViewModel.swift; sourceTree = "<group>"; };
+		3CF498782D159C4E00D361D6 /* CICDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICDTests.swift; sourceTree = "<group>"; };
 		3CF8AD372D00715F00B5209D /* buk_strong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buk_strong.wav; sourceTree = "<group>"; };
 		3CF8AD382D00715F00B5209D /* buk_weak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buk_weak.wav; sourceTree = "<group>"; };
 		3CF8AD392D00715F00B5209D /* jangu_medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jangu_medium.wav; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE5ADF32CABC45A0094F3C3 /* TempoUseCaseTests.swift */,
+				3CF498782D159C4E00D361D6 /* CICDTests.swift */,
 			);
 			path = MacroTests;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CF498792D159C4E00D361D6 /* CICDTests.swift in Sources */,
 				2BE5ADF52CABC45A0094F3C3 /* TempoUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
